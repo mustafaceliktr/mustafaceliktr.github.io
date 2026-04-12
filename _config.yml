@@ -9,7 +9,7 @@ remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 minimal_mistakes_skin: "default" # "air", "aqua" veya "dark" da yapabilirsin
 
 # Yazar Bilgileri
-author:
+  avatar: "/dosya-adi.jpg"
   name: "Mustafa Çelik"
   bio: "Satış Yönetimi | Python Geliştirici | Vibe Coding"
   location: "İstanbul, Türkiye"
@@ -17,8 +17,7 @@ author:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/mustafacelik84" # Burayı kendi linkinle güncelle
-      avatar: "/dosya-adi.jpg"
-
+    
 # Eklentiler
 plugins:
   - jekyll-remote-theme
