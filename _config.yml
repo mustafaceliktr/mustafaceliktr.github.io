@@ -6,7 +6,7 @@ baseurl: ""
 
 # Tema Ayarları (Minimal Mistakes)
 remote_theme: "mmistakes/minimal-mistakes@4.24.0"
-minimal_mistakes_skin: "default" # "air", "aqua" veya "dark" da yapabilirsin
+minimal_mistakes_skin: "air" # "air", "aqua" veya "dark" da yapabilirsin
 
 # Yazar Bilgileri
   avatar: "/profile.png"
