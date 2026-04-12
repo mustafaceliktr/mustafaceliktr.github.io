@@ -16,7 +16,8 @@ author:
   links:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
-      url: "https://www.linkedin.com/in/mustafaceliktr" # Burayı kendi linkinle güncelle
+      url: "https://www.linkedin.com/in/mustafacelik84" # Burayı kendi linkinle güncelle
+      avatar: "/dosya-adi.jpg"
 
 # Eklentiler
 plugins:
