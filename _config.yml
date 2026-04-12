@@ -9,7 +9,7 @@ remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 minimal_mistakes_skin: "default" # "air", "aqua" veya "dark" da yapabilirsin
 
 # Yazar Bilgileri
-  avatar: "/mustafaçelik.jpg"
+  avatar: "/profile.png"
   name: "Mustafa Çelik"
   bio: "Satış Yönetimi | Python Geliştirici | Vibe Coding"
   location: "İstanbul, Türkiye"
