@@ -1,29 +1,25 @@
-# Site Ayarları
-title: Mustafa Çelik
+title: "Mustafa Çelik"
 description: "Deneyimli Satış Profesyoneli & Teknoloji Tutkunu. Projelerim, Python tabanlı uygulamalarım ve hayata dair notlarım."
 url: "https://mustafaceliktr.github.io"
 baseurl: ""
 
-# Tema Ayarları (Minimal Mistakes)
 remote_theme: "mmistakes/minimal-mistakes@4.24.0"
-minimal_mistakes_skin: "air" # "air", "aqua" veya "dark" da yapabilirsin
+minimal_mistakes_skin: "default"
 
-# Yazar Bilgileri
-  avatar: "/profile.jpg"
+author:
   name: "Mustafa Çelik"
+  avatar: "/profile.jpg"
   bio: "Satış Yönetimi | Python Geliştirici | Vibe Coding"
   location: "İstanbul, Türkiye"
   links:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
-      url: "https://www.linkedin.com/in/mustafacelik84" # Burayı kendi linkinle güncelle
-    
-# Eklentiler
+      url: "https://www.linkedin.com/in/mustafaceliktr"
+
 plugins:
   - jekyll-remote-theme
   - jekyll-include-cache
 
-# Yazılar ve Sayfalar
 defaults:
   - scope:
       path: ""
