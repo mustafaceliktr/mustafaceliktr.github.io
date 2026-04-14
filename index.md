@@ -2,7 +2,7 @@
 layout: home
 author_profile: true
 header:
-  overlay_image: https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80
+  overlay_image: "/banner.jpg"
   caption: "Gelecek, teknoloji ve satışın kesişim noktasında şekilleniyor."
 ---
 
