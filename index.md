@@ -3,7 +3,7 @@ layout: home
 author_profile: true
 header:
   overlay_image: "/banner.jpg"
-  caption: "Gelecek, teknoloji ve satışın kesişim noktasında şekilleniyor."
+  caption: "Gelecek, teknoloji ve tecrübenin kesişim noktasında şekilleniyor."
 ---
 
 # Hoş Geldiniz
