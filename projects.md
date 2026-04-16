@@ -10,45 +10,53 @@ header:
 ---
 
 <style>
-  /* Görsellerin ezilmeden kusursuz kırpılması için doğrudan img etiketini hedefliyoruz */
+  /* Görsellerin ezilmeden kusursuz kırpılması */
   .archive__item-teaser img {
     width: 100%;
     height: 150px;
     object-fit: cover;
     border-radius: 8px;
     display: block;
-  }
-  
-  /* Başlık hizalaması */
-  .archive__item-title {
-    margin-top: 0.5em !important;
-    min-height: 2.6em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 1.1em;
-  }
-  
-  /* Açıklama metni hizalaması */
-  .archive__item-excerpt {
-    font-size: 0.85em !important;
-    min-height: 4.5em;
-    overflow: hidden;
-    text-align: center;
     margin-bottom: 15px;
   }
   
-  /* Kartların eşit boyda olması ve butonların her zaman en alta hizalanması için */
-  .archive__item {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  /* Kartların esnek yapısı: Butonları her zaman en alta yapıştırır */
+  .grid__item {
+    display: flex !important;
+    flex-direction: column !important;
   }
+  .archive__item {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
+  }
+  
+  /* Kurumsal ve Sola Hizalı Başlık Tipografisi */
+  .archive__item-title {
+    margin-top: 0 !important;
+    margin-bottom: 8px !important;
+    text-align: left !important;
+    font-size: 1.15rem !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* Kurumsal ve Sola Hizalı Açıklama Tipografisi */
+  .archive__item-excerpt {
+    text-align: left !important;
+    font-size: 0.9rem !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    line-height: 1.5 !important;
+    color: #4a4a4a !important;
+    margin-bottom: 20px !important;
+  }
+  
+  /* Buton hizalaması ve sabitleme */
   .btn-wrapper {
+    margin-top: auto !important; /* Butonu otomatik olarak en alta iter */
     display: flex;
-    justify-content: center;
-    margin-top: auto; /* Butonları otomatik olarak en alta iter */
+    justify-content: flex-start; /* Butonu sola hizalı yapar, çok daha kurumsal durur */
   }
 </style>
 
@@ -69,7 +77,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <article class="archive__item">
       <div class="archive__item-teaser"><img src="/assets/images/inerken.png" alt=""></div>
       <h3 class="archive__item-title">İnerken</h3>
-      <div class="archive__item-excerpt">Link ile veya manuel ürün ekleme; dokuz e-ticaret platformundan akıllı fiyat takibi ve bildirim uygulaması.</div>
+      <div class="archive__item-excerpt">9 e-ticaret platformunda akıllı fiyat takibi ve bildirim uygulaması.</div>
       <div class="btn-wrapper"><a href="/portfolyo/inerken.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
     </article>
   </div>
@@ -77,9 +85,9 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
   <div class="grid__item span-3">
     <article class="archive__item">
       <div class="archive__item-teaser"><img src="/assets/images/freshly.png" alt=""></div>
-      <h3 class="archive__item-title">freshly (BETA)</h3>
-      <div class="archive__item-excerpt">Gıda, ilaç ve kozmetik ürünlerin son kullanma tarihlerini takip eden asistan.</div>
-      <div class="btn-wrapper"><a href="/portfolyo/freshly.html" target="_blank" class="btn btn--inverse btn--small">Detaylar</a></div>
+      <h3 class="archive__item-title">freshly</h3>
+      <div class="archive__item-excerpt">İlaç ve gıda stoklarını takip eden son kullanma tarihi asistanı.</div>
+      <div class="btn-wrapper"><a href="/portfolyo/freshly.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
     </article>
   </div>
 
@@ -87,26 +95,26 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <article class="archive__item">
       <div class="archive__item-teaser"><img src="/assets/images/vibetrack.png" alt=""></div>
       <h3 class="archive__item-title">VibeTrack</h3>
-      <div class="archive__item-excerpt">Ruh haline göre AI müzikler üreten odaklanma odaları ve Pomodoro sayacı.</div>
-      <div class="btn-wrapper"><a href="/portfolyo/vibetrack.html" target="_blank" class="btn btn--success btn--small">Detaylar</a></div>
+      <div class="archive__item-excerpt">Ruh haline göre odaklanma odaları ve Pomodoro sayacı.</div>
+      <div class="btn-wrapper"><a href="/portfolyo/vibetrack.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
     </article>
   </div>
 
   <div class="grid__item span-3">
     <article class="archive__item">
-      <div class="archive__item-teaser"><img src="/assets/images/dataker.png" alt=""></div>
+      <div class="archive__item-teaser"><img src="/assets/images/evcpdataker.png" alt=""></div>
       <h3 class="archive__item-title">E.V.C.P. DaTAker</h3>
-      <div class="archive__item-excerpt">EPDK, elektrikli araç şarj istasyonları verilerini soket bazlı Excel raporlarına dönüştüren araç.</div>
-      <div class="btn-wrapper"><a href="/portfolyo/evcpdataker.html" target="_blank" class="btn btn--primary btn--small">Detaylar</a></div>
+      <div class="archive__item-excerpt">EPDK verilerini soket bazlı Excel raporlarına dönüştüren araç.</div>
+      <div class="btn-wrapper"><a href="/portfolyo/evcpdataker.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
     </article>
   </div>
 
   <div class="grid__item span-3">
     <article class="archive__item">
-      <div class="archive__item-teaser"><img src="/assets/images/ekosistem.png" alt=""></div>
+      <div class="archive__item-teaser"><img src="/assets/images/sarjekosistemianaliz.png" alt=""></div>
       <h3 class="archive__item-title">E.A. Şarj Ekosistemi Analizi</h3>
-      <div class="archive__item-excerpt">Elektrikli araç şarj istasyonları için çok dönemli analiz ve raporlama yazılımı.</div>
-      <div class="btn-wrapper"><a href="/portfolyo/sarjekosistemianaliz.html" target="_blank" class="btn btn--primary btn--small">Detaylar</a></div>
+      <div class="archive__item-excerpt">Elektrikli araç şarj altyapısı için Python tabanlı analiz ve raporlama yazılımı.</div>
+      <div class="btn-wrapper"><a href="/portfolyo/sarjekosistemianaliz.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
     </article>
   </div>
 
@@ -114,8 +122,8 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <article class="archive__item">
       <div class="archive__item-teaser"><img src="/assets/images/gelisim.png" alt=""></div>
       <h3 class="archive__item-title">E.A. Şarj Noktaları Gelişim Raporu</h3>
-      <div class="archive__item-excerpt">Elektrikli araç şarj istasyonları için iki dönemli temel gelişim rapor uygulaması.</div>
-      <div class="btn-wrapper"><a href="/portfolyo/gelisimraporu.html" target="_blank" class="btn btn--primary btn--small">Detaylar</a></div>
+      <div class="archive__item-excerpt">Elektrikli araç şarj noktalarının EPDK verilerinin yükleneren gelişimi analizinin yapılabileceği iki dönemli temel gelişim analiz uygulaması.</div>
+      <div class="btn-wrapper"><a href="/portfolyo/gelisimraporu.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
     </article>
   </div>
 
@@ -124,7 +132,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
       <div class="archive__item-teaser"><img src="/assets/images/projectos.png" alt=""></div>
       <h3 class="archive__item-title">ProjectOS</h3>
       <div class="archive__item-excerpt">Çoklu proje yönetimi ve AI context süreçlerini otomatize eden araç.</div>
-      <div class="btn-wrapper"><a href="/portfolyo/projectos.html" target="_blank" class="btn btn--inverse btn--small">Detaylar</a></div>
+      <div class="btn-wrapper"><a href="/portfolyo/projectos.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
     </article>
   </div>
 
