@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>inerken — Fiyat Takip Uygulaması</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080A0F;
+  --surface: #0D0F14;
+  --card: #111520;
+  --card2: #161B2A;
+  --border: #1E2535;
+  --green: #00E5A0;
+  --green-dim: rgba(0,229,160,.12);
+  --gold: #FFB830;
+  --gold-dim: rgba(255,184,48,.12);
+  --red: #FF4D6D;
+  --blue: #378ADD;
+  --text: #EAF0FF;
+  --muted: #6B7280;
+  --sub: #9CA3AF;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* NOISE OVERLAY */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4}
+
+/* GLOW BG */
+.glow-orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
+.glow-1{width:600px;height:600px;background:rgba(0,229,160,.06);top:-200px;left:-100px}
+.glow-2{width:500px;height:500px;background:rgba(55,138,221,.05);bottom:-100px;right:-100px}
+
+/* LAYOUT */
+.container{max-width:1100px;margin:0 auto;padding:0 32px;position:relative;z-index:1}
+
+/* NAV */
+nav{padding:24px 0;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--text);letter-spacing:-0.5px}
+.nav-logo span{color:var(--green)}
+.nav-badge{background:var(--green-dim);border:1px solid rgba(0,229,160,.2);color:var(--green);font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px;font-family:'Space Mono',monospace}
+
+/* HERO */
+.hero{padding:100px 0 80px;text-align:center}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:6px 16px;margin-bottom:32px}
+.hero-dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(0.85)}}
+.hero-eyebrow-txt{font-size:12px;color:var(--sub);font-family:'Space Mono',monospace}
+h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(48px,8vw,88px);line-height:.95;letter-spacing:-3px;margin-bottom:24px}
+h1 .accent{color:var(--green)}
+h1 .dim{color:var(--muted)}
+.hero-sub{font-size:18px;color:var(--sub);max-width:540px;margin:0 auto 48px;line-height:1.6;font-weight:400}
+
+/* STATS ROW */
+.stats-row{display:flex;justify-content:center;gap:0;margin-bottom:80px;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:var(--card);max-width:700px;margin-left:auto;margin-right:auto;margin-bottom:80px}
+.stat{flex:1;padding:24px 20px;text-align:center;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-val{font-family:'Syne',sans-serif;font-weight:800;font-size:30px;color:var(--green);letter-spacing:-1px}
+.stat-label{font-size:11px;color:var(--muted);margin-top:4px;font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:.5px}
+
+/* SECTION TITLES */
+.section-eyebrow{font-family:'Space Mono',monospace;font-size:11px;color:var(--green);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
+.section-title{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(28px,4vw,42px);letter-spacing:-1.5px;margin-bottom:16px}
+.section-sub{color:var(--sub);font-size:16px;line-height:1.6;max-width:560px}
+
+/* SCREENS SECTION */
+.screens-section{padding:80px 0}
+.screens-wrap{margin-top:56px;overflow-x:auto;padding-bottom:16px}
+
+/* PHONE STYLES (from original) */
+*{box-sizing:border-box}
+.screens{display:flex;flex-wrap:wrap;gap:24px;justify-content:center;padding:16px 0}
+.phone{width:220px;background:#0D0F14;border-radius:36px;border:6px solid #2a2d3a;overflow:hidden;flex-shrink:0}
+.pbar{height:28px;background:#0D0F14;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+.pbar-t{font-size:11px;font-weight:500;color:#eaedf5}
+.picons{display:flex;gap:5px;align-items:center}
+.picon{width:10px;height:10px;background:#eaedf5;border-radius:2px;opacity:.7}
+.picon.sig{width:14px;height:8px;clip-path:polygon(0 100%,30% 40%,60% 20%,100% 0,100% 100%)}
+.picon.bat{width:16px;height:8px;border-radius:2px;border:1px solid rgba(234,237,245,.5);position:relative}
+.picon.bat::after{content:'';position:absolute;top:1px;left:1px;bottom:1px;width:70%;background:#00E5A0;border-radius:1px}
+.screen{background:#0D0F14;min-height:400px;padding:0}
+.slabel{font-size:11px;font-weight:500;color:#9CA3AF;text-align:center;margin-top:8px;padding:0 8px;font-family:'Space Mono',monospace}
+.sbtn{background:#00E5A0;border-radius:12px;color:#0D0F14;font-size:13px;font-weight:700;padding:13px;text-align:center;margin:0 12px}
+.sinput{background:#1E2333;border:1px solid #252A3A;border-radius:10px;padding:10px 12px;margin:0 12px 8px;display:flex;align-items:center;gap:8px}
+.sinput-icon{font-size:14px;opacity:.6}
+.sinput-text{font-size:12px;color:#6B7280}
+.sinput-val{font-size:12px;color:#eaedf5}
+.stab{display:flex;background:#1E2333;border-radius:10px;margin:0 12px 16px;overflow:hidden}
+.stab-item{flex:1;padding:9px;text-align:center;font-size:12px;font-weight:500;color:#9CA3AF}
+.stab-item.active{background:#00E5A0;color:#0D0F14;border-radius:9px}
+.sapp-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px}
+.sapp-title{font-size:17px;font-weight:700;color:#eaedf5}
+.sapp-icons{display:flex;gap:10px}
+.sapp-icon{width:28px;height:28px;border-radius:8px;background:#1E2333;display:flex;align-items:center;justify-content:center;font-size:14px}
+.pcard{background:#1E2333;border:1px solid #252A3A;border-radius:14px;padding:12px;margin:0 10px 10px}
+.pcard-name{font-size:11px;font-weight:700;color:#eaedf5;line-height:1.3;margin-bottom:8px}
+.pcard-badge{display:inline-block;padding:2px 6px;border-radius:4px;font-size:9px;font-weight:700;margin-left:6px}
+.badge-amazon{background:rgba(255,153,0,.15);color:#FF9900}
+.badge-trendyol{background:rgba(242,122,26,.15);color:#F27A1A}
+.badge-hb{background:rgba(255,96,0,.15);color:#FF6000}
+.badge-diger{background:rgba(107,114,128,.15);color:#9CA3AF}
+.pcard-divider{height:1px;background:#252A3A;margin:8px 0}
+.pcard-prices{display:flex;justify-content:space-between;align-items:flex-start}
+.price-col{display:flex;flex-direction:column;gap:2px}
+.price-label{font-size:9px;color:#9CA3AF}
+.price-val{font-size:13px;font-weight:700;color:#eaedf5}
+.price-val.green{color:#00E5A0}
+.price-val.gold{color:#FFB830}
+.price-val.muted{color:#9CA3AF;text-decoration:line-through}
+.price-drop{display:inline-block;background:#00E5A0;color:#0D0F14;font-size:8px;font-weight:700;padding:1px 4px;border-radius:3px;margin-left:3px}
+.pcard-footer{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.pcard-date{font-size:9px;color:#6B7280}
+.pcard-radar{width:22px;height:22px;border-radius:50%;background:#00E5A01a;display:flex;align-items:center;justify-content:center;font-size:11px}
+.progress-bar{height:4px;background:#252A3A;border-radius:2px;margin:6px 0 0;overflow:hidden}
+.progress-fill{height:100%;background:#00E5A0;border-radius:2px;width:67%}
+.progress-lbl{display:flex;justify-content:space-between;margin-top:2px}
+.progress-lbl span{font-size:8px;color:#6B7280}
+.scan-btn{background:#00E5A0;border-radius:12px;margin:0 10px 10px;padding:12px;display:flex;align-items:center;justify-content:center;gap:8px}
+.scan-btn-txt{font-size:13px;font-weight:700;color:#0D0F14}
+.scan-icon{width:16px;height:16px;border:2px solid #0D0F14;border-radius:50%;position:relative}
+.scan-icon::after{content:'';position:absolute;top:50%;left:50%;width:6px;height:6px;background:#0D0F14;border-radius:50%;transform:translate(-50%,-50%)}
+.fab{background:#00E5A0;border-radius:16px;padding:10px 16px;display:flex;align-items:center;gap:6px;margin:0 auto;width:fit-content}
+.fab-txt{font-size:12px;font-weight:700;color:#0D0F14}
+.notif-card{background:#1E2333;border-radius:12px;padding:10px 12px;margin:0 10px 8px;border-left:3px solid #00E5A0}
+.notif-card.flash{border-left-color:#FFB830}
+.notif-title{font-size:11px;font-weight:700;color:#eaedf5;margin-bottom:3px}
+.notif-body{font-size:10px;color:#9CA3AF;line-height:1.4}
+.notif-price{font-size:13px;font-weight:700;color:#00E5A0;margin-top:4px}
+.notif-flash{color:#FFB830}
+.notif-meta{font-size:9px;color:#6B7280;margin-top:3px}
+.pref-row{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:#1E2333;border-radius:10px;margin:0 10px 6px}
+.pref-left{display:flex;align-items:center;gap:8px}
+.pref-icon-wrap{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px}
+.pref-title{font-size:11px;font-weight:500;color:#eaedf5}
+.pref-sub{font-size:9px;color:#6B7280}
+.toggle{width:32px;height:18px;border-radius:9px;position:relative;flex-shrink:0}
+.toggle.on{background:#00E5A0}
+.toggle.off{background:#252A3A}
+.toggle-dot{width:14px;height:14px;background:#fff;border-radius:50%;position:absolute;top:2px}
+.toggle.on .toggle-dot{right:2px}
+.toggle.off .toggle-dot{left:2px}
+.section-title-sm{font-size:9px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px;padding:8px 14px 4px}
+.prev-card{background:#1E2333;border:1.5px solid rgba(0,229,160,.35);border-radius:12px;padding:12px;margin:0 12px 10px;display:flex;gap:10px}
+.prev-img{width:56px;height:56px;background:#252A3A;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.prev-name{font-size:11px;font-weight:600;color:#eaedf5;line-height:1.3;margin-bottom:4px}
+.prev-site{font-size:9px;color:#9CA3AF}
+.prev-price{font-size:18px;font-weight:700;color:#00E5A0;margin-top:4px}
+.prev-stock{display:inline-block;background:rgba(0,229,160,.12);color:#00E5A0;font-size:9px;font-weight:600;padding:2px 6px;border-radius:4px;margin-left:6px}
+
+/* FEATURES GRID */
+.features-section{padding:80px 0}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
+.feat-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;transition:border-color .2s,transform .2s}
+.feat-card:hover{border-color:rgba(0,229,160,.25);transform:translateY(-2px)}
+.feat-icon{font-size:28px;margin-bottom:16px}
+.feat-title{font-family:'Syne',sans-serif;font-weight:700;font-size:17px;margin-bottom:8px;letter-spacing:-.3px}
+.feat-desc{font-size:14px;color:var(--sub);line-height:1.6}
+.feat-tag{display:inline-block;margin-top:12px;font-size:11px;color:var(--green);background:var(--green-dim);border-radius:6px;padding:3px 8px;font-family:'Space Mono',monospace}
+
+/* SCAN MODES */
+.scan-section{padding:80px 0}
+.scan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.scan-card{border-radius:20px;padding:28px;border:1px solid var(--border)}
+.scan-card.fast{background:linear-gradient(135deg,rgba(0,229,160,.08),transparent);border-color:rgba(0,229,160,.2)}
+.scan-card.deep{background:linear-gradient(135deg,rgba(55,138,221,.08),transparent);border-color:rgba(55,138,221,.2)}
+.scan-card.flash{background:linear-gradient(135deg,rgba(255,184,48,.08),transparent);border-color:rgba(255,184,48,.2)}
+.scan-freq{font-family:'Syne',sans-serif;font-weight:800;font-size:42px;letter-spacing:-2px;margin-bottom:4px}
+.scan-freq.green{color:var(--green)}
+.scan-freq.blue{color:var(--blue)}
+.scan-freq.gold{color:var(--gold)}
+.scan-unit{font-size:14px;color:var(--muted);font-weight:400}
+.scan-name{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin:12px 0 8px}
+.scan-desc{font-size:13px;color:var(--sub);line-height:1.5}
+.scan-flash-times{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.flash-time{background:rgba(255,184,48,.12);color:var(--gold);border-radius:6px;padding:3px 8px;font-size:11px;font-weight:600;font-family:'Space Mono',monospace}
+
+/* NOTIF SECTION */
+.notif-section{padding:80px 0}
+.notif-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.notif-big-card{border-radius:20px;padding:28px;border:1px solid var(--border);background:var(--card)}
+.notif-big-card.target{border-color:rgba(0,229,160,.2)}
+.notif-big-card.drop{border-color:rgba(55,138,221,.2)}
+.notif-big-card.flash-b{border-color:rgba(255,184,48,.2)}
+.notif-emoji{font-size:32px;margin-bottom:16px}
+.notif-big-title{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin-bottom:8px}
+.notif-big-title.green{color:var(--green)}
+.notif-big-title.blue{color:var(--blue)}
+.notif-big-title.gold{color:var(--gold)}
+.notif-big-desc{font-size:13px;color:var(--sub);line-height:1.5}
+.notif-example{background:var(--card2);border-radius:10px;padding:10px 12px;margin-top:16px;font-size:12px;color:var(--text);font-family:'Space Mono',monospace;line-height:1.5}
+
+/* SITES TABLE */
+.sites-section{padding:80px 0}
+.sites-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:48px}
+.site-row{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+.site-name{font-weight:600;font-size:15px}
+.site-status{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;font-family:'Space Mono',monospace}
+.status-active{background:rgba(0,229,160,.12);color:var(--green)}
+.status-test{background:rgba(255,184,48,.12);color:var(--gold)}
+.site-note{font-size:11px;color:var(--muted);margin-top:4px}
+
+/* TECH STACK */
+.tech-section{padding:80px 0}
+.tech-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:48px}
+.tech-row{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:16px}
+.tech-icon{font-size:24px;width:48px;height:48px;background:var(--card2);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tech-layer{font-size:11px;color:var(--muted);margin-bottom:2px;font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:.5px}
+.tech-name{font-weight:700;font-size:16px;color:var(--green)}
+.tech-desc{font-size:12px;color:var(--sub);margin-top:2px}
+
+/* STATUS SECTION */
+.status-section{padding:80px 0}
+.status-grid{display:grid;grid-template-columns:1fr;gap:8px;margin-top:48px;max-width:700px}
+.status-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+.status-feat{font-size:14px;font-weight:500}
+.status-badge{font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;font-family:'Space Mono',monospace}
+.s-done{background:rgba(0,229,160,.12);color:var(--green)}
+.s-wait{background:rgba(107,114,128,.1);color:var(--muted)}
+.s-plan{background:rgba(55,138,221,.1);color:var(--blue)}
+
+/* NEXT STEPS */
+.next-section{padding:80px 0}
+.next-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:48px}
+.next-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;display:flex;gap:20px}
+.next-num{font-family:'Syne',sans-serif;font-weight:800;font-size:40px;color:var(--green-dim);letter-spacing:-2px;line-height:1;flex-shrink:0}
+.next-title{font-family:'Syne',sans-serif;font-weight:700;font-size:17px;margin-bottom:8px}
+.next-desc{font-size:13px;color:var(--sub);line-height:1.6}
+.next-cost{display:inline-block;margin-top:12px;font-family:'Space Mono',monospace;font-size:11px;color:var(--gold);background:var(--gold-dim);padding:3px 10px;border-radius:6px}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:48px 0;text-align:center}
+.footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:32px;color:var(--text);letter-spacing:-1px;margin-bottom:8px}
+.footer-logo span{color:var(--green)}
+.footer-url{font-family:'Space Mono',monospace;font-size:13px;color:var(--green);margin-bottom:24px}
+.footer-meta{font-size:12px;color:var(--muted)}
+
+/* DIVIDER */
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border) 20%,var(--border) 80%,transparent);margin:0}
+
+/* ARCH DIAGRAM */
+.arch-section{padding:80px 0}
+.arch-flow{display:flex;align-items:center;justify-content:center;gap:0;margin-top:48px;flex-wrap:wrap;row-gap:24px}
+.arch-node{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px 24px;text-align:center;min-width:140px}
+.arch-node.highlight{border-color:rgba(0,229,160,.3);background:linear-gradient(135deg,rgba(0,229,160,.06),transparent)}
+.arch-node-icon{font-size:24px;margin-bottom:8px}
+.arch-node-name{font-weight:700;font-size:14px;color:var(--text)}
+.arch-node-tech{font-size:11px;color:var(--green);font-family:'Space Mono',monospace;margin-top:2px}
+.arch-arrow{font-size:20px;color:var(--muted);padding:0 8px;flex-shrink:0}
+
+@media(max-width:768px){
+  .features-grid,.scan-grid,.notif-grid,.sites-grid,.tech-grid,.next-grid{grid-template-columns:1fr}
+  h1{letter-spacing:-2px}
+  .stats-row{flex-direction:column}
+  .stat{border-right:none;border-bottom:1px solid var(--border)}
+  .stat:last-child{border-bottom:none}
+  .arch-flow{flex-direction:column}
+  .arch-arrow{transform:rotate(90deg)}
+}
+</style>
+</head>
+<body>
+
+<div class="glow-orb glow-1"></div>
+<div class="glow-orb glow-2"></div>
+
+<!-- NAV -->
+<div class="container">
+<nav>
+  <div class="nav-logo">iner<span>ken</span></div>
+  <div class="nav-badge">v1.0 — Nisan 2026</div>
+</nav>
+</div>
+
+<!-- HERO -->
+<div class="container">
+<div class="hero">
+  <div class="hero-eyebrow">
+    <div class="hero-dot"></div>
+    <span class="hero-eyebrow-txt">Sunucu canlı · https://inerken.onrender.com</span>
+  </div>
+  <h1>Fiyatlar düşerken<br><span class="dim">sen</span> <span class="accent">dinlen.</span></h1>
+  <p class="hero-sub">Türkiye'nin büyük e-ticaret platformlarını tek ekrandan takip eden, fiyat düşüşlerini anında bildiren akıllı alışveriş asistanı.</p>
+</div>
+
+<div class="stats-row">
+  <div class="stat">
+    <div class="stat-val">9</div>
+    <div class="stat-label">Platform</div>
+  </div>
+  <div class="stat">
+    <div class="stat-val">15 dk</div>
+    <div class="stat-label">Hızlı Tarama</div>
+  </div>
+  <div class="stat">
+    <div class="stat-val">7/24</div>
+    <div class="stat-label">Arka Plan Tarama</div>
+  </div>
+  <div class="stat">
+    <div class="stat-val">%0</div>
+    <div class="stat-label">Pil / İnternet</div>
+  </div>
+  <div class="stat">
+    <div class="stat-val">3</div>
+    <div class="stat-label">Bildirim Türü</div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SCREENS -->
+<div class="screens-section">
+<div class="container">
+  <div class="section-eyebrow">Uygulama Ekranları</div>
+  <h2 class="section-title">Flutter ile tasarlandı,<br>her detay düşünüldü.</h2>
+  <div class="screens-wrap">
+  <div class="screens">
+
+  <!-- EKRAN 1: Ana Ekran -->
+  <div>
+  <div class="phone">
+    <div class="pbar"><span class="pbar-t">03:06</span><div class="picons"><div class="picon sig"></div><div class="picon bat"></div></div></div>
+    <div class="screen">
+      <div class="sapp-header">
+        <span class="sapp-title">inerken</span>
+        <div class="sapp-icons">
+          <div class="sapp-icon" style="font-size:12px;color:#eaedf5;position:relative">🔔<div style="position:absolute;top:4px;right:4px;width:7px;height:7px;background:#FF4D6D;border-radius:50%;border:1px solid #0D0F14"></div></div>
+          <div class="sapp-icon" style="font-size:12px;color:#eaedf5">⤴</div>
+        </div>
+      </div>
+      <div class="scan-btn"><div class="scan-icon"></div><span class="scan-btn-txt">Piyasayı Tara / Güncelle</span></div>
+      <div class="pcard">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between">
+          <div class="pcard-name" style="flex:1">Apple iPhone 17 256 GB<br>ProMotion — Siyah</div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+            <span class="pcard-badge badge-amazon">Amazon TR</span>
+            <div style="font-size:16px;color:#FF4D6D">🗑</div>
+          </div>
+        </div>
+        <div class="pcard-divider"></div>
+        <div class="pcard-prices">
+          <div class="price-col"><span class="price-label">Eklendiğinde</span><span class="price-val muted" style="font-size:12px">₺75.107</span><span style="font-size:9px;color:#00E5A0">Güncel: ₺74.899</span></div>
+          <div class="price-col" style="align-items:center"><span class="price-label">Hedef</span><div style="display:flex;align-items:center;gap:3px"><span class="price-val gold">₺72.500</span><span style="font-size:10px;color:#FFB830">✏</span></div></div>
+          <div class="price-col" style="align-items:flex-end"><span class="price-label">Süreçteki En Düşük</span><div style="display:flex;align-items:center"><span class="price-val green">₺74.899</span><span class="price-drop">-%1</span></div><span class="pcard-badge badge-amazon" style="margin:2px 0 0;font-size:8px">Amazon TR</span></div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:18%"></div></div>
+        <div class="progress-lbl"><span>Hedefe ilerleme %18</span><span>19 gün kaldı</span></div>
+        <div class="pcard-footer"><span class="pcard-date">01.04.2026 03:06</span><div class="pcard-radar">◎</div></div>
+      </div>
+      <div class="pcard">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between">
+          <div class="pcard-name" style="flex:1">Samsung Galaxy S25 Ultra 256 GB</div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px"><span class="pcard-badge badge-trendyol">Trendyol</span><div style="font-size:16px;color:#FF4D6D">🗑</div></div>
+        </div>
+        <div class="pcard-divider"></div>
+        <div class="pcard-prices">
+          <div class="price-col"><span class="price-label">Eklendiğinde</span><span class="price-val muted" style="font-size:12px">₺62.999</span></div>
+          <div class="price-col" style="align-items:center"><span class="price-label">Hedef</span><span class="price-val gold">₺58.000</span></div>
+          <div class="price-col" style="align-items:flex-end"><span class="price-label">Süreçteki En Düşük</span><div style="display:flex;align-items:center"><span class="price-val green">₺59.900</span><span class="price-drop">-%5</span></div><span class="pcard-badge badge-hb" style="margin:2px 0 0;font-size:8px">Hepsiburada</span></div>
+        </div>
+        <div class="pcard-footer"><span class="pcard-date">01.04.2026 02:51</span><div class="pcard-radar">◎</div></div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;padding:0 10px 10px"><div class="fab"><span style="font-size:16px;font-weight:700;color:#0D0F14">+</span><span class="fab-txt">Ürün Ekle</span></div></div>
+    </div>
+  </div>
+  <div class="slabel">Ana Ekran</div>
+  </div>
+
+  <!-- EKRAN 2: Ürün Ekle -->
+  <div>
+  <div class="phone">
+    <div class="pbar"><span class="pbar-t">03:26</span><div class="picons"><div class="picon sig"></div><div class="picon bat"></div></div></div>
+    <div class="screen">
+      <div class="sapp-header" style="padding-bottom:4px">
+        <div style="display:flex;align-items:center;gap:8px"><span style="font-size:16px;color:#9CA3AF">←</span><span class="sapp-title" style="font-size:15px">Ürün Ekle</span></div>
+      </div>
+      <div style="padding:0 12px;margin-bottom:6px">
+        <div style="font-size:10px;color:#9CA3AF;margin-bottom:5px">Ürün Linki</div>
+        <div style="background:#1E2333;border:1.5px solid #00E5A0;border-radius:10px;padding:9px 10px;display:flex;align-items:center;gap:6px"><span style="font-size:12px;color:#9CA3AF">🔗</span><span style="font-size:10px;color:#eaedf5;flex:1">amzn.eu/d/0gxFr3WZ</span><div style="width:26px;height:26px;background:#252A3A;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px">📋</div></div>
+      </div>
+      <div style="margin:0 12px 10px;border:1px solid rgba(0,229,160,.3);border-radius:10px;padding:9px 10px;display:flex;align-items:center;justify-content:center;gap:6px"><span style="font-size:12px;color:#00E5A0">🔍</span><span style="font-size:12px;font-weight:600;color:#00E5A0">Ürünü Analiz Et</span></div>
+      <div class="prev-card">
+        <div class="prev-img">📱</div>
+        <div style="flex:1">
+          <div class="prev-name">Apple iPhone 17 256 GB ProMotion teknolojisine sahip...</div>
+          <div style="display:flex;align-items:center;gap:4px;margin-top:3px"><span class="prev-site">Amazon TR</span><span class="prev-stock">Stokta</span></div>
+          <div class="prev-price">₺75.499</div>
+        </div>
+      </div>
+      <div style="padding:0 12px;margin-bottom:8px">
+        <div style="font-size:10px;color:#9CA3AF;margin-bottom:5px">Hedef Fiyat (opsiyonel)</div>
+        <div class="sinput" style="margin:0;border:1px solid #252A3A"><span class="sinput-icon">🚩</span><span class="sinput-val">₺ 72.500</span></div>
+      </div>
+      <div class="sbtn" style="display:flex;align-items:center;justify-content:center;gap:6px"><span style="font-size:14px">⊕</span><span>Takip Listesine Ekle</span></div>
+    </div>
+  </div>
+  <div class="slabel">Ürün Ekle</div>
+  </div>
+
+  <!-- EKRAN 3: Tarama -->
+  <div>
+  <div class="phone">
+    <div class="pbar"><span class="pbar-t">03:31</span><div class="picons"><div class="picon sig"></div><div class="picon bat"></div></div></div>
+    <div class="screen">
+      <div class="sapp-header"><span class="sapp-title">inerken</span><div class="sapp-icons"><div class="sapp-icon" style="font-size:12px;color:#eaedf5">🔔</div><div class="sapp-icon" style="font-size:12px;color:#eaedf5">⤴</div></div></div>
+      <div style="background:#00E5A0;border-radius:12px;margin:0 10px 12px;padding:12px;display:flex;align-items:center;gap:8px">
+        <div style="width:16px;height:16px;border:2px solid #0D0F14;border-top-color:transparent;border-radius:50%"></div>
+        <span style="font-size:13px;font-weight:700;color:#0D0F14">Trendyol taranıyor...</span>
+      </div>
+      <div style="margin:0 10px 10px;background:#1E2333;border-radius:12px;padding:12px">
+        <div style="font-size:10px;color:#9CA3AF;margin-bottom:8px;font-weight:600">Tarama Durumu</div>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <div style="display:flex;align-items:center;gap:8px"><span style="width:14px;height:14px;background:rgba(0,229,160,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:#00E5A0">✓</span><span style="font-size:10px;color:#eaedf5">Amazon TR</span><span style="margin-left:auto;font-size:10px;font-weight:600;color:#00E5A0">₺75.499</span></div>
+          <div style="display:flex;align-items:center;gap:8px"><span style="width:14px;height:14px;background:rgba(0,229,160,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:#00E5A0">✓</span><span style="font-size:10px;color:#eaedf5">Hepsiburada</span><span style="margin-left:auto;font-size:10px;font-weight:600;color:#eaedf5">₺76.890</span></div>
+          <div style="display:flex;align-items:center;gap:8px"><div style="width:14px;height:14px;border:1.5px solid #00E5A0;border-top-color:transparent;border-radius:50%"></div><span style="font-size:10px;color:#F27A1A;font-weight:500">Trendyol</span><span style="margin-left:auto;font-size:9px;color:#9CA3AF">taranıyor...</span></div>
+          <div style="display:flex;align-items:center;gap:8px"><span style="width:14px;height:14px;border:1px solid #252A3A;border-radius:50%"></span><span style="font-size:10px;color:#6B7280">N11</span><span style="margin-left:auto;font-size:9px;color:#6B7280">bekliyor</span></div>
+          <div style="display:flex;align-items:center;gap:8px"><span style="width:14px;height:14px;border:1px solid #252A3A;border-radius:50%"></span><span style="font-size:10px;color:#6B7280">PttAVM</span><span style="margin-left:auto;font-size:9px;color:#6B7280">bekliyor</span></div>
+        </div>
+      </div>
+      <div class="pcard" style="opacity:.5">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between"><div class="pcard-name" style="flex:1">Apple iPhone 17 256 GB</div><span class="pcard-badge badge-amazon">Amazon TR</span></div>
+        <div class="pcard-divider"></div>
+        <div class="pcard-prices">
+          <div class="price-col"><span class="price-label">Eklendiğinde</span><span class="price-val muted" style="font-size:12px">₺75.107</span></div>
+          <div class="price-col" style="align-items:center"><span class="price-label">Hedef</span><span class="price-val gold">₺72.500</span></div>
+          <div class="price-col" style="align-items:flex-end"><span class="price-label">Süreçteki En Düşük</span><span class="price-val green">₺74.899</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slabel">Tarama / Radar</div>
+  </div>
+
+  <!-- EKRAN 4: Bildirimler -->
+  <div>
+  <div class="phone">
+    <div class="pbar"><span class="pbar-t">10:03</span><div class="picons"><div class="picon sig"></div><div class="picon bat"></div></div></div>
+    <div class="screen">
+      <div class="sapp-header"><span class="sapp-title">Bildirimler</span><div class="sapp-icon" style="font-size:11px;color:#eaedf5">↻</div></div>
+      <div class="notif-card">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><span style="font-size:12px">🎯</span><span class="notif-title">Hedef fiyata ulaşıldı!</span></div>
+        <div class="notif-body">Samsung Galaxy S25 Ultra — Hepsiburada'da fiyat hedefe ulaştı!</div>
+        <div class="notif-price">₺57.900 <span style="font-size:9px;color:#9CA3AF;font-weight:400">Hepsiburada</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:5px"><span class="notif-meta">2 dakika önce</span><span style="font-size:10px;font-weight:600;color:#00E5A0">Ürüne Git →</span></div>
+      </div>
+      <div class="notif-card flash">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><span style="font-size:12px">⚡</span><span class="notif-title" style="color:#FFB830">Flaş indirim yakalandı!</span></div>
+        <div class="notif-body">Apple iPhone 17 256 GB — Amazon TR'de ani %6 düşüş tespit edildi.</div>
+        <div class="notif-price notif-flash">₺70.990 <span style="font-size:9px;color:#9CA3AF;font-weight:400">Amazon TR</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:5px"><span class="notif-meta">18 dakika önce</span><span style="font-size:10px;font-weight:600;color:#FFB830">Ürüne Git →</span></div>
+      </div>
+      <div class="notif-card" style="border-left-color:#378ADD;opacity:.7">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><span style="font-size:12px">📉</span><span class="notif-title">Fiyat düştü!</span></div>
+        <div class="notif-body">Samsung S25 Ultra — Trendyol'da ekleme fiyatından daha ucuz!</div>
+        <div class="notif-price" style="color:#378ADD">₺59.900</div>
+        <div class="notif-meta">2 saat önce</div>
+      </div>
+      <div class="notif-card" style="border-left-color:#378ADD;opacity:.5">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><span style="font-size:12px">📉</span><span class="notif-title">Fiyat düştü!</span></div>
+        <div class="notif-body">Apple iPhone 17 — N11'de ekleme fiyatından %2 ucuz.</div>
+        <div class="notif-price" style="color:#378ADD">₺73.500</div>
+        <div class="notif-meta">Dün 22:14</div>
+      </div>
+    </div>
+  </div>
+  <div class="slabel">Bildirimler</div>
+  </div>
+
+  <!-- EKRAN 5: Ayarlar -->
+  <div>
+  <div class="phone">
+    <div class="pbar"><span class="pbar-t">03:45</span><div class="picons"><div class="picon sig"></div><div class="picon bat"></div></div></div>
+    <div class="screen">
+      <div class="sapp-header"><span class="sapp-title">Ayarlar</span></div>
+      <div style="background:#1E2333;border-radius:12px;margin:0 10px 10px;padding:12px;display:flex;align-items:center;gap:10px">
+        <div style="width:40px;height:40px;border-radius:50%;background:rgba(0,229,160,.15);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#00E5A0">MC</div>
+        <div><div style="font-size:13px;font-weight:600;color:#eaedf5">Mustafa Çelik</div><div style="font-size:10px;color:#9CA3AF">mustafakurumsal@gmail.com</div><div style="display:inline-block;background:rgba(123,47,255,.15);color:#9B72FF;font-size:9px;font-weight:600;padding:2px 7px;border-radius:4px;margin-top:3px">Premium</div></div>
+      </div>
+      <div class="section-title-sm">Bildirim Tercihleri</div>
+      <div class="pref-row"><div class="pref-left"><div class="pref-icon-wrap" style="background:rgba(0,229,160,.1)"><span style="font-size:12px">🎯</span></div><div><div class="pref-title">Hedef fiyata ulaşıldığında</div><div class="pref-sub">Ürün belirlediğin fiyata iner</div></div></div><div class="toggle on"><div class="toggle-dot"></div></div></div>
+      <div class="pref-row"><div class="pref-left"><div class="pref-icon-wrap" style="background:rgba(0,229,160,.1)"><span style="font-size:12px">📉</span></div><div><div class="pref-title">Ekleme fiyatından ucuzladığında</div><div class="pref-sub">Herhangi bir sitede düşüş</div></div></div><div class="toggle on"><div class="toggle-dot"></div></div></div>
+      <div class="pref-row"><div class="pref-left"><div class="pref-icon-wrap" style="background:rgba(255,184,48,.1)"><span style="font-size:12px">⚡</span></div><div><div class="pref-title">Flaş indirim yakalandığında</div><div class="pref-sub">Ani %5+ düşüşlerde bildir</div></div></div><div class="toggle on"><div class="toggle-dot"></div></div></div>
+      <div class="pref-row"><div class="pref-left"><div class="pref-icon-wrap" style="background:rgba(107,114,128,.1)"><span style="font-size:12px">✉</span></div><div><div class="pref-title">E-posta bildirimi</div><div class="pref-sub">Push'a ek olarak e-posta</div></div></div><div class="toggle off"><div class="toggle-dot"></div></div></div>
+      <div class="section-title-sm" style="margin-top:4px">Otomatik Tarama</div>
+      <div style="background:#1E2333;border-radius:10px;margin:0 10px;padding:10px 12px"><div style="font-size:10px;color:#9CA3AF;line-height:1.5">Sunucu her <span style="color:#00E5A0;font-weight:600">15 dakikada</span> bir fiyatları kontrol eder. <span style="color:#FFB830;font-weight:600">Flaş indirim saatlerinde</span> tarama 5 dakikaya iner.</div></div>
+    </div>
+  </div>
+  <div class="slabel">Ayarlar</div>
+  </div>
+
+  </div><!-- /screens -->
+  </div><!-- /screens-wrap -->
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- FEATURES -->
+<div class="features-section">
+<div class="container">
+  <div class="section-eyebrow">Temel Özellikler</div>
+  <h2 class="section-title">Her detay düşünüldü.</h2>
+  <div class="features-grid">
+    <div class="feat-card">
+      <div class="feat-icon">🔗</div>
+      <div class="feat-title">Akıllı Link Çözme</div>
+      <div class="feat-desc">amzn.to, amzn.eu, app.hb.biz gibi kısaltılmış ve mobil uygulama linkleri otomatik olarak gerçek ürün sayfasına yönlendirilir.</div>
+      <div class="feat-tag">httpx redirect</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🔍</div>
+      <div class="feat-title">Çapraz Platform Karşılaştırma</div>
+      <div class="feat-desc">9 büyük platformda aynı ürün aranır, tüm sitelerden fiyatlar alınır ve en ucuz seçenek öne çıkarılır.</div>
+      <div class="feat-tag">9 platform</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🚩</div>
+      <div class="feat-title">Hedef Fiyat</div>
+      <div class="feat-desc">Her ürün için ayrı hedef fiyat belirleyebilirsiniz. Fiyat bu değere ulaştığında anında bildirim gönderilir.</div>
+      <div class="feat-tag">kişiselleştirilebilir</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">⚡</div>
+      <div class="feat-title">Flaş İndirim Modu</div>
+      <div class="feat-desc">Kampanya saatlerinde tarama sıklığı 5 dakikaya iner. Kısa süreli indirimleri asla kaçırmazsınız.</div>
+      <div class="feat-tag">10:00 12:00 14:00 18:00 20:00 22:00</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🔋</div>
+      <div class="feat-title">Sıfır Pil Tüketimi</div>
+      <div class="feat-desc">Tüm tarama işlemleri bulut sunucusunda gerçekleşir. Telefonunuz yalnızca sonuçları görüntüler; pil ve internet tüketimi sıfıra yakındır.</div>
+      <div class="feat-tag">sunucu tabanlı</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🛡</div>
+      <div class="feat-title">Store Uyumlu</div>
+      <div class="feat-desc">Sunucu tabanlı mimari sayesinde App Store ve Google Play Store politikalarına tam uyumludur. Arka plan işlemi yoktur.</div>
+      <div class="feat-tag">App Store · Play Store</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SCAN MODES -->
+<div class="scan-section">
+<div class="container">
+  <div class="section-eyebrow">Otomatik Tarama Stratejisi</div>
+  <h2 class="section-title">Uyurken de tarar.</h2>
+  <p class="section-sub">Üç farklı tarama modu aynı anda çalışır. Telefonunuz kapalı olsa bile sunucu izlemeye devam eder.</p>
+  <div class="scan-grid">
+    <div class="scan-card fast">
+      <div class="scan-freq green">15<span class="scan-unit"> dk</span></div>
+      <div class="scan-name">Hızlı Tarama</div>
+      <div class="scan-desc">Takip ettiğiniz ürünün kendi URL'i her 15 dakikada bir taranır. Anlık fiyat değişimlerini yakalar.</div>
+    </div>
+    <div class="scan-card deep">
+      <div class="scan-freq blue">60<span class="scan-unit"> dk</span></div>
+      <div class="scan-name">Derin Tarama</div>
+      <div class="scan-desc">Her saat başı ürün tüm desteklenen sitelerde aranır. En ucuz platformu tespit eder ve karşılaştırır.</div>
+    </div>
+    <div class="scan-card flash">
+      <div class="scan-freq gold">5<span class="scan-unit"> dk</span></div>
+      <div class="scan-name">Flaş Modu</div>
+      <div class="scan-desc">Kampanya saatlerinde devreye girer, tarama 5 dakikaya iner. Kısa süreli indirimleri anında yakalar.</div>
+      <div class="scan-flash-times">
+        <span class="flash-time">10:00</span>
+        <span class="flash-time">12:00</span>
+        <span class="flash-time">14:00</span>
+        <span class="flash-time">18:00</span>
+        <span class="flash-time">20:00</span>
+        <span class="flash-time">22:00</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- NOTIFICATIONS -->
+<div class="notif-section">
+<div class="container">
+  <div class="section-eyebrow">Bildirim Sistemi</div>
+  <h2 class="section-title">3 farklı alarm, 0 kaçırılan fırsat.</h2>
+  <div class="notif-grid">
+    <div class="notif-big-card target">
+      <div class="notif-emoji">🎯</div>
+      <div class="notif-big-title green">Hedef Fiyat</div>
+      <div class="notif-big-desc">Belirlediğiniz hedef fiyata ulaşıldığında anında bildirim gelir.</div>
+      <div class="notif-example">iPhone 17 — 72.500 ₺<br>Hedef: 73.000 ₺ ✓</div>
+    </div>
+    <div class="notif-big-card drop">
+      <div class="notif-emoji">📉</div>
+      <div class="notif-big-title blue">Fiyat Düşüşü</div>
+      <div class="notif-big-desc">Ekleme anındaki fiyatın en az %1 altına inildiğinde bildirim gönderilir.</div>
+      <div class="notif-example">S25 Ultra — 59.900 ₺<br>Ekleme: 62.999 ₺ ↓ %5</div>
+    </div>
+    <div class="notif-big-card flash-b">
+      <div class="notif-emoji">⚡</div>
+      <div class="notif-big-title gold">Flaş İndirim</div>
+      <div class="notif-big-desc">Mevcut fiyattan ani %5'ten fazla düşüş tespit edildiğinde acil bildirim gelir.</div>
+      <div class="notif-example">MacBook Air — 52.000 ₺<br>10 dk önce: 57.000 ₺ ↓ %9</div>
+    </div>
+  </div>
+  <div style="margin-top:24px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 28px;display:flex;gap:32px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:12px"><span style="font-size:20px">📲</span><div><div style="font-weight:600;font-size:14px">Push Bildirim (FCM)</div><div style="font-size:12px;color:var(--muted);margin-top:2px">Firebase Cloud Messaging — kod hazır, Firebase bağlanınca aktif</div></div></div>
+    <div style="display:flex;align-items:center;gap:12px"><span style="font-size:20px">✉️</span><div><div style="font-weight:600;font-size:14px">E-posta Bildirimi</div><div style="font-size:12px;color:var(--muted);margin-top:2px">Gmail SMTP — kullanıcı ayarlardan istediği zaman açıp kapatabilir</div></div></div>
+    <div style="display:flex;align-items:center;gap:12px"><span style="font-size:20px">🔔</span><div><div style="font-weight:600;font-size:14px">Uygulama İçi</div><div style="font-size:12px;color:var(--muted);margin-top:2px">Tüm bildirimler uygulama içinde listelenir, geçmiş görüntülenir</div></div></div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SITES -->
+<div class="sites-section">
+<div class="container">
+  <div class="section-eyebrow">Desteklenen Platformlar</div>
+  <h2 class="section-title">9 platform, tek ekran.</h2>
+  <div class="sites-grid">
+    <div class="site-row"><div><div class="site-name">Trendyol</div><div class="site-note">JS durum nesnesi ile fiyat okuma</div></div><span class="site-status status-active">Aktif</span></div>
+    <div class="site-row"><div><div class="site-name">Hepsiburada</div><div class="site-note">app.hb.biz mobil link desteği</div></div><span class="site-status status-active">Aktif</span></div>
+    <div class="site-row"><div><div class="site-name">Amazon TR</div><div class="site-note">amzn.to / amzn.eu kısa link desteği</div></div><span class="site-status status-active">Aktif</span></div>
+    <div class="site-row"><div><div class="site-name">N11</div><div class="site-note">Tam URL ile sorunsuz çalışma</div></div><span class="site-status status-active">Aktif</span></div>
+    <div class="site-row"><div><div class="site-name">PttAVM</div><div class="site-note">Sepete Özel kampanya fiyatı desteği</div></div><span class="site-status status-active">Aktif</span></div>
+    <div class="site-row"><div><div class="site-name">Idefix</div><div class="site-note">JSON-LD yapılandırılmış veri okuma</div></div><span class="site-status status-active">Aktif</span></div>
+    <div class="site-row"><div><div class="site-name">ÇiçekSepeti</div><div class="site-note">Arama URL güncellendi, test devam ediyor</div></div><span class="site-status status-test">Test</span></div>
+    <div class="site-row"><div><div class="site-name">Teknosa</div><div class="site-note">Seçici doğrulaması tamamlandı</div></div><span class="site-status status-test">Test</span></div>
+    <div class="site-row"><div><div class="site-name">MediaMarkt</div><div class="site-note">Seçici doğrulaması tamamlandı</div></div><span class="site-status status-test">Test</span></div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- TECH STACK -->
+<div class="tech-section">
+<div class="container">
+  <div class="section-eyebrow">Teknik Mimari</div>
+  <h2 class="section-title">Sunucu tabanlı,<br>telefon sadece görüntüler.</h2>
+  <p class="section-sub">Playwright gibi ağır tarayıcı kütüphaneleri mobil cihazlarda çalıştırılamaz. Tüm ağır işlemler bulutta gerçekleşir.</p>
+
+  <!-- ARCH FLOW -->
+  <div class="arch-flow" style="margin-top:48px">
+    <div class="arch-node">
+      <div class="arch-node-icon">📱</div>
+      <div class="arch-node-name">Mobil Uygulama</div>
+      <div class="arch-node-tech">Flutter / Dart</div>
+    </div>
+    <div class="arch-arrow">→</div>
+    <div class="arch-node highlight">
+      <div class="arch-node-icon">⚙️</div>
+      <div class="arch-node-name">Backend API</div>
+      <div class="arch-node-tech">FastAPI · Python</div>
+    </div>
+    <div class="arch-arrow">→</div>
+    <div class="arch-node highlight">
+      <div class="arch-node-icon">🕷</div>
+      <div class="arch-node-name">Scraper Servisi</div>
+      <div class="arch-node-tech">Playwright · Python</div>
+    </div>
+    <div class="arch-arrow">→</div>
+    <div class="arch-node">
+      <div class="arch-node-icon">📦</div>
+      <div class="arch-node-name">Veritabanı</div>
+      <div class="arch-node-tech">SQLite</div>
+    </div>
+    <div class="arch-arrow">→</div>
+    <div class="arch-node">
+      <div class="arch-node-icon">🔔</div>
+      <div class="arch-node-name">Push Bildirim</div>
+      <div class="arch-node-tech">Firebase FCM</div>
+    </div>
+  </div>
+
+  <div class="tech-grid" style="margin-top:32px">
+    <div class="tech-row"><div class="tech-icon">📱</div><div><div class="tech-layer">Mobil</div><div class="tech-name">Flutter / Dart</div><div class="tech-desc">Kullanıcı arayüzü, API çağrısı, bildirim alma</div></div></div>
+    <div class="tech-row"><div class="tech-icon">⚙️</div><div><div class="tech-layer">Backend API</div><div class="tech-name">FastAPI (Python)</div><div class="tech-desc">Kimlik doğrulama, ürün yönetimi, zamanlayıcı, bildirim gönderici</div></div></div>
+    <div class="tech-row"><div class="tech-icon">🕷</div><div><div class="tech-layer">Scraper</div><div class="tech-name">Playwright (Python)</div><div class="tech-desc">Headless browser ile web sayfası tarama, fiyat çekme</div></div></div>
+    <div class="tech-row"><div class="tech-icon">📦</div><div><div class="tech-layer">Veritabanı</div><div class="tech-name">SQLite</div><div class="tech-desc">Kullanıcılar, ürünler, fiyat geçmişi, bildirim kayıtları</div></div></div>
+    <div class="tech-row"><div class="tech-icon">⏱</div><div><div class="tech-layer">Zamanlayıcı</div><div class="tech-name">APScheduler</div><div class="tech-desc">Otomatik arka plan tarama görevleri (15 dk / 60 dk / 5 dk)</div></div></div>
+    <div class="tech-row"><div class="tech-icon">🔔</div><div><div class="tech-layer">Push Bildirim</div><div class="tech-name">Firebase FCM</div><div class="tech-desc">Anlık fiyat düşüşü ve hedef fiyat bildirimleri</div></div></div>
+    <div class="tech-row"><div class="tech-icon">✉️</div><div><div class="tech-layer">E-posta</div><div class="tech-name">SMTP (Gmail)</div><div class="tech-desc">Push bildirimine ek olarak isteğe bağlı e-posta gönderimi</div></div></div>
+    <div class="tech-row"><div class="tech-icon">☁️</div><div><div class="tech-layer">Sunucu</div><div class="tech-name">Render.com</div><div class="tech-desc">Ücretsiz başlangıç planı, Docker konteyner ortamı</div></div></div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- STATUS -->
+<div class="status-section">
+<div class="container">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start">
+    <div>
+      <div class="section-eyebrow">Mevcut Durum</div>
+      <h2 class="section-title" style="font-size:clamp(24px,3vw,36px)">Ne hazır,<br>ne bekliyor?</h2>
+      <div class="status-grid">
+        <div class="status-item"><span class="status-feat">Render.com Sunucu</span><span class="status-badge s-done">✓ Canlı</span></div>
+        <div class="status-item"><span class="status-feat">Backend API</span><span class="status-badge s-done">✓ Tamam</span></div>
+        <div class="status-item"><span class="status-feat">APScheduler (15/60/5 dk)</span><span class="status-badge s-done">✓ Tamam</span></div>
+        <div class="status-item"><span class="status-feat">Flutter Mobil UI</span><span class="status-badge s-done">✓ Tamam</span></div>
+        <div class="status-item"><span class="status-feat">Ürün Ekleme & Link Çözme</span><span class="status-badge s-done">✓ Tamam</span></div>
+        <div class="status-item"><span class="status-feat">Fiyat Tarama (5 platform)</span><span class="status-badge s-done">✓ Tamam</span></div>
+        <div class="status-item"><span class="status-feat">Push Bildirim (FCM)</span><span class="status-badge s-wait">⏳ Bekliyor</span></div>
+        <div class="status-item"><span class="status-feat">E-posta Bildirimi</span><span class="status-badge s-wait">⏳ Bekliyor</span></div>
+        <div class="status-item"><span class="status-feat">App Store / Play Store</span><span class="status-badge s-plan">→ Planlı</span></div>
+      </div>
+    </div>
+
+    <!-- NEXT STEPS (inline sağ kolon) -->
+    <div>
+      <div class="section-eyebrow">Sıradaki Adımlar</div>
+      <h2 class="section-title" style="font-size:clamp(24px,3vw,36px)">Yayına giden<br>son adımlar.</h2>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:0">
+        <div class="next-card" style="padding:20px 24px">
+          <div class="next-num" style="font-size:28px;min-width:32px">1</div>
+          <div><div class="next-title" style="font-size:15px">Firebase Kurulumu</div><div class="next-desc" style="font-size:12px">console.firebase.google.com'da proje oluşturulacak, google-services.json Flutter'a eklenecek. Push bildirimler bu adımla aktif olacak.</div></div>
+        </div>
+        <div class="next-card" style="padding:20px 24px">
+          <div class="next-num" style="font-size:28px;min-width:32px">2</div>
+          <div><div class="next-title" style="font-size:15px">E-posta Bildirimi</div><div class="next-desc" style="font-size:12px">Gmail uygulama şifresi oluşturulacak, SMTP ayarları Render'a girilecek. Kullanıcılar açıp kapatabilecek.</div></div>
+        </div>
+        <div class="next-card" style="padding:20px 24px">
+          <div class="next-num" style="font-size:28px;min-width:32px">3</div>
+          <div><div class="next-title" style="font-size:15px">Test Kapsamı Genişletme</div><div class="next-desc" style="font-size:12px">ÇiçekSepeti, Teknosa, MediaMarkt için canlı testler. 3 site tamamlandığında desteklenen platform 9'a ulaşacak.</div></div>
+        </div>
+        <div class="next-card" style="padding:20px 24px">
+          <div class="next-num" style="font-size:28px;min-width:32px">4</div>
+          <div><div class="next-title" style="font-size:15px">Store Yayını</div><div class="next-desc" style="font-size:12px">Firebase sonrası paketler oluşturulacak.</div><span class="next-cost">Google Play: $25 · App Store: $99/yıl</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- FOOTER -->
+<footer>
+<div class="container">
+  <div class="footer-logo">iner<span>ken</span></div>
+  <div class="footer-url">https://inerken.onrender.com</div>
+  <div style="display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-bottom:32px">
+    <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:var(--green)">9</div><div style="font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:.5px">Platform</div></div>
+    <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:var(--green)">7/24</div><div style="font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:.5px">Tarama</div></div>
+    <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:var(--green)">3 tip</div><div style="font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:.5px">Bildirim</div></div>
+    <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:var(--green)">%0</div><div style="font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:.5px">Pil / İnternet</div></div>
+  </div>
+  <div class="footer-meta">Bu belge Nisan 2026'da hazırlanmıştır · Uygulama hazır · Sunucu çalışıyor · Sıradaki adım: Firebase ve mağaza yayını.</div>
+</div>
+</footer>
+
+</body>
+</html>
