@@ -77,19 +77,19 @@ Satış Profesyoneli olarak, satış ve müşteri yönetimi alanında 15 yıllı
 </div>
 
 <div class="job-item">
-  <p class="job-title">Kurumsal Satış Yöneticisi / Yönetmeni</p>
+  <p class="job-title">Kurumsal Satış Yöneticisi</p>
   <p class="company-date">Bizim Toptan Satış Mağazaları | Nisan 2022 - Mayıs 2024</p>
   <p class="job-description">Aylık ortalama %30 düzenli ciro artışı ve sürekli yeni müşteri kazanımı sağladım. 300+ çalışana sahip kurumsal firmaların, akaryakıt istasyonlarının ve restoran zincirlerinin gıda/gıda dışı ürün tedarik operasyonlarını planlayarak maliyet optimizasyonu ve tedarik zinciri verimliliği sağladım.</p>
 </div>
 
 <div class="job-item">
-  <p class="job-title">Kurumsal Satış Yöneticisi / Yönetmeni</p>
+  <p class="job-title">Kurumsal Satış Yöneticisi</p>
   <p class="company-date">Mepsan Petrol Cihazları A.Ş. | Ağustos 2016 - Nisan 2022</p>
   <p class="job-description">Üretilen akaryakıt ekipmanları ve akaryakıt dağıtım şirketleri ile iş birliği içinde geliştirilen projeler çerçevesinde kurumsal satışları gerçekleştirdim. Petrol Ofisi, Alpet, Lukoil, Soil gibi büyük akaryakıt dağıtım şirketleri ve kamu kurumları ile projeler geliştirip başarıyla uygulamaya geçirdim.</p>
 </div>
 
 <div class="job-item">
-  <p class="job-title">Kurumsal Satış Yöneticisi / Yönetmeni</p>
+  <p class="job-title">Kurumsal Satış Yöneticisi</p>
   <p class="company-date">Nixonled - Yağmur Group & Techled Aydınlatma | Aralık 2011 - Temmuz 2016</p>
   <p class="job-description">Endüstriyel LED aydınlatma armatürlerinin pazarlama ve satış süreçlerini yönettim. Hayat Kimya, Aksa Akrilik, Arçelik, TÜPRAŞ gibi büyük kurumsal firmaları müşteri portföyüne kazandırdım. İstanbul Büyükşehir Belediyesi dahil birçok kamu projesine liderlik ettim.</p>
 </div>
@@ -108,4 +108,5 @@ Satış Profesyoneli olarak, satış ve müşteri yönetimi alanında 15 yıllı
 </ul>
 
 <h2 class="cv-section-title">Hobi ve İlgi Alanları</h2>
-<p>Yapay zeka asistanları üzerinden Vibe Coding ile çeşitli masaüstü ve mobil uygulamalar geliştirmek. EPDK API Gateway üzerinden Şarj Ağı soket verilerini çeken, analiz eden ve dashboardlar oluşturan uygulamalar ile son kullanma tarihi takibi yapan mobil asistan projeleri inşa etmek.</p>
+<p>Yapay zeka asistanları üzerinden Vibe Coding ile çeşitli masaüstü ve mobil uygulamalar geliştirmek. 
+Detaylar için Projeler sayfasına bakabilirsiniz.</p>
