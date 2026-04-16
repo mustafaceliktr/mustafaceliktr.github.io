@@ -22,7 +22,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
 
   <div class="grid__item span-3">
     <article class="archive__item">
-      <div class="archive__item-teaser"><img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=400&q=80" alt=""></div>
+      <div class="archive__item-teaser"><img src="/assets/images/herseyim.jpg" alt=""></div>
       <h3 class="archive__item-title">HerŞeyim</h3>
       <div class="archive__item-excerpt">Görev, not ve toplantı yönetimini tek merkezde toplayan yaşam asistanı.</div>
       <div class="btn-wrapper"><a href="/portfolyo/herseyim.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
@@ -31,34 +31,34 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
 
   <div class="grid__item span-3">
     <article class="archive__item">
-      <div class="archive__item-teaser"><img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80" alt=""></div>
+      <div class="archive__item-teaser"><img src="/assets/images/inerken.jpg" alt=""></div>
       <h3 class="archive__item-title">İnerken</h3>
-      <div class="archive__item-excerpt">9 e-ticaret platformunda akıllı fiyat takibi ve bildirim uygulaması.</div>
+      <div class="archive__item-excerpt">Link veya manuel ürün ekleyerek; dokuz e-ticaret platformunda akıllı fiyat takibi ve hedef/indirimli fiyat bildirim uygulaması.</div>
       <div class="btn-wrapper"><a href="/portfolyo/inerken.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
     </article>
   </div>
 
   <div class="grid__item span-3">
     <article class="archive__item">
-      <div class="archive__item-teaser"><img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&w=400&q=80" alt=""></div>
-      <h3 class="archive__item-title">freshly (BETA)</h3>
-      <div class="archive__item-excerpt">İlaç ve gıda stoklarını takip eden son kullanma tarihi asistanı.</div>
+      <div class="archive__item-teaser"><img src="/assets/images/herseyim.jpg" alt=""></div>
+      <h3 class="archive__item-title">freshly</h3>
+      <div class="archive__item-excerpt">İlaç, kozmetik ve gıda stoklarını takip eden son kullanma tarihi asistanı.</div>
       <div class="btn-wrapper"><a href="/portfolyo/freshly.html" target="_blank" class="btn btn--inverse btn--small">Detaylar</a></div>
     </article>
   </div>
 
   <div class="grid__item span-3">
     <article class="archive__item">
-      <div class="archive__item-teaser"><img src="https://images.unsplash.com/photo-1470019693664-1d20e54cd090?auto=format&fit=crop&w=400&q=80" alt=""></div>
+      <div class="archive__item-teaser"><img src="/assets/images/vibetrack.jpg" alt=""></div>
       <h3 class="archive__item-title">VibeTrack</h3>
-      <div class="archive__item-excerpt">Ruh haline göre odaklanma odaları ve Pomodoro sayacı.</div>
+      <div class="archive__item-excerpt">Ruh haline göre odaklanma odaları eşliğinde AI melodiler  dinleyebileceğiniz sade bir uygulama</div>
       <div class="btn-wrapper"><a href="/portfolyo/vibetrack.html" target="_blank" class="btn btn--success btn--small">Detaylar</a></div>
     </article>
   </div>
 
   <div class="grid__item span-3">
     <article class="archive__item">
-      <div class="archive__item-teaser"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=400&q=80" alt=""></div>
+      <div class="archive__item-teaser"><img src="/assets/images/dataker.jpg" alt=""></div>
       <h3 class="archive__item-title">E.V.C.P. DaTAker</h3>
       <div class="archive__item-excerpt">EPDK verilerini soket bazlı Excel raporlarına dönüştüren araç.</div>
       <div class="btn-wrapper"><a href="/portfolyo/evcpdataker.html" target="_blank" class="btn btn--primary btn--small">Detaylar</a></div>
@@ -67,25 +67,25 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
 
   <div class="grid__item span-3">
     <article class="archive__item">
-      <div class="archive__item-teaser"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80" alt=""></div>
-      <h3 class="archive__item-title">Şarj Ekosistemi Analizi</h3>
-      <div class="archive__item-excerpt">Şarj altyapısı için Python tabanlı analiz ve raporlama yazılımı.</div>
+      <div class="archive__item-teaser"><img src="/assets/images/ekosistem.jpg" alt=""></div>
+      <h3 class="archive__item-title">E.A. Şarj Ekosistemi Analizi</h3>
+      <div class="archive__item-excerpt">Elektrikli araç şarj altyapısı için Python tabanlı analiz ve raporlama yazılımı.</div>
       <div class="btn-wrapper"><a href="/portfolyo/sarjekosistemianaliz.html" target="_blank" class="btn btn--primary btn--small">Detaylar</a></div>
     </article>
   </div>
 
   <div class="grid__item span-3">
     <article class="archive__item">
-      <div class="archive__item-teaser"><img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&w=400&q=80" alt=""></div>
-      <h3 class="archive__item-title">Gelişim Raporu V1</h3>
-      <div class="archive__item-excerpt">Sektörel gelişim verilerinin derinlemesine teknik analizi.</div>
+      <div class="archive__item-teaser"><img src="/assets/images/gelisimraporu.jpg" alt=""></div>
+      <h3 class="archive__item-title">E.A. Şarj Noktaları Gelişim Raporu</h3>
+      <div class="archive__item-excerpt">Elektrikli araç şarj noktalarının EPDK verilerinin yükleneren gelişimi analizinin yapılabileceği iki dönemli temel gelişim analiz uygulaması.</div>
       <div class="btn-wrapper"><a href="/portfolyo/gelisimraporu.html" target="_blank" class="btn btn--primary btn--small">Detaylar</a></div>
     </article>
   </div>
 
   <div class="grid__item span-3">
     <article class="archive__item">
-      <div class="archive__item-teaser"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=400&q=80" alt=""></div>
+      <div class="archive__item-teaser"><img src="/assets/images/projectos.jpg" alt=""></div>
       <h3 class="archive__item-title">ProjectOS</h3>
       <div class="archive__item-excerpt">Çoklu proje yönetimi ve AI context süreçlerini otomatize eden araç.</div>
       <div class="btn-wrapper"><a href="/portfolyo/projectos.html" target="_blank" class="btn btn--inverse btn--small">Detaylar</a></div>
