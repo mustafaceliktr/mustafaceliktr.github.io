@@ -114,7 +114,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <article class="archive__item">
       <div class="archive__item-teaser"><img src="/assets/images/gelisim.png" alt=""></div>
       <h3 class="archive__item-title">E.A. Şarj Noktaları Gelişim Raporu</h3>
-      <div class="archive__item-excerpt">Elektrikli araç şarj noktalarının EPDK verilerinin yüklenerek gelişim analizinin yapılabileceği iki dönemli temel gelişim analiz uygulaması.</div>
+      <div class="archive__item-excerpt">Elektrikli araç şarj istasyonları için iki dönemli temel gelişim rapor uygulaması.</div>
       <div class="btn-wrapper"><a href="/portfolyo/gelisimraporu.html" target="_blank" class="btn btn--primary btn--small">Detaylar</a></div>
     </article>
   </div>
