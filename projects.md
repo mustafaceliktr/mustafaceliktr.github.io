@@ -106,7 +106,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
       <div class="archive__item-teaser"><img src="/assets/images/vibe.png" alt=""></div>
       <h3 class="archive__item-title">VibeTrack</h3>
       <div class="archive__item-excerpt">Ruh haline göre AI üretimi müzikler dinleyebileceğin odaklanma odaları ve Pomodoro sayacı.</div>
-      <div class="btn-wrapper"><a href="/portfolyo/vibe.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
+      <div class="btn-wrapper"><a href="/portfolyo/vibetrack.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
     </article>
   </div>
 
