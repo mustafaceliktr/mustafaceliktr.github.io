@@ -1,1 +1,1169 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Freshly — Keep it fresh, always.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-900: #052e16;
+    --green-800: #14532d;
+    --green-600: #16a34a;
+    --green-500: #22c55e;
+    --green-400: #4ade80;
+    --green-200: #bbf7d0;
+    --green-50: #f0fdf4;
+    --cream: #fafaf7;
+    --ink: #0f1a12;
+    --ink-muted: #3d5c44;
+    --gold: #d4a843;
+  }
 
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* ── Custom Cursor ── */
+  #cursor {
+    position: fixed;
+    width: 12px; height: 12px;
+    background: var(--green-500);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+    mix-blend-mode: multiply;
+  }
+  #cursor-glow {
+    position: fixed;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(34,197,94,0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.4s ease;
+  }
+  body:has(a:hover) #cursor, body:has(button:hover) #cursor { width: 28px; height: 28px; background: var(--green-400); }
+
+  /* ── Particles ── */
+  #particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--green-400);
+    opacity: 0;
+    animation: float-up linear infinite;
+  }
+  @keyframes float-up {
+    0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+    10%  { opacity: 0.4; }
+    90%  { opacity: 0.2; }
+    100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 6vw;
+    background: rgba(250,250,247,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(22,163,74,0.1);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .nav-icon {
+    width: 34px; height: 34px;
+    background: var(--green-600);
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-wordmark {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--ink);
+  }
+  .nav-wordmark span { color: var(--green-500); }
+  .nav-cta {
+    display: flex; align-items: center; gap: 20px;
+  }
+  .nav-link {
+    font-size: 14px; font-weight: 500;
+    color: var(--ink-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-link:hover { color: var(--green-600); }
+  .btn-primary {
+    padding: 10px 22px;
+    background: var(--green-600);
+    color: white;
+    border: none; border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500;
+    cursor: none;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover {
+    background: var(--green-500);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(22,163,74,0.3);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 6vw 80px;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(34,197,94,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(22,163,74,0.06) 0%, transparent 50%);
+  }
+  .hero-grid {
+    position: relative; z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1200px; margin: 0 auto; width: 100%;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(22,163,74,0.1);
+    border: 1px solid rgba(22,163,74,0.25);
+    border-radius: 100px;
+    padding: 6px 14px;
+    font-size: 12px; font-weight: 500;
+    color: var(--green-600);
+    margin-bottom: 24px;
+    letter-spacing: 0.04em;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--green-500);
+    border-radius: 50%;
+    animation: pulse 2s ease infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 5.5vw, 72px);
+    line-height: 1.08;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--green-600);
+  }
+  .hero-desc {
+    font-size: 17px; line-height: 1.7;
+    color: var(--ink-muted);
+    font-weight: 300;
+    margin-bottom: 40px;
+    max-width: 440px;
+  }
+  .hero-actions {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+  .btn-ghost {
+    padding: 10px 22px;
+    border: 1.5px solid rgba(22,163,74,0.4);
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500;
+    color: var(--green-600);
+    background: transparent;
+    cursor: none;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .btn-ghost:hover {
+    background: rgba(22,163,74,0.08);
+    border-color: var(--green-500);
+  }
+  .hero-stats {
+    display: flex; gap: 32px; margin-top: 48px;
+  }
+  .stat-item { }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700;
+    color: var(--ink);
+  }
+  .stat-label {
+    font-size: 12px; color: var(--ink-muted);
+    margin-top: 2px;
+  }
+
+  /* ── Mockup ── */
+  .hero-mockup {
+    position: relative;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .mockup-glow {
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(34,197,94,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: glow-pulse 4s ease-in-out infinite;
+  }
+  @keyframes glow-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.1); opacity: 1; }
+  }
+  .phone-frame {
+    position: relative; z-index: 2;
+    width: 280px;
+    background: var(--ink);
+    border-radius: 44px;
+    padding: 14px;
+    box-shadow:
+      0 40px 80px rgba(15,26,18,0.35),
+      0 0 0 1px rgba(255,255,255,0.08),
+      inset 0 0 0 1px rgba(255,255,255,0.04);
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(-1deg); }
+    50% { transform: translateY(-16px) rotate(1deg); }
+  }
+  .phone-screen {
+    background: #0f1a12;
+    border-radius: 32px;
+    overflow: hidden;
+    aspect-ratio: 9/19.5;
+    position: relative;
+  }
+  .phone-notch {
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 80px; height: 26px;
+    background: var(--ink);
+    border-radius: 0 0 16px 16px;
+    z-index: 10;
+  }
+  .app-ui {
+    padding: 36px 14px 14px;
+    height: 100%;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .app-header {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .app-logo-row {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .app-logo-icon {
+    width: 28px; height: 28px;
+    background: var(--green-600);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .app-logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px; color: white;
+  }
+  .app-logo-text span { color: var(--green-400); }
+  .app-stats-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .app-stat-card {
+    border-radius: 12px;
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .app-stat-card.red { border-color: rgba(239,68,68,0.3); background: rgba(239,68,68,0.08); }
+  .app-stat-card.yellow { border-color: rgba(234,179,8,0.3); background: rgba(234,179,8,0.08); }
+  .app-stat-card.green { border-color: rgba(34,197,94,0.3); background: rgba(34,197,94,0.08); }
+  .app-stat-num { font-size: 20px; font-weight: 700; color: white; }
+  .app-stat-num.red { color: #f87171; }
+  .app-stat-num.yellow { color: #fbbf24; }
+  .app-stat-num.green { color: var(--green-400); }
+  .app-stat-label { font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+  .app-savings {
+    background: rgba(22,163,74,0.12);
+    border: 1px solid rgba(22,163,74,0.25);
+    border-radius: 12px;
+    padding: 10px 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .savings-icon { font-size: 14px; }
+  .savings-text { font-size: 11px; color: var(--green-400); font-weight: 500; }
+  .app-product {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 10px 12px;
+    border-left: 3px solid var(--green-500);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .app-product.warn { border-left-color: #fbbf24; }
+  .product-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-500); flex-shrink: 0;
+  }
+  .product-dot.warn { background: #fbbf24; }
+  .product-info { flex: 1; }
+  .product-name { font-size: 11px; color: white; font-weight: 500; }
+  .product-date { font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 1px; }
+  .product-badge {
+    font-size: 9px; padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(34,197,94,0.2);
+    color: var(--green-400);
+  }
+  .product-badge.warn { background: rgba(251,191,36,0.2); color: #fbbf24; }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── SECTIONS ── */
+  section { position: relative; z-index: 2; }
+
+  .section-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 100px 6vw;
+  }
+
+  .section-eyebrow {
+    font-size: 12px; font-weight: 500;
+    color: var(--green-600);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-eyebrow::before {
+    content: '';
+    width: 28px; height: 1.5px;
+    background: var(--green-500);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .section-title em { font-style: italic; color: var(--green-600); }
+  .section-desc {
+    font-size: 16px; line-height: 1.7;
+    color: var(--ink-muted);
+    font-weight: 300;
+    max-width: 560px;
+  }
+
+  /* ── FEATURES ── */
+  .features-section { background: white; }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 60px;
+  }
+  .feature-card {
+    padding: 32px;
+    border-radius: 20px;
+    border: 1px solid rgba(22,163,74,0.12);
+    background: var(--cream);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    cursor: none;
+  }
+  .feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(22,163,74,0.12);
+    border-color: rgba(22,163,74,0.35);
+  }
+  .feature-icon {
+    width: 48px; height: 48px;
+    background: rgba(22,163,74,0.1);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+    transition: background 0.3s;
+  }
+  .feature-card:hover .feature-icon { background: rgba(22,163,74,0.18); }
+  .feature-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .feature-desc {
+    font-size: 14px; line-height: 1.65;
+    color: var(--ink-muted);
+    font-weight: 300;
+  }
+  .feature-tag {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: rgba(22,163,74,0.1);
+    color: var(--green-600);
+    font-weight: 500;
+  }
+
+  /* ── AUDIENCE ── */
+  .audience-section { background: var(--cream); }
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 60px;
+  }
+  .audience-card {
+    padding: 28px 24px;
+    border-radius: 20px;
+    border: 1px solid rgba(15,26,18,0.08);
+    background: white;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: none;
+  }
+  .audience-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(15,26,18,0.08);
+  }
+  .audience-emoji { font-size: 36px; margin-bottom: 14px; display: block; }
+  .audience-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px; font-weight: 700;
+    color: var(--ink); margin-bottom: 8px;
+  }
+  .audience-desc {
+    font-size: 13px; color: var(--ink-muted);
+    line-height: 1.6; font-weight: 300;
+  }
+
+  /* ── TECH ── */
+  .tech-section { background: var(--ink); }
+  .tech-section .section-eyebrow { color: var(--green-400); }
+  .tech-section .section-eyebrow::before { background: var(--green-400); }
+  .tech-section .section-title { color: white; }
+  .tech-section .section-desc { color: rgba(255,255,255,0.5); }
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .tech-item {
+    padding: 32px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: background 0.3s;
+    cursor: none;
+  }
+  .tech-item:hover { background: rgba(34,197,94,0.06); }
+  .tech-name {
+    font-size: 13px; font-weight: 500;
+    color: var(--green-400);
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+  .tech-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; color: white; font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .tech-desc {
+    font-size: 13px; color: rgba(255,255,255,0.4);
+    line-height: 1.6; font-weight: 300;
+  }
+
+  /* ── IMPACT ── */
+  .impact-section { background: white; }
+  .impact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-top: 60px;
+  }
+  .impact-stat-list { display: flex; flex-direction: column; gap: 24px; }
+  .impact-stat {
+    display: flex; align-items: flex-start; gap: 20px;
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid rgba(22,163,74,0.12);
+    background: var(--cream);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .impact-stat:hover { transform: translateX(6px); box-shadow: 0 8px 24px rgba(22,163,74,0.1); }
+  .impact-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: rgba(22,163,74,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .impact-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700; color: var(--ink);
+  }
+  .impact-label { font-size: 13px; color: var(--ink-muted); font-weight: 300; margin-top: 2px; }
+  .impact-visual {
+    position: relative;
+    height: 400px;
+    background: linear-gradient(135deg, rgba(22,163,74,0.06), rgba(34,197,94,0.12));
+    border-radius: 28px;
+    border: 1px solid rgba(22,163,74,0.15);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .impact-quote {
+    padding: 40px;
+    text-align: center;
+  }
+  .impact-quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  .impact-quote-sub { font-size: 13px; color: var(--ink-muted); font-weight: 300; }
+  .leaf-deco {
+    position: absolute;
+    font-size: 120px;
+    opacity: 0.07;
+    animation: rotate-slow 20s linear infinite;
+  }
+  @keyframes rotate-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* ── VISION ── */
+  .vision-section {
+    background: linear-gradient(180deg, var(--green-900) 0%, #071a0f 100%);
+    overflow: hidden;
+  }
+  .vision-section .section-eyebrow { color: var(--green-400); }
+  .vision-section .section-eyebrow::before { background: var(--green-400); }
+  .vision-section .section-title { color: white; }
+  .vision-section .section-desc { color: rgba(255,255,255,0.5); }
+  .vision-content { margin-top: 60px; }
+  .vision-list { display: flex; flex-direction: column; gap: 20px; }
+  .vision-item {
+    display: flex; align-items: center; gap: 20px;
+    padding: 24px 28px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.03);
+    transition: background 0.3s, transform 0.3s;
+  }
+  .vision-item:hover { background: rgba(34,197,94,0.08); transform: translateX(8px); }
+  .vision-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px; font-weight: 700;
+    color: rgba(34,197,94,0.2);
+    min-width: 50px;
+  }
+  .vision-title {
+    font-size: 16px; font-weight: 500; color: white; margin-bottom: 4px;
+  }
+  .vision-desc { font-size: 13px; color: rgba(255,255,255,0.4); font-weight: 300; }
+  .vision-badge {
+    margin-left: auto;
+    font-size: 11px; padding: 4px 12px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .vision-badge.done { background: rgba(34,197,94,0.15); color: var(--green-400); border: 1px solid rgba(34,197,94,0.3); }
+  .vision-badge.soon { background: rgba(251,191,36,0.12); color: #fbbf24; border: 1px solid rgba(251,191,36,0.25); }
+  .vision-badge.future { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.1); }
+
+  /* ── CTA ── */
+  .cta-section { background: var(--green-600); overflow: hidden; position: relative; }
+  .cta-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 20% 50%, rgba(255,255,255,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 80% 50%, rgba(0,0,0,0.1) 0%, transparent 50%);
+  }
+  .cta-inner {
+    position: relative; z-index: 2;
+    max-width: 700px; margin: 0 auto;
+    padding: 100px 6vw;
+    text-align: center;
+  }
+  .cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 700;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .cta-title em { font-style: italic; color: var(--green-200); }
+  .cta-desc { font-size: 17px; color: rgba(255,255,255,0.8); font-weight: 300; margin-bottom: 40px; }
+  .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-white {
+    padding: 14px 32px;
+    background: white;
+    color: var(--green-700, #15803d);
+    border: none; border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 500;
+    cursor: none; text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-block;
+  }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.2); }
+  .btn-outline-white {
+    padding: 14px 32px;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 500;
+    color: white; cursor: none; text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: white; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    padding: 48px 6vw;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; color: white;
+  }
+  .footer-logo span { color: var(--green-400); }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-link {
+    font-size: 13px; color: rgba(255,255,255,0.4);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-link:hover { color: var(--green-400); }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
+
+  /* ── DIVIDER ── */
+  .organic-divider {
+    height: 60px;
+    background: inherit;
+    position: relative;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-mockup { display: none; }
+    .features-grid { grid-template-columns: 1fr 1fr; }
+    .audience-grid { grid-template-columns: 1fr 1fr; }
+    .tech-grid { grid-template-columns: 1fr; }
+    .impact-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .features-grid, .audience-grid { grid-template-columns: 1fr; }
+    .nav-cta .nav-link { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div id="cursor"></div>
+<div id="cursor-glow"></div>
+
+<!-- Particles -->
+<div id="particles"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-icon">
+      <svg width="20" height="20" viewBox="0 0 100 100">
+        <path d="M50 18C50 18 76 28 79 52C82 76 66 90 50 94C34 90 18 76 21 52C24 28 50 18 50 18Z" fill="#bbf7d0"/>
+        <path d="M50 30C50 30 68 37 70 53C72 69 60 80 50 83C40 80 28 69 30 53C32 37 50 30 50 30Z" fill="#16a34a"/>
+        <line x1="50" y1="57" x2="50" y2="44" stroke="white" stroke-width="5" stroke-linecap="round"/>
+        <line x1="50" y1="57" x2="61" y2="63" stroke="#bbf7d0" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="50" cy="57" r="4" fill="white"/>
+      </svg>
+    </div>
+    <span class="nav-wordmark">fresh<span>ly</span></span>
+  </a>
+  <div class="nav-cta">
+    <a href="#features" class="nav-link">Özellikler</a>
+    <a href="#tech" class="nav-link">Teknoloji</a>
+    <a href="#vision" class="nav-link">Vizyon</a>
+    <a href="https://freshly--mustafaacelikk.replit.app/" class="btn-primary" target="_blank">Uygulamayı Dene</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="hero-eyebrow reveal">Beta — Şimdi Dene</div>
+      <h1 class="hero-title reveal reveal-delay-1">
+        Evinin <em>taze</em> kalması<br>senin elinde
+      </h1>
+      <p class="hero-desc reveal reveal-delay-2">
+        Son kullanma tarihleri geçmeden önce akıllı hatırlatmalar. Barkod tara, tarihi kaydet, zamanında tüket. İsrafı önle, tasarruf et.
+      </p>
+      <div class="hero-actions reveal reveal-delay-3">
+        <a href="https://freshly--mustafaacelikk.replit.app/" class="btn-primary" target="_blank">Hemen Başla</a>
+        <a href="https://tally.so/r/vG4x4g" class="btn-ghost" target="_blank">Geri Bildirim Ver</a>
+      </div>
+      <div class="hero-stats reveal reveal-delay-4">
+        <div class="stat-item">
+          <div class="stat-num">23.5K+</div>
+          <div class="stat-label">Türk ilacı</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">AI</div>
+          <div class="stat-label">Tarif önerisi</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">%42</div>
+          <div class="stat-label">Ev israfı oranı</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phone Mockup -->
+    <div class="hero-mockup reveal reveal-delay-2">
+      <div class="mockup-glow"></div>
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="phone-notch"></div>
+          <div class="app-ui">
+            <div class="app-header">
+              <div class="app-logo-row">
+                <div class="app-logo-icon">
+                  <svg width="16" height="16" viewBox="0 0 100 100">
+                    <path d="M50 18C50 18 76 28 79 52C82 76 66 90 50 94C34 90 18 76 21 52C24 28 50 18 50 18Z" fill="#bbf7d0"/>
+                    <path d="M50 30C50 30 68 37 70 53C72 69 60 80 50 83C40 80 28 69 30 53C32 37 50 30 50 30Z" fill="#16a34a"/>
+                  </svg>
+                </div>
+                <span class="app-logo-text">fresh<span>ly</span></span>
+              </div>
+            </div>
+            <div class="app-stats-grid">
+              <div class="app-stat-card">
+                <div class="app-stat-num">12</div>
+                <div class="app-stat-label">Aktif ürün</div>
+              </div>
+              <div class="app-stat-card red">
+                <div class="app-stat-num red">2</div>
+                <div class="app-stat-label">Bozulmuş</div>
+              </div>
+              <div class="app-stat-card yellow">
+                <div class="app-stat-num yellow">3</div>
+                <div class="app-stat-label">3 gün kaldı</div>
+              </div>
+              <div class="app-stat-card green">
+                <div class="app-stat-num green">7</div>
+                <div class="app-stat-label">Taze</div>
+              </div>
+            </div>
+            <div class="app-savings">
+              <span class="savings-icon">🌱</span>
+              <span class="savings-text">8 ürün kurtarıldı · 360 ₺ tasarruf</span>
+            </div>
+            <div class="app-product">
+              <div class="product-dot"></div>
+              <div class="product-info">
+                <div class="product-name">Dost Tam Yağlı Yoğurt</div>
+                <div class="product-date">SKT: 15.04.2026</div>
+              </div>
+              <div class="product-badge">45 gün</div>
+            </div>
+            <div class="app-product warn">
+              <div class="product-dot warn"></div>
+              <div class="product-info">
+                <div class="product-name">Namet Dana Salam</div>
+                <div class="product-date">SKT: 28.03.2026</div>
+              </div>
+              <div class="product-badge warn">2 gün</div>
+            </div>
+            <div class="app-product">
+              <div class="product-dot"></div>
+              <div class="product-info">
+                <div class="product-name">Monovit D3 50.000 IU</div>
+                <div class="product-date">SKT: 30.11.2026 · 1/gün</div>
+              </div>
+              <div class="product-badge">İlaç</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="features-section">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Özellikler</div>
+      <h2 class="section-title">Her ürün için <em>akıllı takip</em></h2>
+      <p class="section-desc">Gıdadan ilaca, kozmetikten bebek ürünlerine — evindeki her şeyi tek yerden yönet.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">📷</div>
+        <div class="feature-title">Barkod Tarama</div>
+        <div class="feature-desc">Kameranı tut, barkodu tara. 23.500+ Türk ilacı ve Open Food Facts veritabanıyla ürün bilgisi otomatik gelir.</div>
+        <span class="feature-tag">Anında sonuç</span>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">⏰</div>
+        <div class="feature-title">SKT Takibi</div>
+        <div class="feature-desc">Renk kodlu uyarılar: yeşil taze, sarı dikkat, kırmızı bozuldu. Gıda, ilaç ve kozmetik için ayrı hesaplama mantığı.</div>
+        <span class="feature-tag">Renk kodlu</span>
+      </div>
+      <div class="feature-card reveal reveal-delay-3">
+        <div class="feature-icon">🍳</div>
+        <div class="feature-title">AI Tarif Önerisi</div>
+        <div class="feature-desc">Bozulmak üzere olan ürünlerin ne yapılabileceğini Gemini AI'ya sor. Anlık, pratik tarif önerileri al.</div>
+        <span class="feature-tag">Gemini AI</span>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">💊</div>
+        <div class="feature-title">İlaç Yönetimi</div>
+        <div class="feature-desc">23.500+ Türk ilacı veritabanı. Doz ve kullanım bilgisi kaydet. GS1 ilaç barkodlarından SKT otomatik dolar.</div>
+        <span class="feature-tag">TITCK verisi</span>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">🌱</div>
+        <div class="feature-title">Tasarruf Özeti</div>
+        <div class="feature-desc">Kurtardığın ürün sayısı, tahmini para tasarrufu ve önlenen CO₂ miktarı. Her tüketim kayıt altında.</div>
+        <span class="feature-tag">Çevreci</span>
+      </div>
+      <div class="feature-card reveal reveal-delay-3">
+        <div class="feature-icon">👨‍👩‍👧</div>
+        <div class="feature-title">Aile Paylaşımı</div>
+        <div class="feature-desc">Davet koduyla evini paylaş. Herkes aynı listeyi görür, günceller. Çoklu mekan desteğiyle dolap, buzdolabı ayrı.</div>
+        <span class="feature-tag">Çoklu kullanıcı</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCE -->
+<section class="audience-section">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Hedef Kitle</div>
+      <h2 class="section-title">Kim için <em>tasarlandı?</em></h2>
+      <p class="section-desc">Türkiye'de yıllık 93 kg gıda israfının %42'si evlerde gerçekleşiyor. Freshly bu tabloyu değiştirmek için burada.</p>
+    </div>
+    <div class="audience-grid">
+      <div class="audience-card reveal reveal-delay-1">
+        <span class="audience-emoji">👩‍🍳</span>
+        <div class="audience-title">Ev Hanımları & Babalar</div>
+        <div class="audience-desc">Haftalık alışverişten sonra dolabı takip etmek artık kolay.</div>
+      </div>
+      <div class="audience-card reveal reveal-delay-2">
+        <span class="audience-emoji">💊</span>
+        <div class="audience-title">Kronik Hasta Yakınları</div>
+        <div class="audience-desc">İlaç SKT'lerini ve dozaj bilgilerini güvenle kaydet.</div>
+      </div>
+      <div class="audience-card reveal reveal-delay-3">
+        <span class="audience-emoji">🌿</span>
+        <div class="audience-title">Sürdürülebilirlik Meraklıları</div>
+        <div class="audience-desc">İsrafı azalt, CO₂ ayak izini küçült, tasarruf et.</div>
+      </div>
+      <div class="audience-card reveal reveal-delay-4">
+        <span class="audience-emoji">💄</span>
+        <div class="audience-title">Kozmetik Kullanıcıları</div>
+        <div class="audience-desc">Açılma tarihi ve raf ömrü takibiyle cilt bakımını koruma altına al.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH -->
+<section id="tech" class="tech-section">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Teknoloji</div>
+      <h2 class="section-title">Sağlam <em>altyapı,</em><br>modern yığın</h2>
+      <p class="section-desc">Vibe coding ile hızlı prototip, production-grade teknoloji seçimleriyle sağlam temel.</p>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-item reveal reveal-delay-1">
+        <div class="tech-name">Frontend</div>
+        <div class="tech-title">React + TypeScript</div>
+        <div class="tech-desc">Vite build, Tailwind CSS, shadcn/ui bileşen kütüphanesi. PWA desteğiyle ana ekrana eklenebilir.</div>
+      </div>
+      <div class="tech-item reveal reveal-delay-2">
+        <div class="tech-name">Backend & DB</div>
+        <div class="tech-title">Supabase</div>
+        <div class="tech-desc">PostgreSQL veritabanı, Row Level Security, realtime subscriptions, anonim ve e-posta kimlik doğrulama.</div>
+      </div>
+      <div class="tech-item reveal reveal-delay-3">
+        <div class="tech-name">Yapay Zeka</div>
+        <div class="tech-title">Gemini 2.5 Flash</div>
+        <div class="tech-desc">Tarif önerisi ve OCR için Google'ın en güncel modeli. Türkçe dil desteğiyle doğal yanıtlar.</div>
+      </div>
+      <div class="tech-item reveal reveal-delay-1">
+        <div class="tech-name">Veritabanı</div>
+        <div class="tech-title">23.500+ İlaç</div>
+        <div class="tech-desc">TITCK kaynaklı Türkiye ilaç veritabanı. Open Food Facts ve Open Beauty Facts entegrasyonu.</div>
+      </div>
+      <div class="tech-item reveal reveal-delay-2">
+        <div class="tech-name">Tarama</div>
+        <div class="tech-title">html5-qrcode</div>
+        <div class="tech-desc">Tüm barkod formatları, GS1 ilaç karekodu çözümleme. Mobil kamera optimizasyonu.</div>
+      </div>
+      <div class="tech-item reveal reveal-delay-3">
+        <div class="tech-name">Platform</div>
+        <div class="tech-title">Replit + PWA</div>
+        <div class="tech-desc">Hızlı iterasyon için Replit. iOS Safari ve Android Chrome'da ana ekrana ekleme desteği.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="impact-section">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Etki</div>
+      <h2 class="section-title">Rakamlar <em>konuşuyor</em></h2>
+    </div>
+    <div class="impact-grid">
+      <div class="impact-stat-list">
+        <div class="impact-stat reveal reveal-delay-1">
+          <div class="impact-icon">🗑️</div>
+          <div>
+            <div class="impact-num">93 kg</div>
+            <div class="impact-label">Türkiye'de kişi başı yıllık gıda israfı — dünya 3.'sü</div>
+          </div>
+        </div>
+        <div class="impact-stat reveal reveal-delay-2">
+          <div class="impact-icon">🏠</div>
+          <div>
+            <div class="impact-num">%42</div>
+            <div class="impact-label">Bu israfın evlerde gerçekleşen kısmı</div>
+          </div>
+        </div>
+        <div class="impact-stat reveal reveal-delay-3">
+          <div class="impact-icon">💰</div>
+          <div>
+            <div class="impact-num">360 ₺</div>
+            <div class="impact-label">Ortalama kullanıcı başı aylık tahmini tasarruf</div>
+          </div>
+        </div>
+        <div class="impact-stat reveal reveal-delay-4">
+          <div class="impact-icon">🌍</div>
+          <div>
+            <div class="impact-num">0.4 kg</div>
+            <div class="impact-label">Kurtarılan her ürün başına önlenen CO₂</div>
+          </div>
+        </div>
+      </div>
+      <div class="impact-visual reveal reveal-delay-2">
+        <div class="leaf-deco">🌿</div>
+        <div class="impact-quote">
+          <div class="impact-quote-text">"Bozulmadan önce tüketmek, satın almaktan daha sürdürülebilir."</div>
+          <div class="impact-quote-sub">Freshly'nin temel felsefesi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section id="vision" class="vision-section">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Yol Haritası</div>
+      <h2 class="section-title">Bugün beta,<br><em>yarın çok daha fazlası</em></h2>
+      <p class="section-desc">Freshly sürekli gelişiyor. Yakında gelecek özellikler ve uzun vadeli vizyon.</p>
+    </div>
+    <div class="vision-content">
+      <div class="vision-list">
+        <div class="vision-item reveal reveal-delay-1">
+          <div class="vision-num">01</div>
+          <div>
+            <div class="vision-title">Barkod Tarama & SKT Takibi</div>
+            <div class="vision-desc">23.500+ Türk ilacı, Open Food Facts entegrasyonu, renk kodlu uyarılar</div>
+          </div>
+          <span class="vision-badge done">✓ Tamamlandı</span>
+        </div>
+        <div class="vision-item reveal reveal-delay-2">
+          <div class="vision-num">02</div>
+          <div>
+            <div class="vision-title">AI Tarif Önerisi & Tasarruf Paneli</div>
+            <div class="vision-desc">Gemini ile bozulmak üzere malzemelerden tarif, CO₂ ve para tasarrufu takibi</div>
+          </div>
+          <span class="vision-badge done">✓ Tamamlandı</span>
+        </div>
+        <div class="vision-item reveal reveal-delay-3">
+          <div class="vision-num">03</div>
+          <div>
+            <div class="vision-title">İlaç Hatırlatma Bildirimleri</div>
+            <div class="vision-desc">Saatli push notification, doz takibi, SKT yaklaştığında otomatik uyarı</div>
+          </div>
+          <span class="vision-badge soon">⟳ Yakında</span>
+        </div>
+        <div class="vision-item reveal reveal-delay-4">
+          <div class="vision-num">04</div>
+          <div>
+            <div class="vision-title">Fotoğrafla Ürün Okuma</div>
+            <div class="vision-desc">AI destekli etiket okuma — barkod olmayan ürünler için</div>
+          </div>
+          <span class="vision-badge soon">⟳ Yakında</span>
+        </div>
+        <div class="vision-item reveal">
+          <div class="vision-num">05</div>
+          <div>
+            <div class="vision-title">Native iOS & Android</div>
+            <div class="vision-desc">Flutter ile tam native uygulama deneyimi, App Store & Google Play</div>
+          </div>
+          <span class="vision-badge future">◎ Vizyon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg"></div>
+  <div class="cta-inner">
+    <h2 class="cta-title reveal">Dolabın seni <em>bekliyor</em></h2>
+    <p class="cta-desc reveal reveal-delay-1">Ücretsiz dene, misafir olarak giriş yap, verilerini koru. Kayıt zorunlu değil.</p>
+    <div class="cta-actions reveal reveal-delay-2">
+      <a href="https://freshly--mustafaacelikk.replit.app/" class="btn-white" target="_blank">Uygulamayı Aç</a>
+      <a href="https://tally.so/r/vG4x4g" class="btn-outline-white" target="_blank">Ankete Katıl</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">fresh<span>ly</span></div>
+  <div class="footer-links">
+    <a href="https://freshly--mustafaacelikk.replit.app/" class="footer-link" target="_blank">Uygulama</a>
+    <a href="https://tally.so/r/vG4x4g" class="footer-link" target="_blank">Anket</a>
+  </div>
+  <div class="footer-copy">Beta © 2026 · Keep it fresh, always.</div>
+</footer>
+
+<script>
+// Cursor
+const cursor = document.getElementById('cursor');
+const glow = document.getElementById('cursor-glow');
+let mx = 0, my = 0, gx = 0, gy = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+});
+
+function animateGlow() {
+  gx += (mx - gx) * 0.06;
+  gy += (my - gy) * 0.06;
+  glow.style.left = gx + 'px';
+  glow.style.top = gy + 'px';
+  requestAnimationFrame(animateGlow);
+}
+animateGlow();
+
+// Particles
+const particleContainer = document.getElementById('particles');
+const COLORS = ['rgba(34,197,94,0.6)', 'rgba(74,222,128,0.5)', 'rgba(187,247,208,0.7)', 'rgba(22,163,74,0.4)'];
+
+function createParticle() {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const size = Math.random() * 5 + 2;
+  p.style.cssText = `
+    width: ${size}px; height: ${size}px;
+    left: ${Math.random() * 100}%;
+    background: ${COLORS[Math.floor(Math.random() * COLORS.length)]};
+    animation-duration: ${Math.random() * 15 + 10}s;
+    animation-delay: ${Math.random() * 10}s;
+  `;
+  particleContainer.appendChild(p);
+  setTimeout(() => p.remove(), 25000);
+}
+
+setInterval(createParticle, 400);
+for (let i = 0; i < 15; i++) createParticle();
+
+// Scroll Reveal
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+revealEls.forEach(el => observer.observe(el));
+
+// Hero immediate reveal
+setTimeout(() => {
+  document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
+}, 100);
+</script>
+</body>
+</html>
