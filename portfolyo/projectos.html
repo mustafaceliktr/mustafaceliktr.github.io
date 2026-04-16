@@ -1,1 +1,892 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProjectOS — Proje Takip Paneli</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #0F1117;
+  --surface: #161B27;
+  --card:    #1E2535;
+  --card2:   #252D40;
+  --border:  #2D3748;
+  --border2: #3D4F6A;
+  --blue:    #4F8EF7;
+  --blue2:   #6BA3FF;
+  --green:   #38C76A;
+  --orange:  #F59E0B;
+  --red:     #EF4444;
+  --purple:  #A78BFA;
+  --teal:    #14B8A6;
+  --text:    #F0F4FF;
+  --sub:     #8896B0;
+  --muted:   #4A5568;
+  /* Status */
+  --aktif:   #38C76A;
+  --sicak:   #F59E0B;
+  --park:    #4F8EF7;
+  --blokeli: #EF4444;
+  --test:    #A78BFA;
+}
 
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;line-height:1.5;
+}
+
+/* GRAIN */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.5;
+}
+
+/* GLOWS */
+.glow{position:fixed;border-radius:50%;filter:blur(140px);pointer-events:none;z-index:0}
+.g1{width:700px;height:700px;background:rgba(79,142,247,.055);top:-250px;left:-200px}
+.g2{width:500px;height:500px;background:rgba(56,199,106,.04);bottom:-100px;right:-150px}
+.g3{width:400px;height:400px;background:rgba(167,139,250,.03);top:40%;right:0}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(15,17,23,.9);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(45,55,72,.5);
+}
+.nav-in{
+  max-width:1240px;margin:0 auto;padding:0 40px;
+  height:58px;display:flex;align-items:center;justify-content:space-between;
+  position:relative;z-index:1;
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{
+  width:32px;height:32px;border-radius:8px;
+  background:linear-gradient(135deg,var(--blue),#2D6EF7);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:800;font-family:'JetBrains Mono',monospace;color:white;
+}
+.logo-name{font-weight:700;font-size:17px;letter-spacing:-.4px}
+.logo-name span{color:var(--blue)}
+.nav-right{display:flex;gap:8px;align-items:center}
+.badge{
+  padding:4px 11px;border-radius:20px;
+  font-size:11px;font-weight:600;
+  font-family:'JetBrains Mono',monospace;
+}
+.b-blue{background:rgba(79,142,247,.12);border:1px solid rgba(79,142,247,.25);color:var(--blue)}
+.b-green{background:rgba(56,199,106,.1);border:1px solid rgba(56,199,106,.2);color:var(--green)}
+.b-muted{background:rgba(74,85,104,.15);border:1px solid rgba(74,85,104,.3);color:var(--sub)}
+
+/* WRAP */
+.wrap{max-width:1240px;margin:0 auto;padding:0 40px;position:relative;z-index:1}
+
+/* HERO */
+.hero{padding:100px 0 70px}
+.hero-label{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(79,142,247,.08);border:1px solid rgba(79,142,247,.2);
+  border-radius:6px;padding:5px 13px;margin-bottom:26px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue);
+  letter-spacing:1.2px;text-transform:uppercase;
+}
+h1{
+  font-weight:800;font-size:clamp(46px,6.5vw,82px);
+  line-height:.93;letter-spacing:-3px;margin-bottom:6px;
+}
+h1 .hl{color:var(--blue)}
+h1 .sub{color:var(--muted);font-weight:300;font-size:.6em;display:block;letter-spacing:-1px;margin-top:6px}
+.hero-desc{
+  font-size:18px;color:var(--sub);
+  max-width:580px;line-height:1.7;margin:26px 0 40px;font-weight:300;
+}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 24px;border-radius:8px;font-weight:600;font-size:14px;
+  cursor:pointer;transition:all .2s;text-decoration:none;border:none;
+}
+.btn-primary{background:var(--blue);color:white}
+.btn-primary:hover{background:var(--blue2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(79,142,247,.3)}
+.btn-outline{background:transparent;color:var(--sub);border:1px solid var(--border)}
+.btn-outline:hover{border-color:var(--blue);color:var(--blue)}
+.stack-tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);padding:2px 0}
+
+/* STATS */
+.stats{
+  display:flex;gap:0;border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;background:var(--surface);margin:60px 0;
+}
+.stt{
+  flex:1;padding:22px 18px;text-align:center;
+  border-right:1px solid var(--border);
+  transition:background .2s;
+}
+.stt:last-child{border-right:none}
+.stt:hover{background:var(--card)}
+.stt-n{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:30px;color:var(--blue);letter-spacing:-1px}
+.stt-l{font-size:11px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.6px;font-weight:600}
+
+/* DIV */
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border) 20%,var(--border) 80%,transparent)}
+
+/* SECTION */
+.sec{padding:80px 0}
+.sec-tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px}
+.sec-title{font-weight:800;font-size:clamp(30px,4vw,48px);letter-spacing:-1.5px;margin-bottom:14px;line-height:1.05}
+.sec-title .ac{color:var(--green)}
+.sec-title .ab{color:var(--blue)}
+.sec-desc{color:var(--sub);font-size:16px;line-height:1.65;max-width:560px;font-weight:300}
+
+/* ═══════════════════════════════════
+   APP MOCKUP
+═══════════════════════════════════ */
+.mockup{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;
+  margin-top:48px;
+  box-shadow:0 36px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.03);
+}
+/* window chrome */
+.m-chrome{
+  height:36px;background:#0C0F16;
+  display:flex;align-items:center;padding:0 14px;
+  border-bottom:1px solid var(--border);
+  justify-content:space-between;
+}
+.m-dots{display:flex;gap:6px}
+.m-dot{width:11px;height:11px;border-radius:50%}
+.m-dot.r{background:#FF5F57}
+.m-dot.y{background:#FFBD2E}
+.m-dot.g{background:#28CA41}
+.m-chrome-title{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
+/* app layout */
+.m-body{display:flex;height:560px}
+/* sidebar */
+.m-sidebar{
+  width:270px;background:#161B27;
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  padding:20px 0;flex-shrink:0;overflow:hidden;
+}
+.m-sb-header{padding:0 20px 18px;border-bottom:1px solid rgba(255,255,255,.05)}
+.m-sb-title{font-weight:800;font-size:18px;letter-spacing:-.5px}
+.m-sb-sub{font-size:11px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace}
+/* form */
+.m-form{padding:14px 16px;display:flex;flex-direction:column;gap:7px}
+.m-form-title{font-size:12px;font-weight:700;color:var(--sub);margin-bottom:2px;letter-spacing:.3px;text-transform:uppercase}
+.m-inp{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:6px;padding:7px 10px;
+  font-size:11px;color:var(--sub);
+}
+.m-inp.focus{border-color:var(--blue);color:var(--text)}
+.m-select{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:6px;padding:7px 10px;
+  font-size:11px;color:var(--text);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.m-btn-add{
+  background:var(--blue);color:white;
+  border-radius:6px;padding:8px;
+  font-size:12px;font-weight:600;text-align:center;
+  margin-top:2px;
+}
+/* main */
+.m-main{flex:1;background:#0F1117;display:flex;flex-direction:column;overflow:hidden}
+/* topbar */
+.m-topbar{
+  background:#161B27;border-bottom:1px solid var(--border);
+  padding:10px 20px;display:flex;align-items:center;justify-content:space-between;
+}
+.m-topbar-title{font-weight:700;font-size:15px}
+.m-topbar-btns{display:flex;gap:6px}
+.m-tbtn{
+  padding:5px 10px;border-radius:5px;font-size:10px;font-weight:600;
+  font-family:'JetBrains Mono',monospace;
+}
+.m-tbtn.sec{background:rgba(79,142,247,.12);color:var(--blue);border:1px solid rgba(79,142,247,.2)}
+.m-tbtn.dan{background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.2)}
+/* filter bar */
+.m-filters{
+  padding:8px 20px;display:flex;gap:8px;
+  border-bottom:1px solid rgba(45,55,72,.5);
+}
+.m-srch{
+  flex:1;background:var(--card);border:1px solid var(--border);
+  border-radius:6px;padding:6px 10px;font-size:11px;color:var(--sub);
+}
+.m-sfilt{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:6px;padding:6px 12px;font-size:11px;color:var(--sub);
+  min-width:110px;
+}
+/* content grid */
+.m-content{display:flex;flex:1;overflow:hidden}
+.m-list{width:260px;border-right:1px solid var(--border);overflow:hidden;padding:8px}
+/* project card */
+.pcard{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:8px;padding:10px 12px;margin-bottom:6px;
+  cursor:pointer;transition:all .15s;
+}
+.pcard:hover,.pcard.active{border-color:var(--blue);background:rgba(79,142,247,.07)}
+.pcard.active{border-color:var(--blue)}
+.pc-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:5px}
+.pc-name{font-weight:600;font-size:12px;line-height:1.3}
+.status-dot{
+  width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:2px;
+}
+.sd-aktif{background:var(--aktif)}
+.sd-sicak{background:var(--sicak)}
+.sd-park{background:var(--park)}
+.sd-blokeli{background:var(--blokeli)}
+.sd-test{background:var(--test)}
+.pc-task{font-size:10px;color:var(--sub);line-height:1.3;margin-bottom:6px}
+.pc-meta{display:flex;gap:8px}
+.pc-m{font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+/* detail panel */
+.m-detail{flex:1;overflow:hidden;display:flex;flex-direction:column}
+.m-tabs{
+  display:flex;background:#161B27;
+  border-bottom:1px solid var(--border);
+  padding:0 16px;
+}
+.m-tab{
+  padding:10px 14px;font-size:11px;font-weight:600;
+  color:var(--muted);cursor:pointer;
+  border-bottom:2px solid transparent;transition:all .15s;
+}
+.m-tab.act{color:var(--blue);border-bottom-color:var(--blue)}
+.m-tab-content{flex:1;overflow:hidden;padding:14px 16px;background:#0F1117}
+/* AI Pack preview */
+.ai-pack{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:8px;padding:12px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--sub);line-height:1.7;
+}
+.ai-k{color:var(--blue2)}
+.ai-v{color:var(--green)}
+.ai-c{color:var(--muted)}
+.ai-copy-btn{
+  margin-top:10px;background:rgba(79,142,247,.15);
+  border:1px solid rgba(79,142,247,.25);border-radius:6px;
+  padding:7px 14px;font-size:10px;font-weight:600;
+  color:var(--blue);text-align:center;cursor:pointer;font-family:'Inter',sans-serif;
+}
+/* status badge */
+.sb{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700;
+}
+.sb-aktif{background:rgba(56,199,106,.12);color:var(--aktif);border:1px solid rgba(56,199,106,.2)}
+.sb-sicak{background:rgba(245,158,11,.12);color:var(--sicak);border:1px solid rgba(245,158,11,.2)}
+.sb-park{background:rgba(79,142,247,.12);color:var(--park);border:1px solid rgba(79,142,247,.2)}
+.sb-blokeli{background:rgba(239,68,68,.1);color:var(--blokeli);border:1px solid rgba(239,68,68,.2)}
+.sb-test{background:rgba(167,139,250,.1);color:var(--test);border:1px solid rgba(167,139,250,.2)}
+
+/* MODULES */
+.modules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:48px}
+.mod{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:24px;transition:all .25s;
+}
+.mod:hover{border-color:rgba(79,142,247,.35);transform:translateY(-2px)}
+.mod-icon{font-size:26px;margin-bottom:14px}
+.mod-title{font-weight:700;font-size:15px;margin-bottom:6px}
+.mod-desc{font-size:13px;color:var(--sub);line-height:1.6;font-weight:300}
+.mod-tabs{display:flex;gap:5px;margin-top:12px;flex-wrap:wrap}
+.mod-tab{
+  font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--blue);
+  background:rgba(79,142,247,.08);border:1px solid rgba(79,142,247,.15);
+  border-radius:4px;padding:2px 7px;
+}
+
+/* STATUS BOARD */
+.status-board{
+  display:flex;gap:10px;margin-top:40px;flex-wrap:wrap;
+}
+.status-lane{
+  flex:1;min-width:150px;background:var(--surface);
+  border:1px solid var(--border);border-radius:12px;padding:16px 14px;
+}
+.sl-header{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.sl-dot{width:9px;height:9px;border-radius:50%}
+.sl-name{font-weight:700;font-size:13px}
+.sl-count{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-left:auto}
+.sl-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:6px;padding:9px 10px;margin-bottom:6px;
+}
+.slc-name{font-size:11px;font-weight:600;margin-bottom:4px}
+.slc-task{font-size:10px;color:var(--sub);line-height:1.3}
+
+/* TECH */
+.tech-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:40px}
+.tr{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;padding:16px 18px;
+  display:flex;align-items:center;gap:14px;transition:border-color .2s;
+}
+.tr:hover{border-color:var(--blue)}
+.tr-ic{width:40px;height:40px;border-radius:8px;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.tr-cat{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+.tr-name{font-weight:700;font-size:15px;color:var(--green);margin-top:1px}
+.tr-desc{font-size:12px;color:var(--sub);margin-top:2px;line-height:1.4}
+
+/* ROADMAP */
+.roadmap{display:flex;flex-direction:column;gap:10px;margin-top:40px}
+.rm-row{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;padding:14px 20px;
+  display:flex;align-items:center;gap:16px;
+}
+.rm-phase{
+  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;
+  padding:4px 10px;border-radius:20px;white-space:nowrap;
+}
+.rp-kisa{background:rgba(56,199,106,.1);border:1px solid rgba(56,199,106,.2);color:var(--green)}
+.rp-orta{background:rgba(79,142,247,.1);border:1px solid rgba(79,142,247,.2);color:var(--blue)}
+.rp-uzun{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2);color:var(--purple)}
+.rm-text{font-size:14px;font-weight:400}
+
+/* RISKS */
+.risks{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:40px}
+.risk{
+  background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.12);
+  border-radius:10px;padding:16px 18px;
+}
+.risk-icon{font-size:18px;margin-bottom:8px}
+.risk-title{font-weight:700;font-size:13px;color:var(--orange);margin-bottom:6px}
+.risk-desc{font-size:13px;color:var(--sub);line-height:1.55;font-weight:300}
+
+/* DONE */
+.done-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:40px}
+.done-item{
+  display:flex;align-items:flex-start;gap:10px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;padding:12px 14px;
+}
+.done-check{color:var(--green);font-size:14px;flex-shrink:0;margin-top:1px}
+.done-txt{font-size:13px;color:var(--sub);line-height:1.4}
+
+/* CREDIT */
+.cred{background:var(--surface);border-top:1px solid var(--border);padding:32px 0;text-align:center}
+.cred-name{font-weight:700;font-size:17px;margin-bottom:5px}
+.cred-link{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--blue);text-decoration:none;transition:color .2s}
+.cred-link:hover{color:var(--green)}
+.cred-note{font-size:12px;color:var(--muted);margin-top:7px}
+
+footer{border-top:1px solid rgba(255,255,255,.05);padding:40px 0;text-align:center}
+.f-logo{font-weight:800;font-size:24px;letter-spacing:-.8px;margin-bottom:8px}
+.f-logo span{color:var(--blue)}
+.f-meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+.f-stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin:20px 0}
+.fsn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:26px;color:var(--blue)}
+.fsl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s}
+.rv.vis{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  .modules-grid,.tech-grid,.risks,.done-grid{grid-template-columns:1fr}
+  .stats{flex-direction:column}
+  .stt{border-right:none;border-bottom:1px solid var(--border)}
+  .stt:last-child{border-bottom:none}
+  .m-body{flex-direction:column;height:auto}
+  .m-sidebar{width:100%;padding:12px 0}
+  .status-board{flex-direction:column}
+  .roadmap .rm-row{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<div class="glow g1"></div>
+<div class="glow g2"></div>
+<div class="glow g3"></div>
+
+<!-- NAV -->
+<nav>
+<div class="nav-in">
+  <div class="logo">
+    <div class="logo-mark">P</div>
+    <div class="logo-name">Project<span>OS</span></div>
+  </div>
+  <div class="nav-right">
+    <div class="badge b-green">v1.0 Çalışıyor</div>
+    <div class="badge b-blue">localStorage</div>
+    <div class="badge b-muted">Tarayıcı Tabanlı</div>
+  </div>
+</div>
+</nav>
+
+<!-- HERO -->
+<div class="wrap">
+<div class="hero">
+  <div class="hero-label">🧠 Yerel Üretkenlik Aracı</div>
+  <h1>
+    Project<span class="hl">OS</span>
+    <span class="sub">Proje Takip Paneli</span>
+  </h1>
+  <p class="hero-desc">
+    Aynı anda yürütülen birden fazla yazılım projesini tek yerden yönet. Durum takibi, görev listesi, session log, AI context üretimi ve export — hepsi tek panelde, sunucu olmadan.
+  </p>
+  <div class="ctas">
+    <div class="btn btn-primary">⚡ Uygulamayı Aç</div>
+    <div class="btn btn-outline">📄 Proje Özeti</div>
+    <div class="stack-tag">HTML · CSS · JavaScript · localStorage · SheetJS</div>
+  </div>
+</div>
+</div>
+
+<!-- STATS -->
+<div class="wrap">
+<div class="stats rv">
+  <div class="stt"><div class="stt-n">7</div><div class="stt-l">Modül</div></div>
+  <div class="stt"><div class="stt-n">5</div><div class="stt-l">Proje Durumu</div></div>
+  <div class="stt"><div class="stt-n">0</div><div class="stt-l">Sunucu</div></div>
+  <div class="stt"><div class="stt-n">0</div><div class="stt-l">Framework</div></div>
+  <div class="stt"><div class="stt-n">∞</div><div class="stt-l">Yerel Depolama</div></div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- APP MOCKUP -->
+<div class="wrap sec">
+  <div class="sec-tag">Arayüz Önizlemesi</div>
+  <h2 class="sec-title">Panel görünümü,<br><span class="ab">canlı önizleme.</span></h2>
+  <p class="sec-desc">Sidebar'da proje ekleme formu, sol panelde filtrelenebilir proje listesi, sağda sekmeli detay görünümü.</p>
+
+  <div class="mockup rv">
+    <div class="m-chrome">
+      <div class="m-dots">
+        <div class="m-dot r"></div>
+        <div class="m-dot y"></div>
+        <div class="m-dot g"></div>
+      </div>
+      <div class="m-chrome-title">ProjectOS — Proje Takip Paneli</div>
+      <div style="width:60px"></div>
+    </div>
+    <div class="m-body">
+
+      <!-- Sidebar -->
+      <div class="m-sidebar">
+        <div class="m-sb-header">
+          <div class="m-sb-title">ProjectOS</div>
+          <div class="m-sb-sub">Proje Takip Paneli</div>
+        </div>
+        <div class="m-form">
+          <div class="m-form-title">Yeni Proje</div>
+          <div class="m-inp focus">EV Şarj Analizi v4</div>
+          <div class="m-select">
+            <span style="color:var(--aktif);font-size:11px">● Aktif</span>
+            <span style="color:var(--muted);font-size:10px">▾</span>
+          </div>
+          <div class="m-inp">Dashboard güç grafiği ekle</div>
+          <div class="m-inp" style="min-height:44px">EPDK verisini analiz eden Python uygulaması</div>
+          <div class="m-btn-add">Proje Ekle</div>
+        </div>
+      </div>
+
+      <!-- Main -->
+      <div class="m-main">
+        <div class="m-topbar">
+          <div class="m-topbar-title">Projeler</div>
+          <div class="m-topbar-btns">
+            <div class="m-tbtn sec">JSON Dışa Aktar</div>
+            <div class="m-tbtn sec">JSON İçe Aktar</div>
+            <div class="m-tbtn dan">Tümünü Sil</div>
+          </div>
+        </div>
+        <div class="m-filters">
+          <div class="m-srch">🔍 Proje ara...</div>
+          <div class="m-sfilt">Tüm Durumlar ▾</div>
+        </div>
+        <div class="m-content">
+          <!-- Project List -->
+          <div class="m-list">
+            <div class="pcard active">
+              <div class="pc-head">
+                <div class="pc-name">EV Şarj Ekosistemi Analizi</div>
+                <div class="status-dot sd-aktif"></div>
+              </div>
+              <div class="pc-task">→ Dashboard güç grafiği ekle</div>
+              <div class="pc-meta">
+                <div class="pc-m">5 görev</div>
+                <div class="pc-m">3 session</div>
+              </div>
+            </div>
+            <div class="pcard">
+              <div class="pc-head">
+                <div class="pc-name">E.V.C.P. DaTAker</div>
+                <div class="status-dot sd-sicak"></div>
+              </div>
+              <div class="pc-task">→ Export stabil hale getir</div>
+              <div class="pc-meta">
+                <div class="pc-m">3 görev</div>
+                <div class="pc-m">2 session</div>
+              </div>
+            </div>
+            <div class="pcard">
+              <div class="pc-head">
+                <div class="pc-name">inerken Fiyat Takip</div>
+                <div class="status-dot sd-park"></div>
+              </div>
+              <div class="pc-task">→ Firebase push bildirim bağla</div>
+              <div class="pc-meta">
+                <div class="pc-m">4 görev</div>
+                <div class="pc-m">1 session</div>
+              </div>
+            </div>
+            <div class="pcard">
+              <div class="pc-head">
+                <div class="pc-name">ProjectOS</div>
+                <div class="status-dot sd-aktif"></div>
+              </div>
+              <div class="pc-task">→ PDF export gerçek dosya üret</div>
+              <div class="pc-meta">
+                <div class="pc-m">7 görev</div>
+                <div class="pc-m">5 session</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Detail Panel -->
+          <div class="m-detail">
+            <div class="m-tabs">
+              <div class="m-tab">Genel</div>
+              <div class="m-tab">Görevler</div>
+              <div class="m-tab">Session</div>
+              <div class="m-tab act">AI Pack</div>
+              <div class="m-tab">Export</div>
+            </div>
+            <div class="m-tab-content">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+                <div style="font-weight:700;font-size:14px">EV Şarj Ekosistemi Analizi</div>
+                <div class="sb sb-aktif">● Aktif</div>
+              </div>
+              <div class="ai-pack">
+                <span class="ai-c"># === AI CONTEXT PACK ===</span><br>
+                <span class="ai-k">PROJE:</span> <span class="ai-v">EV Şarj Ekosistemi Gelişim Analizi</span><br>
+                <span class="ai-k">DURUM:</span> <span class="ai-v">Aktif</span><br>
+                <span class="ai-k">AÇIKLAMA:</span> <span style="color:var(--sub)">EPDK verisini analiz eden Python uygulaması</span><br>
+                <span class="ai-k">SONRAKİ GÖREV:</span> <span class="ai-v">Dashboard güç grafiği ekle</span><br>
+                <span class="ai-k">AÇIK GÖREVLER:</span> <span style="color:var(--sub)">[5 görev]</span><br>
+                <span class="ai-k">SON SESSION:</span> <span style="color:var(--sub)">PDF export crash fix tamamlandı</span><br>
+                <span class="ai-c"># ===========================</span>
+              </div>
+              <div class="ai-copy-btn">📋 Context'i Kopyala</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- STATUS BOARD -->
+<div class="wrap sec">
+  <div class="sec-tag">Proje Durumları</div>
+  <h2 class="sec-title">5 durum,<br><span class="ac">tam görünürlük.</span></h2>
+  <p class="sec-desc">Her proje bir durumla etiketlenir. Filtre ile istediğin durumu anında görüntüle.</p>
+
+  <div class="status-board rv">
+    <div class="status-lane">
+      <div class="sl-header">
+        <div class="sl-dot" style="background:var(--aktif)"></div>
+        <div class="sl-name">Aktif</div>
+        <div class="sl-count">2</div>
+      </div>
+      <div class="sl-card"><div class="slc-name">EV Şarj Analizi</div><div class="slc-task">→ Güç grafiği ekle</div></div>
+      <div class="sl-card"><div class="slc-name">ProjectOS</div><div class="slc-task">→ PDF export</div></div>
+    </div>
+    <div class="status-lane">
+      <div class="sl-header">
+        <div class="sl-dot" style="background:var(--sicak)"></div>
+        <div class="sl-name">Sıcak</div>
+        <div class="sl-count">1</div>
+      </div>
+      <div class="sl-card"><div class="slc-name">DaTAker</div><div class="slc-task">→ Export stabil et</div></div>
+    </div>
+    <div class="status-lane">
+      <div class="sl-header">
+        <div class="sl-dot" style="background:var(--park)"></div>
+        <div class="sl-name">Park</div>
+        <div class="sl-count">1</div>
+      </div>
+      <div class="sl-card"><div class="slc-name">inerken</div><div class="slc-task">→ Firebase bağla</div></div>
+    </div>
+    <div class="status-lane">
+      <div class="sl-header">
+        <div class="sl-dot" style="background:var(--blokeli)"></div>
+        <div class="sl-name">Blokeli</div>
+        <div class="sl-count">0</div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);padding:4px 0;font-family:'JetBrains Mono',monospace">boş</div>
+    </div>
+    <div class="status-lane">
+      <div class="sl-header">
+        <div class="sl-dot" style="background:var(--test)"></div>
+        <div class="sl-name">Test</div>
+        <div class="sl-count">0</div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);padding:4px 0;font-family:'JetBrains Mono',monospace">boş</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- MODULES -->
+<div class="wrap sec">
+  <div class="sec-tag">Mevcut Modüller</div>
+  <h2 class="sec-title">7 modül,<br><span class="ab">tek panel.</span></h2>
+
+  <div class="modules-grid">
+    <div class="mod rv">
+      <div class="mod-icon">📋</div>
+      <div class="mod-title">Dashboard / Proje Listesi</div>
+      <div class="mod-desc">Projeleri kart yapısında gösterir. Durum rozeti, görev sayısı, session sayısı ve sonraki görev özeti her kartta görünür.</div>
+      <div class="mod-tabs">
+        <div class="mod-tab">arama</div>
+        <div class="mod-tab">durum filtresi</div>
+        <div class="mod-tab">JSON backup</div>
+      </div>
+    </div>
+    <div class="mod rv" style="transition-delay:.1s">
+      <div class="mod-icon">🔍</div>
+      <div class="mod-title">Proje Detay — Genel</div>
+      <div class="mod-desc">Seçili projenin adı, durumu, açıklaması ve sonraki tek görevi düzenlenebilir formda gösterilir. Anlık kayıt ile değişiklikler anında localStorage'a yazılır.</div>
+      <div class="mod-tabs">
+        <div class="mod-tab">düzenleme</div>
+        <div class="mod-tab">anlık kayıt</div>
+      </div>
+    </div>
+    <div class="mod rv" style="transition-delay:.2s">
+      <div class="mod-icon">✅</div>
+      <div class="mod-title">Görevler Sekmesi</div>
+      <div class="mod-desc">Proje bazında görev ekleme ve silme. Her görev proje altında ayrı saklanır. Görev sayısı proje kartına yansır.</div>
+      <div class="mod-tabs">
+        <div class="mod-tab">görev ekle</div>
+        <div class="mod-tab">sil</div>
+      </div>
+    </div>
+    <div class="mod rv" style="transition-delay:.05s">
+      <div class="mod-icon">🗓</div>
+      <div class="mod-title">Session Log</div>
+      <div class="mod-desc">Çalışma oturumlarını kayıt altına al. Her session log ile hangi çalışmada ne yapıldığı geçmişe dökülerek tutulur.</div>
+      <div class="mod-tabs">
+        <div class="mod-tab">log ekle</div>
+        <div class="mod-tab">geçmiş</div>
+      </div>
+    </div>
+    <div class="mod rv" style="transition-delay:.15s">
+      <div class="mod-icon">🤖</div>
+      <div class="mod-title">AI Context Pack</div>
+      <div class="mod-desc">Seçili proje için hazır AI context metni üretir. Tek tıkla kopyala, yapay zeka asistanına yapıştır — bağlam kaybı olmadan çalışmaya başla.</div>
+      <div class="mod-tabs">
+        <div class="mod-tab">context üret</div>
+        <div class="mod-tab">kopyala</div>
+      </div>
+    </div>
+    <div class="mod rv" style="transition-delay:.25s">
+      <div class="mod-icon">📤</div>
+      <div class="mod-title">Export Merkezi</div>
+      <div class="mod-desc">Excel (SheetJS entegrasyonu tamamlandı), PDF, PPTX ve Word için içerik önizleme hazır. Gerçek dosya üretimi aşamalı ekleniyor.</div>
+      <div class="mod-tabs">
+        <div class="mod-tab">Excel ✓</div>
+        <div class="mod-tab">PDF</div>
+        <div class="mod-tab">PPTX</div>
+        <div class="mod-tab">Word</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. mod -->
+  <div class="mod rv" style="margin-top:14px">
+    <div class="mod-icon">💾</div>
+    <div class="mod-title">JSON Yedekleme</div>
+    <div class="mod-desc">Tüm proje verisini tek JSON dosyasına aktarır. İçe aktarma ile geri yükleme mümkündür. localStorage bağımlılığına karşı temel backup katmanı.</div>
+    <div class="mod-tabs">
+      <div class="mod-tab">dışa aktar</div>
+      <div class="mod-tab">içe aktar</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- TECH -->
+<div class="wrap sec">
+  <div class="sec-tag">Teknik Mimari</div>
+  <h2 class="sec-title">Saf, sade,<br><span class="ac">sıfır bağımlılık.</span></h2>
+  <p class="sec-desc">Sunucu yok, framework yok, veritabanı yok. Her şey yerelde, her şey transparan.</p>
+
+  <div class="tech-grid rv">
+    <div class="tr">
+      <div class="tr-ic">🏗</div>
+      <div>
+        <div class="tr-cat">Sayfa Yapısı</div>
+        <div class="tr-name">HTML</div>
+        <div class="tr-desc">Sayfa iskelet, form alanları, butonlar, sekmeler, genel yerleşim</div>
+      </div>
+    </div>
+    <div class="tr">
+      <div class="tr-ic">🎨</div>
+      <div>
+        <div class="tr-cat">Görsel Katman</div>
+        <div class="tr-name">CSS</div>
+        <div class="tr-desc">Tema, kartlar, durum rozetleri, sekmeli panel, filtre çubuğu, export görünümü</div>
+      </div>
+    </div>
+    <div class="tr">
+      <div class="tr-ic">⚙️</div>
+      <div>
+        <div class="tr-cat">Mantık Katmanı</div>
+        <div class="tr-name">JavaScript (Vanilla)</div>
+        <div class="tr-desc">Durum yönetimi, render akışı, olay yönetimi, export preview, localStorage arayüzü</div>
+      </div>
+    </div>
+    <div class="tr">
+      <div class="tr-ic">💾</div>
+      <div>
+        <div class="tr-cat">Kalıcı Depolama</div>
+        <div class="tr-name">localStorage</div>
+        <div class="tr-desc">Tüm projeler, görevler, session log — tarayıcı içinde kalıcı saklanır, sunucu gerektirmez</div>
+      </div>
+    </div>
+    <div class="tr">
+      <div class="tr-ic">📊</div>
+      <div>
+        <div class="tr-cat">Excel Üretimi</div>
+        <div class="tr-name">SheetJS (XLSX)</div>
+        <div class="tr-desc">CDN üzerinden yüklenen SheetJS ile gerçek .xlsx dosyası oluşturma, sütun formatı</div>
+      </div>
+    </div>
+    <div class="tr">
+      <div class="tr-ic">📦</div>
+      <div>
+        <div class="tr-cat">Dağıtım</div>
+        <div class="tr-name">Tarayıcı Tabanlı</div>
+        <div class="tr-desc">Yerel web sürümü çalışıyor; masaüstü paketleme (Electron/Tauri) ikinci aşamada planlanıyor</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- TAMAMLANANLAR -->
+<div class="wrap sec">
+  <div class="sec-tag">Tamamlanan İşler</div>
+  <h2 class="sec-title">Çekirdek <span class="ac">hazır.</span></h2>
+
+  <div class="done-grid rv">
+    <div class="done-item"><div class="done-check">✓</div><div class="done-txt">Temel uygulama iskeleti ve yerel web sürümü çalışır halde</div></div>
+    <div class="done-item"><div class="done-check">✓</div><div class="done-txt">Yeni proje ekleme, listeleme ve detay görüntüleme</div></div>
+    <div class="done-item"><div class="done-check">✓</div><div class="done-txt">Görev ekleme ve proje bazında saklama</div></div>
+    <div class="done-item"><div class="done-check">✓</div><div class="done-txt">Session log ekleme ve geçmiş kayıtları görüntüleme</div></div>
+    <div class="done-item"><div class="done-check">✓</div><div class="done-txt">AI Context Pack üretimi ve kopyalama özelliği</div></div>
+    <div class="done-item"><div class="done-check">✓</div><div class="done-txt">Proje bilgilerini sonradan düzenleme</div></div>
+    <div class="done-item"><div class="done-check">✓</div><div class="done-txt">Arama ve durum filtresi</div></div>
+    <div class="done-item"><div class="done-check">✓</div><div class="done-txt">JSON dışa/içe aktarma ile temel yedekleme akışı</div></div>
+    <div class="done-item"><div class="done-check">✓</div><div class="done-txt">Export sekmesi ve Excel/PDF/PPTX/Word önizleme ekranı</div></div>
+    <div class="done-item"><div class="done-check">✓</div><div class="done-txt">SheetJS entegrasyonu ile gerçek Excel export</div></div>
+    <div class="done-item"><div class="done-check">✓</div><div class="done-txt">Kartlar, sekmeler, durum rozetleri tasarım iyileştirmesi</div></div>
+    <div class="done-item"><div class="done-check">✓</div><div class="done-txt">Filtre çubuğu ve topbar aksiyon butonları</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ROADMAP -->
+<div class="wrap sec">
+  <div class="sec-tag">Planlanan Geliştirmeler</div>
+  <h2 class="sec-title">Sıradaki <span class="ab">adımlar.</span></h2>
+
+  <div class="roadmap rv">
+    <div class="rm-row"><div class="rm-phase rp-kisa">Kısa Vade</div><div class="rm-text">Excel export akışını tam stabil hale getirmek ve kullanım akışını netleştirmek</div></div>
+    <div class="rm-row"><div class="rm-phase rp-kisa">Kısa Vade</div><div class="rm-text">PDF export için gerçek dosya üretimi eklemek</div></div>
+    <div class="rm-row"><div class="rm-phase rp-kisa">Kısa Vade</div><div class="rm-text">Word export için gerçek dosya üretimi eklemek</div></div>
+    <div class="rm-row"><div class="rm-phase rp-orta">Orta Vade</div><div class="rm-text">PPTX export için yapısal sunum çıktısı üretmek</div></div>
+    <div class="rm-row"><div class="rm-phase rp-orta">Orta Vade</div><div class="rm-text">Filtreyi temizle butonu ve aktif filtre etiketi eklemek</div></div>
+    <div class="rm-row"><div class="rm-phase rp-orta">Orta Vade</div><div class="rm-text">Gelişmiş arama — açıklama, görev, session içinde arama</div></div>
+    <div class="rm-row"><div class="rm-phase rp-orta">Orta Vade</div><div class="rm-text">Daha güçlü backup / restore akışı</div></div>
+    <div class="rm-row"><div class="rm-phase rp-uzun">Uzun Vade</div><div class="rm-text">Yerel web sürümünü masaüstü uygulamaya paketlemek</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- RISKS -->
+<div class="wrap sec">
+  <div class="sec-tag">Dikkat Edilecek Noktalar</div>
+  <h2 class="sec-title">Riskler &<br><span style="color:var(--orange)">kısıtlar.</span></h2>
+
+  <div class="risks rv">
+    <div class="risk">
+      <div class="risk-icon">💾</div>
+      <div class="risk-title">localStorage Bağımlılığı</div>
+      <div class="risk-desc">Tarayıcı tabanlı yapı localStorage'a bağlı olduğundan güçlü JSON yedekleme alışkanlığı gerektirir. Tarayıcı temizliğinde veri kaybolabilir.</div>
+    </div>
+    <div class="risk">
+      <div class="risk-icon">📁</div>
+      <div class="risk-title">Tek Dosya Büyümesi</div>
+      <div class="risk-desc">Saf JavaScript ile büyüyen uygulama zamanla tek dosya yönetimini zorlaştırabilir; modülerleştirme gerekebilir.</div>
+    </div>
+    <div class="risk">
+      <div class="risk-icon">📤</div>
+      <div class="risk-title">Export Kütüphane Çeşitliliği</div>
+      <div class="risk-desc">PDF, PPTX ve Word export için farklı kütüphaneler veya farklı üretim stratejileri gerekebilir; entegrasyon süreci iş yükü yaratabilir.</div>
+    </div>
+    <div class="risk">
+      <div class="risk-icon">🖥</div>
+      <div class="risk-title">Masaüstü Paketleme</div>
+      <div class="risk-desc">Masaüstü paketleme aşamasında dosya sistemi erişimi ve dağıtım senaryosu yeniden tasarlanmalıdır. Electron / Tauri seçimi kritik.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CREDIT -->
+<div class="cred">
+  <div class="cred-name">Mustafa Çelik tarafından geliştirilmiştir.</div>
+  <a href="https://www.linkedin.com/in/mustafacelik84/" class="cred-link" target="_blank">🔗 linkedin.com/in/mustafacelik84</a>
+  <div class="cred-note">Tek kullanıcı, çoklu proje · Yerel üretkenlik aracı · HTML + CSS + JS</div>
+</div>
+
+<footer>
+<div class="wrap">
+  <div class="f-logo">Project<span>OS</span></div>
+  <div class="f-stats">
+    <div><div class="fsn">7</div><div class="fsl">Modül</div></div>
+    <div><div class="fsn">5</div><div class="fsl">Durum</div></div>
+    <div><div class="fsn">0</div><div class="fsl">Sunucu</div></div>
+    <div><div class="fsn">v1</div><div class="fsl">Çalışıyor</div></div>
+  </div>
+  <div class="f-meta">ProjectOS · Proje Takip Paneli · Yerel Web Sürümü · Nisan 2026</div>
+</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis') });
+}, {threshold:0.07});
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
