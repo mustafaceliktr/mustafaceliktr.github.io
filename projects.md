@@ -16,7 +16,7 @@ header:
   .btn-wrapper { display: flex; justify-content: center; }
 </style>
 
-Yazılım geliştirme sürecimde tamamladığım ve test süreçleri devam eden çalışmaların özeti aşağıdadır. Detaylı incelemek istediğiniz projenin üzerine tıklayabilirsiniz.
+Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aşağıdadır. Detaylı incelemek istediğiniz projenin üzerine tıklayabilirsiniz.
 
 <div class="grid__wrapper">
 
@@ -26,6 +26,8 @@ Yazılım geliştirme sürecimde tamamladığım ve test süreçleri devam eden 
       <h3 class="archive__item-title">HerŞeyim</h3>
       <div class="archive__item-excerpt">Görev, not ve toplantı yönetimini tek merkezde toplayan yaşam asistanı.</div>
       <div class="btn-wrapper"><a href="/portfolyo/herseyim.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
+    </article>
+  </div>
 
   <div class="grid__item span-3">
     <article class="archive__item">
@@ -66,7 +68,7 @@ Yazılım geliştirme sürecimde tamamladığım ve test süreçleri devam eden 
   <div class="grid__item span-3">
     <article class="archive__item">
       <div class="archive__item-teaser"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80" alt=""></div>
-      <h3 class="archive__item-title">Elektrikli Araç Şarj Ekosistemi Analizi</h3>
+      <h3 class="archive__item-title">Şarj Ekosistemi Analizi</h3>
       <div class="archive__item-excerpt">Şarj altyapısı için Python tabanlı analiz ve raporlama yazılımı.</div>
       <div class="btn-wrapper"><a href="#" class="btn btn--primary btn--small">Detaylar</a></div>
     </article>
@@ -75,8 +77,8 @@ Yazılım geliştirme sürecimde tamamladığım ve test süreçleri devam eden 
   <div class="grid__item span-3">
     <article class="archive__item">
       <div class="archive__item-teaser"><img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&w=400&q=80" alt=""></div>
-      <h3 class="archive__item-title">Şarj İstasyonu Gelişim Raporu V1</h3>
-      <div class="archive__item-excerpt">Sektörel gelişim verilerinin derinlemesine teknik analizi ve dokümantasyonu.</div>
+      <h3 class="archive__item-title">Gelişim Raporu V1</h3>
+      <div class="archive__item-excerpt">Sektörel gelişim verilerinin derinlemesine teknik analizi.</div>
       <div class="btn-wrapper"><a href="#" class="btn btn--primary btn--small">Detaylar</a></div>
     </article>
   </div>
