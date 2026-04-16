@@ -10,6 +10,26 @@ header:
 ---
 
 <style>
+  /* Grid kapsayıcısının esnek olması ve çocukların aynı boyda uzaması için */
+  .grid__wrapper {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: stretch !important;
+  }
+
+  /* Kartların esnek yapısı */
+  .grid__item {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  .archive__item {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    flex-grow: 1 !important;
+  }
+  
   /* Görsellerin ezilmeden kusursuz kırpılması */
   .archive__item-teaser img {
     width: 100%;
@@ -18,17 +38,6 @@ header:
     border-radius: 8px;
     display: block;
     margin-bottom: 15px;
-  }
-  
-  /* Kartların esnek yapısı: Butonları her zaman en alta yapıştırır */
-  .grid__item {
-    display: flex !important;
-    flex-direction: column !important;
-  }
-  .archive__item {
-    display: flex !important;
-    flex-direction: column !important;
-    flex-grow: 1 !important;
   }
   
   /* Kurumsal ve Sola Hizalı Başlık Tipografisi */
@@ -50,13 +59,14 @@ header:
     line-height: 1.5 !important;
     color: #4a4a4a !important;
     margin-bottom: 20px !important;
+    flex-grow: 1 !important; /* Açıklama kısmını esneterek butonu en alta iter */
   }
   
   /* Buton hizalaması ve sabitleme */
   .btn-wrapper {
-    margin-top: auto !important; /* Butonu otomatik olarak en alta iter */
+    margin-top: auto !important; /* Butonu her zaman kartın en altına yapıştırır */
     display: flex;
-    justify-content: flex-start; /* Butonu sola hizalı yapar, çok daha kurumsal durur */
+    justify-content: flex-start;
   }
 </style>
 
@@ -77,7 +87,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <article class="archive__item">
       <div class="archive__item-teaser"><img src="/assets/images/inerken.png" alt=""></div>
       <h3 class="archive__item-title">İnerken</h3>
-      <div class="archive__item-excerpt">9 e-ticaret platformunda akıllı fiyat takibi ve bildirim uygulaması.</div>
+      <div class="archive__item-excerpt">Linkle veya mnuel eklenen ürün için birden fazla e-ticaret platformunda akıllı fiyat takibi ve bildirim uygulaması.</div>
       <div class="btn-wrapper"><a href="/portfolyo/inerken.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
     </article>
   </div>
@@ -86,7 +96,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <article class="archive__item">
       <div class="archive__item-teaser"><img src="/assets/images/freshly.png" alt=""></div>
       <h3 class="archive__item-title">freshly</h3>
-      <div class="archive__item-excerpt">İlaç ve gıda stoklarını takip eden son kullanma tarihi asistanı.</div>
+      <div class="archive__item-excerpt">Gıda, ilaç ve kozmetik ürünlerin SKT'lerini takip eden son kullanma tarihi asistanı.</div>
       <div class="btn-wrapper"><a href="/portfolyo/freshly.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
     </article>
   </div>
@@ -95,7 +105,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <article class="archive__item">
       <div class="archive__item-teaser"><img src="/assets/images/vibetrack.png" alt=""></div>
       <h3 class="archive__item-title">VibeTrack</h3>
-      <div class="archive__item-excerpt">Ruh haline göre odaklanma odaları ve Pomodoro sayacı.</div>
+      <div class="archive__item-excerpt">Ruh haline göre AI üretimi müzikler dinleyebileceğin odaklanma odaları ve Pomodoro sayacı.</div>
       <div class="btn-wrapper"><a href="/portfolyo/vibetrack.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
     </article>
   </div>
@@ -104,7 +114,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <article class="archive__item">
       <div class="archive__item-teaser"><img src="/assets/images/evcpdataker.png" alt=""></div>
       <h3 class="archive__item-title">E.V.C.P. DaTAker</h3>
-      <div class="archive__item-excerpt">EPDK verilerini soket bazlı Excel raporlarına dönüştüren araç.</div>
+      <div class="archive__item-excerpt">EPDK elektrikli araç şarj istasyonları verilerini api ile alıp, Excel raporlarına dönüştüren araç.</div>
       <div class="btn-wrapper"><a href="/portfolyo/evcpdataker.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
     </article>
   </div>
@@ -113,7 +123,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <article class="archive__item">
       <div class="archive__item-teaser"><img src="/assets/images/sarjekosistemianaliz.png" alt=""></div>
       <h3 class="archive__item-title">E.A. Şarj Ekosistemi Analizi</h3>
-      <div class="archive__item-excerpt">Elektrikli araç şarj altyapısı için Python tabanlı analiz ve raporlama yazılımı.</div>
+      <div class="archive__item-excerpt">Elektrikli araç şarj istasyonlarının çoklu dönem gelişimini gösterir analiz ve raporlama yazılımı.</div>
       <div class="btn-wrapper"><a href="/portfolyo/sarjekosistemianaliz.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
     </article>
   </div>
@@ -122,7 +132,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <article class="archive__item">
       <div class="archive__item-teaser"><img src="/assets/images/gelisim.png" alt=""></div>
       <h3 class="archive__item-title">E.A. Şarj Noktaları Gelişim Raporu</h3>
-      <div class="archive__item-excerpt">Elektrikli araç şarj noktalarının EPDK verilerinin yükleneren gelişimi analizinin yapılabileceği iki dönemli temel gelişim analiz uygulaması.</div>
+      <div class="archive__item-excerpt">Elektrikli araç şarj noktalarının EPDK verilerinin yüklenerek iki dönemli temel gelişim analizi çıktısı olan uygulama.</div>
       <div class="btn-wrapper"><a href="/portfolyo/gelisimraporu.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
     </article>
   </div>
