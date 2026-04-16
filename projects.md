@@ -94,7 +94,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
 
   <div class="grid__item span-3">
     <article class="archive__item">
-      <div class="archive__item-teaser"><img src="/assets/images/evcpdataker.png" alt=""></div>
+      <div class="archive__item-teaser"><img src="/assets/images/dataker.png" alt=""></div>
       <h3 class="archive__item-title">E.V.C.P. DaTAker</h3>
       <div class="archive__item-excerpt">EPDK verilerini soket bazlı Excel raporlarına dönüştüren araç.</div>
       <div class="btn-wrapper"><a href="/portfolyo/evcpdataker.html" target="_blank" class="btn btn--primary btn--small">Detaylar</a></div>
@@ -103,7 +103,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
 
   <div class="grid__item span-3">
     <article class="archive__item">
-      <div class="archive__item-teaser"><img src="/assets/images/sarjekosistemianaliz.png" alt=""></div>
+      <div class="archive__item-teaser"><img src="/assets/images/ekosistem.png" alt=""></div>
       <h3 class="archive__item-title">E.A. Şarj Ekosistemi Analizi</h3>
       <div class="archive__item-excerpt">Elektrikli araç şarj altyapısı için Python tabanlı analiz ve raporlama yazılımı.</div>
       <div class="btn-wrapper"><a href="/portfolyo/sarjekosistemianaliz.html" target="_blank" class="btn btn--primary btn--small">Detaylar</a></div>
@@ -112,7 +112,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
 
   <div class="grid__item span-3">
     <article class="archive__item">
-      <div class="archive__item-teaser"><img src="/assets/images/gelisimraporu.png" alt=""></div>
+      <div class="archive__item-teaser"><img src="/assets/images/gelisim.png" alt=""></div>
       <h3 class="archive__item-title">E.A. Şarj Noktaları Gelişim Raporu</h3>
       <div class="archive__item-excerpt">Elektrikli araç şarj noktalarının EPDK verilerinin yükleneren gelişimi analizinin yapılabileceği iki dönemli temel gelişim analiz uygulaması.</div>
       <div class="btn-wrapper"><a href="/portfolyo/gelisimraporu.html" target="_blank" class="btn btn--primary btn--small">Detaylar</a></div>
