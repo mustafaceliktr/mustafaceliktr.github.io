@@ -25,8 +25,7 @@ Yazılım geliştirme sürecimde tamamladığım ve test süreçleri devam eden 
       <div class="archive__item-teaser"><img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=400&q=80" alt=""></div>
       <h3 class="archive__item-title">HerŞeyim</h3>
       <div class="archive__item-excerpt">Görev, not ve toplantı yönetimini tek merkezde toplayan yaşam asistanı.</div>
-      <div class="btn-wrapper"><a href="/projects/herseyim/" class="btn btn--info btn--small">Detaylar</a></div>
-    </article>
+      <div class="btn-wrapper"><a href="/portfolyo/herseyim.html" class="btn btn--info btn--small">Detaylar</a></div>
   </div>
 
   <div class="grid__item span-3">
