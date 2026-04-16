@@ -1,1 +1,1207 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elektrikli Araç Şarj Ekosistemi Gelişim Analizi</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Barlow:wght@300;400;500;600;700;900&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #080D14;
+  --surface:  #0F1923;
+  --panel:    #1A2A3A;
+  --panel2:   #142030;
+  --border:   #2A4A6A;
+  --blue:     #2E6DA4;
+  --blue2:    #4A90D9;
+  --green:    #2ECC71;
+  --green2:   #1A9A4A;
+  --orange:   #E67E22;
+  --orange2:  #F39C12;
+  --red:      #E74C3C;
+  --purple:   #8E44AD;
+  --teal:     #1ABC9C;
+  --yellow:   #F4D03F;
+  --text:     #E8F0F8;
+  --sub:      #8AAAC8;
+  --muted:    #4A6A8A;
+  --white:    #FFFFFF;
+}
 
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Barlow',sans-serif;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+
+/* ─── GRID NOISE OVERLAY ─── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:
+    repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(42,74,106,.04) 40px,rgba(42,74,106,.04) 41px),
+    repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(42,74,106,.04) 40px,rgba(42,74,106,.04) 41px);
+  pointer-events:none;z-index:0;
+}
+
+/* ─── GLOW ORBS ─── */
+.orb{position:fixed;border-radius:50%;filter:blur(140px);pointer-events:none;z-index:0}
+.orb1{width:700px;height:700px;background:rgba(46,109,164,.07);top:-200px;left:-200px}
+.orb2{width:500px;height:500px;background:rgba(30,204,113,.05);bottom:-100px;right:-100px}
+.orb3{width:400px;height:400px;background:rgba(230,126,34,.04);top:50%;left:50%;transform:translate(-50%,-50%)}
+
+/* ─── LAYOUT ─── */
+.wrap{max-width:1280px;margin:0 auto;padding:0 40px;position:relative;z-index:1}
+
+/* ─── NAV ─── */
+nav{
+  padding:20px 0;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(42,74,106,.4);
+  position:sticky;top:0;background:rgba(8,13,20,.92);backdrop-filter:blur(20px);
+  z-index:100;
+}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 40px;width:100%;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:32px;height:32px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.logo-text{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px;letter-spacing:.5px;color:var(--text)}
+.logo-text span{color:var(--green)}
+.nav-tags{display:flex;gap:8px}
+.nav-tag{background:rgba(42,74,106,.3);border:1px solid rgba(42,74,106,.5);border-radius:20px;padding:4px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub)}
+.nav-tag.live{border-color:rgba(30,204,113,.3);background:rgba(30,204,113,.08);color:var(--green)}
+.nav-tag.live::before{content:'● ';color:var(--green);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ─── HERO ─── */
+.hero{padding:100px 0 60px;position:relative}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(46,109,164,.1);border:1px solid rgba(46,109,164,.3);
+  border-radius:4px;padding:6px 14px;margin-bottom:28px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue2);
+  letter-spacing:1px;text-transform:uppercase;
+}
+h1{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;
+  font-size:clamp(42px,6vw,76px);
+  line-height:.95;
+  letter-spacing:-1px;
+  margin-bottom:8px;
+  animation:fadeUp .8s ease both;
+}
+h1 .line2{color:var(--green);display:block}
+h1 .line3{color:var(--sub);font-weight:400;font-size:.65em;display:block;margin-top:4px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+.hero-desc{
+  font-size:18px;color:var(--sub);
+  max-width:600px;line-height:1.65;
+  margin:24px 0 40px;font-weight:300;
+  animation:fadeUp .8s .2s ease both;
+}
+
+.hero-cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap;animation:fadeUp .8s .35s ease both}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 24px;border-radius:6px;font-weight:600;font-size:14px;
+  cursor:pointer;transition:all .2s;text-decoration:none;
+}
+.btn-primary{background:var(--blue);color:white;border:1px solid var(--blue)}
+.btn-primary:hover{background:var(--blue2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(46,109,164,.35)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-outline:hover{border-color:var(--blue2);color:var(--blue2);background:rgba(74,144,217,.06)}
+.hero-pip{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub);padding:2px 0}
+
+/* ─── STATS STRIP ─── */
+.stats-strip{
+  display:flex;gap:0;
+  border:1px solid var(--border);border-radius:10px;
+  overflow:hidden;margin:60px 0;
+  background:var(--surface);
+  animation:fadeUp .8s .4s ease both;
+}
+.stat{
+  flex:1;padding:22px 20px;text-align:center;
+  border-right:1px solid var(--border);
+  position:relative;
+}
+.stat:last-child{border-right:none}
+.stat::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--blue),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.stat:hover::before{opacity:1}
+.stat-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:36px;color:var(--green);letter-spacing:-1px}
+.stat-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);margin-top:4px;text-transform:uppercase;letter-spacing:.8px}
+
+/* ─── SECTION PATTERN ─── */
+.section{padding:80px 0}
+.s-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue2);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px}
+.s-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(32px,4vw,52px);letter-spacing:-1px;margin-bottom:14px;line-height:1}
+.s-sub{color:var(--sub);font-size:16px;line-height:1.6;max-width:580px;font-weight:300}
+.s-title .accent{color:var(--green)}
+.s-title .accent2{color:var(--orange)}
+
+/* ─── DIVIDER ─── */
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border) 20%,var(--border) 80%,transparent);margin:0}
+
+/* ═══════════════════════════════════════════════
+   DASHBOARD MOCKUP
+═══════════════════════════════════════════════ */
+.mockup-container{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  margin-top:48px;
+  box-shadow:0 32px 80px rgba(0,0,0,.5);
+}
+.mockup-titlebar{
+  background:#0A131E;
+  padding:10px 16px;
+  display:flex;align-items:center;gap:8px;
+  border-bottom:1px solid var(--border);
+}
+.win-btn{width:12px;height:12px;border-radius:50%}
+.win-btn.r{background:#E74C3C}
+.win-btn.y{background:#F4D03F}
+.win-btn.g{background:#2ECC71}
+.mockup-title-txt{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub);margin-left:8px}
+
+/* ─── KPI CARDS ─── */
+.kpi-row{display:flex;gap:6px;padding:8px}
+.kpi-c{
+  flex:1;background:var(--panel);border-radius:8px;padding:10px 12px;
+  position:relative;overflow:hidden;min-width:0;
+}
+.kpi-c::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.kpi-c.blue::before{background:var(--blue)}
+.kpi-c.green::before{background:var(--green)}
+.kpi-c.orange::before{background:var(--orange)}
+.kpi-c.purple::before{background:var(--purple)}
+.kpi-c.teal::before{background:var(--teal)}
+.kpi-c.red::before{background:var(--red)}
+.kpi-c.yellow::before{background:var(--yellow)}
+.kpi-c.blue2::before{background:var(--blue2)}
+.kpi-label{font-size:9px;color:var(--sub);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi-old{font-size:10px;color:var(--muted);margin-top:2px}
+.kpi-val{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;letter-spacing:-.5px;margin-top:1px}
+.kpi-c.blue .kpi-val{color:var(--blue2)}
+.kpi-c.green .kpi-val{color:var(--green)}
+.kpi-c.orange .kpi-val{color:var(--orange)}
+.kpi-c.purple .kpi-val{color:var(--purple)}
+.kpi-c.teal .kpi-val{color:var(--teal)}
+.kpi-c.red .kpi-val{color:var(--red)}
+.kpi-c.yellow .kpi-val{color:var(--yellow)}
+.kpi-c.blue2 .kpi-val{color:var(--blue2)}
+.kpi-change{font-size:9px;font-weight:700;margin-top:3px}
+.kpi-change.up{color:var(--green)}
+.kpi-change.dn{color:var(--red)}
+.kpi-section-lbl{padding:4px 8px 0;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}
+
+/* ─── CHART AREA ─── */
+.chart-area{
+  display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 8px 8px;
+}
+.chart-box{
+  background:var(--panel);border-radius:8px;padding:10px 12px;
+}
+.chart-box-title{font-size:10px;color:var(--sub);font-weight:600;margin-bottom:8px}
+
+/* ─── FEATURE GRID ─── */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.feat{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:28px;
+  transition:all .25s;position:relative;overflow:hidden;
+}
+.feat::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(46,109,164,.04),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.feat:hover{border-color:rgba(74,144,217,.35);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.feat:hover::after{opacity:1}
+.feat-icon{font-size:28px;margin-bottom:16px}
+.feat-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:-.3px;margin-bottom:8px}
+.feat-desc{font-size:14px;color:var(--sub);line-height:1.6;font-weight:300}
+.feat-tag{
+  display:inline-block;margin-top:14px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--blue2);background:rgba(74,144,217,.1);
+  border:1px solid rgba(74,144,217,.2);border-radius:4px;padding:3px 8px;
+}
+
+/* ─── OUTPUT CARDS ─── */
+.outputs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.out-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:28px;
+  transition:all .25s;
+}
+.out-card:hover{border-color:rgba(74,144,217,.4);transform:translateY(-2px)}
+.out-icon-wrap{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px}
+.out-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;margin-bottom:8px}
+.out-desc{font-size:14px;color:var(--sub);line-height:1.6;font-weight:300}
+.out-bullets{margin-top:12px;display:flex;flex-direction:column;gap:6px}
+.out-bullet{font-size:13px;color:var(--sub);display:flex;align-items:flex-start;gap:8px}
+.out-bullet::before{content:'→';color:var(--blue2);flex-shrink:0;font-family:'JetBrains Mono',monospace;font-size:11px;margin-top:1px}
+
+/* ─── TECH STACK ─── */
+.tech-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:48px}
+.tech-row{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;padding:18px 20px;
+  display:flex;align-items:center;gap:16px;
+  transition:border-color .2s;
+}
+.tech-row:hover{border-color:var(--blue)}
+.tech-icon-box{width:44px;height:44px;border-radius:10px;background:var(--panel);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.tech-cat{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.tech-name{font-weight:700;font-size:16px;color:var(--green)}
+.tech-desc{font-size:12px;color:var(--sub);margin-top:2px;line-height:1.4}
+
+/* ─── SCAN MODES ─── */
+.modes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.mode-card{border-radius:12px;padding:28px;border:1px solid var(--border)}
+.mode-card.fast{background:linear-gradient(135deg,rgba(30,204,113,.07),transparent);border-color:rgba(30,204,113,.2)}
+.mode-card.deep{background:linear-gradient(135deg,rgba(74,144,217,.07),transparent);border-color:rgba(74,144,217,.2)}
+.mode-card.flash{background:linear-gradient(135deg,rgba(243,156,18,.07),transparent);border-color:rgba(243,156,18,.2)}
+.mode-freq{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:52px;letter-spacing:-2px;line-height:1}
+.mode-freq.g{color:var(--green)}
+.mode-freq.b{color:var(--blue2)}
+.mode-freq.o{color:var(--orange2)}
+.mode-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;margin:12px 0 8px}
+.mode-desc{font-size:14px;color:var(--sub);line-height:1.55;font-weight:300}
+.flash-times{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.ftime{background:rgba(243,156,18,.12);color:var(--orange2);border-radius:4px;padding:3px 8px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600}
+
+/* ─── CHART MOCKUP SVG ─── */
+.chart-mockup{width:100%;height:auto;border-radius:8px;overflow:hidden}
+
+/* ─── PLATFORM TABLE ─── */
+.platforms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:40px}
+.plat-row{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;padding:14px 18px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .2s;
+}
+.plat-row:hover{border-color:var(--blue);background:rgba(46,109,164,.06)}
+.plat-name{font-weight:600;font-size:15px}
+.plat-note{font-size:11px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace}
+.plat-badge{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;font-family:'JetBrains Mono',monospace}
+.pb-active{background:rgba(30,204,113,.12);color:var(--green)}
+.pb-test{background:rgba(243,156,18,.12);color:var(--orange2)}
+
+/* ─── KV SYSTEM ─── */
+.kv-box{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:20px 24px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.9;
+  color:var(--sub);margin-top:32px;
+}
+.kv-key{color:var(--blue2)}
+.kv-val{color:var(--green)}
+.kv-str{color:var(--orange2)}
+.kv-num{color:var(--yellow)}
+.kv-comment{color:var(--muted)}
+
+/* ─── MAP MOCKUP ─── */
+.map-mockup{
+  background:var(--panel);border-radius:12px;
+  overflow:hidden;margin-top:40px;
+  border:1px solid var(--border);
+}
+.map-header{
+  background:#0A131E;padding:10px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--border);
+}
+.map-header-title{font-size:12px;font-weight:600;color:var(--text)}
+.map-legend{display:flex;gap:16px}
+.map-legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--sub)}
+.map-legend-dot{width:10px;height:10px;border-radius:50%}
+
+/* ─── CREDITS ─── */
+.credit-bar{
+  background:#0A131E;border-top:1px solid var(--border);
+  padding:28px 0;text-align:center;
+}
+.credit-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;color:var(--text);margin-bottom:4px}
+.credit-link{
+  font-family:'JetBrains Mono',monospace;font-size:12px;
+  color:var(--blue2);text-decoration:none;
+  transition:color .2s;
+}
+.credit-link:hover{color:var(--green)}
+.credit-note{font-size:12px;color:var(--muted);margin-top:8px}
+
+/* ─── FOOTER ─── */
+footer{border-top:1px solid rgba(42,74,106,.3);padding:48px 0;text-align:center}
+.footer-logo{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28px;color:var(--text);letter-spacing:-1px;margin-bottom:8px}
+.footer-logo span{color:var(--green)}
+.footer-meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+.footer-stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin:24px 0}
+.fs{text-align:center}
+.fs-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:30px;color:var(--green)}
+.fs-lbl{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.5px}
+
+/* ─── SCROLL ANIMATIONS ─── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  .features-grid,.outputs-grid,.tech-grid,.modes-grid,.platforms-grid{grid-template-columns:1fr}
+  .stats-strip{flex-direction:column}
+  .stat{border-right:none;border-bottom:1px solid var(--border)}
+  .stat:last-child{border-bottom:none}
+  .kpi-row{flex-wrap:wrap}
+  .kpi-c{min-width:calc(50% - 3px)}
+  .chart-area{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<!-- NAV -->
+<nav>
+<div class="nav-inner">
+  <div class="logo">
+    <div class="logo-icon">⚡</div>
+    <div class="logo-text">EV<span>Analiz</span></div>
+  </div>
+  <div class="nav-tags">
+    <div class="nav-tag live">v3.11 aktif</div>
+    <div class="nav-tag">Python 3.11+</div>
+    <div class="nav-tag">EPDK Uyumlu</div>
+  </div>
+</div>
+</nav>
+
+<!-- HERO -->
+<div class="wrap">
+<div class="hero">
+  <div class="hero-eyebrow">⚡ EPDK Veri Tabanlı Pazar Analizi</div>
+  <h1>
+    Elektrikli Araç<br>
+    <span class="line2">Şarj Ekosistemi</span>
+    <span class="line3">Gelişim Analizi</span>
+  </h1>
+  <p class="hero-desc">
+    Türkiye'nin EV şarj altyapısını EPDK verisiyle çok dönemli analiz eden, operatör büyümesini, güç teknolojisini ve coğrafi dağılımı karşılaştıran profesyonel masa üstü uygulaması.
+  </p>
+  <div class="hero-cta">
+    <div class="btn btn-primary">⬇ Python Dosyası</div>
+    <div class="btn btn-outline">📄 PDF Çıktısı</div>
+    <div class="btn btn-outline">📑 PPTX Çıktısı</div>
+    <div class="hero-pip">pip install pandas openpyxl matplotlib numpy reportlab python-pptx</div>
+  </div>
+</div>
+</div>
+
+<!-- STATS -->
+<div class="wrap">
+<div class="stats-strip reveal">
+  <div class="stat"><div class="stat-num">12</div><div class="stat-lbl">Maks. Dönem</div></div>
+  <div class="stat"><div class="stat-num">9</div><div class="stat-lbl">Platform</div></div>
+  <div class="stat"><div class="stat-num">24</div><div class="stat-lbl">KPI Kartı</div></div>
+  <div class="stat"><div class="stat-num">20+</div><div class="stat-lbl">Grafik Türü</div></div>
+  <div class="stat"><div class="stat-num">3</div><div class="stat-lbl">Çıktı Formatı</div></div>
+  <div class="stat"><div class="stat-num">81</div><div class="stat-lbl">İl Takibi</div></div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- DASHBOARD MOCKUP -->
+<div class="wrap section">
+  <div class="s-label">Arayüz Önizlemesi</div>
+  <h2 class="s-title">Veri <span class="accent">görsel</span> hale gelir.</h2>
+  <p class="s-sub">Koyu, veri yoğun dashboard'da 24 KPI kartı, interaktif grafikler ve çok dönem trend analizi tek ekranda.</p>
+
+  <div class="mockup-container reveal">
+    <!-- Title bar -->
+    <div class="mockup-titlebar">
+      <div class="win-btn r"></div>
+      <div class="win-btn y"></div>
+      <div class="win-btn g"></div>
+      <div class="mockup-title-txt">⚡  Şarj İstasyonu Analiz Uygulaması  v3.11  |  Oca 2025 → Şub 2026</div>
+    </div>
+
+    <!-- KPI Satır 1 -->
+    <div class="kpi-section-lbl">SOKET & İSTASYON ▸</div>
+    <div class="kpi-row">
+      <div class="kpi-c blue">
+        <div class="kpi-label">Toplam Soket</div>
+        <div class="kpi-old">82.441</div>
+        <div class="kpi-val">96.783</div>
+        <div class="kpi-change up">▲ %17.4</div>
+      </div>
+      <div class="kpi-c teal">
+        <div class="kpi-label">AC Soket</div>
+        <div class="kpi-old">62.115</div>
+        <div class="kpi-val">71.390</div>
+        <div class="kpi-change up">▲ %14.9</div>
+      </div>
+      <div class="kpi-c orange">
+        <div class="kpi-label">DC Soket</div>
+        <div class="kpi-old">20.326</div>
+        <div class="kpi-val">25.393</div>
+        <div class="kpi-change up">▲ %24.9</div>
+      </div>
+      <div class="kpi-c blue2">
+        <div class="kpi-label">Toplam İstasyon</div>
+        <div class="kpi-old">28.450</div>
+        <div class="kpi-val">33.217</div>
+        <div class="kpi-change up">▲ %16.7</div>
+      </div>
+      <div class="kpi-c green">
+        <div class="kpi-label">AC İstasyon</div>
+        <div class="kpi-old">21.340</div>
+        <div class="kpi-val">24.880</div>
+        <div class="kpi-change up">▲ %16.6</div>
+      </div>
+      <div class="kpi-c red">
+        <div class="kpi-label">DC İstasyon</div>
+        <div class="kpi-old">7.110</div>
+        <div class="kpi-val">8.337</div>
+        <div class="kpi-change up">▲ %17.2</div>
+      </div>
+    </div>
+
+    <!-- KPI Satır 2 -->
+    <div class="kpi-section-lbl">HİZMET ŞEKLİ & GÜÇ ▸</div>
+    <div class="kpi-row">
+      <div class="kpi-c teal">
+        <div class="kpi-label">Halka Açık Soket</div>
+        <div class="kpi-old">74.197</div>
+        <div class="kpi-val">87.105</div>
+        <div class="kpi-change up">▲ %17.4</div>
+      </div>
+      <div class="kpi-c purple">
+        <div class="kpi-label">Özel Soket</div>
+        <div class="kpi-old">8.244</div>
+        <div class="kpi-val">9.678</div>
+        <div class="kpi-change up">▲ %17.4</div>
+      </div>
+      <div class="kpi-c green">
+        <div class="kpi-label">Yeşil İstasyon</div>
+        <div class="kpi-old">5.220</div>
+        <div class="kpi-val">7.490</div>
+        <div class="kpi-change up">▲ %43.5</div>
+      </div>
+      <div class="kpi-c green">
+        <div class="kpi-label">Ort. Soket Gücü (kW)</div>
+        <div class="kpi-old">42.3</div>
+        <div class="kpi-val">48.7</div>
+        <div class="kpi-change up">▲ %15.1</div>
+      </div>
+      <div class="kpi-c teal">
+        <div class="kpi-label">Toplam Kurulu Güç</div>
+        <div class="kpi-old">3.487 MW</div>
+        <div class="kpi-val">4.713 MW</div>
+        <div class="kpi-change up">▲ %35.2</div>
+      </div>
+    </div>
+
+    <!-- KPI Satır 3 -->
+    <div class="kpi-section-lbl">OPERATÖR ANALİZİ ▸</div>
+    <div class="kpi-row">
+      <div class="kpi-c blue"><div class="kpi-label">EPDK Lisanslı Opr.</div><div class="kpi-val">127</div></div>
+      <div class="kpi-c green"><div class="kpi-label">Aktif Lisanslı Opr.</div><div class="kpi-val">98</div></div>
+      <div class="kpi-c teal"><div class="kpi-label">Yeni Giren Opr.</div><div class="kpi-val">12</div></div>
+      <div class="kpi-c green"><div class="kpi-label">Büyüyen Opr.</div><div class="kpi-val">61</div></div>
+      <div class="kpi-c yellow"><div class="kpi-label">Yatırım Yapmayan</div><div class="kpi-val">18</div></div>
+      <div class="kpi-c orange"><div class="kpi-label">Küçülen Opr.</div><div class="kpi-val">7</div></div>
+      <div class="kpi-c red"><div class="kpi-label">Faaliyeti Sona Eren</div><div class="kpi-val">3</div></div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="chart-area">
+
+      <!-- Pazar Payı Pasta -->
+      <div class="chart-box">
+        <div class="chart-box-title">Pazar Payı — Soket Sayısı (D2, Top 8)</div>
+        <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" class="chart-mockup">
+          <rect width="320" height="180" fill="#1A2A3A"/>
+          <!-- Pie chart representation -->
+          <g transform="translate(90,90)">
+            <!-- Slices (simplified arcs as wedges) -->
+            <path d="M0,0 L0,-72 A72,72 0 0,1 60,-40 Z" fill="#2E6DA4" opacity=".9"/>
+            <path d="M0,0 L60,-40 A72,72 0 0,1 70,18 Z" fill="#2ECC71" opacity=".9"/>
+            <path d="M0,0 L70,18 A72,72 0 0,1 40,60 Z" fill="#E67E22" opacity=".9"/>
+            <path d="M0,0 L40,60 A72,72 0 0,1 -20,68 Z" fill="#8E44AD" opacity=".9"/>
+            <path d="M0,0 L-20,68 A72,72 0 0,1 -65,30 Z" fill="#E74C3C" opacity=".9"/>
+            <path d="M0,0 L-65,30 A72,72 0 0,1 -72,-10 Z" fill="#1ABC9C" opacity=".9"/>
+            <path d="M0,0 L-72,-10 A72,72 0 0,1 -50,-52 Z" fill="#F4D03F" opacity=".9"/>
+            <path d="M0,0 L-50,-52 A72,72 0 0,1 0,-72 Z" fill="#4A90D9" opacity=".9"/>
+            <!-- Center hole -->
+            <circle cx="0" cy="0" r="34" fill="#1A2A3A"/>
+            <text x="0" y="4" text-anchor="middle" fill="#8AAAC8" font-size="9" font-family="monospace">96.783</text>
+            <text x="0" y="14" text-anchor="middle" fill="#8AAAC8" font-size="7" font-family="monospace">soket</text>
+          </g>
+          <!-- Legend -->
+          <g transform="translate(182,20)">
+            <rect x="0" y="0" width="8" height="8" rx="2" fill="#2E6DA4"/><text x="12" y="8" fill="#8AAAC8" font-size="8.5">TRUGO %21.4</text>
+            <rect x="0" y="16" width="8" height="8" rx="2" fill="#2ECC71"/><text x="12" y="24" fill="#8AAAC8" font-size="8.5">ZES %18.2</text>
+            <rect x="0" y="32" width="8" height="8" rx="2" fill="#E67E22"/><text x="12" y="40" fill="#8AAAC8" font-size="8.5">EŞARJ %14.7</text>
+            <rect x="0" y="48" width="8" height="8" rx="2" fill="#8E44AD"/><text x="12" y="56" fill="#8AAAC8" font-size="8.5">VOLTRUN %11.3</text>
+            <rect x="0" y="64" width="8" height="8" rx="2" fill="#E74C3C"/><text x="12" y="72" fill="#8AAAC8" font-size="8.5">AKSAM %9.1</text>
+            <rect x="0" y="80" width="8" height="8" rx="2" fill="#1ABC9C"/><text x="12" y="88" fill="#8AAAC8" font-size="8.5">OTOKAR %7.8</text>
+            <rect x="0" y="96" width="8" height="8" rx="2" fill="#F4D03F"/><text x="12" y="104" fill="#8AAAC8" font-size="8.5">BTC %5.2</text>
+            <rect x="0" y="112" width="8" height="8" rx="2" fill="#4A90D9"/><text x="12" y="120" fill="#8AAAC8" font-size="8.5">DİĞER %12.3</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Top 10 Büyüyen - Yatay Çubuk -->
+      <div class="chart-box">
+        <div class="chart-box-title">Top 10 Büyüyen Operatör — Soket Büyüme %</div>
+        <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" class="chart-mockup">
+          <rect width="320" height="180" fill="#1A2A3A"/>
+          <!-- Y eksen labels + bars -->
+          <g transform="translate(70,10)">
+            <!-- Bars & Labels -->
+            <text x="-5" y="16" text-anchor="end" fill="#8AAAC8" font-size="8">TRUGO</text>
+            <rect x="0" y="6" width="180" height="12" rx="2" fill="#2E6DA4" opacity=".85"/>
+            <text x="184" y="16" fill="#E8F0F8" font-size="8" font-weight="bold">%218</text>
+
+            <text x="-5" y="36" text-anchor="end" fill="#8AAAC8" font-size="8">VOLTRUN</text>
+            <rect x="0" y="26" width="148" height="12" rx="2" fill="#2ECC71" opacity=".85"/>
+            <text x="152" y="36" fill="#E8F0F8" font-size="8" font-weight="bold">%179</text>
+
+            <text x="-5" y="56" text-anchor="end" fill="#8AAAC8" font-size="8">EŞARJ</text>
+            <rect x="0" y="46" width="122" height="12" rx="2" fill="#E67E22" opacity=".85"/>
+            <text x="126" y="56" fill="#E8F0F8" font-size="8" font-weight="bold">%147</text>
+
+            <text x="-5" y="76" text-anchor="end" fill="#8AAAC8" font-size="8">GREENGO</text>
+            <rect x="0" y="66" width="100" height="12" rx="2" fill="#8E44AD" opacity=".85"/>
+            <text x="104" y="76" fill="#E8F0F8" font-size="8" font-weight="bold">%121</text>
+
+            <text x="-5" y="96" text-anchor="end" fill="#8AAAC8" font-size="8">AKSAM</text>
+            <rect x="0" y="86" width="82" height="12" rx="2" fill="#1ABC9C" opacity=".85"/>
+            <text x="86" y="96" fill="#E8F0F8" font-size="8" font-weight="bold">%99</text>
+
+            <text x="-5" y="116" text-anchor="end" fill="#8AAAC8" font-size="8">ZES</text>
+            <rect x="0" y="106" width="66" height="12" rx="2" fill="#E74C3C" opacity=".85"/>
+            <text x="70" y="116" fill="#E8F0F8" font-size="8" font-weight="bold">%80</text>
+
+            <text x="-5" y="136" text-anchor="end" fill="#8AAAC8" font-size="8">OTOKAR</text>
+            <rect x="0" y="126" width="52" height="12" rx="2" fill="#F4D03F" opacity=".85"/>
+            <text x="56" y="136" fill="#E8F0F8" font-size="8" font-weight="bold">%62</text>
+
+            <text x="-5" y="156" text-anchor="end" fill="#8AAAC8" font-size="8">BTC POWER</text>
+            <rect x="0" y="146" width="38" height="12" rx="2" fill="#4A90D9" opacity=".85"/>
+            <text x="42" y="156" fill="#E8F0F8" font-size="8" font-weight="bold">%46</text>
+
+            <text x="-5" y="176" text-anchor="end" fill="#8AAAC8" font-size="8">MANZARA</text>
+            <rect x="0" y="166" width="22" height="12" rx="2" fill="#BB6BD9" opacity=".85"/>
+            <text x="26" y="176" fill="#E8F0F8" font-size="8" font-weight="bold">%27</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Güç Kategorisi -->
+      <div class="chart-box">
+        <div class="chart-box-title">Güç Kategorisi Dağılımı (kW)</div>
+        <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" class="chart-mockup">
+          <rect width="320" height="180" fill="#1A2A3A"/>
+          <!-- Grid lines -->
+          <line x1="40" y1="20" x2="40" y2="150" stroke="#2A4A6A" stroke-width=".5"/>
+          <line x1="40" y1="150" x2="300" y2="150" stroke="#2A4A6A" stroke-width=".5"/>
+          <line x1="40" y1="120" x2="300" y2="120" stroke="#2A4A6A" stroke-width=".3" stroke-dasharray="4,3"/>
+          <line x1="40" y1="90" x2="300" y2="90" stroke="#2A4A6A" stroke-width=".3" stroke-dasharray="4,3"/>
+          <line x1="40" y1="60" x2="300" y2="60" stroke="#2A4A6A" stroke-width=".3" stroke-dasharray="4,3"/>
+
+          <!-- Groups: Yavaş ≤22kW | 23-50 | 51-150 | Ultra >150 -->
+          <!-- Group 1 -->
+          <rect x="55" y="55" width="28" height="95" rx="2" fill="#2E6DA4" opacity=".85"/>
+          <rect x="87" y="38" width="28" height="112" rx="2" fill="#2ECC71" opacity=".85"/>
+          <text x="80" y="165" text-anchor="middle" fill="#8AAAC8" font-size="8">≤22kW</text>
+
+          <!-- Group 2 -->
+          <rect x="125" y="72" width="28" height="78" rx="2" fill="#2E6DA4" opacity=".85"/>
+          <rect x="157" y="55" width="28" height="95" rx="2" fill="#2ECC71" opacity=".85"/>
+          <text x="150" y="165" text-anchor="middle" fill="#8AAAC8" font-size="8">23-50kW</text>
+
+          <!-- Group 3 -->
+          <rect x="195" y="90" width="28" height="60" rx="2" fill="#2E6DA4" opacity=".85"/>
+          <rect x="227" y="75" width="28" height="75" rx="2" fill="#2ECC71" opacity=".85"/>
+          <text x="220" y="165" text-anchor="middle" fill="#8AAAC8" font-size="8">51-150kW</text>
+
+          <!-- Group 4 -->
+          <rect x="262" y="118" width="14" height="32" rx="2" fill="#2E6DA4" opacity=".85"/>
+          <rect x="279" y="108" width="14" height="42" rx="2" fill="#2ECC71" opacity=".85"/>
+          <text x="276" y="165" text-anchor="middle" fill="#8AAAC8" font-size="8">&gt;150kW</text>
+
+          <!-- Y axis labels -->
+          <text x="36" y="153" text-anchor="end" fill="#8AAAC8" font-size="8">0</text>
+          <text x="36" y="123" text-anchor="end" fill="#8AAAC8" font-size="8">20K</text>
+          <text x="36" y="93" text-anchor="end" fill="#8AAAC8" font-size="8">40K</text>
+          <text x="36" y="63" text-anchor="end" fill="#8AAAC8" font-size="8">60K</text>
+
+          <!-- Legend -->
+          <rect x="42" y="8" width="8" height="6" rx="1" fill="#2E6DA4"/>
+          <text x="53" y="14" fill="#8AAAC8" font-size="8">D1</text>
+          <rect x="68" y="8" width="8" height="6" rx="1" fill="#2ECC71"/>
+          <text x="79" y="14" fill="#8AAAC8" font-size="8">D2</text>
+        </svg>
+      </div>
+
+      <!-- Trend: Soket & İstasyon -->
+      <div class="chart-box">
+        <div class="chart-box-title">Çok Dönem Trend — Soket & İstasyon Gelişimi</div>
+        <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" class="chart-mockup">
+          <rect width="320" height="180" fill="#1A2A3A"/>
+          <!-- Grid -->
+          <line x1="50" y1="140" x2="300" y2="140" stroke="#2A4A6A" stroke-width=".5"/>
+          <line x1="50" y1="110" x2="300" y2="110" stroke="#2A4A6A" stroke-width=".3" stroke-dasharray="4,3"/>
+          <line x1="50" y1="80" x2="300" y2="80" stroke="#2A4A6A" stroke-width=".3" stroke-dasharray="4,3"/>
+          <line x1="50" y1="50" x2="300" y2="50" stroke="#2A4A6A" stroke-width=".3" stroke-dasharray="4,3"/>
+
+          <!-- Data points (6 dönem) -->
+          <!-- Soket line -->
+          <polyline points="62,128 109,120 156,112 203,100 250,90 297,76" fill="none" stroke="#2E6DA4" stroke-width="2.5" stroke-linejoin="round"/>
+          <circle cx="62" cy="128" r="4" fill="#2E6DA4"/>
+          <circle cx="109" cy="120" r="4" fill="#2E6DA4"/>
+          <circle cx="156" cy="112" r="4" fill="#2E6DA4"/>
+          <circle cx="203" cy="100" r="4" fill="#2E6DA4"/>
+          <circle cx="250" cy="90" r="4" fill="#2E6DA4"/>
+          <circle cx="297" cy="76" r="4" fill="#2E6DA4"/>
+
+          <!-- İstasyon line -->
+          <polyline points="62,132 109,126 156,121 203,115 250,109 297,103" fill="none" stroke="#2ECC71" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6,3"/>
+          <circle cx="62" cy="132" r="3" fill="#2ECC71"/>
+          <circle cx="109" cy="126" r="3" fill="#2ECC71"/>
+          <circle cx="156" cy="121" r="3" fill="#2ECC71"/>
+          <circle cx="203" cy="115" r="3" fill="#2ECC71"/>
+          <circle cx="250" cy="109" r="3" fill="#2ECC71"/>
+          <circle cx="297" cy="103" r="3" fill="#2ECC71"/>
+
+          <!-- Area fill under soket -->
+          <polygon points="62,128 109,120 156,112 203,100 250,90 297,76 297,140 62,140" fill="#2E6DA4" opacity=".1"/>
+
+          <!-- X labels -->
+          <text x="62" y="154" text-anchor="middle" fill="#8AAAC8" font-size="7.5">Oca'24</text>
+          <text x="109" y="154" text-anchor="middle" fill="#8AAAC8" font-size="7.5">Mar'24</text>
+          <text x="156" y="154" text-anchor="middle" fill="#8AAAC8" font-size="7.5">May'24</text>
+          <text x="203" y="154" text-anchor="middle" fill="#8AAAC8" font-size="7.5">Tem'24</text>
+          <text x="250" y="154" text-anchor="middle" fill="#8AAAC8" font-size="7.5">Eki'24</text>
+          <text x="297" y="154" text-anchor="middle" fill="#8AAAC8" font-size="7.5">Şub'25</text>
+
+          <!-- Data labels on last point -->
+          <text x="297" y="72" text-anchor="end" fill="#4A90D9" font-size="8" font-weight="bold">96.783</text>
+          <text x="297" y="99" text-anchor="end" fill="#2ECC71" font-size="8" font-weight="bold">33.217</text>
+
+          <!-- Legend -->
+          <line x1="50" y1="168" x2="62" y2="168" stroke="#2E6DA4" stroke-width="2"/>
+          <circle cx="56" cy="168" r="3" fill="#2E6DA4"/>
+          <text x="66" y="171" fill="#8AAAC8" font-size="8">Soket</text>
+          <line x1="102" y1="168" x2="114" y2="168" stroke="#2ECC71" stroke-width="2" stroke-dasharray="4,2"/>
+          <circle cx="108" cy="168" r="3" fill="#2ECC71"/>
+          <text x="118" y="171" fill="#8AAAC8" font-size="8">İstasyon</text>
+        </svg>
+      </div>
+
+    </div><!-- /chart-area -->
+  </div><!-- /mockup-container -->
+</div>
+
+<div class="divider"></div>
+
+<!-- FEATURES -->
+<div class="wrap section">
+  <div class="s-label">Temel Özellikler</div>
+  <h2 class="s-title">Her detay <span class="accent">düşünüldü.</span></h2>
+  <p class="s-sub">Analist bakış açısıyla tasarlanmış, kapsamlı veri işleme ve görselleştirme yetenekleri.</p>
+
+  <div class="features-grid">
+    <div class="feat reveal">
+      <div class="feat-icon">📅</div>
+      <div class="feat-title">Çok Dönem Karşılaştırma</div>
+      <div class="feat-desc">2 ile 12 arası dönem dosyası yükleyerek uzun vadeli ekosistem gelişimini tek analizde görün. Her dönem ayrı Excel/CSV dosyasından okunur.</div>
+      <div class="feat-tag">max 12 dönem</div>
+    </div>
+    <div class="feat reveal" style="transition-delay:.1s">
+      <div class="feat-icon">🏢</div>
+      <div class="feat-title">Operatör Büyüme Analizi</div>
+      <div class="feat-desc">Büyüyen, küçülen, yeni giren ve faaliyeti sona eren operatörlerin soket, istasyon ve kurulu güç bazında karşılaştırmalı analizi.</div>
+      <div class="feat-tag">soket · istasyon · güç</div>
+    </div>
+    <div class="feat reveal" style="transition-delay:.2s">
+      <div class="feat-icon">⚡</div>
+      <div class="feat-title">Güç & Teknoloji Analizi</div>
+      <div class="feat-desc">AC/DC dağılımı, güç kategorisi histogramı, CCS/CHAdeMO/Type2 soket türü dağılımı ve yeşil şarj istasyonu takibi.</div>
+      <div class="feat-tag">AC · DC · Güç Aralıkları</div>
+    </div>
+    <div class="feat reveal" style="transition-delay:.05s">
+      <div class="feat-icon">🗺️</div>
+      <div class="feat-title">Coğrafi Yoğunluk Haritası</div>
+      <div class="feat-desc">Türkiye haritası üzerinde interaktif dağılım: scroll ile zoom, sürükle ile pan, çift tık ile sıfırla. Noktaya tıklayınca Google Maps'ta aç.</div>
+      <div class="feat-tag">GeoJSON · hover tooltip</div>
+    </div>
+    <div class="feat reveal" style="transition-delay:.15s">
+      <div class="feat-icon">🔗</div>
+      <div class="feat-title">Operatör Mapping</div>
+      <div class="feat-desc">Farklı dönemlerdeki farklı yazım varyantlarını standartlaştırmak için Excel tabanlı operatör mapping sistemi. Çoklu marka tespiti otomatik yapılır.</div>
+      <div class="feat-tag">normalize · eşleştir</div>
+    </div>
+    <div class="feat reveal" style="transition-delay:.25s">
+      <div class="feat-icon">🏙️</div>
+      <div class="feat-title">81 İl Bazlı Özet</div>
+      <div class="feat-desc">Her il için soket ve istasyon sayısı, dönemler arası fark ve büyüme oranı. Adres satırından otomatik il çıkarımı, il bilgisi eksik kayıtlar işaretlenir.</div>
+      <div class="feat-tag">81 il · adres parsing</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- HARITA MOCKUP -->
+<div class="wrap section">
+  <div class="s-label">Coğrafi Dağılım</div>
+  <h2 class="s-title">Türkiye'nin şarj <span class="accent2">haritası.</span></h2>
+  <p class="s-sub">96.783 soketin coğrafi dağılımı — her nokta bir şarj soketi. Kırmızı = DC hızlı şarj, cyan = AC şarj.</p>
+
+  <div class="map-mockup reveal">
+    <div class="map-header">
+      <div class="map-header-title">EV Şarj İstasyonu Coğrafi Yoğunluk Haritası  |  Şubat 2026</div>
+      <div class="map-legend">
+        <div class="map-legend-item"><div class="map-legend-dot" style="background:#00E5FF"></div>AC (71.390)</div>
+        <div class="map-legend-item"><div class="map-legend-dot" style="background:#E53935"></div>DC (25.393)</div>
+      </div>
+    </div>
+    <svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
+      <defs>
+        <radialGradient id="mapBg" cx="50%" cy="50%" r="70%">
+          <stop offset="0%" stop-color="#1A3A5A" stop-opacity=".6"/>
+          <stop offset="100%" stop-color="#0A1828" stop-opacity=".9"/>
+        </radialGradient>
+      </defs>
+      <rect width="900" height="300" fill="url(#mapBg)"/>
+
+      <!-- Simplified Turkey shape -->
+      <path d="M 80 120 Q 90 95 130 90 Q 180 82 240 88 Q 300 90 360 85 Q 420 78 480 82 Q 540 80 590 88 Q 640 90 680 95 Q 720 98 750 110 Q 760 115 755 130 Q 760 145 740 155 Q 700 170 660 175 Q 620 178 580 172 Q 540 168 500 175 Q 460 178 420 170 Q 380 165 340 170 Q 300 172 260 165 Q 220 158 180 162 Q 150 165 120 158 Q 90 148 85 135 Z" 
+        fill="#2A3A2A" stroke="#4A6A40" stroke-width="1.2" opacity=".9"/>
+      <!-- Trakya -->
+      <path d="M 80 120 Q 85 100 95 90 Q 105 82 115 85 Q 125 88 130 90 Q 90 95 80 120 Z"
+        fill="#2A3A2A" stroke="#4A6A40" stroke-width="1" opacity=".9"/>
+
+      <!-- Country labels -->
+      <text x="58" y="145" fill="#666660" font-size="8" font-style="italic">YUNANİSTAN</text>
+      <text x="55" y="108" fill="#666660" font-size="8" font-style="italic">BULGARİSTAN</text>
+      <text x="768" y="122" fill="#666660" font-size="8" font-style="italic">GÜRCİSTAN</text>
+      <text x="775" y="148" fill="#666660" font-size="7" font-style="italic">ERMENİSTAN</text>
+      <text x="780" y="175" fill="#666660" font-size="8" font-style="italic">İRAN</text>
+      <text x="680" y="200" fill="#666660" font-size="8" font-style="italic">IRAK</text>
+      <text x="500" y="205" fill="#666660" font-size="8" font-style="italic">SURİYE</text>
+
+      <!-- DC dots (red, larger) — major cities cluster -->
+      <!-- İstanbul cluster -->
+      <circle cx="115" cy="118" r="5" fill="#E53935" opacity=".9"/>
+      <circle cx="120" cy="112" r="4" fill="#E53935" opacity=".85"/>
+      <circle cx="108" cy="124" r="3.5" fill="#E53935" opacity=".8"/>
+      <circle cx="125" cy="122" r="4" fill="#E53935" opacity=".85"/>
+      <circle cx="112" cy="108" r="3" fill="#E53935" opacity=".75"/>
+
+      <!-- Ankara cluster -->
+      <circle cx="415" cy="118" r="4.5" fill="#E53935" opacity=".9"/>
+      <circle cx="422" cy="114" r="3.5" fill="#E53935" opacity=".8"/>
+      <circle cx="410" cy="124" r="3" fill="#E53935" opacity=".75"/>
+
+      <!-- İzmir cluster -->
+      <circle cx="183" cy="142" r="4" fill="#E53935" opacity=".85"/>
+      <circle cx="190" cy="148" r="3.5" fill="#E53935" opacity=".8"/>
+
+      <!-- Bursa -->
+      <circle cx="222" cy="112" r="3.5" fill="#E53935" opacity=".8"/>
+
+      <!-- Antalya -->
+      <circle cx="355" cy="168" r="4" fill="#E53935" opacity=".85"/>
+      <circle cx="363" cy="162" r="3" fill="#E53935" opacity=".75"/>
+
+      <!-- Konya -->
+      <circle cx="408" cy="140" r="3" fill="#E53935" opacity=".75"/>
+
+      <!-- Adana -->
+      <circle cx="512" cy="155" r="3.5" fill="#E53935" opacity=".8"/>
+
+      <!-- Kocaeli -->
+      <circle cx="175" cy="110" r="3" fill="#E53935" opacity=".8"/>
+      <circle cx="168" cy="116" r="2.5" fill="#E53935" opacity=".7"/>
+
+      <!-- Scattered DC -->
+      <circle cx="280" cy="130" r="2.5" fill="#E53935" opacity=".7"/>
+      <circle cx="340" cy="120" r="2" fill="#E53935" opacity=".65"/>
+      <circle cx="460" cy="125" r="2" fill="#E53935" opacity=".65"/>
+      <circle cx="550" cy="135" r="2.5" fill="#E53935" opacity=".7"/>
+      <circle cx="620" cy="140" r="2" fill="#E53935" opacity=".6"/>
+      <circle cx="690" cy="148" r="2" fill="#E53935" opacity=".6"/>
+      <circle cx="300" cy="155" r="2" fill="#E53935" opacity=".6"/>
+
+      <!-- AC dots (cyan, smaller, more numerous) -->
+      <!-- Dense western Turkey -->
+      <circle cx="118" cy="115" r="1.8" fill="#00E5FF" opacity=".7"/>
+      <circle cx="105" cy="120" r="1.8" fill="#00E5FF" opacity=".7"/>
+      <circle cx="122" cy="128" r="1.5" fill="#00E5FF" opacity=".65"/>
+      <circle cx="130" cy="118" r="1.8" fill="#00E5FF" opacity=".7"/>
+      <circle cx="100" cy="115" r="1.5" fill="#00E5FF" opacity=".6"/>
+      <circle cx="115" cy="130" r="2" fill="#00E5FF" opacity=".7"/>
+      <circle cx="110" cy="106" r="1.5" fill="#00E5FF" opacity=".6"/>
+
+      <!-- İzmir region -->
+      <circle cx="180" cy="136" r="1.8" fill="#00E5FF" opacity=".7"/>
+      <circle cx="188" cy="142" r="1.5" fill="#00E5FF" opacity=".65"/>
+      <circle cx="196" cy="138" r="1.5" fill="#00E5FF" opacity=".65"/>
+      <circle cx="176" cy="148" r="1.8" fill="#00E5FF" opacity=".7"/>
+      <circle cx="202" cy="148" r="1.3" fill="#00E5FF" opacity=".6"/>
+
+      <!-- Bursa-Kocaeli corridor -->
+      <circle cx="165" cy="112" r="1.8" fill="#00E5FF" opacity=".7"/>
+      <circle cx="158" cy="118" r="1.5" fill="#00E5FF" opacity=".65"/>
+      <circle cx="175" cy="118" r="1.8" fill="#00E5FF" opacity=".7"/>
+      <circle cx="148" cy="122" r="1.5" fill="#00E5FF" opacity=".6"/>
+      <circle cx="218" cy="110" r="1.8" fill="#00E5FF" opacity=".7"/>
+      <circle cx="228" cy="115" r="1.5" fill="#00E5FF" opacity=".65"/>
+      <circle cx="208" cy="120" r="1.5" fill="#00E5FF" opacity=".65"/>
+
+      <!-- Interior Anatolia -->
+      <circle cx="412" cy="120" r="1.8" fill="#00E5FF" opacity=".7"/>
+      <circle cx="420" cy="125" r="1.5" fill="#00E5FF" opacity=".65"/>
+      <circle cx="400" cy="128" r="1.8" fill="#00E5FF" opacity=".7"/>
+      <circle cx="425" cy="118" r="1.3" fill="#00E5FF" opacity=".6"/>
+
+      <!-- Highways scatter -->
+      <circle cx="260" cy="118" r="1.5" fill="#00E5FF" opacity=".6"/>
+      <circle cx="278" cy="122" r="1.3" fill="#00E5FF" opacity=".55"/>
+      <circle cx="296" cy="128" r="1.5" fill="#00E5FF" opacity=".6"/>
+      <circle cx="315" cy="115" r="1.3" fill="#00E5FF" opacity=".55"/>
+      <circle cx="335" cy="125" r="1.5" fill="#00E5FF" opacity=".6"/>
+      <circle cx="352" cy="132" r="1.5" fill="#00E5FF" opacity=".6"/>
+      <circle cx="375" cy="120" r="1.5" fill="#00E5FF" opacity=".6"/>
+      <circle cx="390" cy="130" r="1.3" fill="#00E5FF" opacity=".55"/>
+      <circle cx="440" cy="130" r="1.5" fill="#00E5FF" opacity=".6"/>
+      <circle cx="458" cy="122" r="1.3" fill="#00E5FF" opacity=".55"/>
+      <circle cx="475" cy="135" r="1.5" fill="#00E5FF" opacity=".6"/>
+
+      <!-- Antalya coast -->
+      <circle cx="350" cy="165" r="1.8" fill="#00E5FF" opacity=".65"/>
+      <circle cx="362" cy="168" r="1.5" fill="#00E5FF" opacity=".6"/>
+      <circle cx="375" cy="165" r="1.5" fill="#00E5FF" opacity=".6"/>
+      <circle cx="388" cy="162" r="1.3" fill="#00E5FF" opacity=".55"/>
+
+      <!-- Eastern Turkey (sparse) -->
+      <circle cx="540" cy="128" r="1.3" fill="#00E5FF" opacity=".5"/>
+      <circle cx="558" cy="138" r="1.3" fill="#00E5FF" opacity=".5"/>
+      <circle cx="580" cy="132" r="1.5" fill="#00E5FF" opacity=".55"/>
+      <circle cx="600" cy="140" r="1.3" fill="#00E5FF" opacity=".5"/>
+      <circle cx="625" cy="145" r="1.3" fill="#00E5FF" opacity=".5"/>
+      <circle cx="650" cy="150" r="1.3" fill="#00E5FF" opacity=".45"/>
+      <circle cx="668" cy="148" r="1" fill="#00E5FF" opacity=".4"/>
+
+      <!-- Info box -->
+      <rect x="680" y="220" width="200" height="68" rx="6" fill="rgba(13,25,41,.85)" stroke="#2A4A6A" stroke-width=".8"/>
+      <text x="690" y="236" fill="#8AAAC8" font-size="8.5" font-family="monospace">📍 96.783 soket konumu</text>
+      <rect x="690" y="244" width="8" height="8" rx="4" fill="#E53935"/>
+      <text x="702" y="251" fill="#8AAAC8" font-size="8">DC Hızlı Şarj: 25.393</text>
+      <rect x="690" y="258" width="8" height="8" rx="4" fill="#00E5FF"/>
+      <text x="702" y="265" fill="#8AAAC8" font-size="8">AC Şarj: 71.390</text>
+      <text x="690" y="280" fill="#4A6A8A" font-size="7.5" font-style="italic">Scroll=Zoom · Sürükle=Pan</text>
+
+      <!-- Zoom controls -->
+      <rect x="16" y="220" width="24" height="24" rx="4" fill="#1A2A3A" stroke="#2A4A6A" stroke-width=".8"/>
+      <text x="28" y="236" text-anchor="middle" fill="#8AAAC8" font-size="14">+</text>
+      <rect x="16" y="248" width="24" height="24" rx="4" fill="#1A2A3A" stroke="#2A4A6A" stroke-width=".8"/>
+      <text x="28" y="264" text-anchor="middle" fill="#8AAAC8" font-size="16">−</text>
+    </svg>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- OUTPUTS -->
+<div class="wrap section">
+  <div class="s-label">Çıktı Formatları</div>
+  <h2 class="s-title">3 formatta <span class="accent">profesyonel çıktı.</span></h2>
+  <p class="s-sub">Analiz sonuçları Excel, PDF veya PowerPoint formatında kayıt edilir. Hepsi tek tıkla.</p>
+
+  <div class="outputs-grid">
+    <div class="out-card reveal">
+      <div class="out-icon-wrap" style="background:rgba(46,109,164,.15)">📊</div>
+      <div class="out-title">Excel (.xlsx)</div>
+      <div class="out-desc">Düzenlenebilir, filtrelenebilir 4 sekmeli rapor.</div>
+      <div class="out-bullets">
+        <div class="out-bullet">Özet KPI tablosu (20+ gösterge, % değişim)</div>
+        <div class="out-bullet">Gelişim Raporu — tüm operatörler, AC/DC ayrımı</div>
+        <div class="out-bullet">İl Bazlı Özet — soket & istasyon karşılaştırması</div>
+        <div class="out-bullet">Dönem Trend — 12 döneme kadar KPI matrisi</div>
+      </div>
+    </div>
+    <div class="out-card reveal" style="transition-delay:.1s">
+      <div class="out-icon-wrap" style="background:rgba(231,76,60,.15)">📄</div>
+      <div class="out-title">PDF (Landscape A4)</div>
+      <div class="out-desc">Baskıya hazır, embed grafik içeren çok sayfalı rapor.</div>
+      <div class="out-bullets">
+        <div class="out-bullet">KPI özet tablosu (kapak sayfası)</div>
+        <div class="out-bullet">Pazar payı yatay çubuk grafikleri (Soket/İstasyon/MW)</div>
+        <div class="out-bullet">Operatör büyüme, güç histogramı, AC/DC dağılım</div>
+        <div class="out-bullet">Trend grafikleri + coğrafi yoğunluk haritası</div>
+      </div>
+    </div>
+    <div class="out-card reveal" style="transition-delay:.2s">
+      <div class="out-icon-wrap" style="background:rgba(142,68,173,.15)">📑</div>
+      <div class="out-title">PowerPoint (.pptx)</div>
+      <div class="out-desc">19+ slayt, native düzenlenebilir grafikler.</div>
+      <div class="out-bullets">
+        <div class="out-bullet">Kapak + KPI Dashboard (8+8+3 kart)</div>
+        <div class="out-bullet">Pazar payı, büyüme, AC/DC, il dağılımı slaytları</div>
+        <div class="out-bullet">Coğrafi harita, güç gelişimi, segmentasyon</div>
+        <div class="out-bullet">Çok dönem trend + yeşil istasyon + DC oran</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- TECH STACK -->
+<div class="wrap section">
+  <div class="s-label">Teknik Altyapı</div>
+  <h2 class="s-title">Python <span class="accent">ekosistemi</span> ile.</h2>
+  <p class="s-sub">Saf Python — harici servis yok, internet bağlantısı gerekmez. Tüm hesaplama yerel.</p>
+
+  <div class="tech-grid reveal">
+    <div class="tech-row">
+      <div class="tech-icon-box">🖥</div>
+      <div>
+        <div class="tech-cat">Kullanıcı Arayüzü</div>
+        <div class="tech-name">Tkinter + ttk</div>
+        <div class="tech-desc">Tabbed notebook, scrollable frame, multi-dönem dönem satırları, progress popup</div>
+      </div>
+    </div>
+    <div class="tech-row">
+      <div class="tech-icon-box">📊</div>
+      <div>
+        <div class="tech-cat">Veri İşleme</div>
+        <div class="tech-name">pandas + openpyxl</div>
+        <div class="tech-desc">Excel/CSV okuma, sütun normalizasyonu, il çıkarımı, KPI hesaplama</div>
+      </div>
+    </div>
+    <div class="tech-row">
+      <div class="tech-icon-box">📈</div>
+      <div>
+        <div class="tech-cat">Görselleştirme</div>
+        <div class="tech-name">matplotlib + numpy</div>
+        <div class="tech-desc">TkAgg backend, Agg (PDF/PPTX), interaktif scatter harita, 20+ grafik türü</div>
+      </div>
+    </div>
+    <div class="tech-row">
+      <div class="tech-icon-box">📄</div>
+      <div>
+        <div class="tech-cat">PDF Üretimi</div>
+        <div class="tech-name">ReportLab</div>
+        <div class="tech-desc">Landscape A4, embed Matplotlib grafik, Türkçe font desteği, KeepTogether</div>
+      </div>
+    </div>
+    <div class="tech-row">
+      <div class="tech-icon-box">📑</div>
+      <div>
+        <div class="tech-cat">PowerPoint Üretimi</div>
+        <div class="tech-name">python-pptx</div>
+        <div class="tech-desc">Native chart (düzenlenebilir), 16x9 slayt, koyu tema, kategori ekseni renklendirme</div>
+      </div>
+    </div>
+    <div class="tech-row">
+      <div class="tech-icon-box">🗺️</div>
+      <div>
+        <div class="tech-cat">Harita</div>
+        <div class="tech-name">GeoJSON + Matplotlib</div>
+        <div class="tech-desc">turkey_provinces.geojson ile il sınırları, zoom/pan/hover tooltip, Google Maps entegrasyonu</div>
+      </div>
+    </div>
+    <div class="tech-row">
+      <div class="tech-icon-box">⚡</div>
+      <div>
+        <div class="tech-cat">Dosya Okuma</div>
+        <div class="tech-name">python-calamine (opt.)</div>
+        <div class="tech-desc">.xlsx okumayı ~3x hızlandırır. .xls için xlrd, LibreOffice fallback</div>
+      </div>
+    </div>
+    <div class="tech-row">
+      <div class="tech-icon-box">🧵</div>
+      <div>
+        <div class="tech-cat">Thread Yönetimi</div>
+        <div class="tech-name">threading + after()</div>
+        <div class="tech-desc">Dosya okuma thread'de, grafik çizimi ana thread'de, lazy render, after() zinciri</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- DESTEKLENEN PLATFORMLAR -->
+<div class="wrap section">
+  <div class="s-label">Desteklenen Platformlar</div>
+  <h2 class="s-title">9 platform, <span class="accent">tek analiz.</span></h2>
+
+  <div class="platforms-grid reveal">
+    <div class="plat-row">
+      <div><div class="plat-name">Trendyol</div><div class="plat-note">JS state nesnesi ile fiyat okuma</div></div>
+      <div class="plat-badge pb-active">Aktif</div>
+    </div>
+    <div class="plat-row">
+      <div><div class="plat-name">Hepsiburada</div><div class="plat-note">app.hb.biz mobil link desteği</div></div>
+      <div class="plat-badge pb-active">Aktif</div>
+    </div>
+    <div class="plat-row">
+      <div><div class="plat-name">Amazon TR</div><div class="plat-note">gizli fiyat elementi okuma</div></div>
+      <div class="plat-badge pb-active">Aktif</div>
+    </div>
+    <div class="plat-row">
+      <div><div class="plat-name">N11</div><div class="plat-note">Tam URL ile sorunsuz çalışma</div></div>
+      <div class="plat-badge pb-active">Aktif</div>
+    </div>
+    <div class="plat-row">
+      <div><div class="plat-name">PttAVM</div><div class="plat-note">Sepete Özel kampanya fiyatı</div></div>
+      <div class="plat-badge pb-active">Aktif</div>
+    </div>
+    <div class="plat-row">
+      <div><div class="plat-name">Idefix</div><div class="plat-note">JSON-LD yapılandırılmış veri</div></div>
+      <div class="plat-badge pb-active">Aktif</div>
+    </div>
+    <div class="plat-row">
+      <div><div class="plat-name">ÇiçekSepeti</div><div class="plat-note">Arama URL güncellendi, test devam</div></div>
+      <div class="plat-badge pb-test">Test</div>
+    </div>
+    <div class="plat-row">
+      <div><div class="plat-name">Teknosa</div><div class="plat-note">Seçici doğrulaması tamamlandı</div></div>
+      <div class="plat-badge pb-test">Test</div>
+    </div>
+    <div class="plat-row">
+      <div><div class="plat-name">MediaMarkt</div><div class="plat-note">Seçici doğrulaması tamamlandı</div></div>
+      <div class="plat-badge pb-test">Test</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- KURULUM -->
+<div class="wrap section">
+  <div class="s-label">Kurulum</div>
+  <h2 class="s-title">3 adımda <span class="accent">çalışır.</span></h2>
+
+  <div class="kv-box reveal">
+    <span class="kv-comment"># 1. Gerekli paketleri yükle</span><br>
+    pip install <span class="kv-val">pandas openpyxl matplotlib numpy reportlab python-pptx requests xlrd</span><br>
+    pip install <span class="kv-val">python-calamine</span>  <span class="kv-comment"># opsiyonel — Excel okumayı ~3x hızlandırır</span><br>
+    <br>
+    <span class="kv-comment"># 2. İl sınırları haritası için (opsiyonel)</span><br>
+    <span class="kv-comment"># turkey_provinces.geojson dosyasını .py ile aynı klasöre koy</span><br>
+    <span class="kv-comment"># https://github.com/cihadturhan/tr-geojson</span><br>
+    <br>
+    <span class="kv-comment"># 3. Uygulamayı başlat</span><br>
+    python <span class="kv-str">epdk_premium.py</span><br>
+    <br>
+    <span class="kv-comment"># ─── Uygulama başlayınca ───</span><br>
+    <span class="kv-comment"># Dönem 1 ve Dönem 2 için EPDK Excel/CSV dosyalarını seç</span><br>
+    <span class="kv-comment"># Analizi Başlat → Dashboard doldu → Excel / PDF / PPTX kaydet</span>
+  </div>
+
+  <div style="margin-top:24px;background:var(--surface);border:1px solid rgba(243,156,18,.3);border-radius:10px;padding:18px 24px">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--orange2);margin-bottom:8px">⚠ Bilgi</div>
+    <div style="font-size:13px;color:var(--sub);line-height:1.6">EPDK EXCEL verisi <strong style="color:var(--text)">epdk.gov.tr</strong> adresinden indirilebilir. Desteklenen sütun formatları: <code style="color:var(--blue2);font-family:'JetBrains Mono',monospace;font-size:11px">sarjIstasyonuNo, CPO Marka, sarjAgiIsletmecisiUnvan, soketGucu, soketTipi</code> ve daha fazlası. Sütun adı varyantları otomatik normalize edilir.</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- KLAVYE KISAYOLLARI -->
+<div class="wrap section">
+  <div class="s-label">Klavye Kısayolları</div>
+  <h2 class="s-title">Hız için <span class="accent">kısayollar.</span></h2>
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:40px" class="reveal">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--green);font-weight:700;margin-bottom:6px">Alt + A</div>
+      <div style="font-size:13px;color:var(--sub)">Analizi Başlat</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--red);font-weight:700;margin-bottom:6px">Alt + Z</div>
+      <div style="font-size:13px;color:var(--sub)">Analizi Sıfırla</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--blue2);font-weight:700;margin-bottom:6px">Alt + X</div>
+      <div style="font-size:13px;color:var(--sub)">Excel Kaydet</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--red);font-weight:700;margin-bottom:6px">Alt + P</div>
+      <div style="font-size:13px;color:var(--sub)">PDF Kaydet</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--purple);font-weight:700;margin-bottom:6px">Alt + S</div>
+      <div style="font-size:13px;color:var(--sub)">PPTX Kaydet</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--teal);font-weight:700;margin-bottom:6px">Alt + N</div>
+      <div style="font-size:13px;color:var(--sub)">Dönem Ekle</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--orange2);font-weight:700;margin-bottom:6px">Alt + I</div>
+      <div style="font-size:13px;color:var(--sub)">Dönem Sil</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--blue);font-weight:700;margin-bottom:6px">Alt + D</div>
+      <div style="font-size:13px;color:var(--sub)">Dosya Seç</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- FOOTER -->
+<div class="credit-bar">
+  <div class="credit-name">Mustafa Çelik tarafından geliştirilmiştir.</div>
+  <a href="https://www.linkedin.com/in/mustafacelik84/" class="credit-link" target="_blank">🔗 linkedin.com/in/mustafacelik84</a>
+  <div class="credit-note">B2B Satış & Enerji Teknolojisi · EV Şarj Altyapısı · Python</div>
+</div>
+
+<footer>
+<div class="wrap">
+  <div class="footer-logo">EV<span>Analiz</span></div>
+  <div class="footer-stats">
+    <div class="fs"><div class="fs-num">12</div><div class="fs-lbl">Maks. Dönem</div></div>
+    <div class="fs"><div class="fs-num">24</div><div class="fs-lbl">KPI Kartı</div></div>
+    <div class="fs"><div class="fs-num">20+</div><div class="fs-lbl">Grafik Türü</div></div>
+    <div class="fs"><div class="fs-num">3</div><div class="fs-lbl">Çıktı Formatı</div></div>
+    <div class="fs"><div class="fs-num">81</div><div class="fs-lbl">İl Takibi</div></div>
+    <div class="fs"><div class="fs-num">v3.11</div><div class="fs-lbl">Versiyon</div></div>
+  </div>
+  <div class="footer-meta">Elektrikli Araç Şarj Ekosistemi Gelişim Analizi · Python 3.11+ · Nisan 2026</div>
+</div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
