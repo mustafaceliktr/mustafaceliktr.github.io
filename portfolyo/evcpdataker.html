@@ -1,1 +1,872 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E.V.C.P. DaTAker — EPDK Şarj İstasyonu Veri Alıcı</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #0E0E0E;
+  --sidebar:  #1F1F1F;
+  --card:     #2B2B2B;
+  --card2:    #1F1F1F;
+  --border:   #333333;
+  --accent:   #3B8ED0;
+  --accent2:  #5BA3E0;
+  --success:  #2CC985;
+  --danger:   #C42B1C;
+  --warn:     #FF5555;
+  --text:     #FFFFFF;
+  --sub:      #AAAAAA;
+  --muted:    #555555;
+}
 
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  overflow-x:hidden;
+}
+
+/* noise grain */
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.5;
+}
+
+/* glow */
+.glow{position:fixed;border-radius:50%;filter:blur(160px);pointer-events:none;z-index:0}
+.g1{width:600px;height:600px;background:rgba(59,142,208,.06);top:-150px;right:-100px}
+.g2{width:500px;height:500px;background:rgba(44,201,133,.04);bottom:-100px;left:-100px}
+
+/* NAV */
+nav{
+  border-bottom:1px solid rgba(255,255,255,.06);
+  background:rgba(14,14,14,.92);
+  backdrop-filter:blur(24px);
+  position:sticky;top:0;z-index:100;
+}
+.nav-in{
+  max-width:1200px;margin:0 auto;padding:0 40px;
+  height:60px;display:flex;align-items:center;justify-content:space-between;
+  position:relative;z-index:1;
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-badge{
+  width:34px;height:34px;background:var(--accent);
+  border-radius:9px;display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:700;color:white;font-family:'JetBrains Mono',monospace;
+}
+.logo-txt{font-weight:800;font-size:16px;letter-spacing:-.3px}
+.logo-txt span{color:var(--accent)}
+.nav-pills{display:flex;gap:8px}
+.pill{
+  padding:5px 13px;border-radius:20px;font-size:11px;font-weight:600;
+  font-family:'JetBrains Mono',monospace;letter-spacing:.3px;
+}
+.pill-blue{background:rgba(59,142,208,.12);border:1px solid rgba(59,142,208,.25);color:var(--accent)}
+.pill-green{background:rgba(44,201,133,.1);border:1px solid rgba(44,201,133,.22);color:var(--success)}
+.pill-green::before{content:'● ';animation:blink 2s ease infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* WRAP */
+.wrap{max-width:1200px;margin:0 auto;padding:0 40px;position:relative;z-index:1}
+
+/* HERO */
+.hero{padding:110px 0 80px;position:relative;overflow:hidden}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid rgba(59,142,208,.3);border-radius:6px;
+  background:rgba(59,142,208,.07);
+  padding:6px 14px;margin-bottom:28px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);
+  letter-spacing:1px;text-transform:uppercase;
+}
+h1{
+  font-weight:800;
+  font-size:clamp(44px,6vw,80px);
+  line-height:.95;letter-spacing:-2.5px;
+  margin-bottom:10px;
+}
+h1 .blue{color:var(--accent)}
+h1 .green{color:var(--success)}
+h1 .gray{color:var(--muted);font-weight:300}
+.hero-desc{
+  font-size:18px;color:var(--sub);
+  max-width:560px;line-height:1.7;
+  margin:24px 0 40px;font-weight:300;
+}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 28px;border-radius:50px;
+  font-weight:700;font-size:14px;cursor:pointer;
+  transition:all .2s;text-decoration:none;letter-spacing:.2px;
+}
+.btn-prim{background:var(--accent);color:white;border:none}
+.btn-prim:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 8px 28px rgba(59,142,208,.3)}
+.btn-ghost{background:transparent;color:var(--sub);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn-success{background:var(--success);color:#0a1f14;border:none}
+.btn-success:hover{filter:brightness(1.1);transform:translateY(-1px)}
+
+/* STATS */
+.stats{
+  display:flex;gap:0;
+  border:1px solid var(--border);border-radius:14px;
+  overflow:hidden;background:var(--card2);
+  margin:64px 0;
+}
+.st{flex:1;padding:24px 20px;text-align:center;border-right:1px solid var(--border);position:relative}
+.st:last-child{border-right:none}
+.st::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--accent);transition:width .4s}
+.st:hover::after{width:80%}
+.st-n{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:32px;color:var(--success);letter-spacing:-1px}
+.st-l{font-size:11px;color:var(--muted);margin-top:5px;letter-spacing:.5px;text-transform:uppercase;font-weight:600}
+
+/* DIV */
+.div{height:1px;background:linear-gradient(90deg,transparent,var(--border) 20%,var(--border) 80%,transparent)}
+
+/* SECTIONS */
+.sec{padding:80px 0}
+.tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px}
+.stitle{font-weight:800;font-size:clamp(30px,4vw,48px);letter-spacing:-1.5px;margin-bottom:14px;line-height:1}
+.stitle .ac{color:var(--success)}
+.stitle .ab{color:var(--accent)}
+.sdesc{color:var(--sub);font-size:16px;line-height:1.65;max-width:560px;font-weight:300}
+
+/* APP MOCKUP */
+.app-frame{
+  background:var(--sidebar);
+  border:1px solid var(--border);
+  border-radius:20px;overflow:hidden;
+  margin-top:48px;
+  box-shadow:0 40px 100px rgba(0,0,0,.6);
+}
+/* title bar */
+.app-tbar{
+  height:38px;background:var(--bg);
+  display:flex;align-items:center;padding:0 16px;
+  border-bottom:1px solid var(--border);
+  justify-content:space-between;
+}
+.tbar-dots{display:flex;gap:6px}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot.r{background:#C42B1C}
+.dot.y{background:#F4C430}
+.dot.g{background:#2CC985}
+.tbar-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+.tbar-right{display:flex;gap:6px}
+.tbar-btn{width:26px;height:20px;border-radius:4px;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--muted)}
+/* app body */
+.app-body{display:flex;height:520px}
+/* sidebar */
+.app-sidebar{
+  width:240px;background:var(--sidebar);
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  padding:24px 0;flex-shrink:0;
+}
+.app-logo-wrap{display:flex;flex-direction:column;align-items:center;padding:0 20px 24px;border-bottom:1px solid rgba(255,255,255,.05)}
+.app-logo-circle{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#1a5a90);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;font-family:'JetBrains Mono',monospace;color:white;margin-bottom:10px}
+.app-logo-name{font-weight:700;font-size:15px;color:white;text-align:center;line-height:1.3}
+.app-step{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 20px;margin:4px 12px;border-radius:10px;
+  cursor:default;transition:background .2s;
+}
+.app-step.active{background:rgba(59,142,208,.12)}
+.app-step-arrow{width:14px;height:14px;position:relative;flex-shrink:0}
+.app-step-arrow svg{width:14px;height:14px}
+.app-step-txt{font-size:13px;font-weight:600}
+.step-active .app-step-txt{color:var(--accent)}
+.step-inactive .app-step-txt{color:var(--muted)}
+.app-version{margin-top:auto;padding:12px 20px;font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+/* main area */
+.app-main{flex:1;background:#141414;display:flex;flex-direction:column;padding:20px 32px;overflow:hidden}
+.app-card{background:var(--card);border-radius:14px;padding:22px 24px;flex:1;display:flex;flex-direction:column;overflow:hidden}
+.app-card-title{font-weight:700;font-size:18px;color:white;margin-bottom:14px}
+.app-textbox{
+  background:var(--card2);border-radius:10px;
+  padding:16px;flex:1;overflow:hidden;
+  border:1px solid rgba(255,255,255,.05);
+}
+.app-txt-alert{color:#FF5555;font-size:12px;font-weight:700;line-height:1.6}
+.app-txt-body{color:#C0C0C0;font-size:12px;line-height:1.7;margin-top:6px}
+.app-txt-link{color:var(--accent);text-decoration:underline;cursor:pointer}
+.app-txt-code{color:var(--success);font-family:'JetBrains Mono',monospace;font-size:11px}
+.app-checkbox-row{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 0 8px;
+}
+.app-checkbox{
+  width:18px;height:18px;border-radius:4px;
+  background:var(--card2);border:1.5px solid var(--accent);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.app-checkbox-txt{font-size:12px;color:var(--sub)}
+.app-btn-row{display:flex;justify-content:center;padding-top:4px}
+.app-btn{
+  padding:12px 40px;border-radius:50px;font-weight:700;font-size:13px;
+  cursor:pointer;border:none;
+}
+.app-btn.primary{background:var(--accent);color:white}
+.app-btn.success{background:var(--success);color:#0a1f14}
+.app-btn.danger{background:var(--danger);color:white}
+/* progress bar mockup */
+.app-progress-section{margin-top:10px}
+.app-prog-label{font-size:12px;color:var(--sub);margin-bottom:6px;display:flex;justify-content:space-between}
+.app-prog-bar{height:8px;background:var(--card2);border-radius:4px;overflow:hidden;border-radius:50px}
+.app-prog-fill{height:100%;border-radius:50px;background:var(--accent)}
+.app-prog-detail{display:flex;justify-content:space-between;margin-top:6px}
+.app-prog-detail span{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.app-prog-detail .timer{color:var(--warn)}
+
+/* FLOW STEPS */
+.flow-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:48px}
+.flow-card{
+  background:var(--card2);border:1px solid var(--border);
+  border-radius:14px;padding:24px 20px;
+  position:relative;overflow:hidden;
+  transition:all .25s;
+}
+.flow-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+.flow-num{
+  font-family:'JetBrains Mono',monospace;font-weight:700;
+  font-size:13px;color:var(--accent);
+  background:rgba(59,142,208,.1);border:1px solid rgba(59,142,208,.2);
+  border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:14px;
+}
+.flow-icon{font-size:24px;margin-bottom:10px}
+.flow-title{font-weight:700;font-size:15px;margin-bottom:6px}
+.flow-desc{font-size:13px;color:var(--sub);line-height:1.55;font-weight:300}
+/* arrow connector */
+.flow-arrow{
+  display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:18px;flex-shrink:0;margin-top:40px;
+}
+
+/* FEATURES */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:48px}
+.feat{
+  background:var(--card2);border:1px solid var(--border);
+  border-radius:14px;padding:26px;
+  transition:all .25s;
+}
+.feat:hover{border-color:rgba(59,142,208,.35);background:rgba(59,142,208,.04);transform:translateY(-2px)}
+.feat-icon{font-size:26px;margin-bottom:14px}
+.feat-title{font-weight:700;font-size:16px;margin-bottom:8px}
+.feat-desc{font-size:13px;color:var(--sub);line-height:1.6;font-weight:300}
+.feat-tag{
+  display:inline-block;margin-top:12px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--accent);background:rgba(59,142,208,.1);
+  border:1px solid rgba(59,142,208,.18);border-radius:4px;padding:3px 8px;
+}
+
+/* TECH */
+.tech-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:40px}
+.tech-row{
+  background:var(--card2);border:1px solid var(--border);
+  border-radius:10px;padding:16px 18px;
+  display:flex;align-items:center;gap:14px;
+  transition:border-color .2s;
+}
+.tech-row:hover{border-color:var(--accent)}
+.tech-ic{width:40px;height:40px;border-radius:8px;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.tech-cat{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.tech-name{font-weight:700;font-size:15px;color:var(--success);margin-top:1px}
+.tech-desc{font-size:12px;color:var(--sub);margin-top:2px;line-height:1.4}
+
+/* CODE BLOCK */
+.codeblock{
+  background:var(--card2);border:1px solid var(--border);
+  border-radius:12px;padding:20px 24px;margin-top:32px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;line-height:2;
+  color:var(--sub);
+}
+.codeblock .c{color:var(--muted)}
+.codeblock .v{color:var(--success)}
+.codeblock .s{color:#E8A87C}
+.codeblock .k{color:var(--accent)}
+.codeblock .warn{color:var(--warn)}
+
+/* DATA FLOW */
+.data-flow{
+  display:flex;align-items:center;gap:0;margin-top:48px;
+  background:var(--card2);border:1px solid var(--border);border-radius:14px;overflow:hidden;
+}
+.df-node{
+  flex:1;padding:22px 18px;text-align:center;border-right:1px solid var(--border);
+}
+.df-node:last-child{border-right:none}
+.df-icon{font-size:24px;margin-bottom:8px}
+.df-name{font-weight:700;font-size:13px;color:var(--text)}
+.df-sub{font-size:11px;color:var(--muted);margin-top:3px;font-family:'JetBrains Mono',monospace}
+.df-arrow{color:var(--muted);font-size:20px;padding:0 4px;flex-shrink:0}
+
+/* CREDIT */
+.credit{background:var(--card2);border-top:1px solid var(--border);padding:32px 0;text-align:center}
+.credit-name{font-weight:700;font-size:18px;margin-bottom:6px}
+.credit-link{
+  font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);text-decoration:none;
+  transition:color .2s;
+}
+.credit-link:hover{color:var(--success)}
+.credit-note{font-size:12px;color:var(--muted);margin-top:8px}
+
+footer{border-top:1px solid rgba(255,255,255,.06);padding:40px 0;text-align:center}
+.f-logo{font-weight:800;font-size:24px;letter-spacing:-1px;margin-bottom:8px}
+.f-logo span{color:var(--accent)}
+.f-meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+.f-stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin:24px 0}
+.fs-n{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:26px;color:var(--success)}
+.fs-l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .65s,transform .65s}
+.rv.vis{opacity:1;transform:translateY(0)}
+
+@media(max-width:860px){
+  .feat-grid,.tech-grid,.flow-grid{grid-template-columns:1fr}
+  .stats{flex-direction:column}
+  .st{border-right:none;border-bottom:1px solid var(--border)}
+  .st:last-child{border-bottom:none}
+  .app-body{flex-direction:column}
+  .app-sidebar{width:100%;height:auto;flex-direction:row;flex-wrap:wrap;padding:12px}
+  .data-flow{flex-direction:column}
+  .df-node{border-right:none;border-bottom:1px solid var(--border)}
+}
+</style>
+</head>
+<body>
+
+<div class="glow g1"></div>
+<div class="glow g2"></div>
+
+<!-- NAV -->
+<nav>
+<div class="nav-in">
+  <div class="logo">
+    <div class="logo-badge">E</div>
+    <div class="logo-txt">E.V.C.P. <span>DaTAker</span></div>
+  </div>
+  <div class="nav-pills">
+    <div class="pill pill-green">v1.0 Stable</div>
+    <div class="pill pill-blue">Windows</div>
+    <div class="pill pill-blue">Python 3.x</div>
+  </div>
+</div>
+</nav>
+
+<!-- HERO -->
+<div class="wrap">
+<div class="hero">
+  <div class="hero-tag">⚡ EPDK Açık Veri Portalı</div>
+  <h1>
+    E.V.C.P.<br>
+    <span class="blue">DaTAker</span>
+  </h1>
+  <p style="font-size:13px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.5px;margin-bottom:4px">Elektrikli Araç Şarj Noktası Veri Alıcı</p>
+  <p class="hero-desc">
+    EPDK açık veri portalındaki elektrikli araç şarj istasyonu verilerini tek tıkla çeken, soket bazında ayrıştıran ve hazır Excel raporuna dönüştüren modern masaüstü uygulaması.
+  </p>
+  <div class="cta-row">
+    <div class="btn btn-prim">⬇ Python Dosyası</div>
+        <p style="font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace">pip install customtkinter requests pandas openpyxl pillow</p>
+  </div>
+</div>
+</div>
+
+<!-- STATS -->
+<div class="wrap">
+<div class="stats rv">
+  <div class="st"><div class="st-n">7</div><div class="st-l">Adım Akış</div></div>
+  <div class="st"><div class="st-n">3×</div><div class="st-l">Yeniden Deneme</div></div>
+  <div class="st"><div class="st-n">60s</div><div class="st-l">Süre Göstergesi</div></div>
+  <div class="st"><div class="st-n">1</div><div class="st-l">Tık Excel</div></div>
+  <div class="st"><div class="st-n">0</div><div class="st-l">Manuel Adım</div></div>
+</div>
+</div>
+
+<div class="div"></div>
+
+<!-- APP MOCKUP -->
+<div class="wrap sec">
+  <div class="tag">Arayüz Önizlemesi</div>
+  <h2 class="stitle">Modern, sade,<br><span class="ac">adım adım.</span></h2>
+  <p class="sdesc">CustomTkinter tabanlı koyu temalı arayüz. Her adım sidebar'da takip edilir, ilerleme çubuğu canlı güncellenir.</p>
+
+  <div class="app-frame rv">
+    <div class="app-tbar">
+      <div class="tbar-dots">
+        <div class="dot r"></div>
+        <div class="dot y"></div>
+        <div class="dot g"></div>
+      </div>
+      <div class="tbar-title">E.V.C.P. DaTAker</div>
+      <div class="tbar-right">
+        <div class="tbar-btn">—</div>
+        <div class="tbar-btn">✕</div>
+      </div>
+    </div>
+    <div class="app-body">
+      <!-- Sidebar -->
+      <div class="app-sidebar">
+        <div class="app-logo-wrap">
+          <div class="app-logo-circle">E</div>
+          <div class="app-logo-name">E.V.C.P.<br>DaTAker</div>
+        </div>
+        <!-- Steps -->
+        <div class="app-step active" style="margin-top:16px">
+          <svg viewBox="0 0 20 20" class="app-step-arrow" fill="none"><polyline points="6,4 14,10 6,16" stroke="#3B8ED0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="app-step-txt" style="color:#3B8ED0">Bilgilendirme</span>
+        </div>
+        <div class="app-step">
+          <svg viewBox="0 0 20 20" class="app-step-arrow" fill="none"><polyline points="6,4 14,10 6,16" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="app-step-txt" style="color:#555">Veri İndirme</span>
+        </div>
+        <div class="app-step">
+          <svg viewBox="0 0 20 20" class="app-step-arrow" fill="none"><polyline points="6,4 14,10 6,16" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="app-step-txt" style="color:#555">Veri İşleniyor</span>
+        </div>
+        <div class="app-step">
+          <svg viewBox="0 0 20 20" class="app-step-arrow" fill="none"><polyline points="6,4 14,10 6,16" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="app-step-txt" style="color:#555">Tamamlandı</span>
+        </div>
+        <div class="app-version">v1.0 Stable</div>
+      </div>
+      <!-- Main -->
+      <div class="app-main">
+        <!-- Top bar buttons -->
+        <div style="display:flex;justify-content:flex-end;gap:6px;margin-bottom:14px">
+          <div style="width:28px;height:28px;border-radius:6px;background:var(--card);display:flex;align-items:center;justify-content:center;color:#555;font-size:14px;cursor:pointer">—</div>
+          <div style="width:28px;height:28px;border-radius:6px;background:var(--card);display:flex;align-items:center;justify-content:center;color:#555;font-size:14px;cursor:pointer;transition:background .2s" onmouseover="this.style.background='#C42B1C'" onmouseout="this.style.background='var(--card)'">✕</div>
+        </div>
+        <div class="app-card">
+          <div class="app-card-title">Veri Toplama Sihirbazı</div>
+          <div class="app-textbox">
+            <div class="app-txt-alert">YASAL UYARI: Bu yazılım bağımsız bir araçtır. EPDK ile resmi bağı YOKTUR.</div>
+            <div class="app-txt-body">
+              <strong style="color:#e0e0e0">Değerli Kullanıcı,</strong><br><br>
+              • <strong style="color:#e0e0e0">Geliştirici:</strong> Bu araç, süreçleri kolaylaştırmak amacıyla 
+              <span class="app-txt-link">Mustafa Çelik</span> tarafından yapay zeka asistanları aracılığı ile tasarlanmıştır.<br><br>
+              • <strong style="color:#e0e0e0">Veri Kaynağı:</strong> EPDK Açık Veri Portalı.<br>
+              • <strong style="color:#e0e0e0">Sorumluluk Reddi:</strong> Verilerin kullanımı kullanıcı sorumluluğundadır.<br>
+              • <strong style="color:#e0e0e0">EPDK Kısıtlaması:</strong> İki rapor alımı arasında en az <span class="app-txt-code">60 dakika</span> bekleme süresi bulunmaktadır.
+            </div>
+          </div>
+          <div class="app-checkbox-row">
+            <div class="app-checkbox">
+              <svg width="12" height="12" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="#3B8ED0" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="app-checkbox-txt">Yasal uyarıyı okudum ve onaylıyorum.</div>
+          </div>
+          <!-- İşlem devam ediyor state -->
+          <div class="app-progress-section">
+            <div class="app-prog-label">
+              <span>EPDK Sunucusuna Bağlanılıyor...</span>
+            </div>
+            <div class="app-prog-bar">
+              <div class="app-prog-fill" style="width:72%"></div>
+            </div>
+            <div class="app-prog-detail">
+              <span>Soket verileri ayrıştırılıyor...</span>
+              <span class="timer">Kalan: ~18 sn</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Final state mockup -->
+  <div class="app-frame rv" style="margin-top:20px">
+    <div class="app-tbar">
+      <div class="tbar-dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+      <div class="tbar-title">E.V.C.P. DaTAker — ✓ Tamamlandı</div>
+      <div class="tbar-right"><div class="tbar-btn">—</div><div class="tbar-btn">✕</div></div>
+    </div>
+    <div class="app-body" style="height:280px">
+      <div class="app-sidebar">
+        <div class="app-logo-wrap">
+          <div class="app-logo-circle" style="background:linear-gradient(135deg,var(--success),#1a7a50)">✓</div>
+          <div class="app-logo-name">E.V.C.P.<br>DaTAker</div>
+        </div>
+        <div class="app-step" style="margin-top:12px">
+          <svg viewBox="0 0 20 20" class="app-step-arrow" fill="none"><polyline points="6,4 14,10 6,16" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="app-step-txt" style="color:#555">Bilgilendirme</span>
+        </div>
+        <div class="app-step">
+          <svg viewBox="0 0 20 20" class="app-step-arrow" fill="none"><polyline points="6,4 14,10 6,16" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="app-step-txt" style="color:#555">Veri İndirme</span>
+        </div>
+        <div class="app-step">
+          <svg viewBox="0 0 20 20" class="app-step-arrow" fill="none"><polyline points="6,4 14,10 6,16" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="app-step-txt" style="color:#555">Veri İşleniyor</span>
+        </div>
+        <div class="app-step active">
+          <svg viewBox="0 0 20 20" class="app-step-arrow" fill="none"><polyline points="6,4 14,10 6,16" stroke="#2CC985" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="app-step-txt" style="color:#2CC985">Tamamlandı ✓</span>
+        </div>
+        <div class="app-version">v1.0 Stable</div>
+      </div>
+      <div class="app-main" style="justify-content:center">
+        <div class="app-card" style="flex:unset">
+          <div class="app-card-title" style="color:#2CC985">İşlem Başarıyla Bitti! ✓</div>
+          <div class="app-prog-bar" style="margin-bottom:8px"><div class="app-prog-fill" style="width:100%;background:var(--success)"></div></div>
+          <div class="app-prog-detail" style="margin-bottom:16px">
+            <span style="color:#aaa">EPDK_Tam_Soket_Listesi_14042026_1432.xlsx</span>
+            <span style="color:#2CC985">Tamamlandı ✓</span>
+          </div>
+          <div style="display:flex;gap:12px">
+            <div class="app-btn danger" style="flex:1;text-align:center">UYGULAMADAN ÇIK</div>
+            <div class="app-btn success" style="flex:1;text-align:center">DOSYAYI AÇ</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- KULLANIM AKIŞI -->
+<div class="wrap sec">
+  <div class="tag">Kullanım Akışı</div>
+  <h2 class="stitle">7 adımda <span class="ab">tamamlandı.</span></h2>
+  <p class="sdesc">Splash ekranından Excel çıktısına kadar her adım rehberli. Teknik bilgiye gerek yok.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr) 12px repeat(3,1fr);gap:10px;align-items:start;margin-top:48px" class="rv">
+    <div class="flow-card">
+      <div class="flow-num">01</div>
+      <div class="flow-icon">🚀</div>
+      <div class="flow-title">Açılış</div>
+      <div class="flow-desc">Splash ekranı: ağ, veri motoru, Excel modülleri yükleniyor — görsel ilerleme çubuğu ile.</div>
+    </div>
+    <div class="flow-card">
+      <div class="flow-num">02</div>
+      <div class="flow-icon">📋</div>
+      <div class="flow-title">Bilgilendirme</div>
+      <div class="flow-desc">Yasal uyarı, veri kaynağı, geliştirici bilgisi ve 60 dakika bekleme kuralı gösterilir.</div>
+    </div>
+    <div class="flow-card">
+      <div class="flow-num">03</div>
+      <div class="flow-icon">✅</div>
+      <div class="flow-title">Onay</div>
+      <div class="flow-desc">Kullanıcı onay kutusunu işaretlediğinde "Veriyi Al" butonu aktif hale gelir.</div>
+    </div>
+    <div class="flow-card">
+      <div class="flow-num">04</div>
+      <div class="flow-icon">🌐</div>
+      <div class="flow-title">Veri Çekme</div>
+      <div class="flow-desc">EPDK API'ye bağlanılır. 3× yeniden deneme, timeout koruması. Canlı durum metni.</div>
+    </div>
+    <div></div>
+    <div class="flow-card">
+      <div class="flow-num">05</div>
+      <div class="flow-icon">⚙️</div>
+      <div class="flow-title">İşleme</div>
+      <div class="flow-desc">Soket alanı ayrıştırılır, JSON normalize edilir, sayısal kolonlar temizlenir.</div>
+    </div>
+    <div class="flow-card">
+      <div class="flow-num">06</div>
+      <div class="flow-icon">💾</div>
+      <div class="flow-title">Kaydetme</div>
+      <div class="flow-desc">Kullanıcı dosya konumunu seçer. Zaman damgalı .xlsx otomatik adlandırılır.</div>
+    </div>
+    <div class="flow-card" style="border-color:rgba(44,201,133,.3)">
+      <div class="flow-num" style="color:var(--success);background:rgba(44,201,133,.1);border-color:rgba(44,201,133,.2)">07</div>
+      <div class="flow-icon">🎉</div>
+      <div class="flow-title">Tamamlama</div>
+      <div class="flow-desc">Başarı mesajı, "Dosyayı Aç" ve "Çıkış" butonları yan yana sunulur.</div>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- VERİ AKIŞI -->
+<div class="wrap sec">
+  <div class="tag">Veri Dönüşüm Zinciri</div>
+  <h2 class="stitle">JSON'dan <span class="ac">Excel'e.</span></h2>
+  <p class="sdesc">Ham API verisi 5 dönüşüm adımından geçerek kullanıma hazır soket bazlı tabloya dönüşür.</p>
+
+  <div class="data-flow rv">
+    <div class="df-node">
+      <div class="df-icon">🌐</div>
+      <div class="df-name">EPDK API</div>
+      <div class="df-sub">JSON Response</div>
+    </div>
+    <div class="df-arrow">→</div>
+    <div class="df-node">
+      <div class="df-icon">📦</div>
+      <div class="df-name">DataFrame</div>
+      <div class="df-sub">pd.DataFrame(data)</div>
+    </div>
+    <div class="df-arrow">→</div>
+    <div class="df-node">
+      <div class="df-icon">🔀</div>
+      <div class="df-name">Explode</div>
+      <div class="df-sub">soketler alanı</div>
+    </div>
+    <div class="df-arrow">→</div>
+    <div class="df-node">
+      <div class="df-icon">🧹</div>
+      <div class="df-name">Normalize</div>
+      <div class="df-sub">json_normalize</div>
+    </div>
+    <div class="df-arrow">→</div>
+    <div class="df-node">
+      <div class="df-icon">🔢</div>
+      <div class="df-name">Temizlik</div>
+      <div class="df-sub">gücKw, enlem, boylam</div>
+    </div>
+    <div class="df-arrow">→</div>
+    <div class="df-node" style="border-right:none">
+      <div class="df-icon">📊</div>
+      <div class="df-name">Excel (.xlsx)</div>
+      <div class="df-sub">Zaman damgalı</div>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- FEATURES -->
+<div class="wrap sec">
+  <div class="tag">Öne Çıkan Özellikler</div>
+  <h2 class="stitle">Her detay <span class="ab">düşünüldü.</span></h2>
+
+  <div class="feat-grid">
+    <div class="feat rv">
+      <div class="feat-icon">🎨</div>
+      <div class="feat-title">Modern SaaS Arayüzü</div>
+      <div class="feat-desc">CustomTkinter tabanlı koyu tema, köşeli geçişli butonlar, sürüklenebilir pencere çerçevesi. Standart Tkinter'a kıyasla premium deneyim.</div>
+      <div class="feat-tag">customtkinter · dark-blue</div>
+    </div>
+    <div class="feat rv" style="transition-delay:.1s">
+      <div class="feat-icon">🔄</div>
+      <div class="feat-title">API Dayanıklılığı</div>
+      <div class="feat-desc">Retry + HTTPAdapter kombinasyonu ile 500/502/503/504 hatalarında otomatik 3 kez yeniden deneme. Geçici sunucu sorunlarına karşı kararlı.</div>
+      <div class="feat-tag">Retry · backoff_factor=1</div>
+    </div>
+    <div class="feat rv" style="transition-delay:.2s">
+      <div class="feat-icon">🧩</div>
+      <div class="feat-title">Soket Bazlı Ayrıştırma</div>
+      <div class="feat-desc">İstasyon içindeki soketler listesini explode + json_normalize ile satır satır açar. Her soket kendi satırını alır, detaylı analiz mümkün olur.</div>
+      <div class="feat-tag">explode · json_normalize</div>
+    </div>
+    <div class="feat rv" style="transition-delay:.05s">
+      <div class="feat-icon">🔢</div>
+      <div class="feat-title">Sayısal Temizlik</div>
+      <div class="feat-desc">gücKw, kapasite, enlem, boylam kolonlarındaki metinleri regex ile ayıklar, virgülü noktaya çevirir ve float'a dönüştürür.</div>
+      <div class="feat-tag">regex · float conversion</div>
+    </div>
+    <div class="feat rv" style="transition-delay:.15s">
+      <div class="feat-icon">📁</div>
+      <div class="feat-title">Akıllı Dosya Adlandırma</div>
+      <div class="feat-desc">Excel dosyası <code style="color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:11px">EPDK_Tam_Soket_Listesi_DDMMYYYY_HHMM.xlsx</code> formatında zaman damgalı olarak otomatik adlandırılır.</div>
+      <div class="feat-tag">datetime · auto-name</div>
+    </div>
+    <div class="feat rv" style="transition-delay:.25s">
+      <div class="feat-icon">⏱️</div>
+      <div class="feat-title">Canlı İlerleme & Timer</div>
+      <div class="feat-desc">Progress bar simülasyonu (%0→%85 otomatik, son %15 gerçek), geri sayım sayacı ve adım adım durum metni ile kullanıcı asla boşta bırakılmaz.</div>
+      <div class="feat-tag">threading · after()</div>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- TECH STACK -->
+<div class="wrap sec">
+  <div class="tag">Teknik Altyapı</div>
+  <h2 class="stitle">Saf Python,<br><span class="ac">sıfır karmaşıklık.</span></h2>
+
+  <div class="tech-grid rv">
+    <div class="tech-row">
+      <div class="tech-ic">🖥</div>
+      <div>
+        <div class="tech-cat">Arayüz</div>
+        <div class="tech-name">customtkinter</div>
+        <div class="tech-desc">Koyu temalı modern widget seti, yuvarlak butonlar, progress bar</div>
+      </div>
+    </div>
+    <div class="tech-row">
+      <div class="tech-ic">🌐</div>
+      <div>
+        <div class="tech-cat">HTTP İstemci</div>
+        <div class="tech-name">requests + Retry</div>
+        <div class="tech-desc">Session, HTTPAdapter, Retry(3, backoff_factor=1, 5xx hataları)</div>
+      </div>
+    </div>
+    <div class="tech-row">
+      <div class="tech-ic">📊</div>
+      <div>
+        <div class="tech-cat">Veri İşleme</div>
+        <div class="tech-name">pandas</div>
+        <div class="tech-desc">DataFrame, explode, json_normalize, concat, apply</div>
+      </div>
+    </div>
+    <div class="tech-row">
+      <div class="tech-ic">📄</div>
+      <div>
+        <div class="tech-cat">Excel Üretimi</div>
+        <div class="tech-name">openpyxl</div>
+        <div class="tech-desc">ExcelWriter, sütun genişlik otomatik ayarı, zaman damgalı sayfa adı</div>
+      </div>
+    </div>
+    <div class="tech-row">
+      <div class="tech-ic">🖼</div>
+      <div>
+        <div class="tech-cat">Görüntü İşleme</div>
+        <div class="tech-name">Pillow (PIL)</div>
+        <div class="tech-desc">Dairesel logo maskesi, chevron icon oluşturma, RGBA işleme</div>
+      </div>
+    </div>
+    <div class="tech-row">
+      <div class="tech-ic">🧵</div>
+      <div>
+        <div class="tech-cat">Çoklu İş Parçacığı</div>
+        <div class="tech-name">threading</div>
+        <div class="tech-desc">Ağır işlemler ayrı thread'de, GUI ana thread'de, safe_gui_update ile senkronizasyon</div>
+      </div>
+    </div>
+    <div class="tech-row">
+      <div class="tech-ic">🪟</div>
+      <div>
+        <div class="tech-cat">Windows API</div>
+        <div class="tech-name">ctypes · windll</div>
+        <div class="tech-desc">Görev çubuğu ikonu, pencere stili, WS_MINIMIZEBOX, WS_EX_APPWINDOW</div>
+      </div>
+    </div>
+    <div class="tech-row">
+      <div class="tech-ic">🔧</div>
+      <div>
+        <div class="tech-cat">Yardımcılar</div>
+        <div class="tech-name">ast · re · os</div>
+        <div class="tech-desc">ast.literal_eval soket parsing, re.sub sayısal temizlik, os.startfile dosya açma</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- KURULUM -->
+<div class="wrap sec">
+  <div class="tag">Kurulum</div>
+  <h2 class="stitle">2 adımda <span class="ab">çalışır.</span></h2>
+
+  <div class="codeblock rv">
+    <span class="c"># 1. Gerekli paketleri yükle</span><br>
+    pip install <span class="v">customtkinter requests pandas openpyxl pillow</span><br>
+    <br>
+    <span class="c"># 2. Uygulamayı başlat (Windows)</span><br>
+    python <span class="s">EVCP_DaTAker.py</span><br>
+    <br>
+    <span class="c"># ─── Uygulama akışı ───</span><br>
+    <span class="c"># Splash ekranı → modüller yüklenir</span><br>
+    <span class="c"># Yasal uyarı metni → onay kutusu işaretle</span><br>
+    <span class="c"># "VERİYİ AL" butonu aktif → tıkla</span><br>
+    <span class="c"># EPDK API → veri indirilir → işlenir</span><br>
+    <span class="c"># Kayıt konumu seç → Excel oluşturulur</span><br>
+    <span class="c"># "DOSYAYI AÇ" → hazır!</span><br>
+    <br>
+    <span class="warn"># ⚠ EPDK kısıtlaması: iki rapor arasında en az 60 dakika bekleyin</span><br>
+    <span class="c"># ⓘ Uygulama Windows odaklı geliştirilmiştir (ctypes windll)</span>
+  </div>
+
+  <div style="margin-top:20px;background:rgba(59,142,208,.07);border:1px solid rgba(59,142,208,.2);border-radius:10px;padding:16px 20px">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);margin-bottom:6px">ℹ EPDK Veri Kaynağı</div>
+    <div style="font-size:13px;color:var(--sub);line-height:1.6">API uç noktası: <code style="color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:12px">https://apigateway.epdk.gov.tr/sarjIstasyonlari</code><br>
+    Dönen veri yapısı: <code style="color:var(--success);font-family:'JetBrains Mono',monospace;font-size:11px">{ "data": [ { "soketler": [...], "enlem": ..., "boylam": ... } ] }</code></div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- VALUE / SINIRLAR -->
+<div class="wrap sec">
+  <div class="tag">Değer & Sınırlar</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+    <div>
+      <h2 class="stitle" style="font-size:clamp(24px,3vw,36px)">Sağladığı<br><span class="ac">değer.</span></h2>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:28px" class="rv">
+        <div style="display:flex;align-items:flex-start;gap:12px;background:rgba(44,201,133,.06);border:1px solid rgba(44,201,133,.15);border-radius:10px;padding:14px 16px">
+          <span style="color:var(--success);font-size:16px;flex-shrink:0">✓</span>
+          <span style="font-size:14px;color:var(--sub);line-height:1.5">Resmî EPDK açık verisini teknik olmayan kullanıcılar için de erişilebilir hale getirir</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;background:rgba(44,201,133,.06);border:1px solid rgba(44,201,133,.15);border-radius:10px;padding:14px 16px">
+          <span style="color:var(--success);font-size:16px;flex-shrink:0">✓</span>
+          <span style="font-size:14px;color:var(--sub);line-height:1.5">Manuel indirme, temizleme ve Excel aktarma yükünü tamamen ortadan kaldırır</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;background:rgba(44,201,133,.06);border:1px solid rgba(44,201,133,.15);border-radius:10px;padding:14px 16px">
+          <span style="color:var(--success);font-size:16px;flex-shrink:0">✓</span>
+          <span style="font-size:14px;color:var(--sub);line-height:1.5">Enerji, ulaşım ve altyapı alanlarında çalışan profesyoneller için hazır veri seti üretir</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;background:rgba(44,201,133,.06);border:1px solid rgba(44,201,133,.15);border-radius:10px;padding:14px 16px">
+          <span style="color:var(--success);font-size:16px;flex-shrink:0">✓</span>
+          <span style="font-size:14px;color:var(--sub);line-height:1.5">Soket detayına kadar inen veri yapısı, şarj altyapısı analizi için doğrudan kullanılabilir</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2 class="stitle" style="font-size:clamp(24px,3vw,36px)">Bilinen<br><span style="color:var(--warn)">sınırlar.</span></h2>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:28px" class="rv">
+        <div style="display:flex;align-items:flex-start;gap:12px;background:rgba(255,85,85,.05);border:1px solid rgba(255,85,85,.15);border-radius:10px;padding:14px 16px">
+          <span style="color:var(--warn);font-size:16px;flex-shrink:0">⚠</span>
+          <span style="font-size:14px;color:var(--sub);line-height:1.5">EPDK servis erişim sorunları uygulamayı etkiler — API bağımlılığı</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;background:rgba(255,85,85,.05);border:1px solid rgba(255,85,85,.15);border-radius:10px;padding:14px 16px">
+          <span style="color:var(--warn);font-size:16px;flex-shrink:0">⚠</span>
+          <span style="font-size:14px;color:var(--sub);line-height:1.5">ctypes windll çağrıları Windows'a özgüdür; macOS/Linux'ta ek uyarlama gerekir</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;background:rgba(255,85,85,.05);border:1px solid rgba(255,85,85,.15);border-radius:10px;padding:14px 16px">
+          <span style="color:var(--warn);font-size:16px;flex-shrink:0">⚠</span>
+          <span style="font-size:14px;color:var(--sub);line-height:1.5">İki rapor alımı arasında 60 dakika EPDK kısıtlaması uygulanmaktadır</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;background:rgba(255,85,85,.05);border:1px solid rgba(255,85,85,.15);border-radius:10px;padding:14px 16px">
+          <span style="color:var(--warn);font-size:16px;flex-shrink:0">⚠</span>
+          <span style="font-size:14px;color:var(--sub);line-height:1.5">EPDK ile resmî bağı yoktur; bağımsız bir araçtır, kurumsal destek sunmaz</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- CREDIT -->
+<div class="credit">
+  <div class="credit-name">Mustafa Çelik ve yapay zeka asistanları işbirliği ile geliştirilmiştir.</div>
+  <a href="https://www.linkedin.com/in/mustafacelik84/" class="credit-link" target="_blank">🔗 linkedin.com/in/mustafacelik84</a>
+</div>
+
+<footer>
+<div class="wrap">
+  <div class="f-logo">E.V.C.P. <span>DaTAker</span></div>
+  <div class="f-stats">
+    <div><div class="fs-n">7</div><div class="fs-l">Adım</div></div>
+    <div><div class="fs-n">3×</div><div class="fs-l">Retry</div></div>
+    <div><div class="fs-n">1</div><div class="fs-l">Tık Excel</div></div>
+    <div><div class="fs-n">v1.0</div><div class="fs-l">Stable</div></div>
+  </div>
+  <div class="f-meta">E.V.C.P. DaTAker · Elektrikli Araç Şarj Noktası Veri Alıcı · Nisan 2026</div>
+</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis') });
+}, {threshold:0.08});
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
