@@ -69,7 +69,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <article class="archive__item">
       <div class="archive__item-teaser"><img src="/assets/images/inerken.png" alt=""></div>
       <h3 class="archive__item-title">İnerken</h3>
-      <div class="archive__item-excerpt">9 e-ticaret platformunda akıllı fiyat takibi ve bildirim uygulaması.</div>
+      <div class="archive__item-excerpt">Link ile veya manuel ürün ekleme; dokuz e-ticaret platformundan akıllı fiyat takibi ve bildirim uygulaması.</div>
       <div class="btn-wrapper"><a href="/portfolyo/inerken.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
     </article>
   </div>
@@ -78,7 +78,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <article class="archive__item">
       <div class="archive__item-teaser"><img src="/assets/images/freshly.png" alt=""></div>
       <h3 class="archive__item-title">freshly (BETA)</h3>
-      <div class="archive__item-excerpt">İlaç ve gıda stoklarını takip eden son kullanma tarihi asistanı.</div>
+      <div class="archive__item-excerpt">Gıda, ilaç ve kozmetik ürünlerin son kullanma tarihlerini takip eden asistan.</div>
       <div class="btn-wrapper"><a href="/portfolyo/freshly.html" target="_blank" class="btn btn--inverse btn--small">Detaylar</a></div>
     </article>
   </div>
@@ -87,7 +87,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <article class="archive__item">
       <div class="archive__item-teaser"><img src="/assets/images/vibetrack.png" alt=""></div>
       <h3 class="archive__item-title">VibeTrack</h3>
-      <div class="archive__item-excerpt">Ruh haline göre odaklanma odaları ve Pomodoro sayacı.</div>
+      <div class="archive__item-excerpt">Ruh haline göre AI müzikler üreten odaklanma odaları ve Pomodoro sayacı.</div>
       <div class="btn-wrapper"><a href="/portfolyo/vibetrack.html" target="_blank" class="btn btn--success btn--small">Detaylar</a></div>
     </article>
   </div>
@@ -96,7 +96,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <article class="archive__item">
       <div class="archive__item-teaser"><img src="/assets/images/dataker.png" alt=""></div>
       <h3 class="archive__item-title">E.V.C.P. DaTAker</h3>
-      <div class="archive__item-excerpt">EPDK verilerini soket bazlı Excel raporlarına dönüştüren araç.</div>
+      <div class="archive__item-excerpt">EPDK, elektrikli araç şarj istasyonları verilerini soket bazlı Excel raporlarına dönüştüren araç.</div>
       <div class="btn-wrapper"><a href="/portfolyo/evcpdataker.html" target="_blank" class="btn btn--primary btn--small">Detaylar</a></div>
     </article>
   </div>
@@ -105,7 +105,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <article class="archive__item">
       <div class="archive__item-teaser"><img src="/assets/images/ekosistem.png" alt=""></div>
       <h3 class="archive__item-title">E.A. Şarj Ekosistemi Analizi</h3>
-      <div class="archive__item-excerpt">Elektrikli araç şarj altyapısı için Python tabanlı analiz ve raporlama yazılımı.</div>
+      <div class="archive__item-excerpt">Elektrikli araç şarj istasyonları için çok dönemli analiz ve raporlama yazılımı.</div>
       <div class="btn-wrapper"><a href="/portfolyo/sarjekosistemianaliz.html" target="_blank" class="btn btn--primary btn--small">Detaylar</a></div>
     </article>
   </div>
@@ -114,7 +114,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <article class="archive__item">
       <div class="archive__item-teaser"><img src="/assets/images/gelisim.png" alt=""></div>
       <h3 class="archive__item-title">E.A. Şarj Noktaları Gelişim Raporu</h3>
-      <div class="archive__item-excerpt">Elektrikli araç şarj noktalarının EPDK verilerinin yükleneren gelişimi analizinin yapılabileceği iki dönemli temel gelişim analiz uygulaması.</div>
+      <div class="archive__item-excerpt">Elektrikli araç şarj noktalarının EPDK verilerinin yüklenerek gelişim analizinin yapılabileceği iki dönemli temel gelişim analiz uygulaması.</div>
       <div class="btn-wrapper"><a href="/portfolyo/gelisimraporu.html" target="_blank" class="btn btn--primary btn--small">Detaylar</a></div>
     </article>
   </div>
