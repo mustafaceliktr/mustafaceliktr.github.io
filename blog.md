@@ -1,5 +1,5 @@
 ---
-layout: posts
+layout: archive
 title: "Blog & Görüşler"
 permalink: /blog/
 author_profile: true
@@ -10,3 +10,13 @@ header:
 ---
 
 Burada LinkedIn makalelerimi, sektördeki gelişmeleri ve kişisel görüşlerimi paylaşıyorum.
+
+---
+
+<h3 class="archive__subtitle">Son Yazılar</h3>
+
+<div class="entries-list">
+  {% for post in site.posts %}
+    {% include archive-single.html %}
+  {% endfor %}
+</div>
