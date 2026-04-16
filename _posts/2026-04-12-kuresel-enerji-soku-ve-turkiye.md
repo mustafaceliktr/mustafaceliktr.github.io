@@ -1,7 +1,7 @@
 ---
 layout: single
 title: 'Küresel Enerji Şoku ve Türkiye: Yeni Dönemde Bizi Ne Bekliyor? 🌍⚡'
-date: 2026-04-17
+date: 2026-04-12
 categories: ["Enerji", "Ekonomi"]
 tags: ["linkedin", "enerji", "ges", "veri", "depolama"]
 ---
