@@ -10,39 +10,54 @@ header:
 ---
 
 <style>
+  /* İndirme Butonları (Hizalama) */
   .cv-download-btn {
     display: inline-block;
     margin-right: 15px;
     margin-bottom: 30px;
   }
+  
+  /* Ana Başlıklar (İş Deneyimleri, Eğitim vb.) */
   .cv-section-title {
     color: #2c3e50;
     border-bottom: 2px solid #3498db;
     padding-bottom: 5px;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 1.3rem !important; /* Biraz küçültüldü */
   }
+  
+  /* CV Genel Metinleri (Özet, Hobiler, Madde İşaretleri) */
+  p, ul li {
+    font-size: 0.9rem !important; /* Standart metin boyutu küçültüldü */
+    line-height: 1.5 !important;
+  }
+  
+  /* İş Pozisyonu Adı */
   .job-title {
-    font-size: 1.0rem;
+    font-size: 1.05rem !important; /* 1.2rem'den 1.05rem'e düşürüldü */
     font-weight: 600;
     color: #2980b9;
     margin-bottom: 0 !important;
   }
+  
+  /* Şirket Adı ve Tarih */
   .company-date {
-    font-size: 0.85rem;
+    font-size: 0.85rem !important; /* 0.95rem'den 0.85rem'e düşürüldü */
     color: #7f8c8d;
     font-style: italic;
     margin-top: 2px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
+  
+  /* İş Açıklaması Paragrafları */
   .job-description {
     text-align: left;
-    font-size: 0.85rem;
-    line-height: 1.6;
-    margin-bottom: 30px;
+    font-size: 0.9rem !important; /* 0.95rem'den 0.9rem'e düşürüldü */
+    line-height: 1.5;
+    margin-bottom: 20px !important;
   }
 </style>
-
 <div class="cv-download-btn">
   <a href="/assets/docs/mustafa_celik_cv_tr.pdf" target="_blank" class="btn btn--primary btn--large"><i class="fas fa-file-pdf"></i> Türkçe CV İndir</a>
 </div>
