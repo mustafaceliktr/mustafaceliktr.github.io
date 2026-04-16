@@ -7,8 +7,17 @@ header:
   overlay_color: "#1F3864"
   overlay_filter: "0.6"
   overlay_image: "/banner.jpg"
-  caption: "Flutter ve Dart ile Geliştirilmiş Üretkenlik Asistanı"
 ---
+
+<style>
+  /* Dev başlığı ve genel metin boyutunu makul bir seviyeye çeker */
+  .page__title {
+    font-size: 2em !important; 
+  }
+  .page__content {
+    font-size: 0.95em; 
+  }
+</style>
 
 Kullanıcıların görev, toplantı, hatırlatıcı ve notlarını tek bir platform üzerinden yönetebileceği kapsamlı bir mobil yaşam asistanıdır. Kişisel ve iş profillerini ayrı tutarak verimli bir organizasyon deneyimi sunar.
 
@@ -36,17 +45,17 @@ Farklı uygulamalara (takvim, görev yöneticisi, not defteri) olan ihtiyacı or
 
 ---
 
-### 🎨 Arayüzden Kesitler (Wireframes)
+### 🎨 Arayüzden Kesitler
 
-*Aşağıdaki görseller uygulamanın etkileşimli wireframe aşamasından alınmıştır.*
+*Aşağıdaki görseller uygulamanın konsept arayüz tasarımını temsil etmektedir.*
 
 <div class="grid__wrapper">
   <div class="grid__item span-6">
-    <img src="/assets/images/herseyim-onboarding.png" alt="Onboarding ve Giriş" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+    <img src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?auto=format&fit=crop&w=600&q=80" alt="Onboarding ve Giriş" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
     <p style="text-align: center; font-size: 0.9em; margin-top: 10px;"><strong>Profil Kurulumu:</strong> Kişisel renk tanımlamaları ve ilk açılış.</p>
   </div>
   <div class="grid__item span-6">
-    <img src="/assets/images/herseyim-dashboard.png" alt="Günlük Briefing Ekranı" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&q=80" alt="Günlük Briefing Ekranı" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
     <p style="text-align: center; font-size: 0.9em; margin-top: 10px;"><strong>Günlük Briefing:</strong> Tüm özet bilgilerin sunulduğu ana dashboard.</p>
   </div>
 </div>
