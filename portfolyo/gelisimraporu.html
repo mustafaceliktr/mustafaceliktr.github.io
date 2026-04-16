@@ -3,387 +3,403 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elektrikli Araç Şarj Ekosistemi Gelişim Analizi</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Barlow:wght@300;400;500;600;700;900&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet">
+<title>Şarj Ağı Gelişim Analizi v4.1</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:       #080D14;
-  --surface:  #0F1923;
-  --panel:    #1A2A3A;
-  --panel2:   #142030;
-  --border:   #2A4A6A;
-  --blue:     #2E6DA4;
-  --blue2:    #4A90D9;
-  --green:    #2ECC71;
-  --green2:   #1A9A4A;
-  --orange:   #E67E22;
-  --orange2:  #F39C12;
-  --red:      #E74C3C;
-  --purple:   #8E44AD;
-  --teal:     #1ABC9C;
-  --yellow:   #F4D03F;
-  --text:     #E8F0F8;
-  --sub:      #8AAAC8;
-  --muted:    #4A6A8A;
+:root{
+  --bg:       #F0F4FA;
   --white:    #FFFFFF;
+  --navy:     #203864;
+  --blue:     #4472C4;
+  --blue2:    #5A8AD4;
+  --blue3:    #EBF0FA;
+  --teal:     #2E86AB;
+  --green:    #2E7D50;
+  --green2:   #E2EFDA;
+  --red:      #C0392B;
+  --red2:     #FCE4D6;
+  --orange:   #E67E22;
+  --yellow:   #F4C430;
+  --text:     #1A2540;
+  --sub:      #4A5A7A;
+  --muted:    #8A9AB8;
+  --border:   #D4DCEC;
+  --r:        16px;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Barlow',sans-serif;
-  overflow-x:hidden;
-  min-height:100vh;
-}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
 
-/* ─── GRID NOISE OVERLAY ─── */
-body::before{
-  content:'';position:fixed;inset:0;
-  background-image:
-    repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(42,74,106,.04) 40px,rgba(42,74,106,.04) 41px),
-    repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(42,74,106,.04) 40px,rgba(42,74,106,.04) 41px);
-  pointer-events:none;z-index:0;
-}
+/* ── CURSOR ── */
+.cursor-glow{position:fixed;width:450px;height:450px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(68,114,196,.07) 0%,transparent 70%);
+  transform:translate(-50%,-50%);transition:left .1s,top .1s;z-index:0}
 
-/* ─── GLOW ORBS ─── */
-.orb{position:fixed;border-radius:50%;filter:blur(140px);pointer-events:none;z-index:0}
-.orb1{width:700px;height:700px;background:rgba(46,109,164,.07);top:-200px;left:-200px}
-.orb2{width:500px;height:500px;background:rgba(30,204,113,.05);bottom:-100px;right:-100px}
-.orb3{width:400px;height:400px;background:rgba(230,126,34,.04);top:50%;left:50%;transform:translate(-50%,-50%)}
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;
+  background:rgba(240,244,250,.92);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(68,114,196,.12);}
+.nav-in{max-width:1240px;margin:0 auto;padding:0 48px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
+.logo{display:flex;align-items:center;gap:11px}
+.logo-mark{width:34px;height:34px;border-radius:9px;
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  display:flex;align-items:center;justify-content:center;font-size:16px}
+.logo-name{font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:var(--navy)}
+.logo-name span{color:var(--blue)}
+.nav-pills{display:flex;gap:8px}
+.np{padding:7px 16px;border-radius:50px;font-size:12px;font-weight:700;
+  font-family:'Outfit',sans-serif;cursor:pointer;transition:all .2s}
+.np-out{background:transparent;border:2px solid var(--blue);color:var(--blue)}
+.np-out:hover{background:var(--blue);color:white}
+.np-fill{background:var(--blue);color:white;border:2px solid var(--blue)}
+.np-fill:hover{background:var(--blue2)}
 
-/* ─── LAYOUT ─── */
-.wrap{max-width:1280px;margin:0 auto;padding:0 40px;position:relative;z-index:1}
+/* ── WRAP ── */
+.wrap{max-width:1240px;margin:0 auto;padding:0 48px;position:relative;z-index:1}
 
-/* ─── NAV ─── */
-nav{
-  padding:20px 0;
-  display:flex;align-items:center;justify-content:space-between;
-  border-bottom:1px solid rgba(42,74,106,.4);
-  position:sticky;top:0;background:rgba(8,13,20,.92);backdrop-filter:blur(20px);
-  z-index:100;
-}
-.nav-inner{max-width:1280px;margin:0 auto;padding:0 40px;width:100%;display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;gap:10px}
-.logo-icon{width:32px;height:32px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
-.logo-text{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px;letter-spacing:.5px;color:var(--text)}
-.logo-text span{color:var(--green)}
-.nav-tags{display:flex;gap:8px}
-.nav-tag{background:rgba(42,74,106,.3);border:1px solid rgba(42,74,106,.5);border-radius:20px;padding:4px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub)}
-.nav-tag.live{border-color:rgba(30,204,113,.3);background:rgba(30,204,113,.08);color:var(--green)}
-.nav-tag.live::before{content:'● ';color:var(--green);animation:pulse 2s ease infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+/* ── HERO ── */
+.hero{padding:110px 0 80px;position:relative;overflow:hidden}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;
+  background:rgba(68,114,196,.1);border:1.5px solid rgba(68,114,196,.22);
+  border-radius:6px;padding:6px 14px;margin-bottom:26px;
+  font-size:11px;font-weight:700;color:var(--blue);font-family:'Outfit',sans-serif;
+  letter-spacing:1.2px;text-transform:uppercase}
+.h-dot{width:7px;height:7px;border-radius:50%;background:var(--green);
+  animation:hd 2s ease infinite}
+@keyframes hd{0%,100%{transform:scale(1)}50%{transform:scale(1.5);opacity:.5}}
+h1{font-family:'Outfit',sans-serif;font-weight:900;
+  font-size:clamp(42px,5.5vw,74px);line-height:.95;letter-spacing:-2px;margin-bottom:8px}
+h1 .bl{color:var(--blue)}
+h1 .sm{color:var(--muted);font-weight:300;font-size:.55em;display:block;
+  letter-spacing:-1px;margin-top:8px;line-height:1.2}
+.hero-desc{font-size:17px;color:var(--sub);line-height:1.75;
+  max-width:540px;margin:26px 0 38px;font-weight:400}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;
+  padding:13px 26px;border-radius:50px;font-weight:700;font-size:14px;
+  cursor:pointer;transition:all .2s;border:none;font-family:'Outfit',sans-serif}
+.btn-prim{background:linear-gradient(135deg,var(--navy),var(--blue));color:white;
+  box-shadow:0 8px 24px rgba(68,114,196,.3)}
+.btn-prim:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(68,114,196,.4)}
+.btn-sec{background:var(--white);color:var(--navy);border:2px solid var(--border)}
+.btn-sec:hover{border-color:var(--blue);color:var(--blue)}
+.hero-pip{font-size:12px;color:var(--muted);
+  font-family:'DM Sans',monospace}
 
-/* ─── HERO ─── */
-.hero{padding:100px 0 60px;position:relative}
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(46,109,164,.1);border:1px solid rgba(46,109,164,.3);
-  border-radius:4px;padding:6px 14px;margin-bottom:28px;
-  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue2);
-  letter-spacing:1px;text-transform:uppercase;
-}
-h1{
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:900;
-  font-size:clamp(42px,6vw,76px);
-  line-height:.95;
-  letter-spacing:-1px;
-  margin-bottom:8px;
-  animation:fadeUp .8s ease both;
-}
-h1 .line2{color:var(--green);display:block}
-h1 .line3{color:var(--sub);font-weight:400;font-size:.65em;display:block;margin-top:4px}
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+/* ── HERO BLOBS ── */
+.hblob{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none}
+.hb1{width:600px;height:600px;background:rgba(68,114,196,.07);top:-150px;right:-150px}
+.hb2{width:400px;height:400px;background:rgba(46,134,171,.05);bottom:-100px;left:300px}
 
-.hero-desc{
-  font-size:18px;color:var(--sub);
-  max-width:600px;line-height:1.65;
-  margin:24px 0 40px;font-weight:300;
-  animation:fadeUp .8s .2s ease both;
-}
+/* ── APP MOCKUP ── */
+.hero-body{display:flex;gap:60px;align-items:center;flex-wrap:wrap}
+.hero-left{flex:1;min-width:300px}
+.hero-right{flex-shrink:0}
 
-.hero-cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap;animation:fadeUp .8s .35s ease both}
-.btn{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:12px 24px;border-radius:6px;font-weight:600;font-size:14px;
-  cursor:pointer;transition:all .2s;text-decoration:none;
-}
-.btn-primary{background:var(--blue);color:white;border:1px solid var(--blue)}
-.btn-primary:hover{background:var(--blue2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(46,109,164,.35)}
-.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
-.btn-outline:hover{border-color:var(--blue2);color:var(--blue2);background:rgba(74,144,217,.06)}
-.hero-pip{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub);padding:2px 0}
-
-/* ─── STATS STRIP ─── */
-.stats-strip{
-  display:flex;gap:0;
-  border:1px solid var(--border);border-radius:10px;
-  overflow:hidden;margin:60px 0;
-  background:var(--surface);
-  animation:fadeUp .8s .4s ease both;
-}
-.stat{
-  flex:1;padding:22px 20px;text-align:center;
-  border-right:1px solid var(--border);
-  position:relative;
-}
-.stat:last-child{border-right:none}
-.stat::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--blue),transparent);
-  opacity:0;transition:opacity .3s;
-}
-.stat:hover::before{opacity:1}
-.stat-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:36px;color:var(--green);letter-spacing:-1px}
-.stat-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);margin-top:4px;text-transform:uppercase;letter-spacing:.8px}
-
-/* ─── SECTION PATTERN ─── */
-.section{padding:80px 0}
-.s-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue2);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px}
-.s-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(32px,4vw,52px);letter-spacing:-1px;margin-bottom:14px;line-height:1}
-.s-sub{color:var(--sub);font-size:16px;line-height:1.6;max-width:580px;font-weight:300}
-.s-title .accent{color:var(--green)}
-.s-title .accent2{color:var(--orange)}
-
-/* ─── DIVIDER ─── */
-.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border) 20%,var(--border) 80%,transparent);margin:0}
-
-/* ═══════════════════════════════════════════════
-   DASHBOARD MOCKUP
-═══════════════════════════════════════════════ */
-.mockup-container{
-  background:var(--surface);
+.app-frame{
+  width:520px;background:var(--white);border-radius:16px;
   border:1px solid var(--border);
-  border-radius:16px;
+  box-shadow:0 32px 80px rgba(32,56,100,.18),0 0 0 1px rgba(255,255,255,.5);
   overflow:hidden;
-  margin-top:48px;
-  box-shadow:0 32px 80px rgba(0,0,0,.5);
 }
-.mockup-titlebar{
-  background:#0A131E;
-  padding:10px 16px;
-  display:flex;align-items:center;gap:8px;
-  border-bottom:1px solid var(--border);
+.af-header{
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  padding:18px 24px;display:flex;align-items:center;gap:14px;
 }
-.win-btn{width:12px;height:12px;border-radius:50%}
-.win-btn.r{background:#E74C3C}
-.win-btn.y{background:#F4D03F}
-.win-btn.g{background:#2ECC71}
-.mockup-title-txt{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub);margin-left:8px}
+.af-logo{width:44px;height:44px;border-radius:10px;
+  background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:20px}
+.af-title{font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:white}
+.af-sub{font-size:11px;color:rgba(255,255,255,.65);margin-top:1px}
+.af-body{padding:24px}
 
-/* ─── KPI CARDS ─── */
-.kpi-row{display:flex;gap:6px;padding:8px}
-.kpi-c{
-  flex:1;background:var(--panel);border-radius:8px;padding:10px 12px;
-  position:relative;overflow:hidden;min-width:0;
-}
-.kpi-c::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-.kpi-c.blue::before{background:var(--blue)}
-.kpi-c.green::before{background:var(--green)}
-.kpi-c.orange::before{background:var(--orange)}
-.kpi-c.purple::before{background:var(--purple)}
-.kpi-c.teal::before{background:var(--teal)}
-.kpi-c.red::before{background:var(--red)}
-.kpi-c.yellow::before{background:var(--yellow)}
-.kpi-c.blue2::before{background:var(--blue2)}
-.kpi-label{font-size:9px;color:var(--sub);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.kpi-old{font-size:10px;color:var(--muted);margin-top:2px}
-.kpi-val{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;letter-spacing:-.5px;margin-top:1px}
-.kpi-c.blue .kpi-val{color:var(--blue2)}
-.kpi-c.green .kpi-val{color:var(--green)}
-.kpi-c.orange .kpi-val{color:var(--orange)}
-.kpi-c.purple .kpi-val{color:var(--purple)}
-.kpi-c.teal .kpi-val{color:var(--teal)}
-.kpi-c.red .kpi-val{color:var(--red)}
-.kpi-c.yellow .kpi-val{color:var(--yellow)}
-.kpi-c.blue2 .kpi-val{color:var(--blue2)}
-.kpi-change{font-size:9px;font-weight:700;margin-top:3px}
-.kpi-change.up{color:var(--green)}
-.kpi-change.dn{color:var(--red)}
-.kpi-section-lbl{padding:4px 8px 0;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}
+/* step boxes */
+.step-box{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;
+  padding:14px 16px;margin-bottom:10px}
+.sb-label{font-family:'Outfit',sans-serif;font-weight:800;font-size:11px;
+  color:var(--blue);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;
+  display:flex;align-items:center;gap:6px}
+.sb-row{display:flex;gap:8px}
+.sb-btn{flex:1;padding:9px 12px;border-radius:8px;font-size:12px;font-weight:700;
+  font-family:'Outfit',sans-serif;text-align:center;cursor:pointer;border:none;transition:all .2s}
+.sb-btn-prim{background:var(--blue);color:white}
+.sb-btn-prim:hover{background:var(--blue2)}
+.sb-btn-out{background:transparent;border:1.5px solid var(--blue);color:var(--blue)}
+.sb-btn-out:hover{background:var(--blue3)}
+.sb-btn-warn{background:#FFF3CD;color:#856404;border:1.5px solid #FFC107}
+.sb-status{display:flex;align-items:center;gap:6px;margin-top:8px;font-size:11px}
+.ss-dot{width:7px;height:7px;border-radius:50%}
+.ss-ok{background:var(--green)}
+.ss-wait{background:var(--muted)}
 
-/* ─── CHART AREA ─── */
-.chart-area{
-  display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 8px 8px;
-}
-.chart-box{
-  background:var(--panel);border-radius:8px;padding:10px 12px;
-}
-.chart-box-title{font-size:10px;color:var(--sub);font-weight:600;margin-bottom:8px}
+/* mapping row */
+.map-row{display:flex;gap:8px;margin-bottom:8px}
+.map-btn-o{flex:1;padding:9px 12px;border-radius:8px;font-size:12px;font-weight:700;
+  background:#FFF8E1;color:#856404;border:1.5px solid #FFC107;text-align:center;cursor:pointer}
+.map-btn-f{flex:1;padding:9px 12px;border-radius:8px;font-size:12px;font-weight:700;
+  background:#FFC107;color:#1a1a1a;border:1.5px solid #FFC107;text-align:center;cursor:pointer}
+.map-status-ok{display:inline-flex;align-items:center;gap:5px;
+  font-size:11px;color:var(--green);font-weight:700;margin-top:6px}
 
-/* ─── FEATURE GRID ─── */
-.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
-.feat{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:12px;padding:28px;
-  transition:all .25s;position:relative;overflow:hidden;
-}
-.feat::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(46,109,164,.04),transparent);
-  opacity:0;transition:opacity .3s;
-}
-.feat:hover{border-color:rgba(74,144,217,.35);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
-.feat:hover::after{opacity:1}
-.feat-icon{font-size:28px;margin-bottom:16px}
-.feat-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:-.3px;margin-bottom:8px}
-.feat-desc{font-size:14px;color:var(--sub);line-height:1.6;font-weight:300}
-.feat-tag{
-  display:inline-block;margin-top:14px;
-  font-family:'JetBrains Mono',monospace;font-size:10px;
-  color:var(--blue2);background:rgba(74,144,217,.1);
-  border:1px solid rgba(74,144,217,.2);border-radius:4px;padding:3px 8px;
-}
+/* run btn */
+.run-btn{width:100%;padding:13px;border-radius:10px;
+  background:linear-gradient(135deg,var(--green),#3DAA68);color:white;
+  font-family:'Outfit',sans-serif;font-weight:800;font-size:14px;
+  border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 6px 20px rgba(46,125,80,.25);transition:all .2s;margin-top:10px}
+.run-btn:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(46,125,80,.35)}
 
-/* ─── OUTPUT CARDS ─── */
-.outputs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
-.out-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:12px;padding:28px;
-  transition:all .25s;
-}
-.out-card:hover{border-color:rgba(74,144,217,.4);transform:translateY(-2px)}
-.out-icon-wrap{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px}
-.out-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;margin-bottom:8px}
-.out-desc{font-size:14px;color:var(--sub);line-height:1.6;font-weight:300}
-.out-bullets{margin-top:12px;display:flex;flex-direction:column;gap:6px}
-.out-bullet{font-size:13px;color:var(--sub);display:flex;align-items:flex-start;gap:8px}
-.out-bullet::before{content:'→';color:var(--blue2);flex-shrink:0;font-family:'JetBrains Mono',monospace;font-size:11px;margin-top:1px}
+/* log area */
+.log-area{background:#1A1A2E;border-radius:8px;padding:10px 14px;margin-top:10px;
+  font-family:'DM Sans',monospace;font-size:11px;color:#7BE8A0;line-height:1.8}
+.log-area span{color:#4A90D9}
 
-/* ─── TECH STACK ─── */
-.tech-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:48px}
-.tech-row{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:10px;padding:18px 20px;
-  display:flex;align-items:center;gap:16px;
-  transition:border-color .2s;
-}
-.tech-row:hover{border-color:var(--blue)}
-.tech-icon-box{width:44px;height:44px;border-radius:10px;background:var(--panel);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.tech-cat{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
-.tech-name{font-weight:700;font-size:16px;color:var(--green)}
-.tech-desc{font-size:12px;color:var(--sub);margin-top:2px;line-height:1.4}
+/* ── STATS ── */
+.stats{display:flex;gap:0;border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;background:var(--white);margin:64px 0}
+.stt{flex:1;padding:24px 16px;text-align:center;
+  border-right:1px solid var(--border);transition:background .2s;position:relative}
+.stt:last-child{border-right:none}
+.stt:hover{background:var(--blue3)}
+.stt::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:0;height:2px;background:var(--blue);transition:width .4s}
+.stt:hover::after{width:70%}
+.stt-n{font-family:'Outfit',sans-serif;font-weight:900;font-size:28px;color:var(--blue);letter-spacing:-1px}
+.stt-l{font-size:11px;color:var(--muted);margin-top:5px;text-transform:uppercase;
+  letter-spacing:.6px;font-weight:600}
 
-/* ─── SCAN MODES ─── */
-.modes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
-.mode-card{border-radius:12px;padding:28px;border:1px solid var(--border)}
-.mode-card.fast{background:linear-gradient(135deg,rgba(30,204,113,.07),transparent);border-color:rgba(30,204,113,.2)}
-.mode-card.deep{background:linear-gradient(135deg,rgba(74,144,217,.07),transparent);border-color:rgba(74,144,217,.2)}
-.mode-card.flash{background:linear-gradient(135deg,rgba(243,156,18,.07),transparent);border-color:rgba(243,156,18,.2)}
-.mode-freq{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:52px;letter-spacing:-2px;line-height:1}
-.mode-freq.g{color:var(--green)}
-.mode-freq.b{color:var(--blue2)}
-.mode-freq.o{color:var(--orange2)}
-.mode-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;margin:12px 0 8px}
-.mode-desc{font-size:14px;color:var(--sub);line-height:1.55;font-weight:300}
-.flash-times{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
-.ftime{background:rgba(243,156,18,.12);color:var(--orange2);border-radius:4px;padding:3px 8px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600}
+/* ── DIV ── */
+.div{height:1px;background:linear-gradient(90deg,transparent,var(--border) 20%,var(--border) 80%,transparent)}
 
-/* ─── CHART MOCKUP SVG ─── */
-.chart-mockup{width:100%;height:auto;border-radius:8px;overflow:hidden}
+/* ── SEC ── */
+.sec{padding:80px 0}
+.sec-tag{font-family:'Outfit',sans-serif;font-size:11px;font-weight:800;
+  color:var(--blue);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:10px}
+.sec-title{font-family:'Outfit',sans-serif;font-weight:900;
+  font-size:clamp(30px,4vw,50px);letter-spacing:-1.5px;margin-bottom:14px;line-height:1.05}
+.sec-title .ac{color:var(--blue)}
+.sec-title .ag{color:var(--green)}
+.sec-desc{color:var(--sub);font-size:16px;line-height:1.7;max-width:560px;font-weight:400}
 
-/* ─── PLATFORM TABLE ─── */
-.platforms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:40px}
-.plat-row{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:10px;padding:14px 18px;
-  display:flex;align-items:center;justify-content:space-between;
-  transition:all .2s;
-}
-.plat-row:hover{border-color:var(--blue);background:rgba(46,109,164,.06)}
-.plat-name{font-weight:600;font-size:15px}
-.plat-note{font-size:11px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace}
-.plat-badge{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;font-family:'JetBrains Mono',monospace}
-.pb-active{background:rgba(30,204,113,.12);color:var(--green)}
-.pb-test{background:rgba(243,156,18,.12);color:var(--orange2)}
+/* ── FLOW STEPS ── */
+.flow-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px;
+  position:relative}
+.flow-connector{
+  position:absolute;top:38px;left:calc(33.3% - 8px);width:calc(33.3% + 16px);height:2px;
+  background:linear-gradient(90deg,var(--blue3),var(--blue),var(--blue3));z-index:0}
+.flow-connector:nth-child(3){left:calc(66.6% - 8px)}
+.flow-card{
+  background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);
+  padding:28px 22px;transition:all .25s;position:relative;z-index:1}
+.flow-card:hover{border-color:var(--blue);transform:translateY(-4px);
+  box-shadow:0 12px 36px rgba(68,114,196,.14)}
+.fc-num{
+  width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  color:white;font-family:'Outfit',sans-serif;font-weight:900;font-size:14px;
+  display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.fc-title{font-family:'Outfit',sans-serif;font-weight:800;font-size:17px;margin-bottom:8px}
+.fc-desc{font-size:13px;color:var(--sub);line-height:1.6}
+.fc-chip{display:inline-flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.chip{padding:3px 10px;border-radius:50px;font-size:10px;font-weight:700;
+  font-family:'Outfit',sans-serif;background:var(--blue3);color:var(--blue);
+  border:1px solid rgba(68,114,196,.15)}
+.chip-g{background:rgba(46,125,80,.08);color:var(--green);border-color:rgba(46,125,80,.15)}
+.chip-o{background:#FFF3CD;color:#856404;border-color:#FFC107}
 
-/* ─── KV SYSTEM ─── */
-.kv-box{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:12px;padding:20px 24px;
-  font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.9;
-  color:var(--sub);margin-top:32px;
-}
-.kv-key{color:var(--blue2)}
-.kv-val{color:var(--green)}
-.kv-str{color:var(--orange2)}
-.kv-num{color:var(--yellow)}
-.kv-comment{color:var(--muted)}
+/* ── ANALYSIS GRID ── */
+.analysis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:52px}
+.an-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);
+  padding:26px;transition:all .25s}
+.an-card:hover{border-color:rgba(68,114,196,.3);transform:translateY(-3px);
+  box-shadow:0 10px 30px rgba(68,114,196,.1)}
+.an-icon{font-size:26px;margin-bottom:14px}
+.an-title{font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;margin-bottom:8px}
+.an-desc{font-size:13px;color:var(--sub);line-height:1.6}
+.an-tag{display:inline-block;margin-top:12px;padding:3px 10px;border-radius:50px;
+  font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;
+  background:var(--blue3);color:var(--blue);border:1px solid rgba(68,114,196,.15)}
 
-/* ─── MAP MOCKUP ─── */
-.map-mockup{
-  background:var(--panel);border-radius:12px;
-  overflow:hidden;margin-top:40px;
-  border:1px solid var(--border);
+/* ── EXCEL PREVIEW ── */
+.excel-section{
+  background:linear-gradient(180deg,var(--bg) 0%,rgba(68,114,196,.04) 50%,var(--bg) 100%);
+  padding:80px 0;
 }
-.map-header{
-  background:#0A131E;padding:10px 16px;
-  display:flex;align-items:center;justify-content:space-between;
-  border-bottom:1px solid var(--border);
+.excel-mockup{
+  background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);
+  overflow:hidden;margin-top:48px;
+  box-shadow:0 20px 60px rgba(32,56,100,.12);
 }
-.map-header-title{font-size:12px;font-weight:600;color:var(--text)}
-.map-legend{display:flex;gap:16px}
-.map-legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--sub)}
-.map-legend-dot{width:10px;height:10px;border-radius:50%}
+.em-chrome{height:34px;background:#F5F5F5;border-bottom:1px solid #E0E0E0;
+  display:flex;align-items:center;padding:0 14px;gap:12px}
+.em-dot{width:12px;height:12px;border-radius:50%}
+.em-bar{flex:1;background:#E8E8E8;border-radius:4px;height:20px;display:flex;align-items:center;padding:0 12px;
+  font-size:11px;color:#888}
+.em-tabs{display:flex;background:#ECECEC;border-bottom:1px solid #D0D0D0;padding:0 10px}
+.em-tab{padding:8px 18px;font-size:11px;font-weight:600;cursor:pointer;border-radius:4px 4px 0 0;margin-right:2px;margin-top:4px}
+.em-tab.act{background:white;border:1px solid #D0D0D0;border-bottom:1px solid white;color:#203864}
+.em-tab.inact{color:#888;background:#E8E8E8}
+.em-body{overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead th{
+  background:#4472C4;color:white;font-weight:700;
+  padding:8px 12px;text-align:center;font-family:'Outfit',sans-serif;
+  border:1px solid #3060B0;font-size:11px;white-space:nowrap;
+}
+tbody tr:nth-child(even){background:#F7F9FF}
+tbody td{padding:7px 12px;border:1px solid #E8ECF4;text-align:center;font-size:11px;color:#333}
+tbody td:first-child{text-align:left;font-weight:600;color:#203864}
+tbody td:nth-child(2){text-align:left;color:#555}
+.td-up{background:#E2EFDA;color:#2E7D50;font-weight:700}
+.td-dn{background:#FCE4D6;color:#C0392B;font-weight:700}
+.td-nu{color:#888}
+.pct-badge{display:inline-block;padding:2px 7px;border-radius:50px;font-size:10px;font-weight:700}
+.pb-g{background:#2E7D50;color:white}
+.pb-r{background:#C0392B;color:white}
+.em-footer{padding:10px 16px;background:#F7F9FF;border-top:1px solid #E0E8F4;
+  font-size:11px;color:#888;display:flex;justify-content:space-between}
 
-/* ─── CREDITS ─── */
-.credit-bar{
-  background:#0A131E;border-top:1px solid var(--border);
-  padding:28px 0;text-align:center;
+/* ── TECH STACK ── */
+.tech-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:48px}
+.tr{background:var(--white);border:1.5px solid var(--border);border-radius:10px;
+  padding:16px 18px;display:flex;align-items:center;gap:14px;transition:border-color .2s}
+.tr:hover{border-color:var(--blue)}
+.tr-ic{width:42px;height:42px;border-radius:10px;background:var(--blue3);
+  display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.tr-cat{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.tr-name{font-family:'Outfit',sans-serif;font-weight:800;font-size:15px;color:var(--green);margin-top:1px}
+.tr-desc{font-size:12px;color:var(--sub);margin-top:2px;line-height:1.4}
+
+/* ── TARGET SECTION ── */
+.targets-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:48px}
+.tgt{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);
+  padding:24px;display:flex;gap:16px;transition:all .25s}
+.tgt:hover{border-color:rgba(68,114,196,.3);transform:translateY(-2px)}
+.tgt-ic{width:46px;height:46px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.ti1{background:rgba(68,114,196,.1)}
+.ti2{background:rgba(46,125,80,.1)}
+.ti3{background:rgba(230,126,34,.1)}
+.ti4{background:rgba(46,134,171,.1)}
+.tgt-title{font-family:'Outfit',sans-serif;font-weight:800;font-size:15px;margin-bottom:5px}
+.tgt-desc{font-size:13px;color:var(--sub);line-height:1.55}
+
+/* ── DISCLAIMER SECTION ── */
+.disc-section{
+  background:linear-gradient(135deg,rgba(68,114,196,.06),rgba(46,125,80,.04));
+  padding:80px 0;
 }
-.credit-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;color:var(--text);margin-bottom:4px}
-.credit-link{
-  font-family:'JetBrains Mono',monospace;font-size:12px;
-  color:var(--blue2);text-decoration:none;
-  transition:color .2s;
+.disc-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:48px}
+.disc-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);padding:22px;transition:all .25s}
+.disc-card:hover{transform:translateY(-2px)}
+.disc-card.warn{border-color:rgba(230,126,34,.25);background:rgba(230,126,34,.03)}
+.disc-card.info{border-color:rgba(68,114,196,.2)}
+.dc-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.dc-icon{font-size:20px}
+.dc-title{font-family:'Outfit',sans-serif;font-weight:800;font-size:15px}
+.dc-desc{font-size:13px;color:var(--sub);line-height:1.6}
+
+/* ── VISION ── */
+.vision{
+  padding:90px 0;
+  background:linear-gradient(135deg,var(--navy) 0%,#1A4090 40%,#2E6AB0 100%);
+  text-align:center;position:relative;overflow:hidden;
 }
+.vb{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none}
+.vb1{width:500px;height:500px;background:rgba(68,114,196,.15);top:-150px;left:-100px}
+.vb2{width:400px;height:400px;background:rgba(46,125,80,.1);bottom:-100px;right:-100px}
+.vision .sec-tag{color:rgba(255,255,255,.5);position:relative;z-index:1}
+.vision-title{font-family:'Outfit',sans-serif;font-weight:900;
+  font-size:clamp(36px,5vw,62px);letter-spacing:-2px;color:white;
+  margin-bottom:20px;position:relative;z-index:1;line-height:1}
+.vision-desc{font-size:17px;color:rgba(255,255,255,.72);line-height:1.7;
+  max-width:620px;margin:0 auto 40px;position:relative;z-index:1}
+.vision-cta{
+  background:white;color:var(--navy);
+  padding:16px 36px;border-radius:50px;
+  font-family:'Outfit',sans-serif;font-weight:800;font-size:15px;
+  cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px;
+  position:relative;z-index:1;box-shadow:0 8px 28px rgba(0,0,0,.2);
+}
+.vision-cta:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 16px 48px rgba(0,0,0,.25)}
+
+/* ── SHORTCUTS ── */
+.shortcuts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:40px}
+.sc{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;
+  display:flex;align-items:center;gap:12px;transition:border-color .2s}
+.sc:hover{border-color:var(--blue)}
+.sc-key{font-family:'DM Sans',monospace;font-weight:700;font-size:12px;color:var(--blue);
+  background:var(--blue3);border:1px solid rgba(68,114,196,.2);border-radius:6px;
+  padding:4px 10px;white-space:nowrap;flex-shrink:0}
+.sc-desc{font-size:13px;color:var(--sub)}
+
+/* ── CREDIT ── */
+.credit{border-top:1px solid var(--border);padding:32px 0;text-align:center}
+.credit-name{font-family:'Outfit',sans-serif;font-weight:800;font-size:17px;margin-bottom:5px}
+.credit-link{font-size:13px;color:var(--blue);text-decoration:none;font-weight:600;transition:color .2s}
 .credit-link:hover{color:var(--green)}
-.credit-note{font-size:12px;color:var(--muted);margin-top:8px}
+.credit-note{font-size:12px;color:var(--muted);margin-top:7px}
 
-/* ─── FOOTER ─── */
-footer{border-top:1px solid rgba(42,74,106,.3);padding:48px 0;text-align:center}
-.footer-logo{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28px;color:var(--text);letter-spacing:-1px;margin-bottom:8px}
-.footer-logo span{color:var(--green)}
-.footer-meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
-.footer-stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin:24px 0}
-.fs{text-align:center}
-.fs-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:30px;color:var(--green)}
-.fs-lbl{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.5px}
+/* ── FOOTER ── */
+footer{border-top:1px solid rgba(68,114,196,.1);padding:36px 0;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.f-logo{font-family:'Outfit',sans-serif;font-weight:900;font-size:18px;color:var(--navy)}
+.f-logo span{color:var(--blue)}
+.f-tags{display:flex;gap:8px;flex-wrap:wrap}
+.f-tag{padding:5px 12px;border-radius:50px;font-size:11px;font-weight:700;
+  background:var(--blue3);color:var(--blue);border:1px solid rgba(68,114,196,.15);
+  font-family:'Outfit',sans-serif}
+.f-meta{font-size:12px;color:var(--muted)}
 
-/* ─── SCROLL ANIMATIONS ─── */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
-.reveal.visible{opacity:1;transform:translateY(0)}
+/* ── REVEAL ── */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .65s,transform .65s}
+.rv.vis{opacity:1;transform:translateY(0)}
 
-@media(max-width:900px){
-  .features-grid,.outputs-grid,.tech-grid,.modes-grid,.platforms-grid{grid-template-columns:1fr}
-  .stats-strip{flex-direction:column}
-  .stat{border-right:none;border-bottom:1px solid var(--border)}
-  .stat:last-child{border-bottom:none}
-  .kpi-row{flex-wrap:wrap}
-  .kpi-c{min-width:calc(50% - 3px)}
-  .chart-area{grid-template-columns:1fr}
+/* ── DATA FLOW DIAGRAM ── */
+.data-flow{display:flex;align-items:center;margin-top:48px;
+  background:var(--white);border-radius:var(--r);padding:28px;
+  border:1.5px solid var(--border);overflow-x:auto;gap:0;
+  box-shadow:0 8px 32px rgba(32,56,100,.07)}
+.df-node{flex:1;min-width:110px;text-align:center;padding:0 6px}
+.dfn-icon{font-size:24px;margin-bottom:8px}
+.dfn-name{font-family:'Outfit',sans-serif;font-weight:800;font-size:13px;color:var(--navy)}
+.dfn-sub{font-size:10px;color:var(--muted);margin-top:3px;
+  font-family:'DM Sans',monospace}
+.df-arrow{color:var(--muted);font-size:20px;flex-shrink:0;padding:0 4px}
+
+@media(max-width:1050px){
+  .analysis-grid,.tech-grid,.disc-cards,.shortcuts-grid{grid-template-columns:1fr}
+  .flow-wrap{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .stats{flex-direction:column}
+  .stt{border-right:none;border-bottom:1px solid var(--border)}
+  .stt:last-child{border-bottom:none}
+}
+@media(max-width:720px){
+  .wrap{padding:0 24px}
+  nav .nav-in{padding:0 24px}
+  .sec,.disc-section,.excel-section,.vision{padding:60px 0}
+  .hero{padding:90px 0 50px}
+  .targets-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;padding:30px 24px}
 }
 </style>
 </head>
 <body>
 
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
-<div class="orb orb3"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
 
 <!-- NAV -->
 <nav>
-<div class="nav-inner">
+<div class="nav-in">
   <div class="logo">
-    <div class="logo-icon">⚡</div>
-    <div class="logo-text">EV<span>Analiz</span></div>
+    <div class="logo-mark">⚡</div>
+    <div class="logo-name">Şarj Ağı <span>Gelişim Analizi</span></div>
   </div>
-  <div class="nav-tags">
-    <div class="nav-tag live">v3.11 aktif</div>
-    <div class="nav-tag">Python 3.11+</div>
-    <div class="nav-tag">EPDK Uyumlu</div>
+  <div class="nav-pills">
+    <div class="np np-out">v4.1</div>
+
   </div>
 </div>
 </nav>
@@ -391,817 +407,541 @@ footer{border-top:1px solid rgba(42,74,106,.3);padding:48px 0;text-align:center}
 <!-- HERO -->
 <div class="wrap">
 <div class="hero">
-  <div class="hero-eyebrow">⚡ EPDK Veri Tabanlı Pazar Analizi</div>
-  <h1>
-    Elektrikli Araç<br>
-    <span class="line2">Şarj Ekosistemi</span>
-    <span class="line3">Gelişim Analizi</span>
-  </h1>
-  <p class="hero-desc">
-    Türkiye'nin EV şarj altyapısını EPDK verisiyle çok dönemli analiz eden, operatör büyümesini, güç teknolojisini ve coğrafi dağılımı karşılaştıran profesyonel masa üstü uygulaması.
-  </p>
-  <div class="hero-cta">
-    <div class="btn btn-primary">⬇ Python Dosyası</div>
-    <div class="btn btn-outline">📄 PDF Çıktısı</div>
-    <div class="btn btn-outline">📑 PPTX Çıktısı</div>
-    <div class="hero-pip">pip install pandas openpyxl matplotlib numpy reportlab python-pptx</div>
+  <div class="hblob hb1"></div>
+  <div class="hblob hb2"></div>
+  <div class="hero-body">
+    <div class="hero-left rv">
+      <div class="hero-badge"><div class="h-dot"></div>Karar Destek Aracı · v4.1</div>
+      <h1>
+        Şarj Ağı<br>
+        <span class="bl">Gelişim</span> Analizi
+        <span class="sm">EV şarj altyapısı için dönemsel kıyaslama ve raporlama</span>
+      </h1>
+      <p class="hero-desc">
+        İki farklı döneme ait Excel veri setini yükle, operatörleri normalleştir, analizi başlat — otomatik renk kodlu Excel raporu hazır.
+      </p>
+      <div class="hero-ctas">
+        <div class="btn btn-prim">▶ Analizi Başlat</div>
+        <div class="btn btn-sec">📄 Tanıtım Dosyası</div>
+        <div class="hero-pip">Python · pandas · ttkbootstrap · openpyxl</div>
+      </div>
+    </div>
+
+    <!-- APP MOCKUP -->
+    <div class="hero-right rv" style="transition-delay:.2s">
+      <div class="app-frame">
+        <div class="af-header">
+          <div class="af-logo">⚡</div>
+          <div>
+            <div class="af-title">ŞARJ AĞI GELİŞİM ANALİZİ</div>
+            <div class="af-sub">v4.1 — Hazır</div>
+          </div>
+        </div>
+        <div class="af-body">
+
+          <!-- Adım 1 -->
+          <div class="step-box">
+            <div class="sb-label">
+              <div style="width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,#203864,#4472C4);display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:900">1</div>
+              ADIM 1: Veri Kaynakları
+            </div>
+            <div class="sb-row">
+              <div class="sb-btn sb-btn-out">İlk Dönem Verisi Seç</div>
+              <div class="sb-btn sb-btn-out">Son Dönem Verisi Seç</div>
+            </div>
+            <div style="display:flex;gap:16px;margin-top:8px">
+              <div class="sb-status"><div class="ss-dot ss-ok"></div><span style="font-size:11px;color:#2E7D50;font-weight:700">✔ Yüklendi</span></div>
+              <div class="sb-status"><div class="ss-dot ss-ok"></div><span style="font-size:11px;color:#2E7D50;font-weight:700">✔ Yüklendi</span></div>
+            </div>
+          </div>
+
+          <!-- Adım 2 -->
+          <div class="step-box">
+            <div class="sb-label">
+              <div style="width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,#856404,#FFC107);display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:900">2</div>
+              ADIM 2: Operatör Mapping
+            </div>
+            <div class="map-row">
+              <div class="map-btn-o">Taslak Oluştur</div>
+              <div class="map-btn-f">Mapping Yükle</div>
+            </div>
+            <div class="map-status-ok">✔ Mapping Aktif &nbsp;·&nbsp; 47 operatör eşleşti</div>
+          </div>
+
+          <!-- Run -->
+          <div class="run-btn">ANALİZİ BAŞLAT ▶&nbsp;&nbsp;<span style="opacity:.7;font-weight:400;font-size:12px">Alt+A</span></div>
+
+          <!-- Log -->
+          <div class="log-area">
+            <span>&gt; </span>İLK veri seti hazır. <span>[EPDKEski_2024.xlsx]</span><br>
+            <span>&gt; </span>SON veri seti hazır. <span>[EPDKYeni_2025.xlsx]</span><br>
+            <span>&gt; </span>Mapping dosyası sisteme alındı.<br>
+            <span style="color:#FFD700">&gt; </span>Analiz tamamlandı. Excel raporu oluşturuldu ✔
+          </div>
+
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 </div>
 
 <!-- STATS -->
 <div class="wrap">
-<div class="stats-strip reveal">
-  <div class="stat"><div class="stat-num">12</div><div class="stat-lbl">Maks. Dönem</div></div>
-  <div class="stat"><div class="stat-num">9</div><div class="stat-lbl">Platform</div></div>
-  <div class="stat"><div class="stat-num">24</div><div class="stat-lbl">KPI Kartı</div></div>
-  <div class="stat"><div class="stat-num">20+</div><div class="stat-lbl">Grafik Türü</div></div>
-  <div class="stat"><div class="stat-num">3</div><div class="stat-lbl">Çıktı Formatı</div></div>
-  <div class="stat"><div class="stat-num">81</div><div class="stat-lbl">İl Takibi</div></div>
+<div class="stats rv">
+  <div class="stt"><div class="stt-n">5</div><div class="stt-l">Analiz Türü</div></div>
+  <div class="stt"><div class="stt-n">3</div><div class="stt-l">Adım Akış</div></div>
+  <div class="stt"><div class="stt-n">6</div><div class="stt-l">Bileşen</div></div>
+  <div class="stt"><div class="stt-n">0</div><div class="stt-l">Sunucu</div></div>
+  <div class="stt"><div class="stt-n">AC+DC</div><div class="stt-l">Soket Analizi</div></div>
+  <div class="stt"><div class="stt-n">v4.1</div><div class="stt-l">Versiyon</div></div>
 </div>
 </div>
 
-<div class="divider"></div>
+<div class="div"></div>
 
-<!-- DASHBOARD MOCKUP -->
-<div class="wrap section">
-  <div class="s-label">Arayüz Önizlemesi</div>
-  <h2 class="s-title">Veri <span class="accent">görsel</span> hale gelir.</h2>
-  <p class="s-sub">Koyu, veri yoğun dashboard'da 24 KPI kartı, interaktif grafikler ve çok dönem trend analizi tek ekranda.</p>
+<!-- FLOW STEPS -->
+<div class="wrap sec">
+  <div class="sec-tag rv">Çalışma Akışı</div>
+  <h2 class="sec-title rv">3 adımda <span class="ac">rapor hazır.</span></h2>
+  <p class="sec-desc rv">Excel yükle, operatörleri eşleştir, analizi başlat. Kullanıcı müdahalesi minimumda tutulur.</p>
 
-  <div class="mockup-container reveal">
-    <!-- Title bar -->
-    <div class="mockup-titlebar">
-      <div class="win-btn r"></div>
-      <div class="win-btn y"></div>
-      <div class="win-btn g"></div>
-      <div class="mockup-title-txt">⚡  Şarj İstasyonu Analiz Uygulaması  v3.11  |  Oca 2025 → Şub 2026</div>
-    </div>
-
-    <!-- KPI Satır 1 -->
-    <div class="kpi-section-lbl">SOKET & İSTASYON ▸</div>
-    <div class="kpi-row">
-      <div class="kpi-c blue">
-        <div class="kpi-label">Toplam Soket</div>
-        <div class="kpi-old">82.441</div>
-        <div class="kpi-val">96.783</div>
-        <div class="kpi-change up">▲ %17.4</div>
-      </div>
-      <div class="kpi-c teal">
-        <div class="kpi-label">AC Soket</div>
-        <div class="kpi-old">62.115</div>
-        <div class="kpi-val">71.390</div>
-        <div class="kpi-change up">▲ %14.9</div>
-      </div>
-      <div class="kpi-c orange">
-        <div class="kpi-label">DC Soket</div>
-        <div class="kpi-old">20.326</div>
-        <div class="kpi-val">25.393</div>
-        <div class="kpi-change up">▲ %24.9</div>
-      </div>
-      <div class="kpi-c blue2">
-        <div class="kpi-label">Toplam İstasyon</div>
-        <div class="kpi-old">28.450</div>
-        <div class="kpi-val">33.217</div>
-        <div class="kpi-change up">▲ %16.7</div>
-      </div>
-      <div class="kpi-c green">
-        <div class="kpi-label">AC İstasyon</div>
-        <div class="kpi-old">21.340</div>
-        <div class="kpi-val">24.880</div>
-        <div class="kpi-change up">▲ %16.6</div>
-      </div>
-      <div class="kpi-c red">
-        <div class="kpi-label">DC İstasyon</div>
-        <div class="kpi-old">7.110</div>
-        <div class="kpi-val">8.337</div>
-        <div class="kpi-change up">▲ %17.2</div>
+  <div class="flow-wrap">
+    <div class="flow-card rv">
+      <div class="fc-num">1</div>
+      <div class="fc-title">Veri Kaynaklarını Yükle</div>
+      <div class="fc-desc">İki farklı döneme ait Excel dosyası seçilir. Sütunlar sihirbaz arayüzüyle manuel olarak eşleştirilir — operatör adı, soket türü, güç değeri.</div>
+      <div class="fc-chip">
+        <div class="chip">.xlsx / .xls</div>
+        <div class="chip">Sütun Sihirbazı</div>
+        <div class="chip">Alt+İ · Alt+S</div>
       </div>
     </div>
-
-    <!-- KPI Satır 2 -->
-    <div class="kpi-section-lbl">HİZMET ŞEKLİ & GÜÇ ▸</div>
-    <div class="kpi-row">
-      <div class="kpi-c teal">
-        <div class="kpi-label">Halka Açık Soket</div>
-        <div class="kpi-old">74.197</div>
-        <div class="kpi-val">87.105</div>
-        <div class="kpi-change up">▲ %17.4</div>
-      </div>
-      <div class="kpi-c purple">
-        <div class="kpi-label">Özel Soket</div>
-        <div class="kpi-old">8.244</div>
-        <div class="kpi-val">9.678</div>
-        <div class="kpi-change up">▲ %17.4</div>
-      </div>
-      <div class="kpi-c green">
-        <div class="kpi-label">Yeşil İstasyon</div>
-        <div class="kpi-old">5.220</div>
-        <div class="kpi-val">7.490</div>
-        <div class="kpi-change up">▲ %43.5</div>
-      </div>
-      <div class="kpi-c green">
-        <div class="kpi-label">Ort. Soket Gücü (kW)</div>
-        <div class="kpi-old">42.3</div>
-        <div class="kpi-val">48.7</div>
-        <div class="kpi-change up">▲ %15.1</div>
-      </div>
-      <div class="kpi-c teal">
-        <div class="kpi-label">Toplam Kurulu Güç</div>
-        <div class="kpi-old">3.487 MW</div>
-        <div class="kpi-val">4.713 MW</div>
-        <div class="kpi-change up">▲ %35.2</div>
+    <div class="flow-card rv" style="transition-delay:.1s">
+      <div class="fc-num">2</div>
+      <div class="fc-title">Operatör Normalizasyonu</div>
+      <div class="fc-desc">Aynı operatör farklı dönemlerde farklı isimle geçebilir. Taslak mapping Excel oluşturulur, düzenlenir ve tekrar yüklenir. Otomatik Türkçe karakter normalizasyonu dahil.</div>
+      <div class="fc-chip">
+        <div class="chip chip-o">Mapping Dosyası</div>
+        <div class="chip chip-o">Ham → Standart</div>
+        <div class="chip">Türkçe Normalize</div>
       </div>
     </div>
-
-    <!-- KPI Satır 3 -->
-    <div class="kpi-section-lbl">OPERATÖR ANALİZİ ▸</div>
-    <div class="kpi-row">
-      <div class="kpi-c blue"><div class="kpi-label">EPDK Lisanslı Opr.</div><div class="kpi-val">127</div></div>
-      <div class="kpi-c green"><div class="kpi-label">Aktif Lisanslı Opr.</div><div class="kpi-val">98</div></div>
-      <div class="kpi-c teal"><div class="kpi-label">Yeni Giren Opr.</div><div class="kpi-val">12</div></div>
-      <div class="kpi-c green"><div class="kpi-label">Büyüyen Opr.</div><div class="kpi-val">61</div></div>
-      <div class="kpi-c yellow"><div class="kpi-label">Yatırım Yapmayan</div><div class="kpi-val">18</div></div>
-      <div class="kpi-c orange"><div class="kpi-label">Küçülen Opr.</div><div class="kpi-val">7</div></div>
-      <div class="kpi-c red"><div class="kpi-label">Faaliyeti Sona Eren</div><div class="kpi-val">3</div></div>
-    </div>
-
-    <!-- Charts Row -->
-    <div class="chart-area">
-
-      <!-- Pazar Payı Pasta -->
-      <div class="chart-box">
-        <div class="chart-box-title">Pazar Payı — Soket Sayısı (D2, Top 8)</div>
-        <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" class="chart-mockup">
-          <rect width="320" height="180" fill="#1A2A3A"/>
-          <!-- Pie chart representation -->
-          <g transform="translate(90,90)">
-            <!-- Slices (simplified arcs as wedges) -->
-            <path d="M0,0 L0,-72 A72,72 0 0,1 60,-40 Z" fill="#2E6DA4" opacity=".9"/>
-            <path d="M0,0 L60,-40 A72,72 0 0,1 70,18 Z" fill="#2ECC71" opacity=".9"/>
-            <path d="M0,0 L70,18 A72,72 0 0,1 40,60 Z" fill="#E67E22" opacity=".9"/>
-            <path d="M0,0 L40,60 A72,72 0 0,1 -20,68 Z" fill="#8E44AD" opacity=".9"/>
-            <path d="M0,0 L-20,68 A72,72 0 0,1 -65,30 Z" fill="#E74C3C" opacity=".9"/>
-            <path d="M0,0 L-65,30 A72,72 0 0,1 -72,-10 Z" fill="#1ABC9C" opacity=".9"/>
-            <path d="M0,0 L-72,-10 A72,72 0 0,1 -50,-52 Z" fill="#F4D03F" opacity=".9"/>
-            <path d="M0,0 L-50,-52 A72,72 0 0,1 0,-72 Z" fill="#4A90D9" opacity=".9"/>
-            <!-- Center hole -->
-            <circle cx="0" cy="0" r="34" fill="#1A2A3A"/>
-            <text x="0" y="4" text-anchor="middle" fill="#8AAAC8" font-size="9" font-family="monospace">96.783</text>
-            <text x="0" y="14" text-anchor="middle" fill="#8AAAC8" font-size="7" font-family="monospace">soket</text>
-          </g>
-          <!-- Legend -->
-          <g transform="translate(182,20)">
-            <rect x="0" y="0" width="8" height="8" rx="2" fill="#2E6DA4"/><text x="12" y="8" fill="#8AAAC8" font-size="8.5">TRUGO %21.4</text>
-            <rect x="0" y="16" width="8" height="8" rx="2" fill="#2ECC71"/><text x="12" y="24" fill="#8AAAC8" font-size="8.5">ZES %18.2</text>
-            <rect x="0" y="32" width="8" height="8" rx="2" fill="#E67E22"/><text x="12" y="40" fill="#8AAAC8" font-size="8.5">EŞARJ %14.7</text>
-            <rect x="0" y="48" width="8" height="8" rx="2" fill="#8E44AD"/><text x="12" y="56" fill="#8AAAC8" font-size="8.5">VOLTRUN %11.3</text>
-            <rect x="0" y="64" width="8" height="8" rx="2" fill="#E74C3C"/><text x="12" y="72" fill="#8AAAC8" font-size="8.5">AKSAM %9.1</text>
-            <rect x="0" y="80" width="8" height="8" rx="2" fill="#1ABC9C"/><text x="12" y="88" fill="#8AAAC8" font-size="8.5">OTOKAR %7.8</text>
-            <rect x="0" y="96" width="8" height="8" rx="2" fill="#F4D03F"/><text x="12" y="104" fill="#8AAAC8" font-size="8.5">BTC %5.2</text>
-            <rect x="0" y="112" width="8" height="8" rx="2" fill="#4A90D9"/><text x="12" y="120" fill="#8AAAC8" font-size="8.5">DİĞER %12.3</text>
-          </g>
-        </svg>
-      </div>
-
-      <!-- Top 10 Büyüyen - Yatay Çubuk -->
-      <div class="chart-box">
-        <div class="chart-box-title">Top 10 Büyüyen Operatör — Soket Büyüme %</div>
-        <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" class="chart-mockup">
-          <rect width="320" height="180" fill="#1A2A3A"/>
-          <!-- Y eksen labels + bars -->
-          <g transform="translate(70,10)">
-            <!-- Bars & Labels -->
-            <text x="-5" y="16" text-anchor="end" fill="#8AAAC8" font-size="8">TRUGO</text>
-            <rect x="0" y="6" width="180" height="12" rx="2" fill="#2E6DA4" opacity=".85"/>
-            <text x="184" y="16" fill="#E8F0F8" font-size="8" font-weight="bold">%218</text>
-
-            <text x="-5" y="36" text-anchor="end" fill="#8AAAC8" font-size="8">VOLTRUN</text>
-            <rect x="0" y="26" width="148" height="12" rx="2" fill="#2ECC71" opacity=".85"/>
-            <text x="152" y="36" fill="#E8F0F8" font-size="8" font-weight="bold">%179</text>
-
-            <text x="-5" y="56" text-anchor="end" fill="#8AAAC8" font-size="8">EŞARJ</text>
-            <rect x="0" y="46" width="122" height="12" rx="2" fill="#E67E22" opacity=".85"/>
-            <text x="126" y="56" fill="#E8F0F8" font-size="8" font-weight="bold">%147</text>
-
-            <text x="-5" y="76" text-anchor="end" fill="#8AAAC8" font-size="8">GREENGO</text>
-            <rect x="0" y="66" width="100" height="12" rx="2" fill="#8E44AD" opacity=".85"/>
-            <text x="104" y="76" fill="#E8F0F8" font-size="8" font-weight="bold">%121</text>
-
-            <text x="-5" y="96" text-anchor="end" fill="#8AAAC8" font-size="8">AKSAM</text>
-            <rect x="0" y="86" width="82" height="12" rx="2" fill="#1ABC9C" opacity=".85"/>
-            <text x="86" y="96" fill="#E8F0F8" font-size="8" font-weight="bold">%99</text>
-
-            <text x="-5" y="116" text-anchor="end" fill="#8AAAC8" font-size="8">ZES</text>
-            <rect x="0" y="106" width="66" height="12" rx="2" fill="#E74C3C" opacity=".85"/>
-            <text x="70" y="116" fill="#E8F0F8" font-size="8" font-weight="bold">%80</text>
-
-            <text x="-5" y="136" text-anchor="end" fill="#8AAAC8" font-size="8">OTOKAR</text>
-            <rect x="0" y="126" width="52" height="12" rx="2" fill="#F4D03F" opacity=".85"/>
-            <text x="56" y="136" fill="#E8F0F8" font-size="8" font-weight="bold">%62</text>
-
-            <text x="-5" y="156" text-anchor="end" fill="#8AAAC8" font-size="8">BTC POWER</text>
-            <rect x="0" y="146" width="38" height="12" rx="2" fill="#4A90D9" opacity=".85"/>
-            <text x="42" y="156" fill="#E8F0F8" font-size="8" font-weight="bold">%46</text>
-
-            <text x="-5" y="176" text-anchor="end" fill="#8AAAC8" font-size="8">MANZARA</text>
-            <rect x="0" y="166" width="22" height="12" rx="2" fill="#BB6BD9" opacity=".85"/>
-            <text x="26" y="176" fill="#E8F0F8" font-size="8" font-weight="bold">%27</text>
-          </g>
-        </svg>
-      </div>
-
-      <!-- Güç Kategorisi -->
-      <div class="chart-box">
-        <div class="chart-box-title">Güç Kategorisi Dağılımı (kW)</div>
-        <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" class="chart-mockup">
-          <rect width="320" height="180" fill="#1A2A3A"/>
-          <!-- Grid lines -->
-          <line x1="40" y1="20" x2="40" y2="150" stroke="#2A4A6A" stroke-width=".5"/>
-          <line x1="40" y1="150" x2="300" y2="150" stroke="#2A4A6A" stroke-width=".5"/>
-          <line x1="40" y1="120" x2="300" y2="120" stroke="#2A4A6A" stroke-width=".3" stroke-dasharray="4,3"/>
-          <line x1="40" y1="90" x2="300" y2="90" stroke="#2A4A6A" stroke-width=".3" stroke-dasharray="4,3"/>
-          <line x1="40" y1="60" x2="300" y2="60" stroke="#2A4A6A" stroke-width=".3" stroke-dasharray="4,3"/>
-
-          <!-- Groups: Yavaş ≤22kW | 23-50 | 51-150 | Ultra >150 -->
-          <!-- Group 1 -->
-          <rect x="55" y="55" width="28" height="95" rx="2" fill="#2E6DA4" opacity=".85"/>
-          <rect x="87" y="38" width="28" height="112" rx="2" fill="#2ECC71" opacity=".85"/>
-          <text x="80" y="165" text-anchor="middle" fill="#8AAAC8" font-size="8">≤22kW</text>
-
-          <!-- Group 2 -->
-          <rect x="125" y="72" width="28" height="78" rx="2" fill="#2E6DA4" opacity=".85"/>
-          <rect x="157" y="55" width="28" height="95" rx="2" fill="#2ECC71" opacity=".85"/>
-          <text x="150" y="165" text-anchor="middle" fill="#8AAAC8" font-size="8">23-50kW</text>
-
-          <!-- Group 3 -->
-          <rect x="195" y="90" width="28" height="60" rx="2" fill="#2E6DA4" opacity=".85"/>
-          <rect x="227" y="75" width="28" height="75" rx="2" fill="#2ECC71" opacity=".85"/>
-          <text x="220" y="165" text-anchor="middle" fill="#8AAAC8" font-size="8">51-150kW</text>
-
-          <!-- Group 4 -->
-          <rect x="262" y="118" width="14" height="32" rx="2" fill="#2E6DA4" opacity=".85"/>
-          <rect x="279" y="108" width="14" height="42" rx="2" fill="#2ECC71" opacity=".85"/>
-          <text x="276" y="165" text-anchor="middle" fill="#8AAAC8" font-size="8">&gt;150kW</text>
-
-          <!-- Y axis labels -->
-          <text x="36" y="153" text-anchor="end" fill="#8AAAC8" font-size="8">0</text>
-          <text x="36" y="123" text-anchor="end" fill="#8AAAC8" font-size="8">20K</text>
-          <text x="36" y="93" text-anchor="end" fill="#8AAAC8" font-size="8">40K</text>
-          <text x="36" y="63" text-anchor="end" fill="#8AAAC8" font-size="8">60K</text>
-
-          <!-- Legend -->
-          <rect x="42" y="8" width="8" height="6" rx="1" fill="#2E6DA4"/>
-          <text x="53" y="14" fill="#8AAAC8" font-size="8">D1</text>
-          <rect x="68" y="8" width="8" height="6" rx="1" fill="#2ECC71"/>
-          <text x="79" y="14" fill="#8AAAC8" font-size="8">D2</text>
-        </svg>
-      </div>
-
-      <!-- Trend: Soket & İstasyon -->
-      <div class="chart-box">
-        <div class="chart-box-title">Çok Dönem Trend — Soket & İstasyon Gelişimi</div>
-        <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" class="chart-mockup">
-          <rect width="320" height="180" fill="#1A2A3A"/>
-          <!-- Grid -->
-          <line x1="50" y1="140" x2="300" y2="140" stroke="#2A4A6A" stroke-width=".5"/>
-          <line x1="50" y1="110" x2="300" y2="110" stroke="#2A4A6A" stroke-width=".3" stroke-dasharray="4,3"/>
-          <line x1="50" y1="80" x2="300" y2="80" stroke="#2A4A6A" stroke-width=".3" stroke-dasharray="4,3"/>
-          <line x1="50" y1="50" x2="300" y2="50" stroke="#2A4A6A" stroke-width=".3" stroke-dasharray="4,3"/>
-
-          <!-- Data points (6 dönem) -->
-          <!-- Soket line -->
-          <polyline points="62,128 109,120 156,112 203,100 250,90 297,76" fill="none" stroke="#2E6DA4" stroke-width="2.5" stroke-linejoin="round"/>
-          <circle cx="62" cy="128" r="4" fill="#2E6DA4"/>
-          <circle cx="109" cy="120" r="4" fill="#2E6DA4"/>
-          <circle cx="156" cy="112" r="4" fill="#2E6DA4"/>
-          <circle cx="203" cy="100" r="4" fill="#2E6DA4"/>
-          <circle cx="250" cy="90" r="4" fill="#2E6DA4"/>
-          <circle cx="297" cy="76" r="4" fill="#2E6DA4"/>
-
-          <!-- İstasyon line -->
-          <polyline points="62,132 109,126 156,121 203,115 250,109 297,103" fill="none" stroke="#2ECC71" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6,3"/>
-          <circle cx="62" cy="132" r="3" fill="#2ECC71"/>
-          <circle cx="109" cy="126" r="3" fill="#2ECC71"/>
-          <circle cx="156" cy="121" r="3" fill="#2ECC71"/>
-          <circle cx="203" cy="115" r="3" fill="#2ECC71"/>
-          <circle cx="250" cy="109" r="3" fill="#2ECC71"/>
-          <circle cx="297" cy="103" r="3" fill="#2ECC71"/>
-
-          <!-- Area fill under soket -->
-          <polygon points="62,128 109,120 156,112 203,100 250,90 297,76 297,140 62,140" fill="#2E6DA4" opacity=".1"/>
-
-          <!-- X labels -->
-          <text x="62" y="154" text-anchor="middle" fill="#8AAAC8" font-size="7.5">Oca'24</text>
-          <text x="109" y="154" text-anchor="middle" fill="#8AAAC8" font-size="7.5">Mar'24</text>
-          <text x="156" y="154" text-anchor="middle" fill="#8AAAC8" font-size="7.5">May'24</text>
-          <text x="203" y="154" text-anchor="middle" fill="#8AAAC8" font-size="7.5">Tem'24</text>
-          <text x="250" y="154" text-anchor="middle" fill="#8AAAC8" font-size="7.5">Eki'24</text>
-          <text x="297" y="154" text-anchor="middle" fill="#8AAAC8" font-size="7.5">Şub'25</text>
-
-          <!-- Data labels on last point -->
-          <text x="297" y="72" text-anchor="end" fill="#4A90D9" font-size="8" font-weight="bold">96.783</text>
-          <text x="297" y="99" text-anchor="end" fill="#2ECC71" font-size="8" font-weight="bold">33.217</text>
-
-          <!-- Legend -->
-          <line x1="50" y1="168" x2="62" y2="168" stroke="#2E6DA4" stroke-width="2"/>
-          <circle cx="56" cy="168" r="3" fill="#2E6DA4"/>
-          <text x="66" y="171" fill="#8AAAC8" font-size="8">Soket</text>
-          <line x1="102" y1="168" x2="114" y2="168" stroke="#2ECC71" stroke-width="2" stroke-dasharray="4,2"/>
-          <circle cx="108" cy="168" r="3" fill="#2ECC71"/>
-          <text x="118" y="171" fill="#8AAAC8" font-size="8">İstasyon</text>
-        </svg>
-      </div>
-
-    </div><!-- /chart-area -->
-  </div><!-- /mockup-container -->
-</div>
-
-<div class="divider"></div>
-
-<!-- FEATURES -->
-<div class="wrap section">
-  <div class="s-label">Temel Özellikler</div>
-  <h2 class="s-title">Her detay <span class="accent">düşünüldü.</span></h2>
-  <p class="s-sub">Analist bakış açısıyla tasarlanmış, kapsamlı veri işleme ve görselleştirme yetenekleri.</p>
-
-  <div class="features-grid">
-    <div class="feat reveal">
-      <div class="feat-icon">📅</div>
-      <div class="feat-title">Çok Dönem Karşılaştırma</div>
-      <div class="feat-desc">2 ile 12 arası dönem dosyası yükleyerek uzun vadeli ekosistem gelişimini tek analizde görün. Her dönem ayrı Excel/CSV dosyasından okunur.</div>
-      <div class="feat-tag">max 12 dönem</div>
-    </div>
-    <div class="feat reveal" style="transition-delay:.1s">
-      <div class="feat-icon">🏢</div>
-      <div class="feat-title">Operatör Büyüme Analizi</div>
-      <div class="feat-desc">Büyüyen, küçülen, yeni giren ve faaliyeti sona eren operatörlerin soket, istasyon ve kurulu güç bazında karşılaştırmalı analizi.</div>
-      <div class="feat-tag">soket · istasyon · güç</div>
-    </div>
-    <div class="feat reveal" style="transition-delay:.2s">
-      <div class="feat-icon">⚡</div>
-      <div class="feat-title">Güç & Teknoloji Analizi</div>
-      <div class="feat-desc">AC/DC dağılımı, güç kategorisi histogramı, CCS/CHAdeMO/Type2 soket türü dağılımı ve yeşil şarj istasyonu takibi.</div>
-      <div class="feat-tag">AC · DC · Güç Aralıkları</div>
-    </div>
-    <div class="feat reveal" style="transition-delay:.05s">
-      <div class="feat-icon">🗺️</div>
-      <div class="feat-title">Coğrafi Yoğunluk Haritası</div>
-      <div class="feat-desc">Türkiye haritası üzerinde interaktif dağılım: scroll ile zoom, sürükle ile pan, çift tık ile sıfırla. Noktaya tıklayınca Google Maps'ta aç.</div>
-      <div class="feat-tag">GeoJSON · hover tooltip</div>
-    </div>
-    <div class="feat reveal" style="transition-delay:.15s">
-      <div class="feat-icon">🔗</div>
-      <div class="feat-title">Operatör Mapping</div>
-      <div class="feat-desc">Farklı dönemlerdeki farklı yazım varyantlarını standartlaştırmak için Excel tabanlı operatör mapping sistemi. Çoklu marka tespiti otomatik yapılır.</div>
-      <div class="feat-tag">normalize · eşleştir</div>
-    </div>
-    <div class="feat reveal" style="transition-delay:.25s">
-      <div class="feat-icon">🏙️</div>
-      <div class="feat-title">81 İl Bazlı Özet</div>
-      <div class="feat-desc">Her il için soket ve istasyon sayısı, dönemler arası fark ve büyüme oranı. Adres satırından otomatik il çıkarımı, il bilgisi eksik kayıtlar işaretlenir.</div>
-      <div class="feat-tag">81 il · adres parsing</div>
-    </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- HARITA MOCKUP -->
-<div class="wrap section">
-  <div class="s-label">Coğrafi Dağılım</div>
-  <h2 class="s-title">Türkiye'nin şarj <span class="accent2">haritası.</span></h2>
-  <p class="s-sub">96.783 soketin coğrafi dağılımı — her nokta bir şarj soketi. Kırmızı = DC hızlı şarj, cyan = AC şarj.</p>
-
-  <div class="map-mockup reveal">
-    <div class="map-header">
-      <div class="map-header-title">EV Şarj İstasyonu Coğrafi Yoğunluk Haritası  |  Şubat 2026</div>
-      <div class="map-legend">
-        <div class="map-legend-item"><div class="map-legend-dot" style="background:#00E5FF"></div>AC (71.390)</div>
-        <div class="map-legend-item"><div class="map-legend-dot" style="background:#E53935"></div>DC (25.393)</div>
-      </div>
-    </div>
-    <svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
-      <defs>
-        <radialGradient id="mapBg" cx="50%" cy="50%" r="70%">
-          <stop offset="0%" stop-color="#1A3A5A" stop-opacity=".6"/>
-          <stop offset="100%" stop-color="#0A1828" stop-opacity=".9"/>
-        </radialGradient>
-      </defs>
-      <rect width="900" height="300" fill="url(#mapBg)"/>
-
-      <!-- Simplified Turkey shape -->
-      <path d="M 80 120 Q 90 95 130 90 Q 180 82 240 88 Q 300 90 360 85 Q 420 78 480 82 Q 540 80 590 88 Q 640 90 680 95 Q 720 98 750 110 Q 760 115 755 130 Q 760 145 740 155 Q 700 170 660 175 Q 620 178 580 172 Q 540 168 500 175 Q 460 178 420 170 Q 380 165 340 170 Q 300 172 260 165 Q 220 158 180 162 Q 150 165 120 158 Q 90 148 85 135 Z" 
-        fill="#2A3A2A" stroke="#4A6A40" stroke-width="1.2" opacity=".9"/>
-      <!-- Trakya -->
-      <path d="M 80 120 Q 85 100 95 90 Q 105 82 115 85 Q 125 88 130 90 Q 90 95 80 120 Z"
-        fill="#2A3A2A" stroke="#4A6A40" stroke-width="1" opacity=".9"/>
-
-      <!-- Country labels -->
-      <text x="58" y="145" fill="#666660" font-size="8" font-style="italic">YUNANİSTAN</text>
-      <text x="55" y="108" fill="#666660" font-size="8" font-style="italic">BULGARİSTAN</text>
-      <text x="768" y="122" fill="#666660" font-size="8" font-style="italic">GÜRCİSTAN</text>
-      <text x="775" y="148" fill="#666660" font-size="7" font-style="italic">ERMENİSTAN</text>
-      <text x="780" y="175" fill="#666660" font-size="8" font-style="italic">İRAN</text>
-      <text x="680" y="200" fill="#666660" font-size="8" font-style="italic">IRAK</text>
-      <text x="500" y="205" fill="#666660" font-size="8" font-style="italic">SURİYE</text>
-
-      <!-- DC dots (red, larger) — major cities cluster -->
-      <!-- İstanbul cluster -->
-      <circle cx="115" cy="118" r="5" fill="#E53935" opacity=".9"/>
-      <circle cx="120" cy="112" r="4" fill="#E53935" opacity=".85"/>
-      <circle cx="108" cy="124" r="3.5" fill="#E53935" opacity=".8"/>
-      <circle cx="125" cy="122" r="4" fill="#E53935" opacity=".85"/>
-      <circle cx="112" cy="108" r="3" fill="#E53935" opacity=".75"/>
-
-      <!-- Ankara cluster -->
-      <circle cx="415" cy="118" r="4.5" fill="#E53935" opacity=".9"/>
-      <circle cx="422" cy="114" r="3.5" fill="#E53935" opacity=".8"/>
-      <circle cx="410" cy="124" r="3" fill="#E53935" opacity=".75"/>
-
-      <!-- İzmir cluster -->
-      <circle cx="183" cy="142" r="4" fill="#E53935" opacity=".85"/>
-      <circle cx="190" cy="148" r="3.5" fill="#E53935" opacity=".8"/>
-
-      <!-- Bursa -->
-      <circle cx="222" cy="112" r="3.5" fill="#E53935" opacity=".8"/>
-
-      <!-- Antalya -->
-      <circle cx="355" cy="168" r="4" fill="#E53935" opacity=".85"/>
-      <circle cx="363" cy="162" r="3" fill="#E53935" opacity=".75"/>
-
-      <!-- Konya -->
-      <circle cx="408" cy="140" r="3" fill="#E53935" opacity=".75"/>
-
-      <!-- Adana -->
-      <circle cx="512" cy="155" r="3.5" fill="#E53935" opacity=".8"/>
-
-      <!-- Kocaeli -->
-      <circle cx="175" cy="110" r="3" fill="#E53935" opacity=".8"/>
-      <circle cx="168" cy="116" r="2.5" fill="#E53935" opacity=".7"/>
-
-      <!-- Scattered DC -->
-      <circle cx="280" cy="130" r="2.5" fill="#E53935" opacity=".7"/>
-      <circle cx="340" cy="120" r="2" fill="#E53935" opacity=".65"/>
-      <circle cx="460" cy="125" r="2" fill="#E53935" opacity=".65"/>
-      <circle cx="550" cy="135" r="2.5" fill="#E53935" opacity=".7"/>
-      <circle cx="620" cy="140" r="2" fill="#E53935" opacity=".6"/>
-      <circle cx="690" cy="148" r="2" fill="#E53935" opacity=".6"/>
-      <circle cx="300" cy="155" r="2" fill="#E53935" opacity=".6"/>
-
-      <!-- AC dots (cyan, smaller, more numerous) -->
-      <!-- Dense western Turkey -->
-      <circle cx="118" cy="115" r="1.8" fill="#00E5FF" opacity=".7"/>
-      <circle cx="105" cy="120" r="1.8" fill="#00E5FF" opacity=".7"/>
-      <circle cx="122" cy="128" r="1.5" fill="#00E5FF" opacity=".65"/>
-      <circle cx="130" cy="118" r="1.8" fill="#00E5FF" opacity=".7"/>
-      <circle cx="100" cy="115" r="1.5" fill="#00E5FF" opacity=".6"/>
-      <circle cx="115" cy="130" r="2" fill="#00E5FF" opacity=".7"/>
-      <circle cx="110" cy="106" r="1.5" fill="#00E5FF" opacity=".6"/>
-
-      <!-- İzmir region -->
-      <circle cx="180" cy="136" r="1.8" fill="#00E5FF" opacity=".7"/>
-      <circle cx="188" cy="142" r="1.5" fill="#00E5FF" opacity=".65"/>
-      <circle cx="196" cy="138" r="1.5" fill="#00E5FF" opacity=".65"/>
-      <circle cx="176" cy="148" r="1.8" fill="#00E5FF" opacity=".7"/>
-      <circle cx="202" cy="148" r="1.3" fill="#00E5FF" opacity=".6"/>
-
-      <!-- Bursa-Kocaeli corridor -->
-      <circle cx="165" cy="112" r="1.8" fill="#00E5FF" opacity=".7"/>
-      <circle cx="158" cy="118" r="1.5" fill="#00E5FF" opacity=".65"/>
-      <circle cx="175" cy="118" r="1.8" fill="#00E5FF" opacity=".7"/>
-      <circle cx="148" cy="122" r="1.5" fill="#00E5FF" opacity=".6"/>
-      <circle cx="218" cy="110" r="1.8" fill="#00E5FF" opacity=".7"/>
-      <circle cx="228" cy="115" r="1.5" fill="#00E5FF" opacity=".65"/>
-      <circle cx="208" cy="120" r="1.5" fill="#00E5FF" opacity=".65"/>
-
-      <!-- Interior Anatolia -->
-      <circle cx="412" cy="120" r="1.8" fill="#00E5FF" opacity=".7"/>
-      <circle cx="420" cy="125" r="1.5" fill="#00E5FF" opacity=".65"/>
-      <circle cx="400" cy="128" r="1.8" fill="#00E5FF" opacity=".7"/>
-      <circle cx="425" cy="118" r="1.3" fill="#00E5FF" opacity=".6"/>
-
-      <!-- Highways scatter -->
-      <circle cx="260" cy="118" r="1.5" fill="#00E5FF" opacity=".6"/>
-      <circle cx="278" cy="122" r="1.3" fill="#00E5FF" opacity=".55"/>
-      <circle cx="296" cy="128" r="1.5" fill="#00E5FF" opacity=".6"/>
-      <circle cx="315" cy="115" r="1.3" fill="#00E5FF" opacity=".55"/>
-      <circle cx="335" cy="125" r="1.5" fill="#00E5FF" opacity=".6"/>
-      <circle cx="352" cy="132" r="1.5" fill="#00E5FF" opacity=".6"/>
-      <circle cx="375" cy="120" r="1.5" fill="#00E5FF" opacity=".6"/>
-      <circle cx="390" cy="130" r="1.3" fill="#00E5FF" opacity=".55"/>
-      <circle cx="440" cy="130" r="1.5" fill="#00E5FF" opacity=".6"/>
-      <circle cx="458" cy="122" r="1.3" fill="#00E5FF" opacity=".55"/>
-      <circle cx="475" cy="135" r="1.5" fill="#00E5FF" opacity=".6"/>
-
-      <!-- Antalya coast -->
-      <circle cx="350" cy="165" r="1.8" fill="#00E5FF" opacity=".65"/>
-      <circle cx="362" cy="168" r="1.5" fill="#00E5FF" opacity=".6"/>
-      <circle cx="375" cy="165" r="1.5" fill="#00E5FF" opacity=".6"/>
-      <circle cx="388" cy="162" r="1.3" fill="#00E5FF" opacity=".55"/>
-
-      <!-- Eastern Turkey (sparse) -->
-      <circle cx="540" cy="128" r="1.3" fill="#00E5FF" opacity=".5"/>
-      <circle cx="558" cy="138" r="1.3" fill="#00E5FF" opacity=".5"/>
-      <circle cx="580" cy="132" r="1.5" fill="#00E5FF" opacity=".55"/>
-      <circle cx="600" cy="140" r="1.3" fill="#00E5FF" opacity=".5"/>
-      <circle cx="625" cy="145" r="1.3" fill="#00E5FF" opacity=".5"/>
-      <circle cx="650" cy="150" r="1.3" fill="#00E5FF" opacity=".45"/>
-      <circle cx="668" cy="148" r="1" fill="#00E5FF" opacity=".4"/>
-
-      <!-- Info box -->
-      <rect x="680" y="220" width="200" height="68" rx="6" fill="rgba(13,25,41,.85)" stroke="#2A4A6A" stroke-width=".8"/>
-      <text x="690" y="236" fill="#8AAAC8" font-size="8.5" font-family="monospace">📍 96.783 soket konumu</text>
-      <rect x="690" y="244" width="8" height="8" rx="4" fill="#E53935"/>
-      <text x="702" y="251" fill="#8AAAC8" font-size="8">DC Hızlı Şarj: 25.393</text>
-      <rect x="690" y="258" width="8" height="8" rx="4" fill="#00E5FF"/>
-      <text x="702" y="265" fill="#8AAAC8" font-size="8">AC Şarj: 71.390</text>
-      <text x="690" y="280" fill="#4A6A8A" font-size="7.5" font-style="italic">Scroll=Zoom · Sürükle=Pan</text>
-
-      <!-- Zoom controls -->
-      <rect x="16" y="220" width="24" height="24" rx="4" fill="#1A2A3A" stroke="#2A4A6A" stroke-width=".8"/>
-      <text x="28" y="236" text-anchor="middle" fill="#8AAAC8" font-size="14">+</text>
-      <rect x="16" y="248" width="24" height="24" rx="4" fill="#1A2A3A" stroke="#2A4A6A" stroke-width=".8"/>
-      <text x="28" y="264" text-anchor="middle" fill="#8AAAC8" font-size="16">−</text>
-    </svg>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- OUTPUTS -->
-<div class="wrap section">
-  <div class="s-label">Çıktı Formatları</div>
-  <h2 class="s-title">3 formatta <span class="accent">profesyonel çıktı.</span></h2>
-  <p class="s-sub">Analiz sonuçları Excel, PDF veya PowerPoint formatında kayıt edilir. Hepsi tek tıkla.</p>
-
-  <div class="outputs-grid">
-    <div class="out-card reveal">
-      <div class="out-icon-wrap" style="background:rgba(46,109,164,.15)">📊</div>
-      <div class="out-title">Excel (.xlsx)</div>
-      <div class="out-desc">Düzenlenebilir, filtrelenebilir 4 sekmeli rapor.</div>
-      <div class="out-bullets">
-        <div class="out-bullet">Özet KPI tablosu (20+ gösterge, % değişim)</div>
-        <div class="out-bullet">Gelişim Raporu — tüm operatörler, AC/DC ayrımı</div>
-        <div class="out-bullet">İl Bazlı Özet — soket & istasyon karşılaştırması</div>
-        <div class="out-bullet">Dönem Trend — 12 döneme kadar KPI matrisi</div>
-      </div>
-    </div>
-    <div class="out-card reveal" style="transition-delay:.1s">
-      <div class="out-icon-wrap" style="background:rgba(231,76,60,.15)">📄</div>
-      <div class="out-title">PDF (Landscape A4)</div>
-      <div class="out-desc">Baskıya hazır, embed grafik içeren çok sayfalı rapor.</div>
-      <div class="out-bullets">
-        <div class="out-bullet">KPI özet tablosu (kapak sayfası)</div>
-        <div class="out-bullet">Pazar payı yatay çubuk grafikleri (Soket/İstasyon/MW)</div>
-        <div class="out-bullet">Operatör büyüme, güç histogramı, AC/DC dağılım</div>
-        <div class="out-bullet">Trend grafikleri + coğrafi yoğunluk haritası</div>
-      </div>
-    </div>
-    <div class="out-card reveal" style="transition-delay:.2s">
-      <div class="out-icon-wrap" style="background:rgba(142,68,173,.15)">📑</div>
-      <div class="out-title">PowerPoint (.pptx)</div>
-      <div class="out-desc">19+ slayt, native düzenlenebilir grafikler.</div>
-      <div class="out-bullets">
-        <div class="out-bullet">Kapak + KPI Dashboard (8+8+3 kart)</div>
-        <div class="out-bullet">Pazar payı, büyüme, AC/DC, il dağılımı slaytları</div>
-        <div class="out-bullet">Coğrafi harita, güç gelişimi, segmentasyon</div>
-        <div class="out-bullet">Çok dönem trend + yeşil istasyon + DC oran</div>
+    <div class="flow-card rv" style="transition-delay:.2s">
+      <div class="fc-num">3</div>
+      <div class="fc-title">Analiz &amp; Excel Raporu</div>
+      <div class="fc-desc">Veriler birleştirilir, değişim metrikleri hesaplanır. Renk kodlu Excel raporu otomatik üretilir: artış → yeşil, azalış → kırmızı, yüzde formatlar uygulanır.</div>
+      <div class="fc-chip">
+        <div class="chip chip-g">🟢 Artış</div>
+        <div class="chip" style="background:#FCE4D6;color:#C0392B;border-color:#E74C3C">🔴 Azalış</div>
+        <div class="chip">Otomatik Sıralama</div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="divider"></div>
+<div class="div"></div>
+
+<!-- DATA FLOW -->
+<div class="wrap sec">
+  <div class="sec-tag rv">Veri Dönüşüm Zinciri</div>
+  <h2 class="sec-title rv">Excel'den <span class="ag">rapora.</span></h2>
+  <p class="sec-desc rv">Ham veri 5 dönüşüm adımından geçerek operatör bazlı kıyaslamalı rapora dönüşür.</p>
+
+  <div class="data-flow rv">
+    <div class="df-node">
+      <div class="dfn-icon">📁</div>
+      <div class="dfn-name">Excel D1</div>
+      <div class="dfn-sub">İlk Dönem</div>
+    </div>
+    <div class="df-arrow">→</div>
+    <div class="df-node">
+      <div class="dfn-icon">📁</div>
+      <div class="dfn-name">Excel D2</div>
+      <div class="dfn-sub">Son Dönem</div>
+    </div>
+    <div class="df-arrow">→</div>
+    <div class="df-node">
+      <div class="dfn-icon">🔀</div>
+      <div class="dfn-name">Mapping</div>
+      <div class="dfn-sub">Normalize</div>
+    </div>
+    <div class="df-arrow">→</div>
+    <div class="df-node">
+      <div class="dfn-icon">⚙️</div>
+      <div class="dfn-name">Gruplama</div>
+      <div class="dfn-sub">AC / DC split</div>
+    </div>
+    <div class="df-arrow">→</div>
+    <div class="df-node">
+      <div class="dfn-icon">🔗</div>
+      <div class="dfn-name">Merge</div>
+      <div class="dfn-sub">outer join</div>
+    </div>
+    <div class="df-arrow">→</div>
+    <div class="df-node">
+      <div class="dfn-icon">📊</div>
+      <div class="dfn-name">Excel Rapor</div>
+      <div class="dfn-sub">Renk kodlu</div>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- EXCEL PREVIEW -->
+<section class="excel-section">
+<div class="wrap">
+  <div class="sec-tag rv">Excel Çıktısı</div>
+  <h2 class="sec-title rv">Renk kodlu, <span class="ac">profesyonel rapor.</span></h2>
+  <p class="sec-desc rv">Artışlar yeşil, azalışlar kırmızı renk kodlamasıyla anında görünür. Yüzdelik formatlar, otomatik sıralama, tam tablo düzeni.</p>
+
+  <div class="excel-mockup rv">
+    <div class="em-chrome">
+      <div class="em-dot" style="background:#FF5F57"></div>
+      <div class="em-dot" style="background:#FFBD2E"></div>
+      <div class="em-dot" style="background:#28CA41"></div>
+      <div class="em-bar">📊 Şarj_Ağı_Analiz_Raporu_2025.xlsx</div>
+    </div>
+    <div class="em-tabs">
+      <div class="em-tab act">Gelişim_Raporu</div>
+      <div class="em-tab inact">Özet</div>
+    </div>
+    <div class="em-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Operator</th>
+            <th>Marka</th>
+            <th>AC Eski</th>
+            <th>DC Eski</th>
+            <th>AC Yeni</th>
+            <th>DC Yeni</th>
+            <th>AC Değişim</th>
+            <th>DC Değişim</th>
+            <th>Büyüme %</th>
+            <th>Pazar Payı</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TRUGO ENERJİ A.Ş.</td>
+            <td>TRUGO</td>
+            <td>1.240</td><td>412</td>
+            <td>1.890</td><td>680</td>
+            <td class="td-up">+650</td>
+            <td class="td-up">+268</td>
+            <td><span class="pct-badge pb-g">+52.4%</span></td>
+            <td>21.4%</td>
+          </tr>
+          <tr>
+            <td>ZES ELEKTRİK</td>
+            <td>ZES</td>
+            <td>980</td><td>290</td>
+            <td>1.420</td><td>450</td>
+            <td class="td-up">+440</td>
+            <td class="td-up">+160</td>
+            <td><span class="pct-badge pb-g">+40.8%</span></td>
+            <td>18.2%</td>
+          </tr>
+          <tr>
+            <td>EŞARJ ELEKTRİK</td>
+            <td>EŞARJ</td>
+            <td>820</td><td>180</td>
+            <td>1.100</td><td>260</td>
+            <td class="td-up">+280</td>
+            <td class="td-up">+80</td>
+            <td><span class="pct-badge pb-g">+29.7%</span></td>
+            <td>14.7%</td>
+          </tr>
+          <tr>
+            <td>VOLTRUN TEKNOLOJİ</td>
+            <td>VOLTRUN</td>
+            <td>650</td><td>120</td>
+            <td>620</td><td>100</td>
+            <td class="td-dn">−30</td>
+            <td class="td-dn">−20</td>
+            <td><span class="pct-badge pb-r">−6.6%</span></td>
+            <td>11.3%</td>
+          </tr>
+          <tr>
+            <td>BTC POWER</td>
+            <td>BTC</td>
+            <td>210</td><td>45</td>
+            <td>300</td><td>80</td>
+            <td class="td-up">+90</td>
+            <td class="td-up">+35</td>
+            <td><span class="pct-badge pb-g">+53.2%</span></td>
+            <td>5.2%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="em-footer">
+      <span>🟢 Artış = Yeşil &nbsp;·&nbsp; 🔴 Azalış = Kırmızı &nbsp;·&nbsp; Otomatik sıralama: En büyükten küçüğe</span>
+      <span>Toplam: 5 / 47 operatör gösteriliyor</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="div"></div>
+
+<!-- ANALYSIS TYPES -->
+<div class="wrap sec">
+  <div class="sec-tag rv">Analiz Türleri</div>
+  <h2 class="sec-title rv">5 ayrı boyut,<br><span class="ac">tek raporda.</span></h2>
+
+  <div class="analysis-grid">
+    <div class="an-card rv">
+      <div class="an-icon">🔌</div>
+      <div class="an-title">Soket Analizi</div>
+      <div class="an-desc">AC ve DC soket sayılarını ayrı ayrı hesaplar, iki dönem arasındaki artış/azalışı ortaya koyar. Her operatör için ayrı satır.</div>
+      <div class="an-tag">AC · DC · Toplam</div>
+    </div>
+    <div class="an-card rv" style="transition-delay:.1s">
+      <div class="an-icon">⚡</div>
+      <div class="an-title">Güç Analizi</div>
+      <div class="an-desc">Toplam kurulu güç (kW) değişimini operatör bazında gösterir. Enerji kapasitesindeki gelişimi sayısal olarak ölçer.</div>
+      <div class="an-tag">kW · Toplam Kurulu Güç</div>
+    </div>
+    <div class="an-card rv" style="transition-delay:.2s">
+      <div class="an-icon">📈</div>
+      <div class="an-title">Büyüme Analizi</div>
+      <div class="an-desc">Dönemsel büyüme oranı yüzde olarak hesaplanır. Artış yeşil, azalış kırmızı renk kodlamasıyla anında görünür.</div>
+      <div class="an-tag">% Büyüme · Trend</div>
+    </div>
+    <div class="an-card rv" style="transition-delay:.05s">
+      <div class="an-icon">🏢</div>
+      <div class="an-title">Operatör Bazlı</div>
+      <div class="an-desc">Firma ve marka bazında gruplandırılmış performans analizi. Mapping ile normalize edilmiş isimler üzerinden kıyaslama.</div>
+      <div class="an-tag">Firma · Marka · Gruplama</div>
+    </div>
+    <div class="an-card rv" style="transition-delay:.15s">
+      <div class="an-icon">📉</div>
+      <div class="an-title">Pazar Payı</div>
+      <div class="an-desc">Her operatörün toplam pazar içindeki yüzdesel payı hesaplanır. Sektörün konsolidasyon ve rekabet haritası ortaya çıkar.</div>
+      <div class="an-tag">% Pazar Payı</div>
+    </div>
+    <div class="an-card rv" style="transition-delay:.25s">
+      <div class="an-icon">🧹</div>
+      <div class="an-title">Veri Temizleme</div>
+      <div class="an-desc">Türkçe karakter normalizasyonu, noktalama temizleme, AC/DC otomatik sınıflandırma, bilinmeyen soket tipleri için UNKNOWN ataması.</div>
+      <div class="an-tag">Normalize · Regex · Sınıfla</div>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
 
 <!-- TECH STACK -->
-<div class="wrap section">
-  <div class="s-label">Teknik Altyapı</div>
-  <h2 class="s-title">Python <span class="accent">ekosistemi</span> ile.</h2>
-  <p class="s-sub">Saf Python — harici servis yok, internet bağlantısı gerekmez. Tüm hesaplama yerel.</p>
+<div class="wrap sec">
+  <div class="sec-tag rv">Teknik Altyapı</div>
+  <h2 class="sec-title rv">Python ekosistemi,<br><span class="ag">saf güç.</span></h2>
 
-  <div class="tech-grid reveal">
-    <div class="tech-row">
-      <div class="tech-icon-box">🖥</div>
+  <div class="tech-grid rv">
+    <div class="tr">
+      <div class="tr-ic">🧠</div>
       <div>
-        <div class="tech-cat">Kullanıcı Arayüzü</div>
-        <div class="tech-name">Tkinter + ttk</div>
-        <div class="tech-desc">Tabbed notebook, scrollable frame, multi-dönem dönem satırları, progress popup</div>
+        <div class="tr-cat">Veri İşleme</div>
+        <div class="tr-name">pandas + numpy</div>
+        <div class="tr-desc">Veri okuma, temizleme, gruplama, merge işlemleri. Büyük veri setleri için optimize edilmiş.</div>
       </div>
     </div>
-    <div class="tech-row">
-      <div class="tech-icon-box">📊</div>
+    <div class="tr">
+      <div class="tr-ic">🖥</div>
       <div>
-        <div class="tech-cat">Veri İşleme</div>
-        <div class="tech-name">pandas + openpyxl</div>
-        <div class="tech-desc">Excel/CSV okuma, sütun normalizasyonu, il çıkarımı, KPI hesaplama</div>
+        <div class="tr-cat">Modern GUI</div>
+        <div class="tr-name">ttkbootstrap + tkinter</div>
+        <div class="tr-desc">Bootstrap temalı modern arayüz, LabelFrame adımları, renk sistemi ve responsive düzen.</div>
       </div>
     </div>
-    <div class="tech-row">
-      <div class="tech-icon-box">📈</div>
+    <div class="tr">
+      <div class="tr-ic">📊</div>
       <div>
-        <div class="tech-cat">Görselleştirme</div>
-        <div class="tech-name">matplotlib + numpy</div>
-        <div class="tech-desc">TkAgg backend, Agg (PDF/PPTX), interaktif scatter harita, 20+ grafik türü</div>
+        <div class="tr-cat">Excel Rapor</div>
+        <div class="tr-name">openpyxl</div>
+        <div class="tr-desc">Font, PatternFill, Border stilleri, otomatik sütun genişliği, yüzdelik formatlar.</div>
       </div>
     </div>
-    <div class="tech-row">
-      <div class="tech-icon-box">📄</div>
+    <div class="tr">
+      <div class="tr-ic">🖼</div>
       <div>
-        <div class="tech-cat">PDF Üretimi</div>
-        <div class="tech-name">ReportLab</div>
-        <div class="tech-desc">Landscape A4, embed Matplotlib grafik, Türkçe font desteği, KeepTogether</div>
+        <div class="tr-cat">Görsel</div>
+        <div class="tr-name">Pillow (PIL)</div>
+        <div class="tr-desc">Logo ve görsel yükleme, Splash Screen ve header için yeniden boyutlandırma.</div>
       </div>
     </div>
-    <div class="tech-row">
-      <div class="tech-icon-box">📑</div>
+    <div class="tr">
+      <div class="tr-ic">🧵</div>
       <div>
-        <div class="tech-cat">PowerPoint Üretimi</div>
-        <div class="tech-name">python-pptx</div>
-        <div class="tech-desc">Native chart (düzenlenebilir), 16x9 slayt, koyu tema, kategori ekseni renklendirme</div>
+        <div class="tr-cat">Thread</div>
+        <div class="tr-name">threading</div>
+        <div class="tr-desc">Analiz ve mapping arka planda çalışır, GUI donmaz. LoadingWindow ile anlık geri bildirim.</div>
       </div>
     </div>
-    <div class="tech-row">
-      <div class="tech-icon-box">🗺️</div>
+    <div class="tr">
+      <div class="tr-ic">🔤</div>
       <div>
-        <div class="tech-cat">Harita</div>
-        <div class="tech-name">GeoJSON + Matplotlib</div>
-        <div class="tech-desc">turkey_provinces.geojson ile il sınırları, zoom/pan/hover tooltip, Google Maps entegrasyonu</div>
-      </div>
-    </div>
-    <div class="tech-row">
-      <div class="tech-icon-box">⚡</div>
-      <div>
-        <div class="tech-cat">Dosya Okuma</div>
-        <div class="tech-name">python-calamine (opt.)</div>
-        <div class="tech-desc">.xlsx okumayı ~3x hızlandırır. .xls için xlrd, LibreOffice fallback</div>
-      </div>
-    </div>
-    <div class="tech-row">
-      <div class="tech-icon-box">🧵</div>
-      <div>
-        <div class="tech-cat">Thread Yönetimi</div>
-        <div class="tech-name">threading + after()</div>
-        <div class="tech-desc">Dosya okuma thread'de, grafik çizimi ana thread'de, lazy render, after() zinciri</div>
+        <div class="tr-cat">Normalizasyon</div>
+        <div class="tr-name">re (regex)</div>
+        <div class="tr-desc">Türkçe karakter dönüşümü, noktalama temizleme, whitespace normalizasyonu.</div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="divider"></div>
+<div class="div"></div>
 
-<!-- DESTEKLENEN PLATFORMLAR -->
-<div class="wrap section">
-  <div class="s-label">Desteklenen Platformlar</div>
-  <h2 class="s-title">9 platform, <span class="accent">tek analiz.</span></h2>
+<!-- SHORTCUTS -->
+<div class="wrap sec">
+  <div class="sec-tag rv">Klavye Kısayolları</div>
+  <h2 class="sec-title rv">Hız için <span class="ac">kısayollar.</span></h2>
 
-  <div class="platforms-grid reveal">
-    <div class="plat-row">
-      <div><div class="plat-name">Trendyol</div><div class="plat-note">JS state nesnesi ile fiyat okuma</div></div>
-      <div class="plat-badge pb-active">Aktif</div>
+  <div class="shortcuts-grid rv">
+    <div class="sc"><div class="sc-key">Alt + İ</div><div class="sc-desc">İlk dönem verisini seç</div></div>
+    <div class="sc"><div class="sc-key">Alt + S</div><div class="sc-desc">Son dönem verisini seç</div></div>
+    <div class="sc"><div class="sc-key">Alt + T</div><div class="sc-desc">Taslak mapping oluştur</div></div>
+    <div class="sc"><div class="sc-key">Alt + M</div><div class="sc-desc">Mapping dosyası yükle</div></div>
+    <div class="sc"><div class="sc-key">Alt + A</div><div class="sc-desc">Analizi başlat</div></div>
+    <div class="sc"><div class="sc-key">Alt + C</div><div class="sc-desc">Uygulamadan çık</div></div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- TARGET AUDIENCE -->
+<div class="wrap sec">
+  <div class="sec-tag rv">Hedef Kullanıcılar</div>
+  <h2 class="sec-title rv">Sektörün ihtiyacı,<br><span class="ag">hazır araç.</span></h2>
+
+  <div class="targets-grid">
+    <div class="tgt rv">
+      <div class="tgt-ic ti1">⚡</div>
+      <div>
+        <div class="tgt-title">Enerji Şirketleri</div>
+        <div class="tgt-desc">Şarj ağı operatörlerinin dönemsel performansını hızla kıyaslayarak pazar dinamiklerini takip eden analistler.</div>
+      </div>
     </div>
-    <div class="plat-row">
-      <div><div class="plat-name">Hepsiburada</div><div class="plat-note">app.hb.biz mobil link desteği</div></div>
-      <div class="plat-badge pb-active">Aktif</div>
+    <div class="tgt rv" style="transition-delay:.1s">
+      <div class="tgt-ic ti2">🚗</div>
+      <div>
+        <div class="tgt-title">EV Altyapı Firmaları</div>
+        <div class="tgt-desc">Kurulu güç ve soket büyümesini izleyerek altyapı planlaması yapan elektrikli araç şarj firmaları.</div>
+      </div>
     </div>
-    <div class="plat-row">
-      <div><div class="plat-name">Amazon TR</div><div class="plat-note">gizli fiyat elementi okuma</div></div>
-      <div class="plat-badge pb-active">Aktif</div>
+    <div class="tgt rv" style="transition-delay:.2s">
+      <div class="tgt-ic ti3">📊</div>
+      <div>
+        <div class="tgt-title">Veri Analistleri</div>
+        <div class="tgt-desc">Karmaşık veri temizleme ve eşleştirme işlemlerini otomatize ederek zaman kazanmak isteyen profesyoneller.</div>
+      </div>
     </div>
-    <div class="plat-row">
-      <div><div class="plat-name">N11</div><div class="plat-note">Tam URL ile sorunsuz çalışma</div></div>
-      <div class="plat-badge pb-active">Aktif</div>
-    </div>
-    <div class="plat-row">
-      <div><div class="plat-name">PttAVM</div><div class="plat-note">Sepete Özel kampanya fiyatı</div></div>
-      <div class="plat-badge pb-active">Aktif</div>
-    </div>
-    <div class="plat-row">
-      <div><div class="plat-name">Idefix</div><div class="plat-note">JSON-LD yapılandırılmış veri</div></div>
-      <div class="plat-badge pb-active">Aktif</div>
-    </div>
-    <div class="plat-row">
-      <div><div class="plat-name">ÇiçekSepeti</div><div class="plat-note">Arama URL güncellendi, test devam</div></div>
-      <div class="plat-badge pb-test">Test</div>
-    </div>
-    <div class="plat-row">
-      <div><div class="plat-name">Teknosa</div><div class="plat-note">Seçici doğrulaması tamamlandı</div></div>
-      <div class="plat-badge pb-test">Test</div>
-    </div>
-    <div class="plat-row">
-      <div><div class="plat-name">MediaMarkt</div><div class="plat-note">Seçici doğrulaması tamamlandı</div></div>
-      <div class="plat-badge pb-test">Test</div>
+    <div class="tgt rv" style="transition-delay:.3s">
+      <div class="tgt-ic ti4">🏛</div>
+      <div>
+        <div class="tgt-title">Kamu &amp; Özel Planlama</div>
+        <div class="tgt-desc">EV şarj altyapısı politikası geliştiren, yatırım kararı alan kamu kurumları ve özel sektör planlama ekipleri.</div>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="divider"></div>
+<div class="div"></div>
 
-<!-- KURULUM -->
-<div class="wrap section">
-  <div class="s-label">Kurulum</div>
-  <h2 class="s-title">3 adımda <span class="accent">çalışır.</span></h2>
+<!-- DISCLAIMER -->
+<section class="disc-section">
+<div class="wrap">
+  <div class="sec-tag rv">Önemli Notlar</div>
+  <h2 class="sec-title rv">Sınırlamalar &amp;<br><span style="color:var(--orange)">uyarılar.</span></h2>
 
-  <div class="kv-box reveal">
-    <span class="kv-comment"># 1. Gerekli paketleri yükle</span><br>
-    pip install <span class="kv-val">pandas openpyxl matplotlib numpy reportlab python-pptx requests xlrd</span><br>
-    pip install <span class="kv-val">python-calamine</span>  <span class="kv-comment"># opsiyonel — Excel okumayı ~3x hızlandırır</span><br>
-    <br>
-    <span class="kv-comment"># 2. İl sınırları haritası için (opsiyonel)</span><br>
-    <span class="kv-comment"># turkey_provinces.geojson dosyasını .py ile aynı klasöre koy</span><br>
-    <span class="kv-comment"># https://github.com/cihadturhan/tr-geojson</span><br>
-    <br>
-    <span class="kv-comment"># 3. Uygulamayı başlat</span><br>
-    python <span class="kv-str">epdk_premium.py</span><br>
-    <br>
-    <span class="kv-comment"># ─── Uygulama başlayınca ───</span><br>
-    <span class="kv-comment"># Dönem 1 ve Dönem 2 için EPDK Excel/CSV dosyalarını seç</span><br>
-    <span class="kv-comment"># Analizi Başlat → Dashboard doldu → Excel / PDF / PPTX kaydet</span>
-  </div>
-
-  <div style="margin-top:24px;background:var(--surface);border:1px solid rgba(243,156,18,.3);border-radius:10px;padding:18px 24px">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--orange2);margin-bottom:8px">⚠ Bilgi</div>
-    <div style="font-size:13px;color:var(--sub);line-height:1.6">EPDK EXCEL verisi <strong style="color:var(--text)">epdk.gov.tr</strong> adresinden indirilebilir. Desteklenen sütun formatları: <code style="color:var(--blue2);font-family:'JetBrains Mono',monospace;font-size:11px">sarjIstasyonuNo, CPO Marka, sarjAgiIsletmecisiUnvan, soketGucu, soketTipi</code> ve daha fazlası. Sütun adı varyantları otomatik normalize edilir.</div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- KLAVYE KISAYOLLARI -->
-<div class="wrap section">
-  <div class="s-label">Klavye Kısayolları</div>
-  <h2 class="s-title">Hız için <span class="accent">kısayollar.</span></h2>
-
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:40px" class="reveal">
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--green);font-weight:700;margin-bottom:6px">Alt + A</div>
-      <div style="font-size:13px;color:var(--sub)">Analizi Başlat</div>
+  <div class="disc-cards">
+    <div class="disc-card warn rv">
+      <div class="dc-head"><div class="dc-icon">⚠️</div><div class="dc-title">Veri Sorumluluğu</div></div>
+      <div class="dc-desc">Sonuçlar tamamen kullanıcının sağladığı veri setlerine dayanır. Hatalı sütun eşleştirmesi veya mapping hataları analiz sonuçlarını etkiler.</div>
     </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--red);font-weight:700;margin-bottom:6px">Alt + Z</div>
-      <div style="font-size:13px;color:var(--sub)">Analizi Sıfırla</div>
+    <div class="disc-card warn rv" style="transition-delay:.1s">
+      <div class="dc-head"><div class="dc-icon">📄</div><div class="dc-title">Resmi Belge Değil</div></div>
+      <div class="dc-desc">Bu yazılım tarafından oluşturulan raporlar resmi belge niteliği taşımaz. Karar destek aracı olarak kullanılmalıdır.</div>
     </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--blue2);font-weight:700;margin-bottom:6px">Alt + X</div>
-      <div style="font-size:13px;color:var(--sub)">Excel Kaydet</div>
+    <div class="disc-card info rv" style="transition-delay:.2s">
+      <div class="dc-head"><div class="dc-icon">🔗</div><div class="dc-title">Mapping Kritik</div></div>
+      <div class="dc-desc">Farklı dönemlerde aynı operatörün farklı yazılışları varsa mapping dosyası zorunludur. Mapping olmadan analiz yanıltıcı olabilir.</div>
     </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--red);font-weight:700;margin-bottom:6px">Alt + P</div>
-      <div style="font-size:13px;color:var(--sub)">PDF Kaydet</div>
-    </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--purple);font-weight:700;margin-bottom:6px">Alt + S</div>
-      <div style="font-size:13px;color:var(--sub)">PPTX Kaydet</div>
-    </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--teal);font-weight:700;margin-bottom:6px">Alt + N</div>
-      <div style="font-size:13px;color:var(--sub)">Dönem Ekle</div>
-    </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--orange2);font-weight:700;margin-bottom:6px">Alt + I</div>
-      <div style="font-size:13px;color:var(--sub)">Dönem Sil</div>
-    </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--blue);font-weight:700;margin-bottom:6px">Alt + D</div>
-      <div style="font-size:13px;color:var(--sub)">Dosya Seç</div>
+    <div class="disc-card info rv" style="transition-delay:.3s">
+      <div class="dc-head"><div class="dc-icon">💻</div><div class="dc-title">Windows Odaklı</div></div>
+      <div class="dc-desc">ctypes ve os entegrasyonu Windows ortamı için optimize edilmiştir. macOS/Linux'ta ek uyarlama gerekebilir.</div>
     </div>
   </div>
 </div>
+</section>
 
-<div class="divider"></div>
+<div class="div"></div>
 
-<!-- FOOTER -->
-<div class="credit-bar">
+<!-- VISION -->
+<section class="vision">
+  <div class="vb vb1"></div>
+  <div class="vb vb2"></div>
+  <div class="wrap">
+    <div class="sec-tag rv">Sonuç</div>
+    <h2 class="vision-title rv">Karmaşık veriyi<br>anlamlı içgörüye dönüştür.</h2>
+    <p class="vision-desc rv">
+      "Şarj Ağı Gelişim Analizi", çift dönem kıyaslamasını saniyeler içinde renk kodlu Excel raporuna dönüştüren güçlü bir karar destek aracıdır. Enerji sektörünün hızlı büyüyen EV altyapısını takip etmek için tasarlandı.
+    </p>
+
+  </div>
+</section>
+
+<!-- CREDIT -->
+<div class="wrap">
+<div class="credit">
   <div class="credit-name">Mustafa Çelik tarafından geliştirilmiştir.</div>
   <a href="https://www.linkedin.com/in/mustafacelik84/" class="credit-link" target="_blank">🔗 linkedin.com/in/mustafacelik84</a>
-  <div class="credit-note">B2B Satış & Enerji Teknolojisi · EV Şarj Altyapısı · Python</div>
+  <div class="credit-note">EV Şarj Altyapısı · Veri Analizi · Python · ttkbootstrap</div>
+</div>
 </div>
 
-<footer>
+<!-- FOOTER -->
 <div class="wrap">
-  <div class="footer-logo">EV<span>Analiz</span></div>
-  <div class="footer-stats">
-    <div class="fs"><div class="fs-num">12</div><div class="fs-lbl">Maks. Dönem</div></div>
-    <div class="fs"><div class="fs-num">24</div><div class="fs-lbl">KPI Kartı</div></div>
-    <div class="fs"><div class="fs-num">20+</div><div class="fs-lbl">Grafik Türü</div></div>
-    <div class="fs"><div class="fs-num">3</div><div class="fs-lbl">Çıktı Formatı</div></div>
-    <div class="fs"><div class="fs-num">81</div><div class="fs-lbl">İl Takibi</div></div>
-    <div class="fs"><div class="fs-num">v3.11</div><div class="fs-lbl">Versiyon</div></div>
+<footer>
+  <div class="f-logo">Şarj Ağı <span>Gelişim Analizi</span></div>
+  <div class="f-tags">
+    <div class="f-tag">pandas</div>
+    <div class="f-tag">ttkbootstrap</div>
+    <div class="f-tag">openpyxl</div>
+    <div class="f-tag">AC/DC</div>
+    <div class="f-tag">Mapping</div>
+    <div class="f-tag">v4.1</div>
   </div>
-  <div class="footer-meta">Elektrikli Araç Şarj Ekosistemi Gelişim Analizi · Python 3.11+ · Nisan 2026</div>
-</div>
+  <div class="f-meta">Şarj Ağı Gelişim Analizi v4.1 · Python · 2026</div>
 </footer>
+</div>
 
 <script>
-// Scroll reveal
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-    }
+/* cursor glow */
+const cg = document.getElementById('cursorGlow');
+document.addEventListener('mousemove', e => {
+  cg.style.left = e.clientX + 'px';
+  cg.style.top  = e.clientY + 'px';
+});
+
+/* scroll reveal */
+const ro = new IntersectionObserver(entries =>
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis') }),
+  { threshold: 0.07 }
+);
+document.querySelectorAll('.rv').forEach(el => ro.observe(el));
+
+/* flow card tilt */
+document.querySelectorAll('.flow-card,.an-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width  - 0.5;
+    const y = (e.clientY - r.top)  / r.height - 0.5;
+    card.style.transform = `translateY(-4px) rotateX(${-y*5}deg) rotateY(${x*5}deg)`;
   });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+});
 </script>
 </body>
 </html>
