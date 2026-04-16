@@ -23,13 +23,13 @@ header:
     margin-bottom: 20px;
   }
   .job-title {
-    font-size: 1.2rem;
+    font-size: 1.0rem;
     font-weight: 600;
     color: #2980b9;
     margin-bottom: 0 !important;
   }
   .company-date {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     color: #7f8c8d;
     font-style: italic;
     margin-top: 2px;
@@ -37,7 +37,7 @@ header:
   }
   .job-description {
     text-align: left;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     line-height: 1.6;
     margin-bottom: 30px;
   }
