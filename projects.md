@@ -94,7 +94,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
 
   <div class="grid__item span-3">
     <article class="archive__item">
-      <div class="archive__item-teaser"><img src="/assets/images/freshly.png" alt=""></div>
+      <div class="archive__item-teaser"><img src="/assets/images/skttakip.png" alt=""></div>
       <h3 class="archive__item-title">freshly</h3>
       <div class="archive__item-excerpt">Gıda, ilaç ve kozmetik ürünlerin SKT'lerini takip eden son kullanma tarihi asistanı.</div>
       <div class="btn-wrapper"><a href="/portfolyo/freshly.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
@@ -106,7 +106,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
       <div class="archive__item-teaser"><img src="/assets/images/vibetrack.png" alt=""></div>
       <h3 class="archive__item-title">VibeTrack</h3>
       <div class="archive__item-excerpt">Ruh haline göre AI üretimi müzikler dinleyebileceğin odaklanma odaları ve Pomodoro sayacı.</div>
-      <div class="btn-wrapper"><a href="/portfolyo/vibetrack.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
+      <div class="btn-wrapper"><a href="/portfolyo/vibe.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
     </article>
   </div>
 
