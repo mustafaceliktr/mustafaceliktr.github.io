@@ -70,7 +70,7 @@ header:
   }
 </style>
 
-Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aşağıdadır. Detaylı incelemek istediğiniz projenin üzerine tıklayabilirsiniz.
+Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aşağıdadır. Projeleri incelemek isterseniz tanıtım sayfalarına gitmek için ilgili proje detaylar butonunu tıklayabilirsiniz.
 
 <div class="grid__wrapper">
 
@@ -87,7 +87,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <article class="archive__item">
       <div class="archive__item-teaser"><img src="/assets/images/inerken.png" alt=""></div>
       <h3 class="archive__item-title">İnerken</h3>
-      <div class="archive__item-excerpt">Linkle veya mnuel eklenen ürün için birden fazla e-ticaret platformunda akıllı fiyat takibi ve bildirim uygulaması.</div>
+      <div class="archive__item-excerpt">Linkle veya manuel eklenen ürün için birden fazla e-ticaret platformunda akıllı fiyat takibi ve bildirim uygulaması.</div>
       <div class="btn-wrapper"><a href="/portfolyo/inerken.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
     </article>
   </div>
@@ -103,7 +103,7 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
 
   <div class="grid__item span-3">
     <article class="archive__item">
-      <div class="archive__item-teaser"><img src="/assets/images/vibetrack.png" alt=""></div>
+      <div class="archive__item-teaser"><img src="/assets/images/vibe.png" alt=""></div>
       <h3 class="archive__item-title">VibeTrack</h3>
       <div class="archive__item-excerpt">Ruh haline göre AI üretimi müzikler dinleyebileceğin odaklanma odaları ve Pomodoro sayacı.</div>
       <div class="btn-wrapper"><a href="/portfolyo/vibe.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
@@ -112,16 +112,16 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
 
   <div class="grid__item span-3">
     <article class="archive__item">
-      <div class="archive__item-teaser"><img src="/assets/images/evcpdataker.png" alt=""></div>
+      <div class="archive__item-teaser"><img src="/assets/images/dataker.png" alt=""></div>
       <h3 class="archive__item-title">E.V.C.P. DaTAker</h3>
-      <div class="archive__item-excerpt">EPDK elektrikli araç şarj istasyonları verilerini api ile alıp, Excel raporlarına dönüştüren araç.</div>
+      <div class="archive__item-excerpt">Elektrikli araç şarj istasyonları verilerini api ile alıp, Excel raporlarına dönüştüren araç.</div>
       <div class="btn-wrapper"><a href="/portfolyo/evcpdataker.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
     </article>
   </div>
 
   <div class="grid__item span-3">
     <article class="archive__item">
-      <div class="archive__item-teaser"><img src="/assets/images/sarjekosistemianaliz.png" alt=""></div>
+      <div class="archive__item-teaser"><img src="/assets/images/ekosistem.png" alt=""></div>
       <h3 class="archive__item-title">E.A. Şarj Ekosistemi Analizi</h3>
       <div class="archive__item-excerpt">Elektrikli araç şarj istasyonlarının çoklu dönem gelişimini gösterir analiz ve raporlama yazılımı.</div>
       <div class="btn-wrapper"><a href="/portfolyo/sarjekosistemianaliz.html" target="_blank" class="btn btn--info btn--small">Detaylar</a></div>
