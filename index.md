@@ -1,6 +1,7 @@
 ---
 layout: single
 title: "Hoş Geldiniz"
+seo_title: "Mustafa Çelik"
 author_profile: true
 header:
   overlay_color: "#000"
