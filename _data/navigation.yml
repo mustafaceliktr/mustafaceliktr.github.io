@@ -1,7 +1,7 @@
 main:
   - title: "Ana Sayfa"
     url: /
-      - title: "Özgeçmiş"
+  - title: "Özgeçmiş"
     url: /cv/
   - title: "Projelerim"
     url: /projects/
