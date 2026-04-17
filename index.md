@@ -1,9 +1,10 @@
 ---
-layout: home
+layout: single
 author_profile: true
 header:
-  overlay_image: "/banner.jpg"
-  caption: "Gelecek, teknoloji ve tecrübenin kesişim noktasında şekilleniyor."
+  overlay_color: "#000"
+  overlay_filter: "0.5"
+  overlay_image: "/banner.jpg" 
 ---
 
 # Hoş Geldiniz
