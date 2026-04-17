@@ -1,3 +1,8 @@
+title: "Mustafa Çelik"
+description: "Deneyimli Satış Profesyoneli & Teknoloji Tutkunu. Projelerim, Python tabanlı uygulamalarım ve hayata dair notlarım."
+url: "https://mustafaceliktr.github.io"
+baseurl: ""
+
 remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 minimal_mistakes_skin: "default"
 
