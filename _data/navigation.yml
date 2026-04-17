@@ -1,9 +1,9 @@
 main:
   - title: "Ana Sayfa"
     url: /
+      - title: "Özgeçmiş"
+    url: /cv/
   - title: "Projelerim"
     url: /projects/
-  - title: "Özgeçmiş"
-    url: /cv/
   - title: "Blog"
     url: /blog/
