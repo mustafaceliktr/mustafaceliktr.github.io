@@ -24,3 +24,9 @@ defaults:
     values:
       layout: single
       author_profile: true
+
+      analytics:
+  provider: "google-gtag"
+  google:
+    tracking_id: "G-R8X1FLQWNQ" # Kopyaladığın G- ile başlayan kodu tırnak içine yapıştır
+    anonymize_ip: false
