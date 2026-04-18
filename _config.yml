@@ -26,7 +26,7 @@ defaults:
       author_profile: true
 
 analytics:
-provider: "google-gtag"
-google:
-tracking_id: "G-R8X1FLQWNQ" # Kopyaladığın G- ile başlayan kodu tırnak içine yapıştır
-anonymize_ip: false
+  provider: "google-gtag"
+  google:
+    tracking_id: "G-BURAYA_KENDI_KODUNU_YAZ"
+    anonymize_ip: false
