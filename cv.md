@@ -11,7 +11,7 @@ author_profile: true
     position: relative;
   }
 
-  /* Butonları tam işaretlediğiniz sağ üst köşeye taşıyan yapı */
+  /* Butonları sağ üst köşeye taşıyan yapı */
   .cv-download-container {
     position: absolute;
     top: -45px; 
@@ -29,7 +29,7 @@ author_profile: true
     color: #fff !important;
     text-decoration: none !important;
     border-radius: 4px;
-    font-size: 0.64rem; /* %15 küçültüldü */
+    font-size: 0.64rem;
     font-weight: 600;
     text-align: center;
     transition: background 0.3s;
@@ -40,25 +40,25 @@ author_profile: true
     background-color: #34495e;
   }
 
-  /* Ana Başlıklar (İş Deneyimleri, Eğitim vb.) */
+  /* Ana Başlıklar */
   .cv-section-title {
     color: #2c3e50;
     border-bottom: 2px solid #3498db;
     padding-bottom: 5px;
     margin-top: 30px;
     margin-bottom: 15px;
-    font-size: 1.1rem !important; /* %15 küçültüldü */
+    font-size: 1.1rem !important;
   }
   
   /* CV Genel Metinleri */
   p, ul li {
-    font-size: 0.76rem !important; /* %15 küçültüldü */
+    font-size: 0.76rem !important;
     line-height: 1.5 !important;
   }
   
   /* İş Pozisyonu Adı */
   .job-title {
-    font-size: 0.89rem !important; /* %15 küçültüldü */
+    font-size: 0.89rem !important;
     font-weight: 600;
     color: #2980b9;
     margin-bottom: 0 !important;
@@ -66,7 +66,7 @@ author_profile: true
   
   /* Şirket Adı ve Tarih */
   .company-date {
-    font-size: 0.72rem !important; /* %15 küçültüldü */
+    font-size: 0.72rem !important;
     color: #7f8c8d;
     font-style: italic;
     margin-top: 2px;
@@ -76,7 +76,7 @@ author_profile: true
   /* İş Açıklaması Paragrafları */
   .job-description {
     text-align: left;
-    font-size: 0.76rem !important; /* %15 küçültüldü */
+    font-size: 0.76rem !important;
     line-height: 1.5;
     margin-bottom: 20px !important;
   }
@@ -84,10 +84,11 @@ author_profile: true
 
 <div class="cv-content">
   <div class="cv-download-container">
-    <a href="#form-alani" class="cv-btn"><i class="fas fa-file-pdf"></i> Türkçe CV İndir</a>
-    <a href="#form-alani" class="cv-btn"><i class="fas fa-file-pdf"></i> Download English CV</a>
+    <a href="#form-alani" class="cv-btn" onclick="setLanguage('tr')"><i class="fas fa-file-pdf"></i> Türkçe CV İndir</a>
+    <a href="#form-alani" class="cv-btn" onclick="setLanguage('en')"><i class="fas fa-file-pdf"></i> Download English CV</a>
   </div>
 
+  ## Özgeçmiş Özeti
   Satış Profesyoneli olarak, satış ve müşteri yönetimi alanında 15 yıllık geniş bir deneyime sahibim. 2008 yılından bu yana, küçük, orta ve büyük ölçekli müşterilerle etkili satış stratejileri geliştirerek, müşteri ihtiyaçlarını anlama ve çözüm odaklı yaklaşımlar sunma konularında başarılı sonuçlar elde ettim.
 
   <h2 class="cv-section-title">İş Deneyimleri</h2>
@@ -143,6 +144,18 @@ Kişisel verilerin güvenliği ve iletişim takibi için lütfen aşağıdaki fo
   
   <input type="submit" value="Bilgileri Gönder ve CV İndir" class="cv-btn" style="width: 100%; cursor: pointer; padding: 12px; margin-top: 10px;">
   
-  <input type="hidden" name="x-sheetmonkey-redirect" value="https://mustafaceliktr.github.io/assets/docs/mustafa_celik_cv_tr.pdf">
+  <input type="hidden" id="pdf-linki" name="x-sheetmonkey-redirect" value="https://mustafaceliktr.github.io/assets/docs/mustafa_celik_cv_tr.pdf">
   
 </form>
+
+<script>
+  function setLanguage(lang) {
+    var linkInput = document.getElementById('pdf-linki');
+    if (lang === 'tr') {
+      linkInput.value = "https://mustafaceliktr.github.io/assets/docs/mustafa_celik_cv_tr.pdf";
+    } else if (lang === 'en') {
+      // Eğer İngilizce PDF'inin adı farklıysa, aşağıdaki kısmı kendi İngilizce dosya adınla değiştirmelisin
+      linkInput.value = "https://mustafaceliktr.github.io/assets/docs/mustafa_celik_cv_en.pdf"; 
+    }
+  }
+</script>
