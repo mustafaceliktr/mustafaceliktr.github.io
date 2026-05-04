@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Özgeçmiş"
+title: ""
 permalink: /cv/
 author_profile: true
 ---
