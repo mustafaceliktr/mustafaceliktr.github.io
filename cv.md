@@ -1,6 +1,7 @@
 ---
 layout: single
 title: "Özgeçmiş"
+permalink: /cv/
 author_profile: true
 ---
 
