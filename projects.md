@@ -1,6 +1,7 @@
 ---
 layout: single
-title: "Özgeçmiş"
+title: "Uygulama Çalışmalarım"
+permalink: /projects/
 author_profile: true
 ---
 
