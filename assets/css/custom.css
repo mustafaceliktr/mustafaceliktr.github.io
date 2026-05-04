@@ -1,0 +1,4 @@
+/* Tüm siteyi görselindeki profesyonel yapıya çeker */
+body, .page__content, .archive__item { font-size: 0.85rem !important; line-height: 1.6 !important; }
+h1, h2, h3, .page__title, .archive__item-title { color: #2c3e50 !important; border-bottom: 2px solid #3498db !important; padding-bottom: 10px !important; }
+.btn, .cv-btn { background-color: #2c3e50 !important; color: #ffffff !important; border-radius: 5px !important; font-size: 0.75rem !important; }
