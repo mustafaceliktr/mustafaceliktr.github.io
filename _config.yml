@@ -1,5 +1,6 @@
-title: "Mustafa Çelik"
-logo: "/assets/images/Mustafa.png"
+title: "mustafaceliktr"
+# Logo root dizininde olduğu için yolunu bu şekilde düzeltiyoruz:
+logo: "/Mustafa.png" 
 remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 minimal_mistakes_skin: "default"
 
@@ -13,19 +14,19 @@ author:
       icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/mustafacelik84"
 
-plugins:
-  - jekyll-remote-theme
-  - jekyll-include-cache
-
+# TÜM SAYFALARI GÖRSELDEKİ STANDARTTA EŞİTLEME
 defaults:
   - scope:
+      path: ""
       type: "pages"
     values:
       layout: "single"
       author_profile: true
+      # Tüm sayfalara o kurumsal banner alanını ekler:
+      header:
+        overlay_color: "#2c3e50"
+        overlay_filter: "0.5"
 
-analytics:
-  provider: "google-gtag"
-  google:
-    tracking_id: "G-BURAYA_KENDI_KODUNU_YAZ"
-    anonymize_ip: false
+plugins:
+  - jekyll-remote-theme
+  - jekyll-include-cache
