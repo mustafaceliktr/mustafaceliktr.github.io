@@ -131,5 +131,5 @@ author_profile: true
 Kişisel verilerin güvenliği için lütfen formu doldurunuz. İndirme bağlantısı, formu gönderdikten hemen sonra ekrandaki onay mesajında belirecektir.
 
 <div style="width: 100%; display: flex; justify-content: center; margin-top: 20px;">
-  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfVdi-zpShrWQcjlOPanQr-dMFtOd0NkDh2SSAdj4l1hyGsOw/viewform?embedded=true" width="%100" height="823" frameborder="0" marginheight="0" marginwidth="0">Yükleniyor…</iframe>
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfVdi-zpShrWQcjlOPanQr-dMFtOd0NkDh2SSAdj4l1hyGsOw/viewform?embedded=true" width="640" height="823" frameborder="0" marginheight="0" marginwidth="0">Yükleniyor…</iframe>
 </div>
