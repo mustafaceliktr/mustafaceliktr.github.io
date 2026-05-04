@@ -1,6 +1,7 @@
 ---
 layout: single
 title: "Özgeçmiş"
+permalink: /blog/
 author_profile: true
 ---
 
