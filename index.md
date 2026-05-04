@@ -9,8 +9,8 @@ seo_title: "Mustafa Çelik"
   /* Ana Sayfa Tanıtım Metni Tasarımı */
   .intro-text {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 1rem;
-    line-height: 1.7;
+    font-size: 0,95rem;
+    line-height: 1.3;
     color: #333333;
     margin-top: 10px;
   }
