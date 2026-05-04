@@ -4,6 +4,57 @@ title: "Uygulama Çalışmalarım"
 permalink: /projects/
 author_profile: true
 ---
+<style>
+  /* Kartları Esnek Hale Getirerek Butonları Aynı Hizaya Çekme */
+  .grid__wrapper {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: stretch !important;
+  }
+  .grid__item {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .archive__item {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    margin-bottom: 0 !important;
+  }
+  
+  /* Metin Hizalaması, Boyut Küçültme ve Kurumsal Düzen */
+  .archive__item-title {
+    font-size: 0.95rem !important; /* %20 küçültüldü */
+    margin-top: 15px !important;
+    text-align: left !important;
+  }
+  
+  .archive__item-excerpt {
+    font-size: 0.75rem !important; /* %20 küçültüldü */
+    line-height: 1.6 !important;
+    text-align: justify !important; /* Dikkati dağıtmayan kurumsal hizalama */
+    flex-grow: 1 !important; /* Açıklama kısa olsa bile butonu aşağı iter */
+    margin-bottom: 20px !important;
+  }
+
+  /* Tüm Butonların Hizasını, Rengini ve Şeklini Eşitleme */
+  .archive__item .btn {
+    margin-top: auto !important; /* Her zaman en alt hizada sabit kalır */
+    font-size: 0.65rem !important;
+    padding: 8px 15px !important;
+    background-color: #2c3e50 !important; /* Özgeçmiş sayfasındaki kurumsal lacivert */
+    border: none !important;
+    color: #fff !important;
+    border-radius: 4px !important; 
+    text-align: center !important;
+    display: inline-block !important;
+    transition: background 0.3s;
+  }
+  
+  .archive__item .btn:hover {
+    background-color: #34495e !important;
+  }
+</style>
 
 <style>
   /* Grid kapsayıcısının esnek olması ve çocukların aynı boyda uzaması için */
