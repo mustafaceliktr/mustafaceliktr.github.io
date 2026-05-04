@@ -11,6 +11,16 @@ author_profile: true
     position: relative;
   }
 
+  /* Sayfa başlığını ve altındaki çizgiyi tamamen gizle */
+.page__title {
+  display: none !important;
+}
+
+.page__header {
+  border-bottom: none !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
   /* Butonları sağ üst köşeye taşıyan yapı */
   .cv-download-container {
     position: absolute;
