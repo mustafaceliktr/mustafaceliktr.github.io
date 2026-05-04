@@ -128,18 +128,8 @@ author_profile: true
 <hr id="form-alani">
 
 Özgeçmişi İndirmek İçin Bilgilerinizi Paylaşın
-Kişisel verilerin güvenliği için lütfen aşağıdaki formu doldurunuz. İndirme bağlantısı form gönderildikten sonra açılacaktır.
+Kişisel verilerin güvenliği ve paylaşım takibi için lütfen aşağıdaki formu doldurunuz. İndirme bağlantısı, formu gönderdikten hemen sonra ekranda belirecektir.
 
-<form action="https://formspree.io/f/mojrerve" method="POST" style="max-width: 400px;">
-  <label>Adınız Soyadınız:</label>
-  <input type="text" name="name" required style="width: 100%; margin-bottom: 10px;">
-  
-  <label>E-posta Adresiniz:</label>
-  <input type="email" name="_replyto" required style="width: 100%; margin-bottom: 10px;">
-  
-  <label>Telefon Numaranız:</label>
-  <input type="tel" name="phone" required style="width: 100%; margin-bottom: 10px;">
-  
-  <input type="submit" value="Bilgileri Gönder ve CV İndir" class="cv-btn" style="width: 100%; cursor: pointer;">
-  <input type="hidden" name="_next" value="https://mustafaceliktr.github.io/assets/docs/mustafa_celik_cv_tr.pdf">
-</form>
+<div style="width: 100%; display: flex; justify-content: center; margin-top: 20px;">
+  <iframe src="SENIN_GOOGLE_FORM_LINKIN" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Yükleniyor…</iframe>
+</div>
