@@ -19,10 +19,9 @@ plugins:
 
 defaults:
   - scope:
-      path: ""
-      type: posts
+      type: "pages"
     values:
-      layout: single
+      layout: "single"
       author_profile: true
 
 analytics:
