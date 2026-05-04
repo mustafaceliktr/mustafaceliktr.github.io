@@ -88,7 +88,6 @@ author_profile: true
     <a href="#form-alani" class="cv-btn"><i class="fas fa-file-pdf"></i> Download English CV</a>
   </div>
 
-  ## Özgeçmiş Özeti
   Satış Profesyoneli olarak, satış ve müşteri yönetimi alanında 15 yıllık geniş bir deneyime sahibim. 2008 yılından bu yana, küçük, orta ve büyük ölçekli müşterilerle etkili satış stratejileri geliştirerek, müşteri ihtiyaçlarını anlama ve çözüm odaklı yaklaşımlar sunma konularında başarılı sonuçlar elde ettim.
 
   <h2 class="cv-section-title">İş Deneyimleri</h2>
