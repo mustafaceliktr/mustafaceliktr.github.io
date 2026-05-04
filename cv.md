@@ -127,7 +127,7 @@ author_profile: true
 <br><br>
 <hr id="form-alani">
 
-### Özgeçmişi İndirmek İçin Bilgilerinizi Paylaşın
+Özgeçmişi İndirmek İçin Bilgilerinizi Paylaşın
 Kişisel verilerin güvenliği için lütfen aşağıdaki formu doldurunuz. İndirme bağlantısı form gönderildikten sonra açılacaktır.
 
 <form action="https://formspree.io/f/mojrerve" method="POST" style="max-width: 400px;">
