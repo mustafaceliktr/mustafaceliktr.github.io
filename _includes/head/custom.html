@@ -1,34 +1,51 @@
 <style>
-  /* 1. Logoyu Büyütme */
+  /* 1. Logoyu Tekrar Büyütme ve Vurgulama */
   .site-logo img {
-    max-height: 100px !important; /* İmza logo olduğu için 100px idealdir */
+    max-height: 200px !important; /* Logonu tekrar belirgin hale getirdik */
     width: auto !important;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
+    display: block;
   }
 
-  /* 2. Logonun Altına Slogan Ekleme */
+  /* 2. Sloganı Küçük ve Zarif Hale Getirme */
   .site-logo:after {
     content: "Gelecek, tecrübe ve teknolojinin kesişim noktasında şekilleniyor";
     display: block;
-    font-size: 0.75rem; /* Slogan boyutu */
+    font-size: 0.45rem !important; /* Metni oldukça küçülterek logoyu rahatlattık */
     font-weight: 400;
-    color: #666; /* Şık bir gri tonu */
+    color: #888; /* Daha yumuşak bir gri tonu */
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    line-height: 1.2;
-    margin-top: 5px;
-    letter-spacing: 0.5px;
+    line-height: 1.1;
+    margin-top: 0px;
+    letter-spacing: 0.3px;
   }
 
-  /* 3. Banner Gidince Oluşan Boşluğu Kapatma (İçeriği Yukarı Çekme) */
-  .initial-content {
-    margin-top: 0 !important;
+  /* 3. Sol Profil Alanını (İsim ve Bio) Küçültme */
+  .author__name {
+    font-size: 1.1rem !important;
+    margin-top: 10px !important;
   }
-  .page__inner-wrap {
-    margin-top: -20px !important;
+  
+  .author__bio {
+    font-size: 0.8rem !important;
+    line-height: 1.3 !important;
+    color: #666 !important;
+  }
+  
+  .author__urls li {
+    font-size: 0.8rem !important;
   }
 
   /* 4. Menüdeki Metin Başlığını Gizle */
   .site-title {
     display: none !important;
+  }
+
+  /* 5. Sayfa Boşluklarını Düzenleme (İçeriği Yukarı Çekme) */
+  .initial-content {
+    margin-top: 0 !important;
+  }
+  .page__inner-wrap {
+    margin-top: -30px !important;
   }
 </style>
