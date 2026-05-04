@@ -18,7 +18,7 @@ seo_title: "Mustafa Çelik"
 
 <div class="intro-text">
   <p>Merhaba, web siteme hoş geldiniz.</p>
-  <p>15 yıllık kurumsal satış tecrübemi, Yapay Zeka ve Python (Vibe Coding) dünyasıyla harmanlayarak geleceğin iş modellerini tasarlıyorum...</p>
+  <p>15 yıllık kurumsal satış tecrübemi ve güncel gelişmelere olan merakımı yapay zeka dünyasıyla harmanlayarak geleceğin iş modellerini tasarlıyorum...</p>
 </div>
 
 <div class="intro-text">
