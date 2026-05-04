@@ -1,20 +1,12 @@
-title: "mustafaceliktr"
-# Logo root dizininde olduğu için yolunu bu şekilde düzeltiyoruz:
-logo: "/Mustafa.png" 
-remote_theme: "mmistakes/minimal-mistakes@4.24.0"
-minimal_mistakes_skin: "default"
+# Site Ayarları
+title: "Mustafa Çelik"
+logo: "/assets/images/Mustafa.png" # Logonun bu yolda olduğunu teyit et
+teaser: "/assets/images/Mustafa.png"
 
-author:
-  name: "Mustafa Çelik"
-  avatar: "/profile.jpg"
-  bio: "Satış Yönetimi | AI Meraklısı | Vibe Coding"
-  location: "İstanbul, Türkiye"
-  links:
-    - label: "LinkedIn"
-      icon: "fab fa-fw fa-linkedin"
-      url: "https://www.linkedin.com/in/mustafacelik84"
+# Masthead (Üst Bilgi) Ayarları
+minimal_mistakes_skin: "default" # Kendi özel CSS'imizi kullanacağız
 
-# TÜM SAYFALARI GÖRSELDEKİ STANDARTTA EŞİTLEME
+# Varsayılanlar
 defaults:
   - scope:
       path: ""
@@ -22,11 +14,9 @@ defaults:
     values:
       layout: "single"
       author_profile: true
-      # Tüm sayfalara o kurumsal banner alanını ekler:
-      header:
-        overlay_color: "#2c3e50"
-        overlay_filter: "0.5"
+      share: true
+      related: true
 
-plugins:
-  - jekyll-remote-theme
-  - jekyll-include-cache
+# Dosya yollarını temiz tutmak için
+include:
+  - _pages
