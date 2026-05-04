@@ -11,11 +11,6 @@ author_profile: true
     position: relative;
   }
 
-  /* Sayfa başlığını ve altındaki çizgiyi tamamen gizle */
-.page__title {
-  display: none !important;
-}
-
 .page__header {
   border-bottom: none !important;
   margin-bottom: 0 !important;
@@ -32,6 +27,10 @@ author_profile: true
     z-index: 10;
   }
   
+  /* Sayfa başlığını ve altındaki çizgiyi tamamen gizle */
+.page__title {
+  display: none !important;
+}
   .cv-btn {
     display: inline-block;
     padding: 8px 15px; 
