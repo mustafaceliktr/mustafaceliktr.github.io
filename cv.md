@@ -127,9 +127,22 @@ author_profile: true
 <br><br>
 <hr id="form-alani">
 
-Özgeçmişi İndirmek İçin Bilgilerinizi Paylaşın
-Kişisel verilerin güvenliği için lütfen formu doldurunuz. İndirme bağlantısı, formu gönderdikten hemen sonra ekrandaki onay mesajında belirecektir.
+### Özgeçmişi İndirmek İçin Bilgilerinizi Paylaşın
+Kişisel verilerin güvenliği ve iletişim takibi için lütfen aşağıdaki formu doldurunuz. İndirme bağlantısı form gönderildikten sonra doğrudan açılacaktır.
 
-<div style="width: 100%; display: flex; justify-content: center; margin-top: 20px;">
-  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfVdi-zpShrWQcjlOPanQr-dMFtOd0NkDh2SSAdj4l1hyGsOw/viewform?embedded=true" width="640" height="823" frameborder="0" marginheight="0" marginwidth="0">Yükleniyor…</iframe>
-</div>
+<form action="https://api.sheetmonkey.io/form/vkzVxiCPicRA18yL4ezYdc" method="POST" style="max-width: 400px;">
+  
+  <label>Adınız Soyadınız:</label>
+  <input type="text" name="Ad Soyad" required style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+  
+  <label>E-posta Adresiniz:</label>
+  <input type="email" name="E-posta" required style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+  
+  <label>Telefon Numaranız:</label>
+  <input type="tel" name="Telefon" required style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+  
+  <input type="submit" value="Bilgileri Gönder ve CV İndir" class="cv-btn" style="width: 100%; cursor: pointer; padding: 12px; margin-top: 10px;">
+  
+  <input type="hidden" name="x-sheetmonkey-redirect" value="https://mustafaceliktr.github.io/assets/docs/mustafa_celik_cv_tr.pdf">
+  
+</form>
