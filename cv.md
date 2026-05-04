@@ -6,37 +6,26 @@ author_profile: true
 ---
 
 <style>
-  /* Sayfa kapsayıcısını butonların hizalanması için referans noktası yapıyoruz */
-  .page__inner-wrap {
-    position: relative;
+  /* Sayfa genelindeki başlık ve çizgi gizleme ayarları */
+  .page__title {
+    display: none !important;
+  }
+  .page__header {
+    border-bottom: none !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
   }
 
-.page__header {
-  border-bottom: none !important;
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-}
-  /* Butonları sağ üst köşeye taşıyan yapı */
+  /* Butonlar ve Konumlandırma */
   .cv-download-container {
     position: absolute;
-    top: -20px; 
+    top: -20px !important; 
     right: 0;
     display: flex;
     flex-direction: row; 
     gap: 10px;
     z-index: 10;
   }
-  
-  /* 2. İçeriğin (Özgeçmiş Özeti'nin) en üste yapışmaması için bir boşluk bırakıyoruz */
-.cv-content {
-  margin-top: 50px !important;
-  position: relative;
-}
-  
-  /* Sayfa başlığını ve altındaki çizgiyi tamamen gizle */
-.page__title {
-  display: none !important;
-}
   .cv-btn {
     display: inline-block;
     padding: 8px 15px; 
@@ -44,80 +33,60 @@ author_profile: true
     color: #fff !important;
     text-decoration: none !important;
     border-radius: 4px;
-    font-size: 0.64rem;
+    font-size: 0.60rem !important; /* Buton metni */
     font-weight: 600;
     text-align: center;
     transition: background 0.3s;
     white-space: nowrap;
   }
 
-  .cv-btn:hover {
-    background-color: #34495e;
+  /* İçerik Boşluğu */
+  .cv-content {
+    margin-top: 50px !important;
+    position: relative;
   }
 
-  /* Ana Başlıklar */
-  .cv-section-title {
+  /* Ana Bölüm Başlıkları (İş Deneyimleri, Eğitim Bilgileri, Özgeçmiş Özeti h2 vb.) */
+  .cv-section-title, .ozet-alani h2 {
     color: #2c3e50;
     border-bottom: 2px solid #3498db;
     padding-bottom: 5px;
-    margin-top: 30px;
+    margin-top: 25px;
     margin-bottom: 15px;
-    font-size: 1.1rem !important;
+    font-size: 0.95rem !important; /* Özetteki başlık boyutu */
   }
   
-  /* CV Genel Metinleri */
-  p, ul li {
-    font-size: 0.76rem !important;
+  /* Genel Paragraflar ve Listeler (Tüm açıklama metinleri) */
+  p, ul li, .ozet-alani p, .job-description {
+    font-size: 0.70rem !important; /* Özetteki paragraf boyutu */
     line-height: 1.5 !important;
   }
   
-  /* İş Pozisyonu Adı */
+  /* İş Pozisyonu Adı (Ufak bir vurgu farkı için) */
   .job-title {
-    font-size: 0.89rem !important;
+    font-size: 0.80rem !important; 
     font-weight: 600;
     color: #2980b9;
     margin-bottom: 0 !important;
   }
   
-  /* Şirket Adı ve Tarih */
+  /* Şirket Adı ve Tarih (Biraz daha silik ve küçük) */
   .company-date {
-    font-size: 0.72rem !important;
+    font-size: 0.65rem !important;
     color: #7f8c8d;
     font-style: italic;
     margin-top: 2px;
     margin-bottom: 10px;
   }
-  
-  /* İş Açıklaması Paragrafları */
-  .job-description {
-    text-align: left;
-    font-size: 0.76rem !important;
-    line-height: 1.5;
-    margin-bottom: 20px !important;
-  }
-  /* 1. Sadece "Özgeçmiş Özeti" Başlığı ve Paragrafı İçin Küçültme */
-  .ozet-alani h2 {
-    font-size: 0.95rem !important;
-    margin-bottom: 5px !important;
-    margin-top: 20px !important;
-  }
-  .ozet-alani p {
-    font-size: 0.70rem !important; /* Genel metinden daha küçük */
-    line-height: 1.4 !important;
-  }
 
-  /* 2. Sadece Form (Anket) Alanındaki Metinler İçin Küçültme */
+  /* Form (Anket) Alanı Fontları */
   .form-alani h3 {
     font-size: 0.85rem !important;
-    margin-bottom: 5px !important;
   }
-  .form-alani p, 
-  .form-alani label, 
-  .form-alani input {
+  .form-alani label, .form-alani input {
     font-size: 0.70rem !important;
   }
 </style>
-
 <div class="cv-content">
   <div class="cv-download-container">
     <a href="#form-alani" class="cv-btn" onclick="setLanguage('tr')"><i class="fas fa-file-pdf"></i> Türkçe CV İndir</a>
