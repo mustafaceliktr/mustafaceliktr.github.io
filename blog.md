@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Özgeçmiş"
+title: "Blog"
 permalink: /blog/
 author_profile: true
 ---
