@@ -6,36 +6,38 @@ author_profile: true
 ---
 
 <style>
-  /* Butonları sağa hizalayan ve dikey dizen yapı */
+  /* Sayfa kapsayıcısını butonların hizalanması için referans noktası yapıyoruz */
+  .page__inner-wrap {
+    position: relative;
+  }
+
+  /* Butonları tam işaretlediğiniz sağ üst köşeye taşıyan yapı */
   .cv-download-container {
-    float: right;
+    position: absolute;
+    top: -45px; 
+    right: 0;
     display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-left: 30px;
-    margin-bottom: 20px;
+    flex-direction: row; 
+    gap: 10px;
+    z-index: 10;
   }
   
   .cv-btn {
     display: inline-block;
-    padding: 12px 20px;
+    padding: 8px 15px; 
     background-color: #2c3e50;
     color: #fff !important;
     text-decoration: none !important;
-    border-radius: 5px;
-    font-size: 0.85rem;
+    border-radius: 4px;
+    font-size: 0.64rem; /* %15 küçültüldü */
     font-weight: 600;
     text-align: center;
     transition: background 0.3s;
+    white-space: nowrap;
   }
 
   .cv-btn:hover {
     background-color: #34495e;
-  }
-
-  /* Formun ve sayfanın genel yerleşimi için temizlik */
-  .cv-content {
-    overflow: hidden; /* float'ın sayfayı bozmamasını sağlar */
   }
 
   /* Ana Başlıklar (İş Deneyimleri, Eğitim vb.) */
@@ -45,18 +47,18 @@ author_profile: true
     padding-bottom: 5px;
     margin-top: 30px;
     margin-bottom: 15px;
-    font-size: 1.3rem !important; /* Biraz küçültüldü */
+    font-size: 1.1rem !important; /* %15 küçültüldü */
   }
   
-  /* CV Genel Metinleri (Özet, Hobiler, Madde İşaretleri) */
+  /* CV Genel Metinleri */
   p, ul li {
-    font-size: 0.9rem !important; /* Standart metin boyutu küçültüldü */
+    font-size: 0.76rem !important; /* %15 küçültüldü */
     line-height: 1.5 !important;
   }
   
   /* İş Pozisyonu Adı */
   .job-title {
-    font-size: 1.05rem !important; /* 1.2rem'den 1.05rem'e düşürüldü */
+    font-size: 0.89rem !important; /* %15 küçültüldü */
     font-weight: 600;
     color: #2980b9;
     margin-bottom: 0 !important;
@@ -64,7 +66,7 @@ author_profile: true
   
   /* Şirket Adı ve Tarih */
   .company-date {
-    font-size: 0.85rem !important; /* 0.95rem'den 0.85rem'e düşürüldü */
+    font-size: 0.72rem !important; /* %15 küçültüldü */
     color: #7f8c8d;
     font-style: italic;
     margin-top: 2px;
@@ -74,7 +76,7 @@ author_profile: true
   /* İş Açıklaması Paragrafları */
   .job-description {
     text-align: left;
-    font-size: 0.9rem !important; /* 0.95rem'den 0.9rem'e düşürüldü */
+    font-size: 0.76rem !important; /* %15 küçültüldü */
     line-height: 1.5;
     margin-bottom: 20px !important;
   }
@@ -87,20 +89,20 @@ author_profile: true
   </div>
 
   ## Özgeçmiş Özeti
-  Satış Profesyoneli olarak, satış ve müşteri yönetimi alanında 15 yıllık geniş bir deneyime sahibim. 2008 yılından bu yana, küçük, orta ve büyük ölçekli müşterilerle etkili satış stratejileri geliştirerek, müşteri ihtiyaçlarını anlama ve çözüm odaklı yaklaşımlar sunma konularında başarılı sonuçlar elde ettim. İş süreçlerini optimize etme becerim sayesinde, müşteri memnuniyetini artırarak şirket hedeflerine ulaşılmasına katkı sağladım.
+  Satış Profesyoneli olarak, satış ve müşteri yönetimi alanında 15 yıllık geniş bir deneyime sahibim. 2008 yılından bu yana, küçük, orta ve büyük ölçekli müşterilerle etkili satış stratejileri geliştirerek, müşteri ihtiyaçlarını anlama ve çözüm odaklı yaklaşımlar sunma konularında başarılı sonuçlar elde ettim.
 
   <h2 class="cv-section-title">İş Deneyimleri</h2>
 
   <div class="job-item">
     <p class="job-title">Satış Yöneticisi</p>
     <p class="company-date">Zebra Electronics | Eylül 2024 - Ocak 2026</p>
-    <p class="job-description">Şirketin ürettiği DC/AC elektrikli araç şarj ünitelerinin lisanslı CPO (Şarj Ağı İşletmecisi) ve B2B müşterilerine satışını gerçekleştirdim. CPO yazılımı ve çağrı merkezi hizmetlerinin satışını yaparak müşteri ihtiyaçlarını analiz ettim, teknik ve ticari çözümler sundum. Aylık 80.000 USD düzenli ciro elde ederek toplamda 2 milyon USD değerinde sözleşmeler imzaladım.</p>
+    <p class="job-description">DC/AC şarj üniteleri satışı ve CPO yazılım çözümleri süreçlerini yönettim. Toplamda 2 milyon USD değerinde sözleşme yönetimi gerçekleştirdim.</p>
   </div>
 
   <div class="job-item">
     <p class="job-title">Kurumsal Satış Yöneticisi</p>
     <p class="company-date">Bizim Toptan Satış Mağazaları | Nisan 2022 - Mayıs 2024</p>
-    <p class="job-description">Aylık ortalama %30 düzenli ciro artışı ve sürekli yeni müşteri kazanımı sağladım. 300+ çalışana sahip kurumsal firmaların, akaryakıt istasyonlarının ve restoran zincirlerinin gıda/gıda dışı ürün tedarik operasyonlarını planlayarak maliyet optimizasyonu ve tedarik zinciri verimliliği sağladım.</p>
+    <p class="job-description">300+ çalışana sahip kurumsal firmaların tedarik operasyonlarını planlayarak maliyet optimizasyonu sağladım.</p>
   </div>
 
   <div class="job-item">
@@ -118,19 +120,8 @@ author_profile: true
   <h2 class="cv-section-title">Eğitim Bilgileri</h2>
   <ul>
     <li><strong>Marmara Üniversitesi</strong> - Teknoloji Fakültesi, Elektrik Öğretmenliği (Eylül 2023 - Devam ediyor)</li>
-    <li><strong>Conley Üniversitesi</strong> - İşletme Yönetimi, Lisans (Eylül 2020 - Haziran 2022)</li>
+    <li><strong>Conley Üniversitesi</strong> - İşletme Yönetimi, Lisans (2020 - 2022)</li>
   </ul>
-
-  <h2 class="cv-section-title">Teknik ve Profesyonel Yetenekler</h2>
-  <ul>
-    <li><strong>Satış & İş Geliştirme:</strong> Kurumsal Pazarlama, Çözüm Satışı, Saha Satış, Müşteri İlişkileri ve Memnuniyeti, Süreç Yönetimi.</li>
-    <li><strong>Teknoloji & Yazılım:</strong> Yapay Zeka (Vibe Coding), Python (Veri Çekme & Raporlama), SAP HANA, Oracle, ERP, Autocad.</li>
-    <li><strong>Araçlar:</strong> Microsoft Office Programları (İleri Düzey Excel, Word, PowerPoint).</li>
-  </ul>
-
-  <h2 class="cv-section-title">Hobi ve İlgi Alanları</h2>
-  <p>Yapay zeka asistanları üzerinden Vibe Coding ile çeşitli masaüstü ve mobil uygulamalar geliştirmek. 
-  Detaylar için Projeler sayfasına bakabilirsiniz.</p>
 
 </div>
 
@@ -138,7 +129,7 @@ author_profile: true
 <hr id="form-alani">
 
 ### Özgeçmişi İndirmek İçin Bilgilerinizi Paylaşın
-Kişisel verilerin güvenliği ve paylaşım takibi için lütfen aşağıdaki formu doldurunuz. İndirme bağlantısı form gönderildikten sonra doğrudan açılacaktır.
+Kişisel verilerin güvenliği için lütfen aşağıdaki formu doldurunuz. İndirme bağlantısı form gönderildikten sonra açılacaktır.
 
 <form action="https://formspree.io/f/mojrerve" method="POST" style="max-width: 400px;">
   <label>Adınız Soyadınız:</label>
@@ -151,6 +142,5 @@ Kişisel verilerin güvenliği ve paylaşım takibi için lütfen aşağıdaki f
   <input type="tel" name="phone" required style="width: 100%; margin-bottom: 10px;">
   
   <input type="submit" value="Bilgileri Gönder ve CV İndir" class="cv-btn" style="width: 100%; cursor: pointer;">
-  
   <input type="hidden" name="_next" value="https://mustafaceliktr.github.io/assets/docs/mustafa_celik_cv_tr.pdf">
 </form>
