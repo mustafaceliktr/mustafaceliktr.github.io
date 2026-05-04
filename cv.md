@@ -19,13 +19,19 @@ author_profile: true
   /* Butonları sağ üst köşeye taşıyan yapı */
   .cv-download-container {
     position: absolute;
-    top: -45px; 
+    top: -20px; 
     right: 0;
     display: flex;
     flex-direction: row; 
     gap: 10px;
     z-index: 10;
   }
+  
+  /* 2. İçeriğin (Özgeçmiş Özeti'nin) en üste yapışmaması için bir boşluk bırakıyoruz */
+.cv-content {
+  margin-top: 50px !important;
+  position: relative;
+}
   
   /* Sayfa başlığını ve altındaki çizgiyi tamamen gizle */
 .page__title {
