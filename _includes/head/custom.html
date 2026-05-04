@@ -1,12 +1,33 @@
 <style>
-  /* Menüdeki Logoyu Büyütme Ayarı */
+  /* 1. Logoyu Büyütme */
   .site-logo img {
-    max-height: 200px !important; /* Logonun yüksekliği. İstersen 150px filan da yapabilirsin */
+    max-height: 100px !important; /* İmza logo olduğu için 100px idealdir */
     width: auto !important;
-    margin-top: -25px; /* Logoyu dikeyde biraz ortalamak için */
+    margin-bottom: 5px;
   }
-  
-  /* Logonun yanındaki metni (Site Title) tamamen gizle */
+
+  /* 2. Logonun Altına Slogan Ekleme */
+  .site-logo:after {
+    content: "Gelecek, tecrübe ve teknolojinin kesişim noktasında şekilleniyor";
+    display: block;
+    font-size: 0.75rem; /* Slogan boyutu */
+    font-weight: 400;
+    color: #666; /* Şık bir gri tonu */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.2;
+    margin-top: 5px;
+    letter-spacing: 0.5px;
+  }
+
+  /* 3. Banner Gidince Oluşan Boşluğu Kapatma (İçeriği Yukarı Çekme) */
+  .initial-content {
+    margin-top: 0 !important;
+  }
+  .page__inner-wrap {
+    margin-top: -20px !important;
+  }
+
+  /* 4. Menüdeki Metin Başlığını Gizle */
   .site-title {
     display: none !important;
   }
