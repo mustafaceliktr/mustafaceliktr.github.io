@@ -80,6 +80,27 @@ author_profile: true
     line-height: 1.5;
     margin-bottom: 20px !important;
   }
+  /* 1. Sadece "Özgeçmiş Özeti" Başlığı ve Paragrafı İçin Küçültme */
+  .ozet-alani h2 {
+    font-size: 0.95rem !important;
+    margin-bottom: 5px !important;
+    margin-top: 20px !important;
+  }
+  .ozet-alani p {
+    font-size: 0.70rem !important; /* Genel metinden daha küçük */
+    line-height: 1.4 !important;
+  }
+
+  /* 2. Sadece Form (Anket) Alanındaki Metinler İçin Küçültme */
+  .form-alani h3 {
+    font-size: 0.85rem !important;
+    margin-bottom: 5px !important;
+  }
+  .form-alani p, 
+  .form-alani label, 
+  .form-alani input {
+    font-size: 0.70rem !important;
+  }
 </style>
 
 <div class="cv-content">
@@ -88,8 +109,10 @@ author_profile: true
     <a href="#form-alani" class="cv-btn" onclick="setLanguage('en')"><i class="fas fa-file-pdf"></i> Download English CV</a>
   </div>
 
-  ## Özgeçmiş Özeti
-  Satış Profesyoneli olarak, satış ve müşteri yönetimi alanında 15 yıllık geniş bir deneyime sahibim. 2008 yılından bu yana, küçük, orta ve büyük ölçekli müşterilerle etkili satış stratejileri geliştirerek, müşteri ihtiyaçlarını anlama ve çözüm odaklı yaklaşımlar sunma konularında başarılı sonuçlar elde ettim.
+ <div class="ozet-alani">
+    <h2>Özgeçmiş Özeti</h2>
+    <p>Satış Profesyoneli olarak, satış ve müşteri yönetimi alanında 15 yıllık geniş bir deneyime sahibim. 2008 yılından bu yana, küçük, orta ve büyük ölçekli müşterilerle etkili satış stratejileri geliştirerek, müşteri ihtiyaçlarını anlama ve çözüm odaklı yaklaşımlar sunma konularında başarılı sonuçlar elde ettim.</p>
+  </div>
 
   <h2 class="cv-section-title">İş Deneyimleri</h2>
 
@@ -125,28 +148,26 @@ author_profile: true
 
 </div>
 
-<br><br>
-<hr id="form-alani">
+<div class="form-alani">
+  <h3>Özgeçmişi İndirmek İçin Bilgilerinizi Paylaşın</h3>
+  <p>Kişisel verilerin güvenliği ve iletişim takibi için lütfen aşağıdaki formu doldurunuz. İndirme bağlantısı form gönderildikten sonra doğrudan açılacaktır.</p>
 
-### Özgeçmişi İndirmek İçin Bilgilerinizi Paylaşın
-Kişisel verilerin güvenliği ve iletişim takibi için lütfen aşağıdaki formu doldurunuz. İndirme bağlantısı form gönderildikten sonra doğrudan açılacaktır.
-
-<form action="https://api.sheetmonkey.io/form/vkzVxiCPicRA18yL4ezYdc" method="POST" style="max-width: 400px;">
-  
-  <label>Adınız Soyadınız:</label>
-  <input type="text" name="Ad Soyad" required style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
-  
-  <label>E-posta Adresiniz:</label>
-  <input type="email" name="E-posta" required style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
-  
-  <label>Telefon Numaranız:</label>
-  <input type="tel" name="Telefon" required style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
-  
-  <input type="submit" value="Bilgileri Gönder ve CV İndir" class="cv-btn" style="width: 100%; cursor: pointer; padding: 12px; margin-top: 10px;">
-  
-  <input type="hidden" id="pdf-linki" name="x-sheetmonkey-redirect" value="https://mustafaceliktr.github.io/assets/docs/mustafa_celik_cv_tr.pdf">
-  
-</form>
+  <form action="https://api.sheetmonkey.io/form/vkzVxiCPicRA18yL4ezYdc" method="POST" style="max-width: 400px;">
+    
+    <label>Adınız Soyadınız:</label>
+    <input type="text" name="Ad Soyad" required style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+    
+    <label>E-posta Adresiniz:</label>
+    <input type="email" name="E-posta" required style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+    
+    <label>Telefon Numaranız:</label>
+    <input type="tel" name="Telefon" required style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+    
+    <input type="submit" value="Bilgileri Gönder ve CV İndir" class="cv-btn" style="width: 100%; cursor: pointer; padding: 12px; margin-top: 10px;">
+    
+    <input type="hidden" id="pdf-linki" name="x-sheetmonkey-redirect" value="https://mustafaceliktr.github.io/assets/docs/mustafa_celik_cv_tr.pdf">
+  </form>
+</div>
 
 <script>
   function setLanguage(lang) {
