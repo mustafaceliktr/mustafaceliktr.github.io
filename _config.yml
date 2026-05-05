@@ -1,10 +1,16 @@
-# Tema Ayarları (Bu kısım hatayı çözecek olan kısımdır)
-remote_theme: "mmistakes/minimal-mistakes@4.24.4" # Versiyonu sabitlemek iyidir
+# Tema Ayarları
+remote_theme: "mmistakes/minimal-mistakes" # Versiyon takısı olmadan en sağlıklısıdır
 minimal_mistakes_skin: "default"
 
-# Eski veya çakışan tema satırları varsa SİL:
-# theme: jekyll-theme-primer (Bunu mutlaka sil!)
-# theme: minimal-mistakes-jekyll (Bunu da sil!)
+# Plugins (Eklentiler)
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jekyll-include-cache
+  - jekyll-remote-theme # Bu satırın olduğundan emin ol!
+  
 # Site Ayarları
 title: "Mustafa Çelik"
 logo: "/assets/images/Mustafa.png" # Logonun bu yolda olduğunu teyit et
