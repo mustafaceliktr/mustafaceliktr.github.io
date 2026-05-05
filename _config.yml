@@ -33,3 +33,19 @@ defaults:
 # Dosya yollarını temiz tutmak için
 include:
   - _pages
+
+# SEO Ayarları
+description: "Mustafa Çelik - Kişisel Portfolyo ve Özgeçmiş"
+url: "https://mustafaceliktr.github.io"
+author:
+  name: "Mustafa Çelik"
+  links:
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/in/kullaniciadin" # Burayı güncelle
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/mustafaceliktr"
+
+# Sosyal Paylaşım Görseli
+og_image: "/assets/images/Mustafa.png" # Link paylaşıldığında görünecek resim
