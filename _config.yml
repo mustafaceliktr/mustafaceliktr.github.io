@@ -49,3 +49,10 @@ author:
 
 # Sosyal Paylaşım Görseli
 og_image: "/assets/images/Mustafa.png" # Link paylaşıldığında görünecek resim
+
+footer:
+  links:
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/in/kullaniciadin"
+  copyright: "© 2026 Mustafa Çelik. Tüm hakları saklıdır."
