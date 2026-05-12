@@ -1,53 +1,40 @@
 /* ============================================================
-   MUSTAFA ÇELİK - GÖRSEL DÜZENLEME ADIM 3: LOGO ODAKLI HEADER
+   MUSTAFA ÇELİK - GÖRSEL DÜZENLEME ADIM 4: LOGO BÜYÜTME
    ============================================================ */
 
-/* 1. "Mustafa Çelik" Metnini Kaldır */
+/* 1. Logoyu Belirginleştir ve Boyutlandır */
+.site-logo img {
+  max-height: 120px !important; /* 60px'den 120px'e çıkardık, ihtiyaca göre artırabilirsin */
+  width: auto !important;
+  display: block !important;
+  transition: all 0.3s ease;
+}
+
+/* 2. Header Alanını Logo Boyutuna Göre Esnet */
+.masthead__inner-wrap {
+  padding: 20px 0 !important; /* Logonun nefes alması için üst-alt boşluk */
+  background-color: transparent !important;
+}
+
+/* 3. İsim Metnini Kapalı Tutmaya Devam */
 .site-title {
   display: none !important;
 }
 
-/* 2. Logo Alanını Düzenle */
-.site-logo {
-  display: inline-block !important;
-  margin-bottom: 0 !important;
-}
-
-.site-logo img {
-  max-height: 60px !important; /* Logonu buradaki değeri değiştirerek büyütebilirsin */
-  width: auto !important;
-  transition: transform 0.3s ease;
-}
-
-/* 3. Header Alanı ve Çizgisiz Saf Görünüm */
-header.masthead, 
-.masthead, 
-.masthead__inner-wrap, 
-.site-nav, 
-.greedy-nav {
-  background-color: #ffffff !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-.masthead__inner-wrap {
-  padding: 10px 0 !important;
-}
-
-/* 4. Menü Linkleri (Koyu ve Net) */
-.masthead__menu-item a, 
-.greedy-nav a {
+/* 4. Menü Linklerini Hizala */
+.masthead__menu-item a {
   color: #333333 !important;
   font-weight: 500 !important;
+  vertical-align: middle;
 }
 
-/* 5. Global Font (0.70rem Sabiti) */
-body, p, li, table, div, article, .page__content p, .page__content li {
+/* 5. Global Standartlar (0.70rem) */
+body, p, li, table, div, article {
   font-size: 0.70rem !important;
   line-height: 1.6 !important;
 }
 
-/* 6. Sol Bar (Sidebar) Düzenlemesi */
+/* 6. Sol Bar Hizalaması */
 .author__content {
   display: flex !important;
   flex-direction: column !important;
