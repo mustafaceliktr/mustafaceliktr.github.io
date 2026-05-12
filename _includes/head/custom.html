@@ -4,78 +4,10 @@
   document.addEventListener("DOMContentLoaded", function() {
     var links = document.querySelectorAll('.author__urls a, .footer__urls a, .page__content a');
     for (var i = 0; i < links.length; i++) {
+      // Eğer link senin sitene ait değilse yeni sekmede aç
       if (links[i].hostname !== window.location.hostname && links[i].href.includes('http')) {
         links[i].target = '_blank';
         links[i].rel = 'noopener noreferrer';
-      }
-    }
-  });
-</script>
-
-<style>
-  /* TÜM SİTE GENELİ KARAKTER BOYUTU AYARLARI (CV STANDARTI) */
-
-  /* 1. Genel Metinler, Listeler ve Proje Açıklamaları */
-  .page__content p, 
-  .page__content li, 
-  .archive__item-excerpt,
-  .sidebar p,
-  .sidebar li {
-    font-size: 0.70rem !important;
-    line-height: 1.5 !important;
-    text-align: justify; /* Daha kurumsal bir görünüm için */
-  }
-
-  /* 2. Ana Başlıklar (Sayfa içi H2 başlıkları ve Proje İsimleri) */
-  .page__content h2, 
-  .archive__item-title {
-    font-size: 0.95rem !important;
-    color: #2c3e50;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 5px;
-    margin-top: 25px !important;
-  }
-
-  /* 3. Alt Başlıklar (H3) ve İş Pozisyonu İsimleri */
-  .page__content h3, 
-  .job-title {
-    font-size: 0.80rem !important;
-    font-weight: 600;
-    color: #2980b9;
-  }
-
-  /* 4. Tarihler, Şirket Bilgileri ve Küçük Detaylar */
-  .page__meta, 
-  .company-date, 
-  .archive__item-date {
-    font-size: 0.65rem !important;
-    color: #7f8c8d;
-    font-style: italic;
-  }
-
-  /* 5. Tüm Butonların (Detaylar, İndir, Gönder) Standartlaştırılması */
-  .btn, .cv-btn {
-    font-size: 0.60rem !important;
-    padding: 8px 15px !important;
-    background-color: #2c3e50 !important;
-    border-radius: 4px !important;
-    text-transform: none !important; /* Küçük/Büyük harf zorunluluğunu kaldırır */
-  }
-</style>
-<link rel="stylesheet" href="{{ '/assets/custom.css' | relative_url }}">
-
-<link rel="stylesheet" href="{{ '/assets/custom.css' | relative_url }}">
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    // Özellikle sol bar (author__urls) ve footer içindeki linkleri hedef alır
-    var links = document.querySelectorAll('.author__urls a, .footer__urls a, .page__content a');
-    
-    for (var i = 0; i < links.length; i++) {
-      // Eğer link 'http' ile başlıyorsa ve senin alan adını içermiyorsa dış bağlantıdır
-      if (links[i].hostname !== window.location.hostname && links[i].href.includes('http')) {
-        links[i].target = '_blank';
-        links[i].rel = 'noopener noreferrer'; // Güvenlik için gereklidir
       }
     }
   });
