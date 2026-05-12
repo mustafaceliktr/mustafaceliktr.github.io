@@ -61,7 +61,7 @@ footer:
 author:
   name   : "Mustafa Çelik"
   avatar : "/assets/images/mustafacelik.png" # Buraya kendi fotoğrafını da koyabilirsin
-  bio    : "Satış Profesyoneli | AI & Vibe Coding Meraklısı"
+  bio    : "Satış Profesyoneli <br> AI & Vibe Coding Meraklısı"
   location: "İstanbul, Türkiye"
   links:
     - label: "LinkedIn"
