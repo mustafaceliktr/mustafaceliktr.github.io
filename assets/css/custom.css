@@ -79,3 +79,30 @@ input, select, textarea {
   font-size: 0.70rem !important;
   padding: 0.4rem 0.8rem;
 }
+
+/* 1. Sayfa Başlıklarını (Örn: "Blog") Gizleme */
+/* Bu komut, header ve logo zaten yukarıda olduğu için redundant duran büyük başlıkları kaldırır */
+.page__title {
+  display: none !important;
+}
+
+/* 2. Blog Listesindeki Yazı Başlıklarını Küçültme */
+/* Başlıkların tek satıra sığması ve daha zarif durması için */
+.archive__item-title {
+  font-size: 1.0rem !important; /* Orijinalden daha küçük, gövde metninden biraz daha büyük */
+  line-height: 1.2 !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.3rem !important;
+  font-weight: bold;
+}
+
+/* 3. Başlıklar ve İçerik Arasındaki Boşluğu Optimize Etme */
+.archive__item-excerpt {
+  font-size: 0.70rem !important; /* Gövde metniyle aynı boyutta (0.70rem) tutalım */
+  margin-top: 0 !important;
+}
+
+/* Başlık altındaki çizgiyi (varsa) biraz yukarı çekmek için */
+.page__content h1, .page__content h2 {
+  padding-bottom: 0.2em !important;
+}
