@@ -1,33 +1,75 @@
 /* ============================================================
-   MUSTAFA ÇELİK - ÖZGEÇMİŞ SAYFASI ÜST ALAN DÜZENLEME
+   MUSTAFA ÇELİK - MERKEZİ TASARIM DOSYASI (TÜM SİTE VE CV)
    ============================================================ */
 
-/* 1. Başlık ve Butonları Yan Yana Getiren Konteyner */
-.cv-header-grid {
-  display: flex;
-  justify-content: space-between; /* Başlık sola, butonlar sağa */
-  align-items: flex-start;        /* Üst hizalamayı koru */
-  margin-top: 10px;
-  margin-bottom: 25px;
-  border-bottom: 1px solid #eee;  /* Şık bir ayraç */
-  padding-bottom: 15px;
+/* 1. Global Font ve Kompakt Yapı (0.70rem) */
+body, p, li, table, div, article, .page__content p, .page__content li {
+  font-size: 0.70rem !important;
+  line-height: 1.6 !important;
+  text-align: justify;
 }
 
-.cv-header-grid h2 {
-  margin: 0 !important;           /* Başlığın kendi boşluğunu sıfırla */
-  padding: 0 !important;
+/* 2. Header (Üst Bilgi) ve Logo Ayarları - Temiz Beyaz Görünüm */
+header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
+  background-color: #ffffff !important;
   border: none !important;
+  box-shadow: none !important;
 }
 
-/* 2. Sağdaki Buton Grubu */
-.cv-button-stack {
+.site-title {
+  display: none !important; /* Yazı olan ismi gizler */
+}
+
+.site-logo img {
+  max-height: 120px !important; /* Logonun büyüklüğü */
+  width: auto !important;
+  display: block !important;
+}
+
+.masthead__menu-item a, .greedy-nav a {
+  color: #333333 !important;
+  font-weight: 500 !important;
+}
+
+/* 3. Sayfa Başlıklarını (Özgeçmiş, Blog vb.) Gizle */
+.page__title {
+  display: none !important;
+}
+
+/* 4. Sol Bar (Sidebar) - Alt Alta Hizalama */
+.author__content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+}
+
+.author__bio {
+  font-size: 0.70rem !important;
+  line-height: 1.3 !important;
+  display: block !important;
+  width: 100% !important;
+  margin-top: 5px !important;
+  color: #666 !important;
+}
+
+/* ============================================================
+   ÖZGEÇMİŞ SAYFASI ÖZEL (BUTON YERLEŞİMİ)
+   ============================================================ */
+
+/* 5. CV Butonlarını Paragrafın Sağına Sabitleme (Float) */
+.cv-actions-float {
+  float: right;
   display: flex;
-  flex-direction: column;         /* Butonları alt alta diz */
-  gap: 8px;                       /* Butonlar arası boşluk */
-  min-width: 160px;
+  flex-direction: column;
+  gap: 8px;
+  margin-left: 20px;
+  margin-bottom: 15px;
+  width: 170px;
+  position: relative;
+  z-index: 10;
 }
 
-/* 3. Buton Tasarımı (Kurumsal Lacivert) */
+/* Buton Tasarımı (Kurumsal Lacivert) */
 .cv-download-btn {
   display: block;
   font-size: 0.65rem !important;
@@ -38,14 +80,16 @@
   color: #ffffff !important;
   border-radius: 4px;
   text-decoration: none !important;
-  transition: transform 0.2s, opacity 0.2s;
+  transition: opacity 0.2s ease;
 }
 
 .cv-download-btn:hover {
   opacity: 0.9;
-  transform: translateY(-1px);
 }
 
-/* 4. Sayfa Başlığı ve Diğer Standartlar (Önceki adımdan sabit) */
-.page__title { display: none !important; }
-body, p, li { font-size: 0.70rem !important; }
+/* Sayfa Akışını Koruma (Butonlardan sonraki metnin kaymasını önler) */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
