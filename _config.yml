@@ -56,3 +56,28 @@ footer:
       icon: "fab fa-fw fa-linkedin"
       url: "https://linkedin.com/in/kullaniciadin"
   copyright: "© 2026 Mustafa Çelik. Tüm hakları saklıdır."
+
+  # Yazar Bilgileri (Sol Barı Dolduran Kısım)
+author:
+  name   : "Mustafa Çelik"
+  avatar : "/assets/images/mustafacelik.png" # Buraya kendi fotoğrafını da koyabilirsin
+  bio    : "Satış Profesyoneli | AI & Vibe Coding Meraklısı"
+  location: "İstanbul, Türkiye"
+  links:
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/in/mustafacelik84" # Kendi linkinle değiştir
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/mustafaceliktr"
+
+# Varsayılanlar (Sidebar'ı tüm sayfalarda aktif eder)
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "single"
+      author_profile: true # Bu satır sol barı açar
+      share: true
+      related: true
