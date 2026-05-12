@@ -49,3 +49,20 @@
   }
 </style>
 <link rel="stylesheet" href="{{ '/assets/custom.css' | relative_url }}">
+
+<link rel="stylesheet" href="{{ '/assets/custom.css' | relative_url }}">
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Özellikle sol bar (author__urls) ve footer içindeki linkleri hedef alır
+    var links = document.querySelectorAll('.author__urls a, .footer__urls a, .page__content a');
+    
+    for (var i = 0; i < links.length; i++) {
+      // Eğer link 'http' ile başlıyorsa ve senin alan adını içermiyorsa dış bağlantıdır
+      if (links[i].hostname !== window.location.hostname && links[i].href.includes('http')) {
+        links[i].target = '_blank';
+        links[i].rel = 'noopener noreferrer'; // Güvenlik için gereklidir
+      }
+    }
+  });
+</script>
