@@ -1,3 +1,17 @@
+<link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var links = document.querySelectorAll('.author__urls a, .footer__urls a, .page__content a');
+    for (var i = 0; i < links.length; i++) {
+      if (links[i].hostname !== window.location.hostname && links[i].href.includes('http')) {
+        links[i].target = '_blank';
+        links[i].rel = 'noopener noreferrer';
+      }
+    }
+  });
+</script>
+
 <style>
   /* TÜM SİTE GENELİ KARAKTER BOYUTU AYARLARI (CV STANDARTI) */
 
