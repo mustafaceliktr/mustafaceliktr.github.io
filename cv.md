@@ -5,9 +5,12 @@ permalink: /cv/
 author_profile: true
 ---
 
-<div class="cv-actions-wrapper">
-  <a href="/assets/files/Mustafa_Celik_CV_TR.pdf" class="cv-download-btn">Türkçe CV İndir</a>
-  <a href="/assets/files/Mustafa_Celik_CV_EN.pdf" class="cv-download-btn">English CV Download</a>
+<div class="cv-header-grid">
+  <h2>Özgeçmiş Özeti</h2>
+  <div class="cv-button-stack">
+    <a href="/assets/files/Mustafa_Celik_CV_TR.pdf" class="cv-download-btn">Türkçe CV İndir</a>
+    <a href="/assets/files/Mustafa_Celik_CV_EN.pdf" class="cv-download-btn">English CV Download</a>
+  </div>
 </div>
 
   <div class="ozet-alani">
