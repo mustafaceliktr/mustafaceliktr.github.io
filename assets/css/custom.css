@@ -51,6 +51,29 @@ input, select, textarea {
   padding: 5px;
 }
 
+/* Sol Bar İsim ve Alt Metin Hizalama */
+.author__content {
+  display: flex !important;
+  flex-direction: column !important; /* Her şeyi alt alta dizer */
+  align-items: flex-start !important; /* Sola yaslar */
+  text-align: left !important;
+  padding-left: 0 !important;
+}
+
+.author__name {
+  display: block !important;
+  width: 100%;
+  margin-bottom: 2px !important; /* İsim ile alt metin arasındaki boşluğu daraltır */
+}
+
+.author__bio {
+  display: block !important;
+  width: 100%;
+  font-size: 0.70rem !important; /* İstediğin kompakt boyut */
+  line-height: 1.3 !important; /* Satır aralığını daraltır */
+  margin-top: 0 !important;
+}
+
 /* Butonları Font Boyutuna Uydurma */
 .btn {
   font-size: 0.70rem !important;
