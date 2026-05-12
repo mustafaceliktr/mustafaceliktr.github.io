@@ -1,50 +1,46 @@
 /* ============================================================
-   MUSTAFA ÇELİK - MERKEZİ STİL DOSYASI (NİHAİ VERSİYON)
+   MUSTAFA ÇELİK - MERKEZİ TASARIM DOSYASI (NİHAİ VERSİYON)
    ============================================================ */
 
-/* 1. Global Yazı Boyutları ve Kompakt Yapı */
-body, p, li, table, div, article, .page__content {
-  font-size: 0.70rem !important; /* Tüm site için standart boyut */
+/* 1. Global Font ve Kompakt Yapı (0.70rem Standartı) */
+body, p, li, table, div, article, .page__content p, .page__content li {
+  font-size: 0.70rem !important;
   line-height: 1.6 !important;
 }
 
-/* 2. Header (Masthead) - Tam Lacivert ve Kusursuz Görünüm */
+/* 2. Header - Lacivert Bütünlük ve Beyaz Kutunun Silinmesi */
 header.masthead, .masthead {
   background-color: #002147 !important; /* Kurumsal Lacivert */
   border-bottom: none !important;
 }
 
 .masthead__inner-wrap {
-  background-color: transparent !important; /* Logo etrafındaki beyaz kutuyu siler */
-  padding: 15px 0 !important;
+  background-color: transparent !important; /* Beyaz şeridi tamamen yok eder */
+  padding: 12px 0 !important;
 }
 
-/* Site ismi ve menü yazılarını beyaz yap */
+/* Header Metin ve Menü Renkleri */
 .site-title, .masthead__menu-item a {
   color: #ffffff !important;
   font-weight: 500 !important;
 }
 
-.masthead__menu-item a:hover {
-  color: #d1d1d1 !important;
-}
-
 /* 3. Sayfa Başlıklarını (Blog, Özgeçmiş vb.) Gizleme */
 .page__title {
-  display: none !important; /* Gereksiz kaba başlıkları kaldırır */
+  display: none !important;
 }
 
-/* 4. Sol Bar (Bio) Düzenlemesi - Bilgileri Alt Alta Diz */
+/* 4. Sol Bar (Sidebar) - Bilgileri Ad-Soyad Altına Hizalama */
 .author__content {
   display: flex !important;
-  flex-direction: column !important; /* Yazıları alt alta dizer */
-  align-items: flex-start !important; /* Sola yaslar */
+  flex-direction: column !important; /* Kesin alt alta dizilim */
+  align-items: flex-start !important;
   text-align: left !important;
 }
 
 .author__name {
-  margin-bottom: 5px !important;
   font-size: 1.0rem !important;
+  margin-bottom: 4px !important;
 }
 
 .author__bio {
@@ -54,16 +50,22 @@ header.masthead, .masthead {
   width: 100% !important;
 }
 
-/* 5. Blog Yazı Başlıkları ve İçerik Arasındaki Boşluklar */
+/* 5. Blog ve Proje Listeleri (Kompakt Başlıklar) */
 .archive__item-title {
-  font-size: 0.95rem !important;
+  font-size: 0.90rem !important;
   font-weight: bold !important;
-  margin-top: 0.5rem !important;
+  margin-top: 10px !important;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 3px;
 }
 
-/* 6. Form ve Buton Standartları (CV Sayfası İçin) */
+.archive__item-excerpt {
+  font-size: 0.70rem !important;
+}
+
+/* 6. Form ve Buton Standartları */
 input, select, textarea, .btn, .cv-btn {
   font-size: 0.65rem !important;
-  padding: 8px 12px !important;
+  padding: 6px 12px !important;
   border-radius: 4px !important;
 }
