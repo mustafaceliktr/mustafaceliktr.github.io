@@ -13,8 +13,8 @@ plugins:
   
 # Site Ayarları
 title: "Mustafa Çelik"
-logo: "/assets/images/Mustafa.png" # Logonun bu yolda olduğunu teyit et
-teaser: "/assets/images/Mustafa.png"
+logo: "assets/images/mustafacleiklogo.png" # Logonun bu yolda olduğunu teyit et
+teaser: "assets/images/mustafacleiklogo.png"
 
 # Masthead (Üst Bilgi) Ayarları
 minimal_mistakes_skin: "default" # Kendi özel CSS'imizi kullanacağız
@@ -42,31 +42,31 @@ author:
   links:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
-      url: "https://linkedin.com/in/kullaniciadin" # Burayı güncelle
+      url: "https://linkedin.com/in/mustafaceliktr" # Burayı güncelle
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/mustafaceliktr"
 
 # Sosyal Paylaşım Görseli
-og_image: "/assets/images/Mustafa.png" # Link paylaşıldığında görünecek resim
+og_image: "assets/images/mustafacleiklogo.png" # Link paylaşıldığında görünecek resim
 
 footer:
   links:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
-      url: "https://linkedin.com/in/kullaniciadin"
+      url: "https://linkedin.com/in/mustafaceliktr"
   copyright: "© 2026 Mustafa Çelik. Tüm hakları saklıdır."
 
   # Yazar Bilgileri (Sol Barı Dolduran Kısım)
 author:
   name   : "Mustafa Çelik"
-  avatar : "/assets/images/mustafacelik.png" # Buraya kendi fotoğrafını da koyabilirsin
+  avatar : "assets/images/mustafacelik.png" # Buraya kendi fotoğrafını da koyabilirsin
   bio    : "Satış Profesyoneli <br> AI & Vibe Coding Meraklısı"
   location: "İstanbul, Türkiye"
   links:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
-      url: "https://linkedin.com/in/mustafacelik84" # Kendi linkinle değiştir
+      url: "https://linkedin.com/in/mustafaceliktr" # Kendi linkinle değiştir
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/mustafaceliktr"
