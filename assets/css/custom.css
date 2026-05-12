@@ -1,36 +1,51 @@
 /* ============================================================
-   MUSTAFA ÇELİK - ÜST BİLGİ (HEADER) KESİN ÇÖZÜM
+   MUSTAFA ÇELİK - %100 GARANTİLİ ÜST BİLGİ (HEADER) ÇÖZÜMÜ
    ============================================================ */
 
-/* 1. Tüm Üst Katmanları Laciverte Zorla */
+/* 1. ÜST ŞERİDİN TÜM KATMANLARINI LACİVERTE ZORLA */
+/* Bu blok, o beyaz şeridi her ne olursa olsun laciverte gömer */
+header.masthead, 
 .masthead, 
 .masthead__inner-wrap, 
-.site-header, 
-.site-nav {
+.masthead__menu, 
+nav.greedy-nav, 
+.greedy-nav {
   background-color: #002147 !important; /* Kurumsal Lacivert */
+  background: #002147 !important;
   border-bottom: none !important;
+  box-shadow: none !important;
 }
 
-/* 2. Logo ve Yazıları Beyaz Yap */
+/* 2. LOGO, İSİM VE MENÜ YAZILARINI BEYAZA ZORLA */
 .site-title, 
-.site-title:visited,
-.site-nav li a, 
-.masthead__menu-item a {
+.site-title:visited, 
+.site-logo img,
+.masthead__menu-item a, 
+.greedy-nav a, 
+.greedy-nav .visible-links a {
   color: #ffffff !important;
+  text-decoration: none !important;
 }
 
-/* 3. Global Font (0.70rem) - Zaten çalışıyor ama bütünlük için koruyoruz */
+.masthead__menu-item a:hover, 
+.greedy-nav a:hover {
+  color: #d1d1d1 !important;
+}
+
+/* 3. GLOBAL FONT VE KOMPAKT YAPI (0.70rem) */
+/* Zaten çalışıyor ama bütünlüğü koruyalım */
 body, p, li, table, div, article, .page__content p, .page__content li {
   font-size: 0.70rem !important;
   line-height: 1.6 !important;
+  text-align: justify;
 }
 
-/* 4. Sayfa Başlıklarını Gizle */
+/* 4. SAYFA BAŞLIKLARINI GİZLE */
 .page__title {
   display: none !important;
 }
 
-/* 5. Sol Bar (Sidebar) - Alt Alta Hizalama (Zaten çalışıyor) */
+/* 5. SOL BAR (SIDEBAR) DÜZENLEMESİ */
 .author__content {
   display: flex !important;
   flex-direction: column !important;
@@ -43,4 +58,5 @@ body, p, li, table, div, article, .page__content p, .page__content li {
   display: block !important;
   width: 100% !important;
   margin-top: 5px !important;
+  color: #666 !important;
 }
