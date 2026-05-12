@@ -1,42 +1,69 @@
 /* ============================================================
-   MUSTAFA ÇELİK - GÖRSEL DÜZENLEME ADIM 4: LOGO BÜYÜTME
+   MUSTAFA ÇELİK - ÖZGEÇMİŞ SAYFASI ÖZEL DÜZENLEMELERİ
    ============================================================ */
 
-/* 1. Logoyu Belirginleştir ve Boyutlandır */
-.site-logo img {
-  max-height: 120px !important; /* 60px'den 120px'e çıkardık, ihtiyaca göre artırabilirsin */
-  width: auto !important;
-  display: block !important;
-  transition: all 0.3s ease;
-}
-
-/* 2. Header Alanını Logo Boyutuna Göre Esnet */
-.masthead__inner-wrap {
-  padding: 20px 0 !important; /* Logonun nefes alması için üst-alt boşluk */
-  background-color: transparent !important;
-}
-
-/* 3. İsim Metnini Kapalı Tutmaya Devam */
-.site-title {
+/* 1. Sayfa Başlığını Gizle */
+.page__title {
   display: none !important;
 }
 
-/* 4. Menü Linklerini Hizala */
-.masthead__menu-item a {
-  color: #333333 !important;
-  font-weight: 500 !important;
-  vertical-align: middle;
+/* 2. Özgeçmiş Giriş Alanı (Metin + Butonlar) */
+.cv-intro-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-top: 20px;
 }
 
-/* 5. Global Standartlar (0.70rem) */
+.cv-intro-text {
+  flex: 3;
+}
+
+.cv-button-stack {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 160px;
+}
+
+/* 3. Buton Tasarımları */
+.cv-download-btn {
+  font-size: 0.65rem !important;
+  font-weight: 600 !important;
+  text-align: center;
+  padding: 10px;
+  background-color: #002147 !important; /* Kurumsal Lacivert */
+  color: #ffffff !important;
+  border-radius: 4px;
+  text-decoration: none !important;
+  transition: opacity 0.3s ease;
+}
+
+.cv-download-btn:hover {
+  opacity: 0.9;
+}
+
+/* 4. Global Font ve Diğer Standartlar (0.70rem) */
 body, p, li, table, div, article {
   font-size: 0.70rem !important;
   line-height: 1.6 !important;
 }
 
-/* 6. Sol Bar Hizalaması */
-.author__content {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: flex-start !important;
+/* Header ve Logo Ayarları (Önceki adımdan korunanlar) */
+header.masthead, .masthead, .masthead__inner-wrap {
+  background-color: #ffffff !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.site-logo img {
+  max-height: 120px !important;
+  width: auto !important;
+}
+
+.masthead__menu-item a {
+  color: #333333 !important;
+  font-weight: 500 !important;
 }
