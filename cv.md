@@ -5,11 +5,15 @@ permalink: /cv/
 author_profile: true
 ---
 
-<div class="cv-header-grid">
+<div class="cv-actions-float">
+  <a href="/form-linkin-veya-dosya-yolun" class="cv-download-btn">Türkçe CV İndir</a>
+  <a href="/form-linkin-veya-dosya-yolun" class="cv-download-btn">English CV Download</a>
+</div>
+
   <h2>Özgeçmiş Özeti</h2>
-  
   <p>Satış Profesyoneli olarak, satış ve müşteri yönetimi alanında 15 yıllık geniş bir deneyime sahibim. 2008 yılından bu yana, küçük, orta ve büyük ölçekli müşterilerle etkili satış stratejileri geliştirerek, müşteri ihtiyaçlarını anlama ve çözüm odaklı yaklaşımlar sunma konularında başarılı sonuçlar elde ettim. İş süreçlerini optimize etme becerim sayesinde, müşteri memnuniyetini artırarak şirket hedeflerine ulaşılmasına katkı sağladım.</p>
-  </div>
+ 
+  <div class="clearfix"></div>
   
   <div class="cv-button-stack">
     <a href="/assets/files/Mustafa_Celik_CV_TR.pdf" class="cv-download-btn">Türkçe CV İndir</a>
