@@ -1,3 +1,4 @@
+<a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
 ---
 layout: single
 title: 'EV Şarj Ekosisteminde "Hızlı Büyüme"den "Nitelikli Operasyon" Dönemine Geçiyoruz ⚡📈'

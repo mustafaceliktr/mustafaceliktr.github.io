@@ -1,3 +1,4 @@
+<a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
 ---
 title: "Küresel Belirsizlik Çağında Enerji Maliyetleri: Türkiye İçin Sessiz Bir Baskı Alanı"
 layout: single

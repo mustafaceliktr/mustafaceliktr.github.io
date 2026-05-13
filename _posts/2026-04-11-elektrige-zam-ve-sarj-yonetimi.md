@@ -1,3 +1,4 @@
+<a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
 ---
 layout: single
 title: 'Elektriğe %25 Zam: Şarj Ekosisteminde "Üret, Depola, Yönet" Dönemi ⚡'
