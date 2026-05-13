@@ -72,20 +72,37 @@ div.entries-list, div.entries-grid {
 }
 
 div.entries-list .archive__item, div.entries-grid .archive__item {
+    position: relative !important;
     display: flex !important;
     flex-direction: column !important;
     height: 100% !important;
     border: 1px solid #eaeaea !important;
     border-radius: 8px !important;
     padding: 20px !important;
+    padding-bottom: 45px !important; /* En altta tarih için bilerek boşluk bıraktık */
     box-shadow: 0 4px 10px rgba(0,0,0,0.04) !important;
     margin-bottom: 0 !important;
     background: #fff !important;
 }
 
-.archive__item-title {
-    margin-top: 0 !important;
-    text-align: left !important;
+.archive__item-excerpt {
+    flex-grow: 1 !important; /* Metni esnetir, boşluğu kartın en altına iter */
+}
+
+/* Karta HTML ile eklediğimiz otomatik tarih sınıfı */
+.card-auto-date {
+    position: absolute !important;
+    bottom: 15px !important;
+    right: 20px !important; /* İstersen left: 20px yaparak sola da alabilirsin */
+    font-size: 0.65rem !important;
+    color: #888 !important;
+    margin: 0 !important;
+    font-weight: bold !important;
+}
+
+/* EKSTRA GÜVENLİK: Yazı içine girildiğinde temanın kendi tarihi çıkmaya çalışırsa KESİNLİKLE GİZLE */
+.page__date {
+    display: none !important;
 }
 
 .archive__item-body {
@@ -147,40 +164,4 @@ div.entries-list .archive__item, div.entries-grid .archive__item {
     color: #002147 !important;
     font-weight: bold !important;
     display: block !important;
-}
-/* ==========================================================================
-   BLOG ANA SAYFASI (KART YAPISI VE OTOMATİK TARİH)
-   ========================================================================== */
-div.entries-list .archive__item, div.entries-grid .archive__item {
-    position: relative !important;
-    display: flex !important;
-    flex-direction: column !important;
-    height: 100% !important;
-    border: 1px solid #eaeaea !important;
-    border-radius: 8px !important;
-    padding: 20px !important;
-    padding-bottom: 45px !important; /* En altta tarih için bilerek boşluk bıraktık */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.04) !important;
-    margin-bottom: 0 !important;
-    background: #fff !important;
-}
-
-.archive__item-excerpt {
-    flex-grow: 1 !important; /* Metni esnetir, boşluğu kartın en altına iter */
-}
-
-/* Karta HTML ile eklediğimiz otomatik tarih sınıfı */
-.card-auto-date {
-    position: absolute !important;
-    bottom: 15px !important;
-    right: 20px !important; /* İstersen left: 20px yaparak sola da alabilirsin */
-    font-size: 0.65rem !important;
-    color: #888 !important;
-    margin: 0 !important;
-    font-weight: bold !important;
-}
-
-/* EKSTRA GÜVENLİK: Yazı içine girildiğinde temanın kendi tarihi çıkmaya çalışırsa KESİNLİKLE GİZLE */
-.page__date {
-    display: none !important;
 }
