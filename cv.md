@@ -64,7 +64,7 @@ author_profile: true
   <h3>Özgeçmişi İndirmek İçin Bilgilerinizi Paylaşın</h3>
   <p>Kişisel verilerin güvenliği için lütfen formu doldurunuz. İndirme bağlantısı gönderim sonrası açılacaktır.</p>
 
-  <form action="https://formspree.io/f/SENIN_KODUNU_BURAYA_YAZ" method="POST" style="max-width: 400px;">
+  <form action="https://formspree.io/f/mwvyzrgl" method="POST" style="max-width: 400px;">
     <label>Adınız Soyadınız:</label>
     <input type="text" name="Ad Soyad" required style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
     
@@ -84,11 +84,14 @@ author_profile: true
   function prepareDownload(lang) {
     var linkInput = document.getElementById('pdf-linki');
     var formArea = document.getElementById('form-alani');
+    
+    // Küçük harf ve alt çizgi kuralına göre güncellendi
     if (lang === 'tr') {
       linkInput.value = "https://mustafaceliktr.github.io/assets/docs/mustafa_celik_cv_tr.pdf";
     } else {
       linkInput.value = "https://mustafaceliktr.github.io/assets/docs/mustafa_celik_cv_en.pdf";
     }
+    
     formArea.scrollIntoView({ behavior: 'smooth' });
   }
 </script>
