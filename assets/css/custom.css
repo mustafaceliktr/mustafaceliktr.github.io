@@ -9,8 +9,6 @@ body, p, li, a, span, .page__content, .archive__item-excerpt, .author__bio {
 .masthead__logo img {
     height: 140px !important;
     max-height: 140px !important;
-    image-rendering: -webkit-optimize-contrast !important;
-    image-rendering: crisp-edges !important; 
 }
 
 .page__hero, .page__hero--overlay, .page__hero-image {
@@ -18,9 +16,9 @@ body, p, li, a, span, .page__content, .archive__item-excerpt, .author__bio {
 }
 
 /* ==========================================================================
-   ÖZGEÇMİŞ SAYFASI (YENİ DÜZEN & KÜÇÜK BUTONLAR)
+   ÖZGEÇMİŞ SAYFASI: ÜSTTEKİ KÜÇÜK BUTONLAR
    ========================================================================== */
-.page__title { display: none !important; } /* Tepedeki Özgeçmiş yazısını kaldırır */
+.page__title { display: none !important; } /* Sayfa başlığını (Özgeçmiş yazısı) kaldırır */
 
 .cv-actions-sidebar-top {
     display: flex !important;
@@ -34,7 +32,7 @@ body, p, li, a, span, .page__content, .archive__item-excerpt, .author__bio {
 .cv-mini-btn {
     background-color: #002147 !important; 
     color: #ffffff !important;
-    padding: 6px 12px !important;
+    padding: 6px 12px !important; /* Küçük buton ölçüsü */
     text-decoration: none !important;
     border-radius: 4px !important;
     text-align: center !important;
@@ -45,7 +43,7 @@ body, p, li, a, span, .page__content, .archive__item-excerpt, .author__bio {
 }
 
 /* ==========================================================================
-   BLOG & PROJELER: OTOMATİK BUTON HİZALAMA (GÜNCEL)
+   BLOG & PROJELER: OTOMATİK BUTON VE TARİH HİZALAMA
    ========================================================================== */
 div.entries-list, div.entries-grid {
     display: grid !important;
@@ -53,7 +51,6 @@ div.entries-list, div.entries-grid {
     gap: 25px !important;
 }
 
-/* Kartın kendisini bir dikey esnek kutu yapıyoruz */
 .archive__item {
     position: relative !important;
     display: flex !important;
@@ -62,27 +59,25 @@ div.entries-list, div.entries-grid {
     border: 1px solid #eaeaea !important;
     border-radius: 8px !important;
     padding: 20px !important;
-    padding-bottom: 45px !important; /* Alt kısımda tarih/buton için sabit boşluk */
+    padding-bottom: 45px !important; /* En altta tarih/buton için yer ayırır */
     background: #fff !important;
 }
 
-/* Özet metin alanını esnetiyoruz */
 .archive__item-excerpt {
-    flex-grow: 1 !important;
+    flex-grow: 1 !important; /* Metin alanını esnetir, butonu aşağı itmeye zorlar */
     display: flex !important;
     flex-direction: column !important;
-    margin-bottom: 10px !important;
 }
 
 /* PROJELER: "Detaylar" butonunu otomatik olarak en dibe iter */
 .archive__item-excerpt .btn, .archive__item .btn {
-    margin-top: auto !important; /* SİHİRLİ DOKUNUŞ: Üstteki boşluğu doldurur */
+    margin-top: auto !important; /* Üstteki boşluğu doldurarak butonu aşağıya yapıştırır */
     align-self: flex-start !important;
     padding: 6px 12px !important;
     font-size: 0.65rem !important;
 }
 
-/* BLOG KARTLARI: Sağ alt köşedeki tarih için stil */
+/* BLOG KARTLARI: Sağ alt köşedeki tarih */
 .card-auto-date-blog {
     position: absolute !important;
     bottom: 15px !important;
@@ -93,10 +88,9 @@ div.entries-list, div.entries-grid {
     font-weight: bold !important;
 }
 
-/* Sayfa içindeki tarihleri gizle */
 .page__meta, .page__date { display: none !important; }
 
-/* Blog Yazı İçi: Geri Dön Butonu */
+/* Blog Yazı İçi Geri Dön Butonu */
 .blog-back-btn {
     float: right !important;
     background-color: #002147 !important;
@@ -106,5 +100,4 @@ div.entries-list, div.entries-grid {
     text-decoration: none !important;
     font-weight: bold !important;
     font-size: 0.65rem !important;
-    margin-bottom: 10px !important;
 }
