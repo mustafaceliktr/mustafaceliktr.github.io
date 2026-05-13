@@ -1,4 +1,3 @@
-<a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
 ---
 layout: single
 title: 'EV Şarj Ekosisteminde "Hızlı Büyüme"den "Nitelikli Operasyon" Dönemine Geçiyoruz ⚡📈'
@@ -6,6 +5,8 @@ date: 2026-04-02
 categories: ["Evcharge", "Enerji"]
 tags: ["linkedin", "b2b", "enerji", "evcharge"]
 ---
+
+<a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
 
 Elektrikli araç (EV) şarj ağı ekosistemimiz, ilk verileri toplamaya başladığım Ocak 2025'ten Nisan 2026'ya kadar geçen 14 aylık süreçte devasa bir ivme kazandı. Verilerle konuşmak gerekirse; toplam soket sayımız %56,4 artarak 42.023 adede ulaştı. Toplam kurulu gücümüz ise %76,8 büyüme ile 3.200 MW seviyelerine ulaştı.
 

@@ -1,4 +1,3 @@
-<a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
 ---
 layout: single
 title: 'Küresel Enerji Şoku ve Türkiye: Yeni Dönemde Bizi Ne Bekliyor? 🌍⚡'
@@ -6,6 +5,8 @@ date: 2026-04-12
 categories: ["Enerji", "Ekonomi"]
 tags: ["linkedin", "enerji", "ges", "veri", "depolama"]
 ---
+
+<a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
 
 Küresel enerji piyasalarındaki gelişmeler ve Orta Doğu'daki gerilimler, tedarik zincirinde ciddi bir arz şoku yarattı. IEA ve Dünya Bankası gibi kurumların teyakkuzda olduğu tarihi bir eşikten geçiyoruz. Peki, bu makro rüzgarlar Türkiye'yi nasıl etkiliyor ve bizi ne bekliyor? 
 
