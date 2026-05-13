@@ -5,14 +5,15 @@ permalink: /cv/
 author_profile: true
 ---
 
-<div class="cv-actions-float">
-  <a href="#form-alani" onclick="prepareDownload('tr')" class="cv-download-btn">Türkçe CV İndir</a>
-  <a href="#form-alani" onclick="prepareDownload('en')" class="cv-download-btn">English CV Download</a>
+<div class="cv-intro-wrapper">
+  <div class="cv-intro-text">
+    Satış Profesyoneli olarak, satış ve müşteri yönetimi alanında 15 yıllık geniş bir deneyime sahibim. 2008 yılından bu yana, küçük, orta ve büyük ölçekli müşterilerle etkili satış stratejileri geliştirerek, müşteri ihtiyaçlarını anlama ve çözüm odaklı yaklaşımlar sunma konularında başarılı sonuçlar elde ettim. İş süreçlerini optimize etme becerim sayesinde, müşteri memnuniyetini artırarak şirket hedeflerine ulaşılmasına katkı sağladım.
+  </div>
+  <div class="cv-actions-sidebar">
+    <a href="#form-alani" onclick="prepareDownload('tr')" class="cv-download-btn">Türkçe CV İndir</a>
+    <a href="#form-alani" onclick="prepareDownload('en')" class="cv-download-btn">English CV Download</a>
+  </div>
 </div>
-
-Satış Profesyoneli olarak, satış ve müşteri yönetimi alanında 15 yıllık geniş bir deneyime sahibim. 2008 yılından bu yana, küçük, orta ve büyük ölçekli müşterilerle etkili satış stratejileri geliştirerek, müşteri ihtiyaçlarını anlama ve çözüm odaklı yaklaşımlar sunma konularında başarılı sonuçlar elde ettim. İş süreçlerini optimize etme becerim sayesinde, müşteri memnuniyetini artırarak şirket hedeflerine ulaşılmasına katkı sağladım.
-
-<div class="clearfix"></div>
 
 <h2 class="cv-section-title">İş Deneyimleri</h2>
 
