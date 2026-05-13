@@ -2,7 +2,7 @@
 title: "Küresel Belirsizlik Çağında Enerji Maliyetleri: Türkiye İçin Sessiz Bir Baskı Alanı"
 layout: single
 author_profile: true
-date: 2026-05-13
+
 categories: ["Enerji", "Ekonomi"]
 tags: ["Enerji Maliyetleri", "B2B", "Sanayi", "Sürdürülebilirlik"]
 header:
