@@ -15,6 +15,7 @@ plugins:
 title: "Mustafa Çelik"
 logo: "assets/images/mustafacleiklogo.png" # Logonun bu yolda olduğunu teyit et
 teaser: "assets/images/mustafacleiklogo.png"
+locale: "tr-TR"
 
 # Masthead (Üst Bilgi) Ayarları
 minimal_mistakes_skin: "default" # Kendi özel CSS'imizi kullanacağız
