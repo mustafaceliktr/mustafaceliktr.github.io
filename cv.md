@@ -1,20 +1,16 @@
 ---
 layout: single
-title: "Özgeçmiş"
 permalink: /cv/
 author_profile: true
 ---
 
-<div class="resume-header-container">
-  <div class="resume-intro">
-    <h2 class="cv-section-title">Özgeçmiş Özeti</h2>
-    <p>Satış Profesyoneli olarak, satış ve müşteri yönetimi alanında 15 yıllık geniş bir deneyime sahibim. 2008 yılından bu yana, küçük, orta ve büyük ölçekli müşterilerle etkili satış stratejileri geliştirerek, müşteri ihtiyaçlarını anlama ve çözüm odaklı yaklaşımlar sunma konularında başarılı sonuçlar elde ettim. İş süreçlerini optimize etme becerim sayesinde, müşteri memnuniyetini artırarak şirket hedeflerine ulaşılmasına katkı sağladım.</p>
-  </div>
-  <div class="resume-buttons">
-    <a href="#form-alani" onclick="prepareDownload('tr')" class="resume-btn">Türkçe CV İndir</a>
-    <a href="#form-alani" onclick="prepareDownload('en')" class="resume-btn">English CV Download</a>
-  </div>
+<div class="cv-actions-sidebar-top">
+  <a href="#form-alani" onclick="prepareDownload('tr')" class="cv-mini-btn">Türkçe CV İndir</a>
+  <a href="#form-alani" onclick="prepareDownload('en')" class="cv-mini-btn">English CV Download</a>
 </div>
+
+<h2 class="cv-section-title">Özgeçmiş Özeti</h2>
+Satış Profesyoneli olarak, satış ve müşteri yönetimi alanında 15 yıllık geniş bir deneyime sahibim. 2008 yılından bu yana, küçük, orta ve büyük ölçekli müşterilerle etkili satış stratejileri geliştirerek, müşteri ihtiyaçlarını anlama ve çözüm odaklı yaklaşımlar sunma konularında başarılı sonuçlar elde ettim. İş süreçlerini optimize etme becerim sayesinde, müşteri memnuniyetini artırarak şirket hedeflerine ulaşılmasına katkı sağladım.
 
 <h2 class="cv-section-title">İş Deneyimleri</h2>
 
@@ -76,7 +72,7 @@ author_profile: true
     <label>Telefon Numaranız (Opsiyonel):</label>
     <input type="tel" name="Telefon" style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
     
-    <input type="submit" id="submit-btn" value="Özgeçmişi mailime gönder" class="cv-btn" style="width: 100%; cursor: pointer; padding: 12px; margin-top: 10px; font-size: 0.70rem !important; background-color: #002147; color: white; border: none; border-radius: 4px; font-weight: bold;">
+    <input type="submit" id="submit-btn" value="Özgeçmişi mailime gönder" class="cv-btn" style="width: 100%; cursor: pointer; padding: 10px; margin-top: 10px; font-size: 0.65rem !important; background-color: #002147; color: white; border: none; border-radius: 4px; font-weight: bold;">
   </form>
   
   <p id="form-mesaj" style="display:none; color: green; margin-top: 15px; font-weight: bold; font-size: 0.75rem;"></p>
@@ -122,10 +118,18 @@ author_profile: true
         mesajAlani.textContent = "Talebiniz başarıyla alındı. Özgeçmiş e-posta adresinize gönderilecektir.";
         form.reset();
         submitBtn.value = "Talep Gönderildi";
+        
+        // 5 saniye sonra butonu sıfırla
+        setTimeout(function() {
+          submitBtn.disabled = false;
+          submitBtn.value = "Özgeçmişi mailime gönder";
+          mesajAlani.style.display = "none";
+        }, 5000);
+        
       } else {
         mesajAlani.style.display = "block";
         mesajAlani.style.color = "red";
-        mesajAlani.textContent = "Bir hata oluştu, lütfen daha sonra tekrar deneyin.";
+        mesajAlani.textContent = "Bir hata oluştu, lütfen tekrar deneyin.";
         submitBtn.disabled = false;
         submitBtn.value = "Tekrar Dene";
       }
@@ -134,6 +138,7 @@ author_profile: true
       mesajAlani.style.color = "red";
       mesajAlani.textContent = "Bağlantı hatası oluştu.";
       submitBtn.disabled = false;
+      submitBtn.value = "Tekrar Dene";
     });
   });
 </script>
