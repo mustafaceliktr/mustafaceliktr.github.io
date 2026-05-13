@@ -64,7 +64,7 @@ author_profile: true
   <h3>Özgeçmişi İndirmek İçin Bilgilerinizi Paylaşın</h3>
   <p>Kişisel verilerin güvenliği için lütfen formu doldurunuz. İndirme işlemi anında başlayacaktır.</p>
 
-  <form id="cv-form" action="https://formspree.io/f/SENIN_FORMSPREE_KODUN" method="POST" style="max-width: 400px;">
+  <form id="cv-form" action="https://formspree.io/f/mwvyzrgl" method="POST" style="max-width: 400px;">
     <label>Adınız Soyadınız:</label>
     <input type="text" name="Ad Soyad" required style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
     
