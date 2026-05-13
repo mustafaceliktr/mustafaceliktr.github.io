@@ -18,7 +18,7 @@ body, p, li, a, span, .page__content, .archive__item-excerpt, .author__bio {
 /* ==========================================================================
    ÖZGEÇMİŞ SAYFASI: ÜSTTEKİ KÜÇÜK BUTONLAR
    ========================================================================== */
-.page__title { display: none !important; } /* Sayfa başlığını (Özgeçmiş yazısı) kaldırır */
+.page__title { display: none !important; }
 
 .cv-actions-sidebar-top {
     display: flex !important;
@@ -32,18 +32,17 @@ body, p, li, a, span, .page__content, .archive__item-excerpt, .author__bio {
 .cv-mini-btn {
     background-color: #002147 !important; 
     color: #ffffff !important;
-    padding: 6px 12px !important; /* Küçük buton ölçüsü */
+    padding: 6px 12px !important;
     text-decoration: none !important;
     border-radius: 4px !important;
     text-align: center !important;
     font-weight: bold !important;
     font-size: 0.65rem !important;
     width: auto !important;
-    transition: background-color 0.3s ease !important;
 }
 
 /* ==========================================================================
-   BLOG & PROJELER: OTOMATİK BUTON VE TARİH HİZALAMA
+   BLOG & PROJELER: BUTONLARI OTOMATİK EN ALTA HİZALAMA
    ========================================================================== */
 div.entries-list, div.entries-grid {
     display: grid !important;
@@ -51,6 +50,7 @@ div.entries-list, div.entries-grid {
     gap: 25px !important;
 }
 
+/* Kartın iskeletini esnek yapıyoruz */
 .archive__item {
     position: relative !important;
     display: flex !important;
@@ -59,25 +59,26 @@ div.entries-list, div.entries-grid {
     border: 1px solid #eaeaea !important;
     border-radius: 8px !important;
     padding: 20px !important;
-    padding-bottom: 45px !important; /* En altta tarih/buton için yer ayırır */
+    padding-bottom: 50px !important; /* Alt kısımdaki buton/tarih için yer açar */
     background: #fff !important;
 }
 
+/* Metin kısmını esneterek butonu aşağı iteriz */
 .archive__item-excerpt {
-    flex-grow: 1 !important; /* Metin alanını esnetir, butonu aşağı itmeye zorlar */
+    flex-grow: 1 !important;
     display: flex !important;
     flex-direction: column !important;
 }
 
-/* PROJELER: "Detaylar" butonunu otomatik olarak en dibe iter */
+/* PROJELER: Detaylar butonunu her zaman kartın dibine yapıştırır */
 .archive__item-excerpt .btn, .archive__item .btn {
-    margin-top: auto !important; /* Üstteki boşluğu doldurarak butonu aşağıya yapıştırır */
+    margin-top: auto !important; 
     align-self: flex-start !important;
     padding: 6px 12px !important;
     font-size: 0.65rem !important;
 }
 
-/* BLOG KARTLARI: Sağ alt köşedeki tarih */
+/* BLOG KARTLARI: Sağ alt tarih */
 .card-auto-date-blog {
     position: absolute !important;
     bottom: 15px !important;
@@ -90,7 +91,7 @@ div.entries-list, div.entries-grid {
 
 .page__meta, .page__date { display: none !important; }
 
-/* Blog Yazı İçi Geri Dön Butonu */
+/* Blog Yazı İçi: Geri Dön Butonu */
 .blog-back-btn {
     float: right !important;
     background-color: #002147 !important;
