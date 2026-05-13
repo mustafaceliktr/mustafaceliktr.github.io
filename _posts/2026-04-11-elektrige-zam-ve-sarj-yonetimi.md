@@ -10,6 +10,7 @@ header:
 ---
 
 <a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
+
 Elektriğe gelen %25'lik son zamla birlikte, elektrikli araç ekosisteminde artık sadece tüketim değil; enerjiyi üretme, depolama ve yönetme kabiliyeti ana gündem maddesi haline geliyor.
 
 **Elektriğe %25 zam geldi.**
