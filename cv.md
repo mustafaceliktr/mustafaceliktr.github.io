@@ -64,7 +64,7 @@ author_profile: true
   <h3>Özgeçmişi İndirmek İçin Bilgilerinizi Paylaşın</h3>
   <p>Kişisel verilerin güvenliği için lütfen formu doldurunuz. İndirme bağlantısı gönderim sonrası açılacaktır.</p>
 
-  <form action="https://api.sheetmonkey.io/form/mojrerve" method="POST" style="max-width: 400px;">
+  <form action="https://formspree.io/f/mojrerve" method="POST" style="max-width: 400px;">
     <label>Adınız Soyadınız:</label>
     <input type="text" name="Ad Soyad" required style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
     
