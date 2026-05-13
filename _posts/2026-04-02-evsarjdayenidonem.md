@@ -10,10 +10,9 @@ header:
 ---
 
 <a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
-
+<span class="custom-post-date">📅 02 Nisan 2026</span>
 
 Elektrikli araç (EV) şarj ağı ekosistemimiz, Ocak 2025'ten Nisan 2026'ya kadar geçen süreçte devasa bir ivme kazanarak toplam kurulu gücünü %76,8 artırdı.
-
 Verilerle konuşmak gerekirse; toplam soket sayımız %56,4 artarak 42.023 adede ulaştı. Toplam kurulu gücümüz ise %76,8 büyüme ile 3.200 MW seviyelerine ulaştı.
 
 Bu süreçte sisteme 1.836 adet AC ve 2.677 adet DC yeni ünite dahil oldu. Sadece cihaz bazlı donanım yatırımı 14 ayda 41 Milyon USD seviyesinde; bu da aylık ortalama 3,4 Milyon USD yatırım iştahı demek. Özellikle DC taraftaki %67,8’lik soket büyümesi, sektörün hızlı şarj odaklı vizyonunu netleştiriyor.

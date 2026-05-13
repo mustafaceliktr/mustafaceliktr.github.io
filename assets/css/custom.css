@@ -62,7 +62,7 @@ body, p, li, a, span, .page__content, .archive__item-excerpt, .author__bio {
 }
 
 /* ==========================================================================
-   BLOG ANA SAYFASI (GRID YAPISI) VE TARİHLER
+   BLOG ANA SAYFASI (GRID YAPISI)
    ========================================================================== */
 div.entries-list, div.entries-grid {
     display: grid !important;
@@ -88,16 +88,6 @@ div.entries-list .archive__item, div.entries-grid .archive__item {
     text-align: left !important;
 }
 
-/* Kutu içindeki tarihlerin stili */
-.archive__item .page__meta {
-    font-size: 0.65rem !important;
-    color: #777 !important;
-    margin-top: 5px !important;
-    margin-bottom: 15px !important;
-    text-align: left !important;
-    display: block !important;
-}
-
 .archive__item-body {
     display: flex !important;
     flex-direction: column !important;
@@ -105,36 +95,33 @@ div.entries-list .archive__item, div.entries-grid .archive__item {
 }
 
 /* ==========================================================================
-   BLOG YAZI İÇİ: "BLOG LİSTESİNE DÖN" BUTONU (SAĞ ÜST KÖŞEYE SABİTLEME)
+   YENİ ÇÖZÜM: BUTON VE TARİH DÜZENİ
    ========================================================================== */
-/* Sayfa içeriği çerçevesini referans noktası yapıyoruz */
-.page__inner-wrap {
-    position: relative !important;
-}
-
-/* Butonu metinlerin arasından çıkarıp en sağ üst köşeye sabitliyoruz */
+/* Buton artık metni ezmez, etrafından dolaştırır */
 .blog-back-btn {
-    position: absolute !important;
-    top: 0 !important;
-    right: 0 !important;
+    float: right !important;
     background-color: #002147 !important;
     color: #ffffff !important;
     padding: 8px 16px !important;
     border-radius: 5px !important;
     text-decoration: none !important;
     font-weight: bold !important;
-    text-align: center !important;
-    z-index: 10 !important;
+    margin-left: 20px !important;
+    margin-bottom: 10px !important;
 }
 
-.blog-back-btn:hover {
-    background-color: #001530 !important;
-    color: #ffffff !important;
-}
-
-/* Ekstra güvenlik: Ana sayfada herhangi bir şekilde sızarsa gizle */
+/* Ana sayfadaki kartlarda butonu görünmez yap */
 .archive__item-excerpt .blog-back-btn {
     display: none !important;
+}
+
+/* Manuel eklediğimiz tarih satırı */
+.custom-post-date {
+    display: block !important;
+    font-size: 0.65rem !important;
+    color: #888 !important;
+    margin-bottom: 15px !important;
+    font-weight: bold !important;
 }
 
 /* ==========================================================================
