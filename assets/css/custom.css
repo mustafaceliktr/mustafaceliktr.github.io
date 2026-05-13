@@ -145,3 +145,22 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
 .archive__item .btn:hover {
   opacity: 0.9 !important;
 }
+/* ============================================================
+   OKUMA SAYFASI DÜZENİ (METNİ ORTALAMA)
+   ============================================================ */
+
+/* Yazı detay sayfasındaki metin alanını sınırla ve ortala */
+.page__content {
+  max-width: 100% !important;
+  text-align: justify;
+}
+
+/* Eğer sidebar (sol bar) yoksa metnin devasa olmasını engelle */
+.layout--single .page__content {
+  padding-right: 0;
+}
+
+/* Başlık ve içerik arasındaki boşluğu dengele */
+.page__inner-wrap {
+  margin-top: 20px;
+}

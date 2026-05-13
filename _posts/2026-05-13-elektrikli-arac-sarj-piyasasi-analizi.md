@@ -1,6 +1,8 @@
 ---
 title: "Elektrikli Araç Şarj Piyasasında Yeni Dönem: Verimlilik ve Kullanım Derinliği"
-date: 2026-05-13
+layout: single
+author_profile: true
+date: 2026-04-30
 categories:
   - Enerji
   - Mobilite
@@ -8,7 +10,6 @@ tags:
   - EPDK
   - Elektrikli Arac
   - DC Sarj
-  - Sürdürülebilirlik
 header:
   overlay_image: /assets/images/ev-charging-analysis.jpg
   overlay_filter: 0.5
