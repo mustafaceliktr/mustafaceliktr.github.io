@@ -1,5 +1,5 @@
 /* ============================================================
-   MUSTAFA ÇELİK - MASTER CSS (V2.0 - TÜM HATALAR GİDERİLDİ)
+   MUSTAFA ÇELİK - MASTER CSS (V2.1 - KESİN ÇÖZÜM)
    ============================================================ */
 
 /* 1. GLOBAL AYARLAR */
@@ -15,7 +15,7 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
 }
 
 .site-title { display: none !important; }
-.site-logo img { max-height: 120px !important; width: auto !important; }
+.site-logo img { max-height: 140px !important; width: auto !important; }
 .masthead__menu-item a, .greedy-nav a { color: #333333 !important; font-weight: 500 !important; }
 .page__title { display: none !important; }
 
@@ -24,64 +24,63 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
 .author__bio { font-size: 0.70rem !important; line-height: 1.3 !important; color: #666 !important; }
 .cv-intro-wrapper { display: flex; justify-content: space-between; align-items: flex-start; gap: 30px; margin-bottom: 25px; }
 
-/* 3. BLOG GERİ DÖN BUTONU (SAĞ ÜST) */
+/* 3. BLOG "GERİ DÖN" BUTONU (SAĞ ÜST) */
 .blog-back-btn {
   float: right;
   font-size: 0.65rem !important;
   font-weight: 600 !important;
   padding: 6px 12px;
-  background-color: #002147 !important; /* Kurumsal lacivert */
+  background-color: #002147 !important;
   color: #ffffff !important;
   border-radius: 4px;
   text-decoration: none !important;
   margin-left: 20px;
   margin-bottom: 15px;
   display: inline-block;
-  z-index: 99;
 }
 
-/* 4. ÖNCEKİ - SONRAKİ BUTONLARI TÜRKÇELEŞTİRME */
-/* Mevcut İngilizce metinleri gizle */
-.pagination--pager span {
-  display: none !important;
+.blog-back-btn:hover { opacity: 0.9; }
+
+/* 4. ÖNCEKİ - SONRAKİ BUTONLARI TÜRKÇELEŞTİRME (KESİN YÖNTEM) */
+
+/* Önceki Yazı Butonu */
+.pagination--pager.pagination--pager--previous .pager-title {
+  font-size: 0 !important; /* Mevcut 'Previous' yazısını yok eder */
 }
 
-/* Yeni Türkçe metinleri ekle */
-.pagination--pager::before {
-  font-size: 0.75rem;
+.pagination--pager.pagination--pager--previous .pager-title::after {
+  content: "Önceki Yazı"; /* Yerine bunu koyar */
+  font-size: 0.70rem !important;
   font-weight: bold;
 }
 
-.pagination--pager.pagination--pager--previous::before {
-  content: "← Önceki Yazı";
+/* Sonraki Yazı Butonu */
+.pagination--pager.pagination--pager--next .pager-title {
+  font-size: 0 !important; /* Mevcut 'Next' yazısını yok eder */
 }
 
-.pagination--pager.pagination--pager--next::before {
-  content: "Sonraki Yazı →";
+.pagination--pager.pagination--pager--next .pager-title::after {
+  content: "Sonraki Yazı"; /* Yerine bunu koyar */
+  font-size: 0.70rem !important;
+  font-weight: bold;
 }
 
-/* Buton kutularını hizala */
+/* Buton kutularının genel şıklığı */
 .pagination--pager {
   padding: 15px !important;
-  background: #f9f9f9 !important;
+  background: #fdfdfd !important;
   border: 1px solid #eee !important;
   border-radius: 4px !important;
   text-decoration: none !important;
-  color: #002147 !important;
 }
 
-/* 5. KART HİZALAMA VE TEMİZLİK */
+/* 5. GRID VE KART AYARLARI */
 .page__hero, .page__hero--overlay, .archive .page__hero { display: none !important; }
 .grid__wrapper { display: flex !important; flex-wrap: wrap !important; align-items: stretch !important; }
 .archive__item { 
   display: flex !important; flex-direction: column !important; 
   height: 100% !important; background-color: #fff !important; 
   border: 1px solid #f2f2f2 !important; margin-bottom: 20px;
-}
-.archive__item .btn {
-  background-color: #002147 !important;
-  font-size: 0.65rem !important;
-  margin-top: auto !important;
 }
 
 /* 6. OKUMA SAYFASI DÜZENİ */
