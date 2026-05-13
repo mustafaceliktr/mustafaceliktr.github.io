@@ -3,6 +3,7 @@ title: "Küresel Belirsizlik Çağında Enerji Maliyetleri: Türkiye İçin Sess
 layout: single
 author_profile: true
 date: 2026-05-13
+excerpt:" "
 categories:
   - Enerji
   - Ekonomi

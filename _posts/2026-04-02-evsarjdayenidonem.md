@@ -2,6 +2,7 @@
 layout: single
 title: 'EV Şarj Ekosisteminde "Hızlı Büyüme"den "Nitelikli Operasyon" Dönemine Geçiyoruz ⚡📈'
 date: 2026-04-02
+excerpt:" "
 categories: ["Evcharge", "Enerji"]
 tags: ["linkedin", "b2b", "enerji", "evcharge"]
 ---
