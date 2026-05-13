@@ -1,11 +1,15 @@
 ---
-layout: single
 title: 'Küresel Enerji Şoku ve Türkiye: Yeni Dönemde Bizi Ne Bekliyor? 🌍⚡'
+layout: single
+author_profile: true
 date: 2026-04-12
-excerpt:" "
 categories: ["Enerji", "Ekonomi"]
 tags: ["linkedin", "enerji", "ges", "veri", "depolama"]
+header:
+  teaser: /assets/images/global-energy.jpg
 ---
+
+Küresel enerji piyasalarındaki makro rüzgarların Türkiye üzerindeki etkilerini, yenilenebilir enerji gücümüzü ve yeni dönemin yapısal değişimlerini analiz ediyoruz.
 <a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
 
 Küresel enerji piyasalarındaki gelişmeler ve Orta Doğu'daki gerilimler, tedarik zincirinde ciddi bir arz şoku yarattı. IEA ve Dünya Bankası gibi kurumların teyakkuzda olduğu tarihi bir eşikten geçiyoruz. Peki, bu makro rüzgarlar Türkiye'yi nasıl etkiliyor ve bizi ne bekliyor? 

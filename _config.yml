@@ -82,3 +82,5 @@ defaults:
       author_profile: true # Bu satır sol barı açar
       share: true
       related: true
+locale: "tr-tr"
+excerpt_separator: ""

@@ -1,11 +1,15 @@
 ---
-layout: single
 title: 'Elektriğe %25 Zam: Şarj Ekosisteminde "Üret, Depola, Yönet" Dönemi ⚡'
+layout: single
+author_profile: true
 date: 2026-04-11
-excerpt:" "
 categories: ["Evcharge", "Enerji"]
 tags: ["linkedin", "b2b", "enerji", "evcharge", "ges", "elektrik"]
+header:
+  teaser: /assets/images/energy-management.jpg
 ---
+
+Elektriğe gelen %25'lik son zamla birlikte, elektrikli araç ekosisteminde artık sadece tüketim değil; enerjiyi üretme, depolama ve yönetme kabiliyeti ana gündem maddesi haline geliyor.
 <a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
 
 **Elektriğe %25 zam geldi.**
