@@ -1,29 +1,23 @@
 /* ============================================================
-   MUSTAFA ÇELİK - MERKEZİ TASARIM DOSYASI (MASTER CSS)
+   MUSTAFA ÇELİK - MASTER CSS (V4.0 - KESİN ÇÖZÜM)
    ============================================================ */
 
 /* 1. GLOBAL AYARLAR */
-body, p, li, table, div, article, .page__content p, .page__content li {
+body, p, li, table, div, article {
   font-size: 0.70rem !important;
   line-height: 1.6 !important;
   text-align: justify;
 }
 
-header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
+header.masthead, .masthead, .greedy-nav {
   background-color: #ffffff !important;
   border: none !important;
 }
 
 .site-title { display: none !important; }
 .site-logo img { max-height: 120px !important; width: auto !important; }
-.masthead__menu-item a, .greedy-nav a { color: #333333 !important; font-weight: 500 !important; }
-.page__title { display: none !important; }
 
-/* 2. SOL BAR VE ÖZGEÇMİŞ AYARLARI */
-.author__content { display: flex !important; flex-direction: column !important; align-items: flex-start !important; }
-.author__bio { font-size: 0.70rem !important; line-height: 1.3 !important; color: #666 !important; }
-
-/* 3. BLOG "GERİ DÖN" BUTONU VE ÖZETLERDE GİZLEME */
+/* 2. BLOG "GERİ DÖN" BUTONU */
 .blog-back-btn {
   float: right;
   font-size: 0.65rem !important;
@@ -38,14 +32,46 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
   display: inline-block;
 }
 
-/* KRİTİK: Buton metninin blog listesindeki özetlerde görünmesini engeller */
-.archive__item .blog-back-btn, 
-.grid__item .blog-back-btn,
-.archive__item-excerpt .blog-back-btn {
-  display: none !important;
+/* ÖNEMLİ: Blog listesinde bu buton metninin görünmesini engellemek için ek koruma */
+.archive__item-excerpt, .archive__item-teaser + .archive__item-body {
+  overflow: hidden;
 }
 
-/* 4. PREV-NEXT BUTONLARI TÜRKÇELEŞTİRME (KESİN YÖNTEM) */
+/* 3. BLOG ANA SAYFA (GÖRSEL 2) DÜZENLEMESİ */
+.entries-grid, .grid__wrapper {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: stretch !important; /* Kartları aynı boya getirir */
+}
+
+.grid__item {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.archive__item {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  background-color: #ffffff !important;
+  border: 1px solid #f2f2f2 !important;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.archive__item-body {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-grow: 1 !important;
+  padding: 15px !important;
+}
+
+.archive__item-excerpt {
+  flex-grow: 1 !important;
+}
+
+/* 4. ÖNCEKİ / SONRAKİ BUTONLARI TÜRKÇELEŞTİRME */
 .pagination--pager.pagination--pager--previous .pager-title { font-size: 0 !important; }
 .pagination--pager.pagination--pager--previous .pager-title::after {
   content: "Önceki Yazı";
@@ -59,31 +85,3 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
   font-size: 0.70rem !important;
   font-weight: bold;
 }
-
-/* 5. GRID, KART VE KOPYA ALAN GİZLEME */
-.page__hero, .page__hero--overlay, .archive .page__hero { display: none !important; }
-
-.entries-grid, .grid__wrapper {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  align-items: stretch !important;
-}
-
-.archive__item { 
-  display: flex !important; 
-  flex-direction: column !important; 
-  height: 100% !important; 
-  background-color: #fff !important; 
-  border: 1px solid #f2f2f2 !important; 
-  margin-bottom: 20px;
-}
-
-.archive__item-excerpt p:last-child, 
-.archive__item-contents p:last-child {
-  margin-top: auto !important;
-  margin-bottom: 0 !important;
-  padding-top: 15px;
-}
-
-/* 6. OKUMA SAYFASI DÜZENİ */
-.page__content { max-width: 100% !important; text-align: justify; }
