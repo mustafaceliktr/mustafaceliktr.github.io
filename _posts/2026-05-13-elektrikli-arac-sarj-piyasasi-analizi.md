@@ -3,6 +3,7 @@ title: "Elektrikli Araç Şarj Piyasasında Yeni Dönem: Verimlilik ve Kullanım
 layout: single
 author_profile: true
 date: 2026-04-30
+excerpt:" "
 categories:
   - Enerji
   - Mobilite
