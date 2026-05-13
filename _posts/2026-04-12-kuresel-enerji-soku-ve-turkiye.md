@@ -1,3 +1,4 @@
+<a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
 ---
 layout: single
 title: 'Küresel Enerji Şoku ve Türkiye: Yeni Dönemde Bizi Ne Bekliyor? 🌍⚡'

@@ -1,4 +1,5 @@
----
+<a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>-
+--
 title: "Elektrikli Araç Şarj Piyasasında Yeni Dönem: Verimlilik ve Kullanım Derinliği"
 layout: single
 author_profile: true
