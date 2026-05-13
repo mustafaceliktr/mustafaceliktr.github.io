@@ -2,7 +2,7 @@
    MUSTAFA ÇELİK - MERKEZİ TASARIM DOSYASI (MASTER CSS)
    ============================================================ */
 
-/* 1. GLOBAL AYARLAR (YAZI TİPİ VE HEADER) */
+/* 1. GLOBAL AYARLAR */
 body, p, li, table, div, article, .page__content p, .page__content li {
   font-size: 0.70rem !important;
   line-height: 1.6 !important;
@@ -50,7 +50,7 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
   color: #666 !important;
 }
 
-/* 3. ÖZGEÇMİŞ SAYFASI (BUTON VE GİRİŞ PARAGRAFI) */
+/* 3. ÖZGEÇMİŞ SAYFASI (INTRO VE FORM ALANI) */
 .cv-intro-wrapper {
   display: flex;
   justify-content: space-between;
@@ -61,7 +61,6 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
 
 .cv-intro-text {
   flex: 1; 
-  text-align: justify;
 }
 
 .cv-actions-sidebar {
@@ -89,7 +88,7 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
 
 /* 4. KART HİZALAMA VE DUPLİKE ALANI GİZLEME (BLOG & PROJE) */
 
-/* ÖNEMLİ: En üstteki o duplike gri alanı gizler */
+/* Üstteki kopya gri Hero alanını tamamen gizler */
 .page__hero, .page__hero--overlay, .archive .page__hero {
   display: none !important;
 }
@@ -98,7 +97,6 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
   display: flex !important;
   flex-wrap: wrap !important;
   align-items: stretch !important;
-  background: transparent !important;
 }
 
 .grid__item {
@@ -106,7 +104,7 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
   flex-direction: column !important;
 }
 
-/* Tüm kartları beyaza zorla ve gri alanları temizle */
+/* Kartların standart beyaz görünümü */
 .archive__item {
   display: flex !important;
   flex-direction: column !important;
@@ -116,11 +114,6 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
   border-radius: 4px;
   margin-bottom: 20px;
   overflow: hidden;
-  box-shadow: none !important;
-}
-
-.archive__item-teaser {
-  flex-shrink: 0; 
 }
 
 .archive__item-body, .archive__item-contents, .archive__item-excerpt {
@@ -131,7 +124,7 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
   background-color: #ffffff !important;
 }
 
-/* Karttaki son butonu en alta sabitler */
+/* Karttaki 'Detaylar' butonunu en alta sabitler */
 .archive__item-excerpt p:last-child, 
 .archive__item-contents p:last-child {
   margin-top: auto !important;
@@ -152,8 +145,4 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
 .page__content {
   max-width: 100% !important;
   text-align: justify;
-}
-
-.layout--single .page__content {
-  padding-right: 0;
 }
