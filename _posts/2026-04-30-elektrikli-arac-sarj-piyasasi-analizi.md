@@ -3,15 +3,14 @@ title: "Elektrikli Araç Şarj Piyasasında Yeni Dönem: Verimlilik ve Kullanım
 layout: single
 author_profile: true
 date: 2026-04-30
-show_date: true
 categories: ["Enerji", "Mobilite"]
 tags: ["EPDK", "Elektrikli Arac", "DC Sarj"]
 header:
   teaser: /assets/images/ev-charging-analysis.jpg
 ---
 
-Türkiye’de elektrikli araç şarj piyasası kurulum odaklı büyümeden, verimlilik ve kullanıcı deneyimi odaklı yeni bir faza geçiş yapıyor.
-<a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
+<a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>Türkiye’de elektrikli araç şarj piyasası kurulum odaklı büyümeden, verimlilik ve kullanıcı deneyimi odaklı yeni bir faza geçiş yapıyor.
+
 
 ⚡ **Elektrikli araç şarj piyasasında artık “kurulum yarışı”ndan “verimlilik ve kullanım derinliği” dönemine geçiyoruz.**
 
