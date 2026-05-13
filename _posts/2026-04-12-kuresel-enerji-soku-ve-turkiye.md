@@ -10,7 +10,6 @@ header:
 ---
 
 <a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
-<span class="custom-post-date">📅 12 Nisan 2026</span>
 
 Küresel enerji piyasalarındaki makro rüzgarların Türkiye üzerindeki etkilerini, yenilenebilir enerji gücümüzü ve yeni dönemin yapısal değişimlerini analiz ediyoruz.
 Küresel enerji piyasalarındaki gelişmeler ve Orta Doğu'daki gerilimler, tedarik zincirinde ciddi bir arz şoku yarattı. IEA ve Dünya Bankası gibi kurumların teyakkuzda olduğu tarihi bir eşikten geçiyoruz. Peki, bu makro rüzgarlar Türkiye'yi nasıl etkiliyor ve bizi ne bekliyor? 
