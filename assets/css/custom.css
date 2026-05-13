@@ -18,48 +18,38 @@ body, p, li, a, span, .page__content, .archive__item-excerpt, .author__bio {
 }
 
 /* ==========================================================================
-   ÖZGEÇMİŞ SAYFASI (FLEXBOX YAPISI - YAN YANA BUTONLAR)
+   ÖZGEÇMİŞ SAYFASI (YENİ DÜZEN)
    ========================================================================== */
-.cv-intro-wrapper {
+.cv-actions-sidebar-top {
     display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    gap: 30px !important;
-    margin-bottom: 40px !important;
+    flex-direction: row !important;
+    gap: 10px !important;
+    margin-bottom: 20px !important;
+    justify-content: flex-start !important; /* Başlığın üzerine yaslar */
     flex-wrap: wrap !important;
 }
 
-.cv-intro-text {
-    flex: 1 1 60% !important;
-    text-align: justify !important;
-}
-
-.cv-actions-sidebar {
-    display: flex !important;
-    flex-direction: row !important; /* Butonları alt alta değil, yan yana dizer */
-    gap: 15px !important;
-    flex: 1 1 auto !important;
-    justify-content: flex-end !important; /* Buton grubunu sağa yaslar */
-    flex-wrap: wrap !important;
-}
-
-.cv-download-btn, .resume-btn, .cv-btn {
+.cv-mini-btn {
     background-color: #002147 !important; 
     color: #ffffff !important;
-    padding: 12px 20px !important;
+    padding: 8px 15px !important; /* Daha küçük buton boyutu */
     text-decoration: none !important;
-    border-radius: 6px !important;
+    border-radius: 4px !important;
     text-align: center !important;
     font-weight: bold !important;
-    width: auto !important; /* Gereksiz uzamaları engeller, yazıya göre boyutlanır */
+    font-size: 0.65rem !important; /* Daha küçük font */
     transition: background-color 0.3s ease !important;
 }
 
-.cv-download-btn:hover, .resume-btn:hover, .cv-btn:hover {
+.cv-mini-btn:hover {
     background-color: #001530 !important;
     color: #ffffff !important;
 }
 
+/* Sayfa başlığını gizle */
+.page__title {
+    display: none !important;
+}
 /* ==========================================================================
    BLOG VE PROJELER ANA SAYFASI (GRID YAPISI VE BUTON HİZALARI)
    ========================================================================== */
