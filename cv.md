@@ -61,45 +61,57 @@ author_profile: true
 
 <div id="form-alani" class="form-alani">
   <hr>
-  <h3>Özgeçmişi İndirmek İçin Bilgilerinizi Paylaşın</h3>
-  <p>Kişisel verilerin güvenliği için lütfen formu doldurunuz. İndirme işlemi anında başlayacaktır.</p>
+  <h3 id="form-baslik">Özgeçmiş Talebi</h3>
+  <p id="form-talimat">Lütfen bilgilerinizi paylaşın, seçtiğiniz özgeçmiş en kısa sürede e-posta adresinize iletilecektir.</p>
 
   <form id="cv-form" action="https://formspree.io/f/mwvyzrgl" method="POST" style="max-width: 400px;">
+    <input type="hidden" id="secilen-dil" name="Talep Edilen Dil" value="Türkçe">
+
     <label>Adınız Soyadınız:</label>
     <input type="text" name="Ad Soyad" required style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
     
     <label>E-posta Adresiniz:</label>
     <input type="email" name="E-posta" required style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
     
-    <label>Telefon Numaranız:</label>
-    <input type="tel" name="Telefon" required style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+    <label>Telefon Numaranız (Opsiyonel):</label>
+    <input type="tel" name="Telefon" style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
     
-    <input type="submit" value="Bilgileri Gönder ve CV İndir" class="cv-btn" style="width: 100%; cursor: pointer; padding: 12px; margin-top: 10px; font-size: 0.70rem !important; background-color: #002147; color: white; border: none; border-radius: 4px;">
+    <input type="submit" id="submit-btn" value="Özgeçmişi mailime gönder" class="cv-btn" style="width: 100%; cursor: pointer; padding: 12px; margin-top: 10px; font-size: 0.70rem !important; background-color: #002147; color: white; border: none; border-radius: 4px; font-weight: bold;">
   </form>
   
-  <p id="form-mesaj" style="display:none; color: green; margin-top: 10px; font-weight: bold; font-size: 0.70rem;"></p>
+  <p id="form-mesaj" style="display:none; color: green; margin-top: 15px; font-weight: bold; font-size: 0.75rem;"></p>
 </div>
 
 <script>
-  // Varsayılan dil seçimi
-  var secilenDil = 'tr';
-
-  // Yukarıdaki butonlara tıklandığında dili belirle ve forma kaydır
+  // Kullanıcı üstteki butonlara tıkladığında çalışacak fonksiyon
   function prepareDownload(lang) {
-    secilenDil = lang;
+    var dilInput = document.getElementById('secilen-dil');
+    var formBaslik = document.getElementById('form-baslik');
+    
+    if (lang === 'tr') {
+      dilInput.value = "Türkçe";
+      formBaslik.textContent = "Türkçe Özgeçmiş Talebi";
+    } else {
+      dilInput.value = "İngilizce";
+      formBaslik.textContent = "English CV Request";
+    }
+    
+    // Form alanına yumuşak geçiş yap
     document.getElementById('form-alani').scrollIntoView({ behavior: 'smooth' });
   }
 
-  // Form gönderildiğinde araya girip indirmeyi başlatan sihirli kod
+  // Form Gönderim İşlemi (AJAX)
   var form = document.getElementById("cv-form");
   var mesajAlani = document.getElementById("form-mesaj");
+  var submitBtn = document.getElementById("submit-btn");
 
   form.addEventListener("submit", function(event) {
-    event.preventDefault(); // Formspree'nin kendi sayfasına gitmesini ENGELLER
+    event.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.value = "Gönderiliyor...";
 
     var data = new FormData(form);
 
-    // Formu arka planda Formspree'ye gönder
     fetch(form.action, {
       method: form.method,
       body: data,
@@ -108,38 +120,23 @@ author_profile: true
       }
     }).then(response => {
       if (response.ok) {
-        // 1. İşlem Başarılı Mesajı Göster
         mesajAlani.style.display = "block";
-        mesajAlani.textContent = "Bilgileriniz gönderildi. İndirme başlıyor...";
-        
-        // 2. Formu Temizle
+        mesajAlani.style.color = "green";
+        mesajAlani.textContent = "Talebiniz başarıyla alındı. Özgeçmiş e-posta adresinize gönderilecektir.";
         form.reset();
-
-        // 3. Seçilen Dile Göre PDF Linkini Belirle
-        var pdfLink = "";
-        if (secilenDil === 'tr') {
-          pdfLink = "https://mustafaceliktr.github.io/assets/docs/mustafa_celik_cv_tr.pdf";
-        } else {
-          pdfLink = "https://mustafaceliktr.github.io/assets/docs/mustafa_celik_cv_en.pdf";
-        }
-
-        // 4. İndirme İşlemini Zorla Tetikle
-        var a = document.createElement('a');
-        a.href = pdfLink;
-        a.target = "_blank"; // Dosyayı yeni sekmede açar/indirir
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-
+        submitBtn.value = "Talep Gönderildi";
       } else {
         mesajAlani.style.display = "block";
         mesajAlani.style.color = "red";
-        mesajAlani.textContent = "Gönderim sırasında bir hata oluştu, lütfen tekrar deneyin.";
+        mesajAlani.textContent = "Bir hata oluştu, lütfen daha sonra tekrar deneyin.";
+        submitBtn.disabled = false;
+        submitBtn.value = "Tekrar Dene";
       }
     }).catch(error => {
       mesajAlani.style.display = "block";
       mesajAlani.style.color = "red";
       mesajAlani.textContent = "Bağlantı hatası oluştu.";
+      submitBtn.disabled = false;
     });
   });
 </script>
