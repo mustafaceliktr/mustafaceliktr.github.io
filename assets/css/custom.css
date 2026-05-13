@@ -1,15 +1,16 @@
 /* ============================================================
-   MUSTAFA ÇELİK - MERKEZİ TASARIM DOSYASI (TÜM SİTE VE CV)
+   MUSTAFA ÇELİK - MERKEZİ TASARIM DOSYASI (MASTER CSS)
    ============================================================ */
 
-/* 1. Global Font ve Kompakt Yapı (0.70rem) */
+/* ============================================================
+   1. GLOBAL AYARLAR (YAZI TİPİ VE HEADER)
+   ============================================================ */
 body, p, li, table, div, article, .page__content p, .page__content li {
   font-size: 0.70rem !important;
   line-height: 1.6 !important;
   text-align: justify;
 }
 
-/* 2. Header (Üst Bilgi) ve Logo Ayarları - Temiz Beyaz Görünüm */
 header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
   background-color: #ffffff !important;
   border: none !important;
@@ -31,12 +32,13 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
   font-weight: 500 !important;
 }
 
-/* 3. Sayfa Başlıklarını (Özgeçmiş, Blog vb.) Gizle */
 .page__title {
-  display: none !important;
+  display: none !important; /* "Özgeçmiş", "Projeler" vb. sayfa başlıklarını gizler */
 }
 
-/* 4. Sol Bar (Sidebar) - Alt Alta Hizalama */
+/* ============================================================
+   2. SOL BAR (PROFİL ALANI)
+   ============================================================ */
 .author__content {
   display: flex !important;
   flex-direction: column !important;
@@ -53,20 +55,18 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
 }
 
 /* ============================================================
-   ÖZGEÇMİŞ SAYFASI ÖZEL (BUTON YERLEŞİMİ)
+   3. ÖZGEÇMİŞ SAYFASI (BUTON VE GİRİŞ PARAGRAFI)
    ============================================================ */
-
-/* 5. İlk Paragraf ve Butonların Düzenli Hizalanması */
 .cv-intro-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 30px; /* Metin ile butonlar arasındaki mesafeyi açar */
+  gap: 30px; 
   margin-bottom: 25px;
 }
 
 .cv-intro-text {
-  flex: 1; /* Paragrafın sınırlarını netleştirir, içeri kıvrılmayı önler */
+  flex: 1; 
   text-align: justify;
 }
 
@@ -75,12 +75,11 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
   flex-direction: column;
   gap: 10px;
   width: 170px;
-  flex-shrink: 0; /* Butonların sıkışmasını engeller */
+  flex-shrink: 0; 
   margin-top: 5px;
 }
 
-/* Buton Tasarımı (Kurumsal Lacivert) */
-.cv-download-btn {
+.cv-download-btn, .cv-btn {
   display: block;
   font-size: 0.65rem !important;
   font-weight: 600 !important;
@@ -91,76 +90,87 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
   border-radius: 4px;
   text-decoration: none !important;
   transition: opacity 0.2s ease;
+  border: none;
 }
 
-.cv-download-btn:hover {
+.cv-download-btn:hover, .cv-btn:hover {
   opacity: 0.9;
 }
-/* ============================================================
-   MUSTAFA ÇELİK - PROJELER SAYFASI DÜZENLEMESİ (KART HİZALAMA)
-   ============================================================ */
 
-/* 1. Tüm Kartları Eşit Boyuta Getirme Anahtarı */
-.grid__wrapper {
+/* ============================================================
+   4. KART HİZALAMA (BLOG VE PROJELER ANA SAYFASI)
+   ============================================================ */
+/* Kartları kapsayan dış kutuyu grid/esnek yapıya zorlar */
+.entries-grid, .grid__wrapper {
   display: flex !important;
   flex-wrap: wrap !important;
-  align-items: stretch !important; /* Kartların aynı boyda uzamasını sağlar */
+  align-items: stretch !important;
 }
 
 .grid__item {
   display: flex !important;
   flex-direction: column !important;
+  width: 100%;
 }
 
+/* Her bir blog veya proje kartının standart görünümü */
 .archive__item {
   display: flex !important;
   flex-direction: column !important;
-  height: 100% !important; /* Kartın tüm dikey alanı kaplamasını sağlar */
+  height: 100% !important;
+  background-color: #ffffff !important; /* Gri arka planı beyaza zorla */
+  border: 1px solid #f2f2f2 !important;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  overflow: hidden;
 }
 
-/* 2. Metin Alanının Esnemesini Sağla (Butonu aşağı iter) */
-.archive__item-excerpt {
+.archive__item-teaser {
+  flex-shrink: 0; 
+}
+
+/* Kart içindeki metin alanı esneyerek yüksekliği doldurur */
+.archive__item-body, .archive__item-contents, .archive__item-excerpt {
   display: flex !important;
   flex-direction: column !important;
-  flex-grow: 1 !important; /* Boş alanı metin kutusu doldurur */
+  flex-grow: 1 !important;
 }
 
-/* 3. 'Detaylar' Butonunu Her Zaman En Alta Sabitle */
-/* Butonu içeren son paragrafı otomatik olarak en alta (margin-top: auto) iter */
-.archive__item-excerpt p:last-child {
+/* Metin ile kart sınırları arasında nefes payı bırak */
+.archive__item-excerpt, .archive__item-contents {
+  padding: 15px !important;
+}
+
+/* Karttaki son elemanı (buton vb.) otomatik en alta iter */
+.archive__item-excerpt p:last-child, 
+.archive__item-contents p:last-child {
   margin-top: auto !important;
   margin-bottom: 0 !important;
+  padding-top: 15px;
 }
 
-/* Butonun Kendi Tasarımı ve Hizalaması */
+/* Kart İçindeki "Detaylar" / "Devamını Oku" Butonları */
 .archive__item .btn {
   display: inline-block !important;
   margin-top: auto !important;
-  align-self: flex-start !important; /* Butonu sola yaslı tutar */
+  align-self: flex-start !important;
   font-size: 0.65rem !important;
-  background-color: #002147 !important; /* Kurumsal Lacivert */
+  background-color: #002147 !important;
   color: #ffffff !important;
 }
 
 .archive__item .btn:hover {
   opacity: 0.9 !important;
 }
-/* ============================================================
-   OKUMA SAYFASI DÜZENİ (METNİ ORTALAMA)
-   ============================================================ */
 
-/* Yazı detay sayfasındaki metin alanını sınırla ve ortala */
+/* ============================================================
+   5. OKUMA SAYFASI DÜZENİ (YAZININ İÇİ)
+   ============================================================ */
 .page__content {
   max-width: 100% !important;
   text-align: justify;
 }
 
-/* Eğer sidebar (sol bar) yoksa metnin devasa olmasını engelle */
 .layout--single .page__content {
   padding-right: 0;
-}
-
-/* Başlık ve içerik arasındaki boşluğu dengele */
-.page__inner-wrap {
-  margin-top: 20px;
 }
