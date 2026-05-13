@@ -6,24 +6,21 @@ body, p, li, a, span, .page__content, .archive__item-excerpt, .author__bio {
     text-align: justify !important;
 }
 
-/* Site Logosu */
 .masthead__logo img {
     height: 140px !important;
     max-height: 140px !important;
     image-rendering: -webkit-optimize-contrast !important;
-    image-rendering: crisp-edges !important; /* Logonun net görünmesi için */
+    image-rendering: crisp-edges !important; 
 }
 
-/* Üst gri Hero alanını tamamen gizleme */
 .page__hero, .page__hero--overlay, .page__hero-image {
     display: none !important;
 }
 
-
 /* ==========================================================================
    ÖZGEÇMİŞ SAYFASI (FLEXBOX YAPISI)
    ========================================================================== */
-.resume-header-container {
+.cv-intro-wrapper {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
@@ -32,12 +29,12 @@ body, p, li, a, span, .page__content, .archive__item-excerpt, .author__bio {
     flex-wrap: wrap !important;
 }
 
-.resume-intro {
+.cv-intro-text {
     flex: 1 1 60% !important;
     text-align: justify !important;
 }
 
-.resume-buttons {
+.cv-actions-sidebar {
     display: flex !important;
     flex-direction: column !important;
     gap: 15px !important;
@@ -45,8 +42,8 @@ body, p, li, a, span, .page__content, .archive__item-excerpt, .author__bio {
     align-items: flex-end !important;
 }
 
-.resume-btn {
-    background-color: #002147 !important; /* Kurumsal Lacivert */
+.cv-download-btn, .resume-btn, .cv-btn {
+    background-color: #002147 !important; 
     color: #ffffff !important;
     padding: 12px 25px !important;
     text-decoration: none !important;
@@ -59,14 +56,13 @@ body, p, li, a, span, .page__content, .archive__item-excerpt, .author__bio {
     transition: background-color 0.3s ease !important;
 }
 
-.resume-btn:hover {
+.cv-download-btn:hover, .resume-btn:hover, .cv-btn:hover {
     background-color: #001530 !important;
     color: #ffffff !important;
 }
 
-
 /* ==========================================================================
-   BLOG ANA SAYFASI (GRID / KART YAPISI)
+   BLOG ANA SAYFASI (GRID YAPISI) VE TARİHLER
    ========================================================================== */
 div.entries-list, div.entries-grid {
     display: grid !important;
@@ -92,52 +88,67 @@ div.entries-list .archive__item, div.entries-grid .archive__item {
     text-align: left !important;
 }
 
+/* Kutu içindeki tarihlerin stili */
+.archive__item .page__meta {
+    font-size: 0.65rem !important;
+    color: #777 !important;
+    margin-top: 5px !important;
+    margin-bottom: 15px !important;
+    text-align: left !important;
+    display: block !important;
+}
+
 .archive__item-body {
     display: flex !important;
     flex-direction: column !important;
     flex-grow: 1 !important;
 }
 
-
 /* ==========================================================================
-   BLOG YAZI İÇİ: "BLOG LİSTESİNE DÖN" BUTONU
+   BLOG YAZI İÇİ: "BLOG LİSTESİNE DÖN" BUTONU (SAĞ ÜST KÖŞEYE SABİTLEME)
    ========================================================================== */
-.back-to-blog-btn {
-    float: right !important;
+/* Sayfa içeriği çerçevesini referans noktası yapıyoruz */
+.page__inner-wrap {
+    position: relative !important;
+}
+
+/* Butonu metinlerin arasından çıkarıp en sağ üst köşeye sabitliyoruz */
+.blog-back-btn {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
     background-color: #002147 !important;
     color: #ffffff !important;
     padding: 8px 16px !important;
     border-radius: 5px !important;
     text-decoration: none !important;
     font-weight: bold !important;
-    margin-left: 20px !important;
-    margin-bottom: 15px !important;
     text-align: center !important;
+    z-index: 10 !important;
 }
 
-.back-to-blog-btn:hover {
+.blog-back-btn:hover {
     background-color: #001530 !important;
     color: #ffffff !important;
 }
 
-/* Ana sayfadaki kart özetlerinde buton HTML'i kalırsa diye ekstra güvenlik gizlemesi */
-.archive__item-excerpt .back-to-blog-btn {
+/* Ekstra güvenlik: Ana sayfada herhangi bir şekilde sızarsa gizle */
+.archive__item-excerpt .blog-back-btn {
     display: none !important;
 }
-
 
 /* ==========================================================================
    CSS İLE PREVIOUS / NEXT TÜRKÇELEŞTİRME
    ========================================================================== */
 .pagination--pager {
-    font-size: 0 !important; /* Orijinal İngilizce metni gizler */
+    font-size: 0 !important; 
     color: transparent !important;
     padding: 10px 20px !important;
 }
 
 .pagination--pager.previous::after {
     content: "Önceki Yazı" !important;
-    font-size: 0.70rem !important; /* İstediğiniz boyutu geri getirir */
+    font-size: 0.70rem !important; 
     color: #002147 !important;
     font-weight: bold !important;
     display: block !important;
