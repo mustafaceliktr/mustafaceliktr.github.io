@@ -10,6 +10,7 @@ header:
 ---
 <a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
 
+
 Enerji maliyetlerinin sadece birer rakam değil, toplumsal refahın ve ekonomik rekabetin sessiz omurgası olduğu yeni bir döneme giriyoruz.
 
 
