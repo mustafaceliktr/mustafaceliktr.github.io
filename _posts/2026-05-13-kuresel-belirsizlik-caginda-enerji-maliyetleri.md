@@ -13,8 +13,8 @@ tags:
   - Sürdürülebilirlik
 header:
   teaser: /assets/images/energy-costs-analysis.jpg
+  <a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>-
 ---
-<a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
 
 Enerji piyasasını bugün sadece petrol, doğal gaz ya da elektrik fiyatı üzerinden okumak bana artık eksik geliyor. Çünkü asıl mesele yalnızca enerji maliyetlerinin artması değil; bu maliyetlerin üretimden istihdama, gelir dağılımından toplumsal refaha kadar uzanan geniş bir zinciri etkilemesi.
 

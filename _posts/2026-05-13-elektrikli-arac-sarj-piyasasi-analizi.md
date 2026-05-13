@@ -13,8 +13,8 @@ tags:
 header:
   overlay_image: /assets/images/ev-charging-analysis.jpg
   overlay_filter: 0.5
----
 <a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>-
+---
 
 ⚡ Elektrikli araç şarj piyasasında artık **“kurulum yarışı”**ndan **“verimlilik ve kullanım derinliği”** dönemine geçiyoruz. 
 
