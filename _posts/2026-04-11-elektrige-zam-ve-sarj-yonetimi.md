@@ -2,7 +2,7 @@
 title: 'Elektriğe %25 Zam: Şarj Ekosisteminde "Üret, Depola, Yönet" Dönemi ⚡'
 layout: single
 author_profile: true
-date: 2026-04-11
+
 categories: ["Evcharge", "Enerji"]
 tags: ["linkedin", "b2b", "enerji", "evcharge", "ges", "elektrik"]
 header:
