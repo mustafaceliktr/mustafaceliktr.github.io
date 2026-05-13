@@ -18,7 +18,7 @@ body, p, li, a, span, .page__content, .archive__item-excerpt, .author__bio {
 }
 
 /* ==========================================================================
-   ÖZGEÇMİŞ SAYFASI (FLEXBOX YAPISI)
+   ÖZGEÇMİŞ SAYFASI (FLEXBOX YAPISI - YAN YANA BUTONLAR)
    ========================================================================== */
 .cv-intro-wrapper {
     display: flex !important;
@@ -36,23 +36,22 @@ body, p, li, a, span, .page__content, .archive__item-excerpt, .author__bio {
 
 .cv-actions-sidebar {
     display: flex !important;
-    flex-direction: column !important;
+    flex-direction: row !important; /* Butonları alt alta değil, yan yana dizer */
     gap: 15px !important;
-    flex: 1 1 30% !important;
-    align-items: flex-end !important;
+    flex: 1 1 auto !important;
+    justify-content: flex-end !important; /* Buton grubunu sağa yaslar */
+    flex-wrap: wrap !important;
 }
 
 .cv-download-btn, .resume-btn, .cv-btn {
     background-color: #002147 !important; 
     color: #ffffff !important;
-    padding: 12px 25px !important;
+    padding: 12px 20px !important;
     text-decoration: none !important;
     border-radius: 6px !important;
     text-align: center !important;
     font-weight: bold !important;
-    width: 100% !important;
-    max-width: 200px !important;
-    display: block !important;
+    width: auto !important; /* Gereksiz uzamaları engeller, yazıya göre boyutlanır */
     transition: background-color 0.3s ease !important;
 }
 
@@ -62,7 +61,7 @@ body, p, li, a, span, .page__content, .archive__item-excerpt, .author__bio {
 }
 
 /* ==========================================================================
-   BLOG ANA SAYFASI (GRID YAPISI)
+   BLOG VE PROJELER ANA SAYFASI (GRID YAPISI VE BUTON HİZALARI)
    ========================================================================== */
 div.entries-list, div.entries-grid {
     display: grid !important;
@@ -79,42 +78,32 @@ div.entries-list .archive__item, div.entries-grid .archive__item {
     border: 1px solid #eaeaea !important;
     border-radius: 8px !important;
     padding: 20px !important;
-    padding-bottom: 45px !important; /* En altta tarih için bilerek boşluk bıraktık */
     box-shadow: 0 4px 10px rgba(0,0,0,0.04) !important;
     margin-bottom: 0 !important;
     background: #fff !important;
 }
 
-.archive__item-excerpt {
-    flex-grow: 1 !important; /* Metni esnetir, boşluğu kartın en altına iter */
+.archive__item-title {
+    margin-top: 0 !important;
+    text-align: left !important;
 }
 
-/* Karta HTML ile eklediğimiz otomatik tarih sınıfı */
-.card-auto-date {
-    position: absolute !important;
-    bottom: 15px !important;
-    right: 20px !important; /* İstersen left: 20px yaparak sola da alabilirsin */
-    font-size: 0.65rem !important;
-    color: #888 !important;
-    margin: 0 !important;
-    font-weight: bold !important;
-}
-
-/* EKSTRA GÜVENLİK: Yazı içine girildiğinde temanın kendi tarihi çıkmaya çalışırsa KESİNLİKLE GİZLE */
-.page__date {
-    display: none !important;
-}
-
-.archive__item-body {
+/* Kart İçeriği Esnekliği (Butonları aşağı itmek için kritik yapı) */
+.archive__item-body, .archive__item-excerpt {
     display: flex !important;
     flex-direction: column !important;
     flex-grow: 1 !important;
 }
 
+/* PROJELER SAYFASI ÇÖZÜMÜ: Detaylar butonlarını kartın en altına çiviler */
+.archive__item .btn, .archive__item-excerpt .btn {
+    margin-top: auto !important; 
+    align-self: flex-start !important; /* Butonu sola yaslı ve standart boyda tutar */
+}
+
 /* ==========================================================================
-   YENİ ÇÖZÜM: BUTON VE TARİH DÜZENİ
+   BLOG YAZI İÇİ: "BLOG LİSTESİNE DÖN" BUTONU
    ========================================================================== */
-/* Buton artık metni ezmez, etrafından dolaştırır */
 .blog-back-btn {
     float: right !important;
     background-color: #002147 !important;
@@ -127,18 +116,8 @@ div.entries-list .archive__item, div.entries-grid .archive__item {
     margin-bottom: 10px !important;
 }
 
-/* Ana sayfadaki kartlarda butonu görünmez yap */
 .archive__item-excerpt .blog-back-btn {
     display: none !important;
-}
-
-/* Manuel eklediğimiz tarih satırı */
-.custom-post-date {
-    display: block !important;
-    font-size: 0.65rem !important;
-    color: #888 !important;
-    margin-bottom: 15px !important;
-    font-weight: bold !important;
 }
 
 /* ==========================================================================
