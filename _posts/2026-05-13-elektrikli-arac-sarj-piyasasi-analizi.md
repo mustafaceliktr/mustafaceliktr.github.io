@@ -6,8 +6,6 @@ date: 2026-04-30
 categories: ["Enerji", "Mobilite"]
 tags: ["EPDK", "Elektrikli Arac", "DC Sarj"]
 header:
-  overlay_image: /assets/images/ev-charging-analysis.jpg
-  overlay_filter: 0.5
   teaser: /assets/images/ev-charging-analysis.jpg
 ---
 
