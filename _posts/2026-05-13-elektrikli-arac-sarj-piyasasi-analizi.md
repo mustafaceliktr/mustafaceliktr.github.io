@@ -10,7 +10,7 @@ header:
 ---
 
 Türkiye’de elektrikli araç şarj piyasası kurulum odaklı büyümeden, verimlilik ve kullanıcı deneyimi odaklı yeni bir faza geçiş yapıyor.
-<a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
+<a href="/blog/" class="back-to-blog-btn">← Blog Listesine Dön</a>
 
 ⚡ **Elektrikli araç şarj piyasasında artık “kurulum yarışı”ndan “verimlilik ve kullanım derinliği” dönemine geçiyoruz.**
 
