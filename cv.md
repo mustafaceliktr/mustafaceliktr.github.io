@@ -64,7 +64,7 @@ author_profile: true
   <h3>Özgeçmişi İndirmek İçin Bilgilerinizi Paylaşın</h3>
   <p>Kişisel verilerin güvenliği için lütfen formu doldurunuz. İndirme bağlantısı gönderim sonrası açılacaktır.</p>
 
-  <form action="https://formspree.io/f/mojrerve" method="POST" style="max-width: 400px;">
+  <form action="https://formspree.io/f/SENIN_KODUNU_BURAYA_YAZ" method="POST" style="max-width: 400px;">
     <label>Adınız Soyadınız:</label>
     <input type="text" name="Ad Soyad" required style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
     
@@ -76,7 +76,7 @@ author_profile: true
     
     <input type="submit" value="Bilgileri Gönder ve CV İndir" class="cv-btn" style="width: 100%; cursor: pointer; padding: 12px; margin-top: 10px; font-size: 0.70rem !important;">
     
-    <input type="hidden" id="pdf-linki" name="x-sheetmonkey-redirect" value="https://mustafaceliktr.github.io/assets/docs/mustafa_celik_cv_tr.pdf">
+    <input type="hidden" id="pdf-linki" name="_next" value="https://mustafaceliktr.github.io/assets/docs/mustafa_celik_cv_tr.pdf">
   </form>
 </div>
 
