@@ -56,17 +56,27 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
    ÖZGEÇMİŞ SAYFASI ÖZEL (BUTON YERLEŞİMİ)
    ============================================================ */
 
-/* 5. CV Butonlarını Paragrafın Sağına Sabitleme (Float) */
-.cv-actions-float {
-  float: right;
+/* 5. İlk Paragraf ve Butonların Düzenli Hizalanması */
+.cv-intro-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px; /* Metin ile butonlar arasındaki mesafeyi açar */
+  margin-bottom: 25px;
+}
+
+.cv-intro-text {
+  flex: 1; /* Paragrafın sınırlarını netleştirir, içeri kıvrılmayı önler */
+  text-align: justify;
+}
+
+.cv-actions-sidebar {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-left: 20px;
-  margin-bottom: 15px;
+  gap: 10px;
   width: 170px;
-  position: relative;
-  z-index: 10;
+  flex-shrink: 0; /* Butonların sıkışmasını engeller */
+  margin-top: 5px;
 }
 
 /* Buton Tasarımı (Kurumsal Lacivert) */
@@ -85,11 +95,4 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
 
 .cv-download-btn:hover {
   opacity: 0.9;
-}
-
-/* Sayfa Akışını Koruma (Butonlardan sonraki metnin kaymasını önler) */
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
 }
