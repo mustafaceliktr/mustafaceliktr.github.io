@@ -1,5 +1,5 @@
 /* ============================================================
-   MUSTAFA ÇELİK - MASTER CSS (V2.1 - KESİN ÇÖZÜM)
+   MUSTAFA ÇELİK - MASTER CSS (TEMİZ VE GÜVENLİ VERSİYON)
    ============================================================ */
 
 /* 1. GLOBAL AYARLAR */
@@ -15,16 +15,16 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
 }
 
 .site-title { display: none !important; }
-.site-logo img { max-height: 140px !important; width: auto !important; }
+.site-logo img { max-height: 120px !important; width: auto !important; }
 .masthead__menu-item a, .greedy-nav a { color: #333333 !important; font-weight: 500 !important; }
 .page__title { display: none !important; }
 
-/* 2. SOL BAR VE ÖZGEÇMİŞ AYARLARI */
+/* 2. SOL BAR VE ÖZGEÇMİŞ FORM ALANI */
 .author__content { display: flex !important; flex-direction: column !important; align-items: flex-start !important; }
 .author__bio { font-size: 0.70rem !important; line-height: 1.3 !important; color: #666 !important; }
 .cv-intro-wrapper { display: flex; justify-content: space-between; align-items: flex-start; gap: 30px; margin-bottom: 25px; }
 
-/* 3. BLOG "GERİ DÖN" BUTONU (SAĞ ÜST) */
+/* 3. BLOG "GERİ DÖN" BUTONU */
 .blog-back-btn {
   float: right;
   font-size: 0.65rem !important;
@@ -39,39 +39,13 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
   display: inline-block;
 }
 
-.blog-back-btn:hover { opacity: 0.9; }
-
-/* 4. ÖNCEKİ - SONRAKİ BUTONLARI TÜRKÇELEŞTİRME (KESİN YÖNTEM) */
-
-/* Önceki Yazı Butonu */
-.pagination--pager.pagination--pager--previous .pager-title {
-  font-size: 0 !important; /* Mevcut 'Previous' yazısını yok eder */
-}
-
-.pagination--pager.pagination--pager--previous .pager-title::after {
-  content: "Önceki Yazı"; /* Yerine bunu koyar */
-  font-size: 0.70rem !important;
-  font-weight: bold;
-}
-
-/* Sonraki Yazı Butonu */
-.pagination--pager.pagination--pager--next .pager-title {
-  font-size: 0 !important; /* Mevcut 'Next' yazısını yok eder */
-}
-
-.pagination--pager.pagination--pager--next .pager-title::after {
-  content: "Sonraki Yazı"; /* Yerine bunu koyar */
-  font-size: 0.70rem !important;
-  font-weight: bold;
-}
-
-/* Buton kutularının genel şıklığı */
+/* 4. PREV-NEXT BUTONLARI (DOĞAL GÖRÜNÜM) */
 .pagination--pager {
+  background-color: #ffffff !important;
+  border: 1px solid #eeeeee !important;
   padding: 15px !important;
-  background: #fdfdfd !important;
-  border: 1px solid #eee !important;
-  border-radius: 4px !important;
   text-decoration: none !important;
+  font-size: 0.70rem !important;
 }
 
 /* 5. GRID VE KART AYARLARI */
@@ -82,6 +56,4 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
   height: 100% !important; background-color: #fff !important; 
   border: 1px solid #f2f2f2 !important; margin-bottom: 20px;
 }
-
-/* 6. OKUMA SAYFASI DÜZENİ */
 .page__content { max-width: 100% !important; text-align: justify; }
