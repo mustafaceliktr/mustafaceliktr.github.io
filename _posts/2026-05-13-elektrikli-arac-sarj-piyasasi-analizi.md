@@ -3,21 +3,18 @@ title: "Elektrikli Araç Şarj Piyasasında Yeni Dönem: Verimlilik ve Kullanım
 layout: single
 author_profile: true
 date: 2026-04-30
-excerpt:" "
-categories:
-  - Enerji
-  - Mobilite
-tags:
-  - EPDK
-  - Elektrikli Arac
-  - DC Sarj
+categories: ["Enerji", "Mobilite"]
+tags: ["EPDK", "Elektrikli Arac", "DC Sarj"]
 header:
   overlay_image: /assets/images/ev-charging-analysis.jpg
   overlay_filter: 0.5
+  teaser: /assets/images/ev-charging-analysis.jpg
 ---
-<a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>-
 
-⚡ Elektrikli araç şarj piyasasında artık **“kurulum yarışı”**ndan **“verimlilik ve kullanım derinliği”** dönemine geçiyoruz. 
+Türkiye’de elektrikli araç şarj piyasası kurulum odaklı büyümeden, verimlilik ve kullanıcı deneyimi odaklı yeni bir faza geçiş yapıyor.
+<a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
+
+⚡ **Elektrikli araç şarj piyasasında artık “kurulum yarışı”ndan “verimlilik ve kullanım derinliği” dönemine geçiyoruz.**
 
 📊 EPDK’nın Mart 2026 verileri bu dönüşümü net biçimde gösteriyor: Türkiye’de elektrikli araç sayısı 411 binin üzerine çıkarken, ticari şarj soketi sayısı 41.938’e ulaştı. Bunun 23.900’ü AC, 18.038’i DC soketlerden oluşuyor.
 
