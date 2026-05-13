@@ -5,7 +5,6 @@ date: 2026-04-11
 categories: ["Evcharge", "Enerji"]
 tags: ["linkedin", "b2b", "enerji", "evcharge", "ges", "elektrik"]
 ---
-
 <a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
 
 **Elektriğe %25 zam geldi.**
