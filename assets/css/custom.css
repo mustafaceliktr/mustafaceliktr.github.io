@@ -2,9 +2,7 @@
    MUSTAFA ÇELİK - MERKEZİ TASARIM DOSYASI (MASTER CSS)
    ============================================================ */
 
-/* ============================================================
-   1. GLOBAL AYARLAR (YAZI TİPİ VE HEADER)
-   ============================================================ */
+/* 1. GLOBAL AYARLAR (YAZI TİPİ VE HEADER) */
 body, p, li, table, div, article, .page__content p, .page__content li {
   font-size: 0.70rem !important;
   line-height: 1.6 !important;
@@ -18,11 +16,11 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
 }
 
 .site-title {
-  display: none !important; /* Yazı olan ismi gizler */
+  display: none !important;
 }
 
 .site-logo img {
-  max-height: 120px !important; /* Logonun büyüklüğü */
+  max-height: 120px !important;
   width: auto !important;
   display: block !important;
 }
@@ -33,12 +31,10 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
 }
 
 .page__title {
-  display: none !important; /* "Özgeçmiş", "Projeler" vb. sayfa başlıklarını gizler */
+  display: none !important;
 }
 
-/* ============================================================
-   2. SOL BAR (PROFİL ALANI)
-   ============================================================ */
+/* 2. SOL BAR (PROFİL ALANI) */
 .author__content {
   display: flex !important;
   flex-direction: column !important;
@@ -54,9 +50,7 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
   color: #666 !important;
 }
 
-/* ============================================================
-   3. ÖZGEÇMİŞ SAYFASI (BUTON VE GİRİŞ PARAGRAFI)
-   ============================================================ */
+/* 3. ÖZGEÇMİŞ SAYFASI (BUTON VE GİRİŞ PARAGRAFI) */
 .cv-intro-wrapper {
   display: flex;
   justify-content: space-between;
@@ -93,55 +87,51 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
   border: none;
 }
 
-.cv-download-btn:hover, .cv-btn:hover {
-  opacity: 0.9;
+/* 4. KART HİZALAMA VE DUPLİKE ALANI GİZLEME (BLOG & PROJE) */
+
+/* ÖNEMLİ: En üstteki o duplike gri alanı gizler */
+.page__hero, .page__hero--overlay, .archive .page__hero {
+  display: none !important;
 }
 
-/* ============================================================
-   4. KART HİZALAMA (BLOG VE PROJELER ANA SAYFASI)
-   ============================================================ */
-/* Kartları kapsayan dış kutuyu grid/esnek yapıya zorlar */
 .entries-grid, .grid__wrapper {
   display: flex !important;
   flex-wrap: wrap !important;
   align-items: stretch !important;
+  background: transparent !important;
 }
 
 .grid__item {
   display: flex !important;
   flex-direction: column !important;
-  width: 100%;
 }
 
-/* Her bir blog veya proje kartının standart görünümü */
+/* Tüm kartları beyaza zorla ve gri alanları temizle */
 .archive__item {
   display: flex !important;
   flex-direction: column !important;
   height: 100% !important;
-  background-color: #ffffff !important; /* Gri arka planı beyaza zorla */
+  background-color: #ffffff !important; 
   border: 1px solid #f2f2f2 !important;
   border-radius: 4px;
   margin-bottom: 20px;
   overflow: hidden;
+  box-shadow: none !important;
 }
 
 .archive__item-teaser {
   flex-shrink: 0; 
 }
 
-/* Kart içindeki metin alanı esneyerek yüksekliği doldurur */
 .archive__item-body, .archive__item-contents, .archive__item-excerpt {
   display: flex !important;
   flex-direction: column !important;
   flex-grow: 1 !important;
-}
-
-/* Metin ile kart sınırları arasında nefes payı bırak */
-.archive__item-excerpt, .archive__item-contents {
   padding: 15px !important;
+  background-color: #ffffff !important;
 }
 
-/* Karttaki son elemanı (buton vb.) otomatik en alta iter */
+/* Karttaki son butonu en alta sabitler */
 .archive__item-excerpt p:last-child, 
 .archive__item-contents p:last-child {
   margin-top: auto !important;
@@ -149,7 +139,6 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
   padding-top: 15px;
 }
 
-/* Kart İçindeki "Detaylar" / "Devamını Oku" Butonları */
 .archive__item .btn {
   display: inline-block !important;
   margin-top: auto !important;
@@ -159,13 +148,7 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
   color: #ffffff !important;
 }
 
-.archive__item .btn:hover {
-  opacity: 0.9 !important;
-}
-
-/* ============================================================
-   5. OKUMA SAYFASI DÜZENİ (YAZININ İÇİ)
-   ============================================================ */
+/* 5. OKUMA SAYFASI DÜZENİ */
 .page__content {
   max-width: 100% !important;
   text-align: justify;
