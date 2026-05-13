@@ -7,6 +7,7 @@ author_profile: true
 
 <div class="cv-intro-wrapper">
   <div class="cv-intro-text">
+  <h2 class="cv-section-title">Özgeçmiş Özeti</h2>
     Satış Profesyoneli olarak, satış ve müşteri yönetimi alanında 15 yıllık geniş bir deneyime sahibim. 2008 yılından bu yana, küçük, orta ve büyük ölçekli müşterilerle etkili satış stratejileri geliştirerek, müşteri ihtiyaçlarını anlama ve çözüm odaklı yaklaşımlar sunma konularında başarılı sonuçlar elde ettim. İş süreçlerini optimize etme becerim sayesinde, müşteri memnuniyetini artırarak şirket hedeflerine ulaşılmasına katkı sağladım.
   </div>
   <div class="cv-actions-sidebar">
