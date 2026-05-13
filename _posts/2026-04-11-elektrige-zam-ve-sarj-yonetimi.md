@@ -10,10 +10,9 @@ header:
 ---
 
 <a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
-
+<span class="custom-post-date">📅 11 Nisan 2026</span>
 
 Elektriğe gelen %25'lik son zamla birlikte, elektrikli araç ekosisteminde artık sadece tüketim değil; enerjiyi üretme, depolama ve yönetme kabiliyeti ana gündem maddesi haline geliyor.
-
 **Elektriğe %25 zam geldi.**
 
 👉 *Peki bu, elektrikli araçların hâlâ “ucuz” olduğu anlamına geliyor mu?*
