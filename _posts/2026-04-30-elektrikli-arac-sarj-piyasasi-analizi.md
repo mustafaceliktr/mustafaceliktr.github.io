@@ -9,7 +9,9 @@ header:
   teaser: /assets/images/ev-charging-analysis.jpg
 ---
 
-<a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>Türkiye’de elektrikli araç şarj piyasası kurulum odaklı büyümeden, verimlilik ve kullanıcı deneyimi odaklı yeni bir faza geçiş yapıyor.
+<a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
+
+Türkiye’de elektrikli araç şarj piyasası kurulum odaklı büyümeden, verimlilik ve kullanıcı deneyimi odaklı yeni bir faza geçiş yapıyor.
 
 
 ⚡ **Elektrikli araç şarj piyasasında artık “kurulum yarışı”ndan “verimlilik ve kullanım derinliği” dönemine geçiyoruz.**
