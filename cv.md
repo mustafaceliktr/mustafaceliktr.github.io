@@ -62,9 +62,9 @@ author_profile: true
 <div id="form-alani" class="form-alani">
   <hr>
   <h3>Özgeçmişi İndirmek İçin Bilgilerinizi Paylaşın</h3>
-  <p>Kişisel verilerin güvenliği için lütfen formu doldurunuz. İndirme bağlantısı gönderim sonrası açılacaktır.</p>
+  <p>Kişisel verilerin güvenliği için lütfen formu doldurunuz. İndirme işlemi anında başlayacaktır.</p>
 
-  <form action="https://formspree.io/f/mwvyzrgl" method="POST" style="max-width: 400px;">
+  <form id="cv-form" action="https://formspree.io/f/SENIN_FORMSPREE_KODUN" method="POST" style="max-width: 400px;">
     <label>Adınız Soyadınız:</label>
     <input type="text" name="Ad Soyad" required style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
     
@@ -74,24 +74,72 @@ author_profile: true
     <label>Telefon Numaranız:</label>
     <input type="tel" name="Telefon" required style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
     
-    <input type="submit" value="Bilgileri Gönder ve CV İndir" class="cv-btn" style="width: 100%; cursor: pointer; padding: 12px; margin-top: 10px; font-size: 0.70rem !important;">
-    
-    <input type="hidden" id="pdf-linki" name="_next" value="https://mustafaceliktr.github.io/assets/docs/mustafa_celik_cv_tr.pdf">
+    <input type="submit" value="Bilgileri Gönder ve CV İndir" class="cv-btn" style="width: 100%; cursor: pointer; padding: 12px; margin-top: 10px; font-size: 0.70rem !important; background-color: #002147; color: white; border: none; border-radius: 4px;">
   </form>
+  
+  <p id="form-mesaj" style="display:none; color: green; margin-top: 10px; font-weight: bold; font-size: 0.70rem;"></p>
 </div>
 
 <script>
+  // Varsayılan dil seçimi
+  var secilenDil = 'tr';
+
+  // Yukarıdaki butonlara tıklandığında dili belirle ve forma kaydır
   function prepareDownload(lang) {
-    var linkInput = document.getElementById('pdf-linki');
-    var formArea = document.getElementById('form-alani');
-    
-    // Küçük harf ve alt çizgi kuralına göre güncellendi
-    if (lang === 'tr') {
-      linkInput.value = "https://mustafaceliktr.github.io/assets/docs/mustafa_celik_cv_tr.pdf";
-    } else {
-      linkInput.value = "https://mustafaceliktr.github.io/assets/docs/mustafa_celik_cv_en.pdf";
-    }
-    
-    formArea.scrollIntoView({ behavior: 'smooth' });
+    secilenDil = lang;
+    document.getElementById('form-alani').scrollIntoView({ behavior: 'smooth' });
   }
+
+  // Form gönderildiğinde araya girip indirmeyi başlatan sihirli kod
+  var form = document.getElementById("cv-form");
+  var mesajAlani = document.getElementById("form-mesaj");
+
+  form.addEventListener("submit", function(event) {
+    event.preventDefault(); // Formspree'nin kendi sayfasına gitmesini ENGELLER
+
+    var data = new FormData(form);
+
+    // Formu arka planda Formspree'ye gönder
+    fetch(form.action, {
+      method: form.method,
+      body: data,
+      headers: {
+        'Accept': 'application/json'
+      }
+    }).then(response => {
+      if (response.ok) {
+        // 1. İşlem Başarılı Mesajı Göster
+        mesajAlani.style.display = "block";
+        mesajAlani.textContent = "Bilgileriniz gönderildi. İndirme başlıyor...";
+        
+        // 2. Formu Temizle
+        form.reset();
+
+        // 3. Seçilen Dile Göre PDF Linkini Belirle
+        var pdfLink = "";
+        if (secilenDil === 'tr') {
+          pdfLink = "https://mustafaceliktr.github.io/assets/docs/mustafa_celik_cv_tr.pdf";
+        } else {
+          pdfLink = "https://mustafaceliktr.github.io/assets/docs/mustafa_celik_cv_en.pdf";
+        }
+
+        // 4. İndirme İşlemini Zorla Tetikle
+        var a = document.createElement('a');
+        a.href = pdfLink;
+        a.target = "_blank"; // Dosyayı yeni sekmede açar/indirir
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+      } else {
+        mesajAlani.style.display = "block";
+        mesajAlani.style.color = "red";
+        mesajAlani.textContent = "Gönderim sırasında bir hata oluştu, lütfen tekrar deneyin.";
+      }
+    }).catch(error => {
+      mesajAlani.style.display = "block";
+      mesajAlani.style.color = "red";
+      mesajAlani.textContent = "Bağlantı hatası oluştu.";
+    });
+  });
 </script>
