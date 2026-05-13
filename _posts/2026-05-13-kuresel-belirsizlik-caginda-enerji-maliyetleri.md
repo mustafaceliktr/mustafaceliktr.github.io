@@ -10,7 +10,6 @@ header:
 ---
 
 <a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
-<span class="custom-post-date">📅 13 Mayıs 2026</span>
 
 Enerji maliyetlerinin sadece birer rakam değil, toplumsal refahın ve ekonomik rekabetin sessiz omurgası olduğu yeni bir döneme giriyoruz.
 Enerji piyasasını bugün sadece petrol, doğal gaz ya da elektrik fiyatı üzerinden okumak bana artık eksik geliyor. Çünkü asıl mesele yalnızca enerji maliyetlerinin artması değil; bu maliyetlerin üretimden istihdama, gelir dağılımından toplumsal refaha kadar uzanan geniş bir zinciri etkilemesi.
