@@ -96,3 +96,52 @@ header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
 .cv-download-btn:hover {
   opacity: 0.9;
 }
+/* ============================================================
+   MUSTAFA ÇELİK - PROJELER SAYFASI DÜZENLEMESİ (KART HİZALAMA)
+   ============================================================ */
+
+/* 1. Tüm Kartları Eşit Boyuta Getirme Anahtarı */
+.grid__wrapper {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: stretch !important; /* Kartların aynı boyda uzamasını sağlar */
+}
+
+.grid__item {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.archive__item {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important; /* Kartın tüm dikey alanı kaplamasını sağlar */
+}
+
+/* 2. Metin Alanının Esnemesini Sağla (Butonu aşağı iter) */
+.archive__item-excerpt {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-grow: 1 !important; /* Boş alanı metin kutusu doldurur */
+}
+
+/* 3. 'Detaylar' Butonunu Her Zaman En Alta Sabitle */
+/* Butonu içeren son paragrafı otomatik olarak en alta (margin-top: auto) iter */
+.archive__item-excerpt p:last-child {
+  margin-top: auto !important;
+  margin-bottom: 0 !important;
+}
+
+/* Butonun Kendi Tasarımı ve Hizalaması */
+.archive__item .btn {
+  display: inline-block !important;
+  margin-top: auto !important;
+  align-self: flex-start !important; /* Butonu sola yaslı tutar */
+  font-size: 0.65rem !important;
+  background-color: #002147 !important; /* Kurumsal Lacivert */
+  color: #ffffff !important;
+}
+
+.archive__item .btn:hover {
+  opacity: 0.9 !important;
+}
