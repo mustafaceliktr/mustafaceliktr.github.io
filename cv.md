@@ -5,14 +5,14 @@ permalink: /cv/
 author_profile: true
 ---
 
-<div class="cv-intro-wrapper">
-  <div class="cv-intro-text">
-  <h2 class="cv-section-title">Özgeçmiş Özeti</h2>
-    Satış Profesyoneli olarak, satış ve müşteri yönetimi alanında 15 yıllık geniş bir deneyime sahibim. 2008 yılından bu yana, küçük, orta ve büyük ölçekli müşterilerle etkili satış stratejileri geliştirerek, müşteri ihtiyaçlarını anlama ve çözüm odaklı yaklaşımlar sunma konularında başarılı sonuçlar elde ettim. İş süreçlerini optimize etme becerim sayesinde, müşteri memnuniyetini artırarak şirket hedeflerine ulaşılmasına katkı sağladım.
+<div class="resume-header-container">
+  <div class="resume-intro">
+    <h2 class="cv-section-title">Özgeçmiş Özeti</h2>
+    <p>Satış Profesyoneli olarak, satış ve müşteri yönetimi alanında 15 yıllık geniş bir deneyime sahibim. 2008 yılından bu yana, küçük, orta ve büyük ölçekli müşterilerle etkili satış stratejileri geliştirerek, müşteri ihtiyaçlarını anlama ve çözüm odaklı yaklaşımlar sunma konularında başarılı sonuçlar elde ettim. İş süreçlerini optimize etme becerim sayesinde, müşteri memnuniyetini artırarak şirket hedeflerine ulaşılmasına katkı sağladım.</p>
   </div>
-  <div class="cv-actions-sidebar">
-    <a href="#form-alani" onclick="prepareDownload('tr')" class="cv-download-btn">Türkçe CV İndir</a>
-    <a href="#form-alani" onclick="prepareDownload('en')" class="cv-download-btn">English CV Download</a>
+  <div class="resume-buttons">
+    <a href="#form-alani" onclick="prepareDownload('tr')" class="resume-btn">Türkçe CV İndir</a>
+    <a href="#form-alani" onclick="prepareDownload('en')" class="resume-btn">English CV Download</a>
   </div>
 </div>
 
@@ -83,7 +83,6 @@ author_profile: true
 </div>
 
 <script>
-  // Kullanıcı üstteki butonlara tıkladığında çalışacak fonksiyon
   function prepareDownload(lang) {
     var dilInput = document.getElementById('secilen-dil');
     var formBaslik = document.getElementById('form-baslik');
@@ -96,11 +95,9 @@ author_profile: true
       formBaslik.textContent = "English CV Request";
     }
     
-    // Form alanına yumuşak geçiş yap
     document.getElementById('form-alani').scrollIntoView({ behavior: 'smooth' });
   }
 
-  // Form Gönderim İşlemi (AJAX)
   var form = document.getElementById("cv-form");
   var mesajAlani = document.getElementById("form-mesaj");
   var submitBtn = document.getElementById("submit-btn");

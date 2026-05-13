@@ -1,97 +1,152 @@
-/* ============================================================
-   MUSTAFA ÇELİK - MASTER CSS (NİHAİ STABİL VERSİYON)
-   ============================================================ */
-
-/* 1. GLOBAL AYARLAR */
-body, p, li, table, div, article, .page__content p, .page__content li {
-  font-size: 0.70rem !important;
-  line-height: 1.6 !important;
-  text-align: justify;
+/* ==========================================================================
+   GLOBAL TASARIM & TİPOGRAFİ
+   ========================================================================== */
+body, p, li, a, span, .page__content, .archive__item-excerpt, .author__bio {
+    font-size: 0.70rem !important;
+    text-align: justify !important;
 }
 
-header.masthead, .masthead, .masthead__inner-wrap, .site-nav, .greedy-nav {
-  background-color: #ffffff !important;
-  border: none !important;
+/* Site Logosu */
+.masthead__logo img {
+    height: 140px !important;
+    max-height: 140px !important;
+    image-rendering: -webkit-optimize-contrast !important;
+    image-rendering: crisp-edges !important; /* Logonun net görünmesi için */
 }
 
-.site-title { display: none !important; }
-.site-logo img { max-height: 120px !important; width: auto !important; }
-.masthead__menu-item a, .greedy-nav a { color: #333333 !important; font-weight: 500 !important; }
-.page__title { display: none !important; }
-
-/* 2. SOL BAR VE ÖZGEÇMİŞ FORM AYARLARI */
-.author__content { display: flex !important; flex-direction: column !important; align-items: flex-start !important; }
-.author__bio { font-size: 0.70rem !important; line-height: 1.3 !important; color: #666 !important; }
-.cv-intro-wrapper { display: flex; justify-content: space-between; align-items: flex-start; gap: 30px; margin-bottom: 25px; }
-
-.cv-download-btn, .cv-btn {
-  display: block;
-  font-size: 0.65rem !important;
-  font-weight: 600 !important;
-  text-align: center;
-  padding: 8px 12px;
-  background-color: #002147 !important;
-  color: #ffffff !important;
-  border-radius: 4px;
-  text-decoration: none !important;
-  border: none;
+/* Üst gri Hero alanını tamamen gizleme */
+.page__hero, .page__hero--overlay, .page__hero-image {
+    display: none !important;
 }
 
-/* 3. BLOG "GERİ DÖN" BUTONU */
-.blog-back-btn {
-  float: right;
-  font-size: 0.65rem !important;
-  font-weight: 600 !important;
-  padding: 6px 12px;
-  background-color: #002147 !important;
-  color: #ffffff !important;
-  border-radius: 4px;
-  text-decoration: none !important;
-  margin-left: 20px;
-  margin-bottom: 15px;
-  display: inline-block;
+
+/* ==========================================================================
+   ÖZGEÇMİŞ SAYFASI (FLEXBOX YAPISI)
+   ========================================================================== */
+.resume-header-container {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 30px !important;
+    margin-bottom: 40px !important;
+    flex-wrap: wrap !important;
 }
 
-/* 4. BLOG ANA SAYFA (GRID) VE KART DÜZENİ */
-.page__hero, .page__hero--overlay, .archive .page__hero { display: none !important; }
-
-.entries-grid, .grid__wrapper {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  align-items: stretch !important;
+.resume-intro {
+    flex: 1 1 60% !important;
+    text-align: justify !important;
 }
 
-.archive__item { 
-  display: flex !important; 
-  flex-direction: column !important; 
-  height: 100% !important; 
-  background-color: #ffffff !important; 
-  border: 1px solid #f2f2f2 !important; 
-  margin-bottom: 20px;
-  border-radius: 4px;
+.resume-buttons {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+    flex: 1 1 30% !important;
+    align-items: flex-end !important;
+}
+
+.resume-btn {
+    background-color: #002147 !important; /* Kurumsal Lacivert */
+    color: #ffffff !important;
+    padding: 12px 25px !important;
+    text-decoration: none !important;
+    border-radius: 6px !important;
+    text-align: center !important;
+    font-weight: bold !important;
+    width: 100% !important;
+    max-width: 200px !important;
+    display: block !important;
+    transition: background-color 0.3s ease !important;
+}
+
+.resume-btn:hover {
+    background-color: #001530 !important;
+    color: #ffffff !important;
+}
+
+
+/* ==========================================================================
+   BLOG ANA SAYFASI (GRID / KART YAPISI)
+   ========================================================================== */
+div.entries-list, div.entries-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 25px !important;
+    align-items: stretch !important;
+}
+
+div.entries-list .archive__item, div.entries-grid .archive__item {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    border: 1px solid #eaeaea !important;
+    border-radius: 8px !important;
+    padding: 20px !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.04) !important;
+    margin-bottom: 0 !important;
+    background: #fff !important;
+}
+
+.archive__item-title {
+    margin-top: 0 !important;
+    text-align: left !important;
 }
 
 .archive__item-body {
-  display: flex !important;
-  flex-direction: column !important;
-  flex-grow: 1 !important;
-  padding: 15px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
 }
 
-.archive__item-excerpt {
-  flex-grow: 1 !important;
+
+/* ==========================================================================
+   BLOG YAZI İÇİ: "BLOG LİSTESİNE DÖN" BUTONU
+   ========================================================================== */
+.back-to-blog-btn {
+    float: right !important;
+    background-color: #002147 !important;
+    color: #ffffff !important;
+    padding: 8px 16px !important;
+    border-radius: 5px !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    margin-left: 20px !important;
+    margin-bottom: 15px !important;
+    text-align: center !important;
 }
 
-/* 5. ÖNCEKİ - SONRAKİ BUTONLARI TÜRKÇELEŞTİRME */
-.pagination--pager.pagination--pager--previous .pager-title { font-size: 0 !important; }
-.pagination--pager.pagination--pager--previous .pager-title::after {
-  content: "Önceki Yazı"; font-size: 0.70rem !important; font-weight: bold;
+.back-to-blog-btn:hover {
+    background-color: #001530 !important;
+    color: #ffffff !important;
 }
 
-.pagination--pager.pagination--pager--next .pager-title { font-size: 0 !important; }
-.pagination--pager.pagination--pager--next .pager-title::after {
-  content: "Sonraki Yazı"; font-size: 0.70rem !important; font-weight: bold;
+/* Ana sayfadaki kart özetlerinde buton HTML'i kalırsa diye ekstra güvenlik gizlemesi */
+.archive__item-excerpt .back-to-blog-btn {
+    display: none !important;
 }
 
-/* 6. OKUMA SAYFASI DÜZENİ */
-.page__content { max-width: 100% !important; text-align: justify; }
+
+/* ==========================================================================
+   CSS İLE PREVIOUS / NEXT TÜRKÇELEŞTİRME
+   ========================================================================== */
+.pagination--pager {
+    font-size: 0 !important; /* Orijinal İngilizce metni gizler */
+    color: transparent !important;
+    padding: 10px 20px !important;
+}
+
+.pagination--pager.previous::after {
+    content: "Önceki Yazı" !important;
+    font-size: 0.70rem !important; /* İstediğiniz boyutu geri getirir */
+    color: #002147 !important;
+    font-weight: bold !important;
+    display: block !important;
+}
+
+.pagination--pager.next::after {
+    content: "Sonraki Yazı" !important;
+    font-size: 0.70rem !important;
+    color: #002147 !important;
+    font-weight: bold !important;
+    display: block !important;
+}
