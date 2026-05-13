@@ -1,90 +1,45 @@
-/* ==========================================================================
-   GLOBAL TASARIM
-   ========================================================================== */
-body, p, li, a, span, .page__content, .archive__item-excerpt, .author__bio {
-    font-size: 0.70rem !important;
-    text-align: justify !important;
+/* Projeler Grid Yapısı */
+.custom-projects-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 25px !important;
+    width: 100% !important;
 }
 
-.masthead__logo img {
-    height: 140px !important;
-    max-height: 140px !important;
-}
-
-.page__hero, .page__hero--overlay, .page__hero-image {
-    display: none !important;
-}
-
-/* ==========================================================================
-   ÖZGEÇMİŞ SAYFASI DÜZENİ
-   ========================================================================== */
-.page__title { display: none !important; } /* Üstteki Özgeçmiş yazısını kaldırır */
-
-.cv-actions-sidebar-top {
-    display: flex !important;
-    flex-direction: row !important;
-    gap: 10px !important;
-    margin-bottom: 25px !important;
-}
-
-.cv-mini-btn {
-    background-color: #002147 !important; 
-    color: #ffffff !important;
-    padding: 6px 12px !important;
-    text-decoration: none !important;
-    border-radius: 4px !important;
-    font-weight: bold !important;
-    font-size: 0.65rem !important;
-}
-
-/* ==========================================================================
-   PROJELER & BLOG: OTOMATİK BUTON HİZALAMA
-   ========================================================================== */
-/* Kartın ana iskeleti */
-.archive__item {
-    display: flex !important;
-    flex-direction: column !important;
-    height: 100% !important;
+/* Proje Kartı Tasarımı */
+.custom-project-card {
+    background: #fff !important;
     border: 1px solid #eaeaea !important;
     border-radius: 8px !important;
     padding: 20px !important;
-    background: #fff !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
     position: relative !important;
 }
 
-/* Kartın içindeki metin gövdesi - Bu alan esnemeli ki butonu itsin */
-.archive__item-body {
+/* Kart İçeriği Esnekliği */
+.card-content-wrapper {
     display: flex !important;
     flex-direction: column !important;
-    flex-grow: 1 !important; /* Boş alanı doldurur */
-    justify-content: flex-start !important;
+    flex-grow: 1 !important;
 }
 
-/* Metin özeti */
+/* Özet Metni Alanı */
 .archive__item-excerpt {
     margin-bottom: 20px !important;
+    flex-grow: 1 !important; /* Boş alanı doldurarak butonu aşağı iter */
 }
 
-/* PROJELER: Detaylar Butonu - Her zaman en alta çivileme */
-.archive__item-body .btn {
-    margin-top: auto !important; /* Üstteki tüm boşluğu kullanarak butonu alta iter */
+/* BUTON HİZALAMA: Mıknatıs gibi en alta çiviler */
+.custom-align-btn {
+    margin-top: auto !important; /* Otomatik olarak tabana hizalar */
     align-self: flex-start !important;
     padding: 6px 15px !important;
     font-size: 0.65rem !important;
     background-color: #002147 !important;
     color: #fff !important;
-    border: none !important;
     border-radius: 4px !important;
-}
-
-/* BLOG: Kartlardaki tarih stili */
-.card-auto-date-blog {
-    position: absolute !important;
-    bottom: 15px !important;
-    right: 20px !important;
-    font-size: 0.65rem !important;
-    color: #888 !important;
+    text-decoration: none !important;
     font-weight: bold !important;
 }
-
-.page__meta, .page__date { display: none !important; }
