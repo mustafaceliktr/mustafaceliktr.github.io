@@ -15,26 +15,22 @@ Burada LinkedIn makalelerimi, sektördeki gelişmeleri ve kişisel görüşlerim
   {% for post in site.posts %}
     <div class="list__item">
       <article class="archive__item">
+        
         {% if post.header.teaser %}
           <div class="archive__item-teaser">
             <img src="{{ post.header.teaser | relative_url }}" alt="">
           </div>
         {% endif %}
+        
         <h2 class="archive__item-title">
           <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
         </h2>
+        
         <div class="archive__item-excerpt">
           {{ post.excerpt | markdownify | strip_html | truncatewords: 25 }}
         </div>
-        <p class="card-auto-date-blog">📅 {{ post.date | date: "%d.%m.%Y" }}</p>
-      </article>
-    </div>
-  {% endfor %}
-</div>
         
-        <p style="position: absolute !important; bottom: 15px !important; right: 20px !important; font-size: 0.65rem !important; color: #888 !important; margin: 0 !important; font-weight: bold !important; z-index: 10;">
-          📅 {{ post.date | date: "%d.%m.%Y" }}
-        </p>
+        <p class="card-auto-date-blog">📅 {{ post.date | date: "%d.%m.%Y" }}</p>
 
       </article>
     </div>
