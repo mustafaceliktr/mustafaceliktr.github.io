@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Şarj Ağı Gelişim Analizi v4.1</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:       #F0F4FA;
+  --white:    #FFFFFF;
+  --navy:     #203864;
+  --blue:     #4472C4;
+  --blue2:    #5A8AD4;
+  --blue3:    #EBF0FA;
+  --teal:     #2E86AB;
+  --green:    #2E7D50;
+  --green2:   #E2EFDA;
+  --red:      #C0392B;
+  --red2:     #FCE4D6;
+  --orange:   #E67E22;
+  --yellow:   #F4C430;
+  --text:     #1A2540;
+  --sub:      #4A5A7A;
+  --muted:    #8A9AB8;
+  --border:   #D4DCEC;
+  --r:        16px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+
+/* ── CURSOR ── */
+.cursor-glow{position:fixed;width:450px;height:450px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(68,114,196,.07) 0%,transparent 70%);
+  transform:translate(-50%,-50%);transition:left .1s,top .1s;z-index:0}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;
+  background:rgba(240,244,250,.92);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(68,114,196,.12);}
+.nav-in{max-width:1240px;margin:0 auto;padding:0 48px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
+.logo{display:flex;align-items:center;gap:11px}
+.logo-mark{width:34px;height:34px;border-radius:9px;
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  display:flex;align-items:center;justify-content:center;font-size:16px}
+.logo-name{font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:var(--navy)}
+.logo-name span{color:var(--blue)}
+.nav-pills{display:flex;gap:8px}
+.np{padding:7px 16px;border-radius:50px;font-size:12px;font-weight:700;
+  font-family:'Outfit',sans-serif;cursor:pointer;transition:all .2s}
+.np-out{background:transparent;border:2px solid var(--blue);color:var(--blue)}
+.np-out:hover{background:var(--blue);color:white}
+.np-fill{background:var(--blue);color:white;border:2px solid var(--blue)}
+.np-fill:hover{background:var(--blue2)}
+
+/* ── WRAP ── */
+.wrap{max-width:1240px;margin:0 auto;padding:0 48px;position:relative;z-index:1}
+
+/* ── HERO ── */
+.hero{padding:110px 0 80px;position:relative;overflow:hidden}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;
+  background:rgba(68,114,196,.1);border:1.5px solid rgba(68,114,196,.22);
+  border-radius:6px;padding:6px 14px;margin-bottom:26px;
+  font-size:11px;font-weight:700;color:var(--blue);font-family:'Outfit',sans-serif;
+  letter-spacing:1.2px;text-transform:uppercase}
+.h-dot{width:7px;height:7px;border-radius:50%;background:var(--green);
+  animation:hd 2s ease infinite}
+@keyframes hd{0%,100%{transform:scale(1)}50%{transform:scale(1.5);opacity:.5}}
+h1{font-family:'Outfit',sans-serif;font-weight:900;
+  font-size:clamp(42px,5.5vw,74px);line-height:.95;letter-spacing:-2px;margin-bottom:8px}
+h1 .bl{color:var(--blue)}
+h1 .sm{color:var(--muted);font-weight:300;font-size:.55em;display:block;
+  letter-spacing:-1px;margin-top:8px;line-height:1.2}
+.hero-desc{font-size:17px;color:var(--sub);line-height:1.75;
+  max-width:540px;margin:26px 0 38px;font-weight:400}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;
+  padding:13px 26px;border-radius:50px;font-weight:700;font-size:14px;
+  cursor:pointer;transition:all .2s;border:none;font-family:'Outfit',sans-serif}
+.btn-prim{background:linear-gradient(135deg,var(--navy),var(--blue));color:white;
+  box-shadow:0 8px 24px rgba(68,114,196,.3)}
+.btn-prim:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(68,114,196,.4)}
+.btn-sec{background:var(--white);color:var(--navy);border:2px solid var(--border)}
+.btn-sec:hover{border-color:var(--blue);color:var(--blue)}
+.hero-pip{font-size:12px;color:var(--muted);
+  font-family:'DM Sans',monospace}
+
+/* ── HERO BLOBS ── */
+.hblob{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none}
+.hb1{width:600px;height:600px;background:rgba(68,114,196,.07);top:-150px;right:-150px}
+.hb2{width:400px;height:400px;background:rgba(46,134,171,.05);bottom:-100px;left:300px}
+
+/* ── APP MOCKUP ── */
+.hero-body{display:flex;gap:60px;align-items:center;flex-wrap:wrap}
+.hero-left{flex:1;min-width:300px}
+.hero-right{flex-shrink:0}
+
+.app-frame{
+  width:520px;background:var(--white);border-radius:16px;
+  border:1px solid var(--border);
+  box-shadow:0 32px 80px rgba(32,56,100,.18),0 0 0 1px rgba(255,255,255,.5);
+  overflow:hidden;
+}
+.af-header{
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  padding:18px 24px;display:flex;align-items:center;gap:14px;
+}
+.af-logo{width:44px;height:44px;border-radius:10px;
+  background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:20px}
+.af-title{font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:white}
+.af-sub{font-size:11px;color:rgba(255,255,255,.65);margin-top:1px}
+.af-body{padding:24px}
+
+/* step boxes */
+.step-box{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;
+  padding:14px 16px;margin-bottom:10px}
+.sb-label{font-family:'Outfit',sans-serif;font-weight:800;font-size:11px;
+  color:var(--blue);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;
+  display:flex;align-items:center;gap:6px}
+.sb-row{display:flex;gap:8px}
+.sb-btn{flex:1;padding:9px 12px;border-radius:8px;font-size:12px;font-weight:700;
+  font-family:'Outfit',sans-serif;text-align:center;cursor:pointer;border:none;transition:all .2s}
+.sb-btn-prim{background:var(--blue);color:white}
+.sb-btn-prim:hover{background:var(--blue2)}
+.sb-btn-out{background:transparent;border:1.5px solid var(--blue);color:var(--blue)}
+.sb-btn-out:hover{background:var(--blue3)}
+.sb-btn-warn{background:#FFF3CD;color:#856404;border:1.5px solid #FFC107}
+.sb-status{display:flex;align-items:center;gap:6px;margin-top:8px;font-size:11px}
+.ss-dot{width:7px;height:7px;border-radius:50%}
+.ss-ok{background:var(--green)}
+.ss-wait{background:var(--muted)}
+
+/* mapping row */
+.map-row{display:flex;gap:8px;margin-bottom:8px}
+.map-btn-o{flex:1;padding:9px 12px;border-radius:8px;font-size:12px;font-weight:700;
+  background:#FFF8E1;color:#856404;border:1.5px solid #FFC107;text-align:center;cursor:pointer}
+.map-btn-f{flex:1;padding:9px 12px;border-radius:8px;font-size:12px;font-weight:700;
+  background:#FFC107;color:#1a1a1a;border:1.5px solid #FFC107;text-align:center;cursor:pointer}
+.map-status-ok{display:inline-flex;align-items:center;gap:5px;
+  font-size:11px;color:var(--green);font-weight:700;margin-top:6px}
+
+/* run btn */
+.run-btn{width:100%;padding:13px;border-radius:10px;
+  background:linear-gradient(135deg,var(--green),#3DAA68);color:white;
+  font-family:'Outfit',sans-serif;font-weight:800;font-size:14px;
+  border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 6px 20px rgba(46,125,80,.25);transition:all .2s;margin-top:10px}
+.run-btn:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(46,125,80,.35)}
+
+/* log area */
+.log-area{background:#1A1A2E;border-radius:8px;padding:10px 14px;margin-top:10px;
+  font-family:'DM Sans',monospace;font-size:11px;color:#7BE8A0;line-height:1.8}
+.log-area span{color:#4A90D9}
+
+/* ── STATS ── */
+.stats{display:flex;gap:0;border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;background:var(--white);margin:64px 0}
+.stt{flex:1;padding:24px 16px;text-align:center;
+  border-right:1px solid var(--border);transition:background .2s;position:relative}
+.stt:last-child{border-right:none}
+.stt:hover{background:var(--blue3)}
+.stt::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:0;height:2px;background:var(--blue);transition:width .4s}
+.stt:hover::after{width:70%}
+.stt-n{font-family:'Outfit',sans-serif;font-weight:900;font-size:28px;color:var(--blue);letter-spacing:-1px}
+.stt-l{font-size:11px;color:var(--muted);margin-top:5px;text-transform:uppercase;
+  letter-spacing:.6px;font-weight:600}
+
+/* ── DIV ── */
+.div{height:1px;background:linear-gradient(90deg,transparent,var(--border) 20%,var(--border) 80%,transparent)}
+
+/* ── SEC ── */
+.sec{padding:80px 0}
+.sec-tag{font-family:'Outfit',sans-serif;font-size:11px;font-weight:800;
+  color:var(--blue);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:10px}
+.sec-title{font-family:'Outfit',sans-serif;font-weight:900;
+  font-size:clamp(30px,4vw,50px);letter-spacing:-1.5px;margin-bottom:14px;line-height:1.05}
+.sec-title .ac{color:var(--blue)}
+.sec-title .ag{color:var(--green)}
+.sec-desc{color:var(--sub);font-size:16px;line-height:1.7;max-width:560px;font-weight:400}
+
+/* ── FLOW STEPS ── */
+.flow-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px;
+  position:relative}
+.flow-connector{
+  position:absolute;top:38px;left:calc(33.3% - 8px);width:calc(33.3% + 16px);height:2px;
+  background:linear-gradient(90deg,var(--blue3),var(--blue),var(--blue3));z-index:0}
+.flow-connector:nth-child(3){left:calc(66.6% - 8px)}
+.flow-card{
+  background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);
+  padding:28px 22px;transition:all .25s;position:relative;z-index:1}
+.flow-card:hover{border-color:var(--blue);transform:translateY(-4px);
+  box-shadow:0 12px 36px rgba(68,114,196,.14)}
+.fc-num{
+  width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  color:white;font-family:'Outfit',sans-serif;font-weight:900;font-size:14px;
+  display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.fc-title{font-family:'Outfit',sans-serif;font-weight:800;font-size:17px;margin-bottom:8px}
+.fc-desc{font-size:13px;color:var(--sub);line-height:1.6}
+.fc-chip{display:inline-flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.chip{padding:3px 10px;border-radius:50px;font-size:10px;font-weight:700;
+  font-family:'Outfit',sans-serif;background:var(--blue3);color:var(--blue);
+  border:1px solid rgba(68,114,196,.15)}
+.chip-g{background:rgba(46,125,80,.08);color:var(--green);border-color:rgba(46,125,80,.15)}
+.chip-o{background:#FFF3CD;color:#856404;border-color:#FFC107}
+
+/* ── ANALYSIS GRID ── */
+.analysis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:52px}
+.an-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);
+  padding:26px;transition:all .25s}
+.an-card:hover{border-color:rgba(68,114,196,.3);transform:translateY(-3px);
+  box-shadow:0 10px 30px rgba(68,114,196,.1)}
+.an-icon{font-size:26px;margin-bottom:14px}
+.an-title{font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;margin-bottom:8px}
+.an-desc{font-size:13px;color:var(--sub);line-height:1.6}
+.an-tag{display:inline-block;margin-top:12px;padding:3px 10px;border-radius:50px;
+  font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;
+  background:var(--blue3);color:var(--blue);border:1px solid rgba(68,114,196,.15)}
+
+/* ── EXCEL PREVIEW ── */
+.excel-section{
+  background:linear-gradient(180deg,var(--bg) 0%,rgba(68,114,196,.04) 50%,var(--bg) 100%);
+  padding:80px 0;
+}
+.excel-mockup{
+  background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);
+  overflow:hidden;margin-top:48px;
+  box-shadow:0 20px 60px rgba(32,56,100,.12);
+}
+.em-chrome{height:34px;background:#F5F5F5;border-bottom:1px solid #E0E0E0;
+  display:flex;align-items:center;padding:0 14px;gap:12px}
+.em-dot{width:12px;height:12px;border-radius:50%}
+.em-bar{flex:1;background:#E8E8E8;border-radius:4px;height:20px;display:flex;align-items:center;padding:0 12px;
+  font-size:11px;color:#888}
+.em-tabs{display:flex;background:#ECECEC;border-bottom:1px solid #D0D0D0;padding:0 10px}
+.em-tab{padding:8px 18px;font-size:11px;font-weight:600;cursor:pointer;border-radius:4px 4px 0 0;margin-right:2px;margin-top:4px}
+.em-tab.act{background:white;border:1px solid #D0D0D0;border-bottom:1px solid white;color:#203864}
+.em-tab.inact{color:#888;background:#E8E8E8}
+.em-body{overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead th{
+  background:#4472C4;color:white;font-weight:700;
+  padding:8px 12px;text-align:center;font-family:'Outfit',sans-serif;
+  border:1px solid #3060B0;font-size:11px;white-space:nowrap;
+}
+tbody tr:nth-child(even){background:#F7F9FF}
+tbody td{padding:7px 12px;border:1px solid #E8ECF4;text-align:center;font-size:11px;color:#333}
+tbody td:first-child{text-align:left;font-weight:600;color:#203864}
+tbody td:nth-child(2){text-align:left;color:#555}
+.td-up{background:#E2EFDA;color:#2E7D50;font-weight:700}
+.td-dn{background:#FCE4D6;color:#C0392B;font-weight:700}
+.td-nu{color:#888}
+.pct-badge{display:inline-block;padding:2px 7px;border-radius:50px;font-size:10px;font-weight:700}
+.pb-g{background:#2E7D50;color:white}
+.pb-r{background:#C0392B;color:white}
+.em-footer{padding:10px 16px;background:#F7F9FF;border-top:1px solid #E0E8F4;
+  font-size:11px;color:#888;display:flex;justify-content:space-between}
+
+/* ── TECH STACK ── */
+.tech-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:48px}
+.tr{background:var(--white);border:1.5px solid var(--border);border-radius:10px;
+  padding:16px 18px;display:flex;align-items:center;gap:14px;transition:border-color .2s}
+.tr:hover{border-color:var(--blue)}
+.tr-ic{width:42px;height:42px;border-radius:10px;background:var(--blue3);
+  display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.tr-cat{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.tr-name{font-family:'Outfit',sans-serif;font-weight:800;font-size:15px;color:var(--green);margin-top:1px}
+.tr-desc{font-size:12px;color:var(--sub);margin-top:2px;line-height:1.4}
+
+/* ── TARGET SECTION ── */
+.targets-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:48px}
+.tgt{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);
+  padding:24px;display:flex;gap:16px;transition:all .25s}
+.tgt:hover{border-color:rgba(68,114,196,.3);transform:translateY(-2px)}
+.tgt-ic{width:46px;height:46px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.ti1{background:rgba(68,114,196,.1)}
+.ti2{background:rgba(46,125,80,.1)}
+.ti3{background:rgba(230,126,34,.1)}
+.ti4{background:rgba(46,134,171,.1)}
+.tgt-title{font-family:'Outfit',sans-serif;font-weight:800;font-size:15px;margin-bottom:5px}
+.tgt-desc{font-size:13px;color:var(--sub);line-height:1.55}
+
+/* ── DISCLAIMER SECTION ── */
+.disc-section{
+  background:linear-gradient(135deg,rgba(68,114,196,.06),rgba(46,125,80,.04));
+  padding:80px 0;
+}
+.disc-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:48px}
+.disc-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);padding:22px;transition:all .25s}
+.disc-card:hover{transform:translateY(-2px)}
+.disc-card.warn{border-color:rgba(230,126,34,.25);background:rgba(230,126,34,.03)}
+.disc-card.info{border-color:rgba(68,114,196,.2)}
+.dc-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.dc-icon{font-size:20px}
+.dc-title{font-family:'Outfit',sans-serif;font-weight:800;font-size:15px}
+.dc-desc{font-size:13px;color:var(--sub);line-height:1.6}
+
+/* ── VISION ── */
+.vision{
+  padding:90px 0;
+  background:linear-gradient(135deg,var(--navy) 0%,#1A4090 40%,#2E6AB0 100%);
+  text-align:center;position:relative;overflow:hidden;
+}
+.vb{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none}
+.vb1{width:500px;height:500px;background:rgba(68,114,196,.15);top:-150px;left:-100px}
+.vb2{width:400px;height:400px;background:rgba(46,125,80,.1);bottom:-100px;right:-100px}
+.vision .sec-tag{color:rgba(255,255,255,.5);position:relative;z-index:1}
+.vision-title{font-family:'Outfit',sans-serif;font-weight:900;
+  font-size:clamp(36px,5vw,62px);letter-spacing:-2px;color:white;
+  margin-bottom:20px;position:relative;z-index:1;line-height:1}
+.vision-desc{font-size:17px;color:rgba(255,255,255,.72);line-height:1.7;
+  max-width:620px;margin:0 auto 40px;position:relative;z-index:1}
+.vision-cta{
+  background:white;color:var(--navy);
+  padding:16px 36px;border-radius:50px;
+  font-family:'Outfit',sans-serif;font-weight:800;font-size:15px;
+  cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px;
+  position:relative;z-index:1;box-shadow:0 8px 28px rgba(0,0,0,.2);
+}
+.vision-cta:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 16px 48px rgba(0,0,0,.25)}
+
+/* ── SHORTCUTS ── */
+.shortcuts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:40px}
+.sc{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;
+  display:flex;align-items:center;gap:12px;transition:border-color .2s}
+.sc:hover{border-color:var(--blue)}
+.sc-key{font-family:'DM Sans',monospace;font-weight:700;font-size:12px;color:var(--blue);
+  background:var(--blue3);border:1px solid rgba(68,114,196,.2);border-radius:6px;
+  padding:4px 10px;white-space:nowrap;flex-shrink:0}
+.sc-desc{font-size:13px;color:var(--sub)}
+
+/* ── CREDIT ── */
+.credit{border-top:1px solid var(--border);padding:32px 0;text-align:center}
+.credit-name{font-family:'Outfit',sans-serif;font-weight:800;font-size:17px;margin-bottom:5px}
+.credit-link{font-size:13px;color:var(--blue);text-decoration:none;font-weight:600;transition:color .2s}
+.credit-link:hover{color:var(--green)}
+.credit-note{font-size:12px;color:var(--muted);margin-top:7px}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid rgba(68,114,196,.1);padding:36px 0;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.f-logo{font-family:'Outfit',sans-serif;font-weight:900;font-size:18px;color:var(--navy)}
+.f-logo span{color:var(--blue)}
+.f-tags{display:flex;gap:8px;flex-wrap:wrap}
+.f-tag{padding:5px 12px;border-radius:50px;font-size:11px;font-weight:700;
+  background:var(--blue3);color:var(--blue);border:1px solid rgba(68,114,196,.15);
+  font-family:'Outfit',sans-serif}
+.f-meta{font-size:12px;color:var(--muted)}
+
+/* ── REVEAL ── */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .65s,transform .65s}
+.rv.vis{opacity:1;transform:translateY(0)}
+
+/* ── DATA FLOW DIAGRAM ── */
+.data-flow{display:flex;align-items:center;margin-top:48px;
+  background:var(--white);border-radius:var(--r);padding:28px;
+  border:1.5px solid var(--border);overflow-x:auto;gap:0;
+  box-shadow:0 8px 32px rgba(32,56,100,.07)}
+.df-node{flex:1;min-width:110px;text-align:center;padding:0 6px}
+.dfn-icon{font-size:24px;margin-bottom:8px}
+.dfn-name{font-family:'Outfit',sans-serif;font-weight:800;font-size:13px;color:var(--navy)}
+.dfn-sub{font-size:10px;color:var(--muted);margin-top:3px;
+  font-family:'DM Sans',monospace}
+.df-arrow{color:var(--muted);font-size:20px;flex-shrink:0;padding:0 4px}
+
+@media(max-width:1050px){
+  .analysis-grid,.tech-grid,.disc-cards,.shortcuts-grid{grid-template-columns:1fr}
+  .flow-wrap{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .stats{flex-direction:column}
+  .stt{border-right:none;border-bottom:1px solid var(--border)}
+  .stt:last-child{border-bottom:none}
+}
+@media(max-width:720px){
+  .wrap{padding:0 24px}
+  nav .nav-in{padding:0 24px}
+  .sec,.disc-section,.excel-section,.vision{padding:60px 0}
+  .hero{padding:90px 0 50px}
+  .targets-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;padding:30px 24px}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- NAV -->
+<nav>
+<div class="nav-in">
+  <div class="logo">
+    <div class="logo-mark">⚡</div>
+    <div class="logo-name">Şarj Ağı <span>Gelişim Analizi</span></div>
+  </div>
+  <div class="nav-pills">
+    <div class="np np-out">v4.1</div>
+
+  </div>
+</div>
+</nav>
+
+<!-- HERO -->
+<div class="wrap">
+<div class="hero">
+  <div class="hblob hb1"></div>
+  <div class="hblob hb2"></div>
+  <div class="hero-body">
+    <div class="hero-left rv">
+      <div class="hero-badge"><div class="h-dot"></div>Karar Destek Aracı · v4.1</div>
+      <h1>
+        Şarj Ağı<br>
+        <span class="bl">Gelişim</span> Analizi
+        <span class="sm">EV şarj altyapısı için dönemsel kıyaslama ve raporlama</span>
+      </h1>
+      <p class="hero-desc">
+        İki farklı döneme ait Excel veri setini yükle, operatörleri normalleştir, analizi başlat — otomatik renk kodlu Excel raporu hazır.
+      </p>
+      <div class="hero-ctas">
+        <div class="btn btn-prim">▶ Analizi Başlat</div>
+        <div class="btn btn-sec">📄 Tanıtım Dosyası</div>
+        <div class="hero-pip">Python · pandas · ttkbootstrap · openpyxl</div>
+      </div>
+    </div>
+
+    <!-- APP MOCKUP -->
+    <div class="hero-right rv" style="transition-delay:.2s">
+      <div class="app-frame">
+        <div class="af-header">
+          <div class="af-logo">⚡</div>
+          <div>
+            <div class="af-title">ŞARJ AĞI GELİŞİM ANALİZİ</div>
+            <div class="af-sub">v4.1 — Hazır</div>
+          </div>
+        </div>
+        <div class="af-body">
+
+          <!-- Adım 1 -->
+          <div class="step-box">
+            <div class="sb-label">
+              <div style="width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,#203864,#4472C4);display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:900">1</div>
+              ADIM 1: Veri Kaynakları
+            </div>
+            <div class="sb-row">
+              <div class="sb-btn sb-btn-out">İlk Dönem Verisi Seç</div>
+              <div class="sb-btn sb-btn-out">Son Dönem Verisi Seç</div>
+            </div>
+            <div style="display:flex;gap:16px;margin-top:8px">
+              <div class="sb-status"><div class="ss-dot ss-ok"></div><span style="font-size:11px;color:#2E7D50;font-weight:700">✔ Yüklendi</span></div>
+              <div class="sb-status"><div class="ss-dot ss-ok"></div><span style="font-size:11px;color:#2E7D50;font-weight:700">✔ Yüklendi</span></div>
+            </div>
+          </div>
+
+          <!-- Adım 2 -->
+          <div class="step-box">
+            <div class="sb-label">
+              <div style="width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,#856404,#FFC107);display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:900">2</div>
+              ADIM 2: Operatör Mapping
+            </div>
+            <div class="map-row">
+              <div class="map-btn-o">Taslak Oluştur</div>
+              <div class="map-btn-f">Mapping Yükle</div>
+            </div>
+            <div class="map-status-ok">✔ Mapping Aktif &nbsp;·&nbsp; 47 operatör eşleşti</div>
+          </div>
+
+          <!-- Run -->
+          <div class="run-btn">ANALİZİ BAŞLAT ▶&nbsp;&nbsp;<span style="opacity:.7;font-weight:400;font-size:12px">Alt+A</span></div>
+
+          <!-- Log -->
+          <div class="log-area">
+            <span>&gt; </span>İLK veri seti hazır. <span>[EPDKEski_2024.xlsx]</span><br>
+            <span>&gt; </span>SON veri seti hazır. <span>[EPDKYeni_2025.xlsx]</span><br>
+            <span>&gt; </span>Mapping dosyası sisteme alındı.<br>
+            <span style="color:#FFD700">&gt; </span>Analiz tamamlandı. Excel raporu oluşturuldu ✔
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- STATS -->
+<div class="wrap">
+<div class="stats rv">
+  <div class="stt"><div class="stt-n">5</div><div class="stt-l">Analiz Türü</div></div>
+  <div class="stt"><div class="stt-n">3</div><div class="stt-l">Adım Akış</div></div>
+  <div class="stt"><div class="stt-n">6</div><div class="stt-l">Bileşen</div></div>
+  <div class="stt"><div class="stt-n">0</div><div class="stt-l">Sunucu</div></div>
+  <div class="stt"><div class="stt-n">AC+DC</div><div class="stt-l">Soket Analizi</div></div>
+  <div class="stt"><div class="stt-n">v4.1</div><div class="stt-l">Versiyon</div></div>
+</div>
+</div>
+
+<div class="div"></div>
+
+<!-- FLOW STEPS -->
+<div class="wrap sec">
+  <div class="sec-tag rv">Çalışma Akışı</div>
+  <h2 class="sec-title rv">3 adımda <span class="ac">rapor hazır.</span></h2>
+  <p class="sec-desc rv">Excel yükle, operatörleri eşleştir, analizi başlat. Kullanıcı müdahalesi minimumda tutulur.</p>
+
+  <div class="flow-wrap">
+    <div class="flow-card rv">
+      <div class="fc-num">1</div>
+      <div class="fc-title">Veri Kaynaklarını Yükle</div>
+      <div class="fc-desc">İki farklı döneme ait Excel dosyası seçilir. Sütunlar sihirbaz arayüzüyle manuel olarak eşleştirilir — operatör adı, soket türü, güç değeri.</div>
+      <div class="fc-chip">
+        <div class="chip">.xlsx / .xls</div>
+        <div class="chip">Sütun Sihirbazı</div>
+        <div class="chip">Alt+İ · Alt+S</div>
+      </div>
+    </div>
+    <div class="flow-card rv" style="transition-delay:.1s">
+      <div class="fc-num">2</div>
+      <div class="fc-title">Operatör Normalizasyonu</div>
+      <div class="fc-desc">Aynı operatör farklı dönemlerde farklı isimle geçebilir. Taslak mapping Excel oluşturulur, düzenlenir ve tekrar yüklenir. Otomatik Türkçe karakter normalizasyonu dahil.</div>
+      <div class="fc-chip">
+        <div class="chip chip-o">Mapping Dosyası</div>
+        <div class="chip chip-o">Ham → Standart</div>
+        <div class="chip">Türkçe Normalize</div>
+      </div>
+    </div>
+    <div class="flow-card rv" style="transition-delay:.2s">
+      <div class="fc-num">3</div>
+      <div class="fc-title">Analiz &amp; Excel Raporu</div>
+      <div class="fc-desc">Veriler birleştirilir, değişim metrikleri hesaplanır. Renk kodlu Excel raporu otomatik üretilir: artış → yeşil, azalış → kırmızı, yüzde formatlar uygulanır.</div>
+      <div class="fc-chip">
+        <div class="chip chip-g">🟢 Artış</div>
+        <div class="chip" style="background:#FCE4D6;color:#C0392B;border-color:#E74C3C">🔴 Azalış</div>
+        <div class="chip">Otomatik Sıralama</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- DATA FLOW -->
+<div class="wrap sec">
+  <div class="sec-tag rv">Veri Dönüşüm Zinciri</div>
+  <h2 class="sec-title rv">Excel'den <span class="ag">rapora.</span></h2>
+  <p class="sec-desc rv">Ham veri 5 dönüşüm adımından geçerek operatör bazlı kıyaslamalı rapora dönüşür.</p>
+
+  <div class="data-flow rv">
+    <div class="df-node">
+      <div class="dfn-icon">📁</div>
+      <div class="dfn-name">Excel D1</div>
+      <div class="dfn-sub">İlk Dönem</div>
+    </div>
+    <div class="df-arrow">→</div>
+    <div class="df-node">
+      <div class="dfn-icon">📁</div>
+      <div class="dfn-name">Excel D2</div>
+      <div class="dfn-sub">Son Dönem</div>
+    </div>
+    <div class="df-arrow">→</div>
+    <div class="df-node">
+      <div class="dfn-icon">🔀</div>
+      <div class="dfn-name">Mapping</div>
+      <div class="dfn-sub">Normalize</div>
+    </div>
+    <div class="df-arrow">→</div>
+    <div class="df-node">
+      <div class="dfn-icon">⚙️</div>
+      <div class="dfn-name">Gruplama</div>
+      <div class="dfn-sub">AC / DC split</div>
+    </div>
+    <div class="df-arrow">→</div>
+    <div class="df-node">
+      <div class="dfn-icon">🔗</div>
+      <div class="dfn-name">Merge</div>
+      <div class="dfn-sub">outer join</div>
+    </div>
+    <div class="df-arrow">→</div>
+    <div class="df-node">
+      <div class="dfn-icon">📊</div>
+      <div class="dfn-name">Excel Rapor</div>
+      <div class="dfn-sub">Renk kodlu</div>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- EXCEL PREVIEW -->
+<section class="excel-section">
+<div class="wrap">
+  <div class="sec-tag rv">Excel Çıktısı</div>
+  <h2 class="sec-title rv">Renk kodlu, <span class="ac">profesyonel rapor.</span></h2>
+  <p class="sec-desc rv">Artışlar yeşil, azalışlar kırmızı renk kodlamasıyla anında görünür. Yüzdelik formatlar, otomatik sıralama, tam tablo düzeni.</p>
+
+  <div class="excel-mockup rv">
+    <div class="em-chrome">
+      <div class="em-dot" style="background:#FF5F57"></div>
+      <div class="em-dot" style="background:#FFBD2E"></div>
+      <div class="em-dot" style="background:#28CA41"></div>
+      <div class="em-bar">📊 Şarj_Ağı_Analiz_Raporu_2025.xlsx</div>
+    </div>
+    <div class="em-tabs">
+      <div class="em-tab act">Gelişim_Raporu</div>
+      <div class="em-tab inact">Özet</div>
+    </div>
+    <div class="em-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Operator</th>
+            <th>Marka</th>
+            <th>AC Eski</th>
+            <th>DC Eski</th>
+            <th>AC Yeni</th>
+            <th>DC Yeni</th>
+            <th>AC Değişim</th>
+            <th>DC Değişim</th>
+            <th>Büyüme %</th>
+            <th>Pazar Payı</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TRUGO ENERJİ A.Ş.</td>
+            <td>TRUGO</td>
+            <td>1.240</td><td>412</td>
+            <td>1.890</td><td>680</td>
+            <td class="td-up">+650</td>
+            <td class="td-up">+268</td>
+            <td><span class="pct-badge pb-g">+52.4%</span></td>
+            <td>21.4%</td>
+          </tr>
+          <tr>
+            <td>ZES ELEKTRİK</td>
+            <td>ZES</td>
+            <td>980</td><td>290</td>
+            <td>1.420</td><td>450</td>
+            <td class="td-up">+440</td>
+            <td class="td-up">+160</td>
+            <td><span class="pct-badge pb-g">+40.8%</span></td>
+            <td>18.2%</td>
+          </tr>
+          <tr>
+            <td>EŞARJ ELEKTRİK</td>
+            <td>EŞARJ</td>
+            <td>820</td><td>180</td>
+            <td>1.100</td><td>260</td>
+            <td class="td-up">+280</td>
+            <td class="td-up">+80</td>
+            <td><span class="pct-badge pb-g">+29.7%</span></td>
+            <td>14.7%</td>
+          </tr>
+          <tr>
+            <td>VOLTRUN TEKNOLOJİ</td>
+            <td>VOLTRUN</td>
+            <td>650</td><td>120</td>
+            <td>620</td><td>100</td>
+            <td class="td-dn">−30</td>
+            <td class="td-dn">−20</td>
+            <td><span class="pct-badge pb-r">−6.6%</span></td>
+            <td>11.3%</td>
+          </tr>
+          <tr>
+            <td>BTC POWER</td>
+            <td>BTC</td>
+            <td>210</td><td>45</td>
+            <td>300</td><td>80</td>
+            <td class="td-up">+90</td>
+            <td class="td-up">+35</td>
+            <td><span class="pct-badge pb-g">+53.2%</span></td>
+            <td>5.2%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="em-footer">
+      <span>🟢 Artış = Yeşil &nbsp;·&nbsp; 🔴 Azalış = Kırmızı &nbsp;·&nbsp; Otomatik sıralama: En büyükten küçüğe</span>
+      <span>Toplam: 5 / 47 operatör gösteriliyor</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="div"></div>
+
+<!-- ANALYSIS TYPES -->
+<div class="wrap sec">
+  <div class="sec-tag rv">Analiz Türleri</div>
+  <h2 class="sec-title rv">5 ayrı boyut,<br><span class="ac">tek raporda.</span></h2>
+
+  <div class="analysis-grid">
+    <div class="an-card rv">
+      <div class="an-icon">🔌</div>
+      <div class="an-title">Soket Analizi</div>
+      <div class="an-desc">AC ve DC soket sayılarını ayrı ayrı hesaplar, iki dönem arasındaki artış/azalışı ortaya koyar. Her operatör için ayrı satır.</div>
+      <div class="an-tag">AC · DC · Toplam</div>
+    </div>
+    <div class="an-card rv" style="transition-delay:.1s">
+      <div class="an-icon">⚡</div>
+      <div class="an-title">Güç Analizi</div>
+      <div class="an-desc">Toplam kurulu güç (kW) değişimini operatör bazında gösterir. Enerji kapasitesindeki gelişimi sayısal olarak ölçer.</div>
+      <div class="an-tag">kW · Toplam Kurulu Güç</div>
+    </div>
+    <div class="an-card rv" style="transition-delay:.2s">
+      <div class="an-icon">📈</div>
+      <div class="an-title">Büyüme Analizi</div>
+      <div class="an-desc">Dönemsel büyüme oranı yüzde olarak hesaplanır. Artış yeşil, azalış kırmızı renk kodlamasıyla anında görünür.</div>
+      <div class="an-tag">% Büyüme · Trend</div>
+    </div>
+    <div class="an-card rv" style="transition-delay:.05s">
+      <div class="an-icon">🏢</div>
+      <div class="an-title">Operatör Bazlı</div>
+      <div class="an-desc">Firma ve marka bazında gruplandırılmış performans analizi. Mapping ile normalize edilmiş isimler üzerinden kıyaslama.</div>
+      <div class="an-tag">Firma · Marka · Gruplama</div>
+    </div>
+    <div class="an-card rv" style="transition-delay:.15s">
+      <div class="an-icon">📉</div>
+      <div class="an-title">Pazar Payı</div>
+      <div class="an-desc">Her operatörün toplam pazar içindeki yüzdesel payı hesaplanır. Sektörün konsolidasyon ve rekabet haritası ortaya çıkar.</div>
+      <div class="an-tag">% Pazar Payı</div>
+    </div>
+    <div class="an-card rv" style="transition-delay:.25s">
+      <div class="an-icon">🧹</div>
+      <div class="an-title">Veri Temizleme</div>
+      <div class="an-desc">Türkçe karakter normalizasyonu, noktalama temizleme, AC/DC otomatik sınıflandırma, bilinmeyen soket tipleri için UNKNOWN ataması.</div>
+      <div class="an-tag">Normalize · Regex · Sınıfla</div>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- TECH STACK -->
+<div class="wrap sec">
+  <div class="sec-tag rv">Teknik Altyapı</div>
+  <h2 class="sec-title rv">Python ekosistemi,<br><span class="ag">saf güç.</span></h2>
+
+  <div class="tech-grid rv">
+    <div class="tr">
+      <div class="tr-ic">🧠</div>
+      <div>
+        <div class="tr-cat">Veri İşleme</div>
+        <div class="tr-name">pandas + numpy</div>
+        <div class="tr-desc">Veri okuma, temizleme, gruplama, merge işlemleri. Büyük veri setleri için optimize edilmiş.</div>
+      </div>
+    </div>
+    <div class="tr">
+      <div class="tr-ic">🖥</div>
+      <div>
+        <div class="tr-cat">Modern GUI</div>
+        <div class="tr-name">ttkbootstrap + tkinter</div>
+        <div class="tr-desc">Bootstrap temalı modern arayüz, LabelFrame adımları, renk sistemi ve responsive düzen.</div>
+      </div>
+    </div>
+    <div class="tr">
+      <div class="tr-ic">📊</div>
+      <div>
+        <div class="tr-cat">Excel Rapor</div>
+        <div class="tr-name">openpyxl</div>
+        <div class="tr-desc">Font, PatternFill, Border stilleri, otomatik sütun genişliği, yüzdelik formatlar.</div>
+      </div>
+    </div>
+    <div class="tr">
+      <div class="tr-ic">🖼</div>
+      <div>
+        <div class="tr-cat">Görsel</div>
+        <div class="tr-name">Pillow (PIL)</div>
+        <div class="tr-desc">Logo ve görsel yükleme, Splash Screen ve header için yeniden boyutlandırma.</div>
+      </div>
+    </div>
+    <div class="tr">
+      <div class="tr-ic">🧵</div>
+      <div>
+        <div class="tr-cat">Thread</div>
+        <div class="tr-name">threading</div>
+        <div class="tr-desc">Analiz ve mapping arka planda çalışır, GUI donmaz. LoadingWindow ile anlık geri bildirim.</div>
+      </div>
+    </div>
+    <div class="tr">
+      <div class="tr-ic">🔤</div>
+      <div>
+        <div class="tr-cat">Normalizasyon</div>
+        <div class="tr-name">re (regex)</div>
+        <div class="tr-desc">Türkçe karakter dönüşümü, noktalama temizleme, whitespace normalizasyonu.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- SHORTCUTS -->
+<div class="wrap sec">
+  <div class="sec-tag rv">Klavye Kısayolları</div>
+  <h2 class="sec-title rv">Hız için <span class="ac">kısayollar.</span></h2>
+
+  <div class="shortcuts-grid rv">
+    <div class="sc"><div class="sc-key">Alt + İ</div><div class="sc-desc">İlk dönem verisini seç</div></div>
+    <div class="sc"><div class="sc-key">Alt + S</div><div class="sc-desc">Son dönem verisini seç</div></div>
+    <div class="sc"><div class="sc-key">Alt + T</div><div class="sc-desc">Taslak mapping oluştur</div></div>
+    <div class="sc"><div class="sc-key">Alt + M</div><div class="sc-desc">Mapping dosyası yükle</div></div>
+    <div class="sc"><div class="sc-key">Alt + A</div><div class="sc-desc">Analizi başlat</div></div>
+    <div class="sc"><div class="sc-key">Alt + C</div><div class="sc-desc">Uygulamadan çık</div></div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- TARGET AUDIENCE -->
+<div class="wrap sec">
+  <div class="sec-tag rv">Hedef Kullanıcılar</div>
+  <h2 class="sec-title rv">Sektörün ihtiyacı,<br><span class="ag">hazır araç.</span></h2>
+
+  <div class="targets-grid">
+    <div class="tgt rv">
+      <div class="tgt-ic ti1">⚡</div>
+      <div>
+        <div class="tgt-title">Enerji Şirketleri</div>
+        <div class="tgt-desc">Şarj ağı operatörlerinin dönemsel performansını hızla kıyaslayarak pazar dinamiklerini takip eden analistler.</div>
+      </div>
+    </div>
+    <div class="tgt rv" style="transition-delay:.1s">
+      <div class="tgt-ic ti2">🚗</div>
+      <div>
+        <div class="tgt-title">EV Altyapı Firmaları</div>
+        <div class="tgt-desc">Kurulu güç ve soket büyümesini izleyerek altyapı planlaması yapan elektrikli araç şarj firmaları.</div>
+      </div>
+    </div>
+    <div class="tgt rv" style="transition-delay:.2s">
+      <div class="tgt-ic ti3">📊</div>
+      <div>
+        <div class="tgt-title">Veri Analistleri</div>
+        <div class="tgt-desc">Karmaşık veri temizleme ve eşleştirme işlemlerini otomatize ederek zaman kazanmak isteyen profesyoneller.</div>
+      </div>
+    </div>
+    <div class="tgt rv" style="transition-delay:.3s">
+      <div class="tgt-ic ti4">🏛</div>
+      <div>
+        <div class="tgt-title">Kamu &amp; Özel Planlama</div>
+        <div class="tgt-desc">EV şarj altyapısı politikası geliştiren, yatırım kararı alan kamu kurumları ve özel sektör planlama ekipleri.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- DISCLAIMER -->
+<section class="disc-section">
+<div class="wrap">
+  <div class="sec-tag rv">Önemli Notlar</div>
+  <h2 class="sec-title rv">Sınırlamalar &amp;<br><span style="color:var(--orange)">uyarılar.</span></h2>
+
+  <div class="disc-cards">
+    <div class="disc-card warn rv">
+      <div class="dc-head"><div class="dc-icon">⚠️</div><div class="dc-title">Veri Sorumluluğu</div></div>
+      <div class="dc-desc">Sonuçlar tamamen kullanıcının sağladığı veri setlerine dayanır. Hatalı sütun eşleştirmesi veya mapping hataları analiz sonuçlarını etkiler.</div>
+    </div>
+    <div class="disc-card warn rv" style="transition-delay:.1s">
+      <div class="dc-head"><div class="dc-icon">📄</div><div class="dc-title">Resmi Belge Değil</div></div>
+      <div class="dc-desc">Bu yazılım tarafından oluşturulan raporlar resmi belge niteliği taşımaz. Karar destek aracı olarak kullanılmalıdır.</div>
+    </div>
+    <div class="disc-card info rv" style="transition-delay:.2s">
+      <div class="dc-head"><div class="dc-icon">🔗</div><div class="dc-title">Mapping Kritik</div></div>
+      <div class="dc-desc">Farklı dönemlerde aynı operatörün farklı yazılışları varsa mapping dosyası zorunludur. Mapping olmadan analiz yanıltıcı olabilir.</div>
+    </div>
+    <div class="disc-card info rv" style="transition-delay:.3s">
+      <div class="dc-head"><div class="dc-icon">💻</div><div class="dc-title">Windows Odaklı</div></div>
+      <div class="dc-desc">ctypes ve os entegrasyonu Windows ortamı için optimize edilmiştir. macOS/Linux'ta ek uyarlama gerekebilir.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="div"></div>
+
+<!-- VISION -->
+<section class="vision">
+  <div class="vb vb1"></div>
+  <div class="vb vb2"></div>
+  <div class="wrap">
+    <div class="sec-tag rv">Sonuç</div>
+    <h2 class="vision-title rv">Karmaşık veriyi<br>anlamlı içgörüye dönüştür.</h2>
+    <p class="vision-desc rv">
+      "Şarj Ağı Gelişim Analizi", çift dönem kıyaslamasını saniyeler içinde renk kodlu Excel raporuna dönüştüren güçlü bir karar destek aracıdır. Enerji sektörünün hızlı büyüyen EV altyapısını takip etmek için tasarlandı.
+    </p>
+
+  </div>
+</section>
+
+<!-- CREDIT -->
+<div class="wrap">
+<div class="credit">
+  <div class="credit-name">Mustafa Çelik tarafından geliştirilmiştir.</div>
+  <a href="https://www.linkedin.com/in/mustafacelik84/" class="credit-link" target="_blank">🔗 linkedin.com/in/mustafacelik84</a>
+  <div class="credit-note">EV Şarj Altyapısı · Veri Analizi · Python · ttkbootstrap</div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<div class="wrap">
+<footer>
+  <div class="f-logo">Şarj Ağı <span>Gelişim Analizi</span></div>
+  <div class="f-tags">
+    <div class="f-tag">pandas</div>
+    <div class="f-tag">ttkbootstrap</div>
+    <div class="f-tag">openpyxl</div>
+    <div class="f-tag">AC/DC</div>
+    <div class="f-tag">Mapping</div>
+    <div class="f-tag">v4.1</div>
+  </div>
+  <div class="f-meta">Şarj Ağı Gelişim Analizi v4.1 · Python · 2026</div>
+</footer>
+</div>
+
+<script>
+/* cursor glow */
+const cg = document.getElementById('cursorGlow');
+document.addEventListener('mousemove', e => {
+  cg.style.left = e.clientX + 'px';
+  cg.style.top  = e.clientY + 'px';
+});
+
+/* scroll reveal */
+const ro = new IntersectionObserver(entries =>
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis') }),
+  { threshold: 0.07 }
+);
+document.querySelectorAll('.rv').forEach(el => ro.observe(el));
+
+/* flow card tilt */
+document.querySelectorAll('.flow-card,.an-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width  - 0.5;
+    const y = (e.clientY - r.top)  / r.height - 0.5;
+    card.style.transform = `translateY(-4px) rotateX(${-y*5}deg) rotateY(${x*5}deg)`;
+  });
+  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+});
+</script>
+</body>
+</html>

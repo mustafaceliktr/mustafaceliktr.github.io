@@ -1,0 +1,229 @@
+/* Ana sayfa kurumsal giriş */
+.home-intro {
+    color: #111827;
+    padding: 24px 0 36px;
+}
+
+.home-intro__content {
+    margin: 0 auto;
+    max-width: 880px;
+    text-align: center;
+}
+
+.home-intro__label {
+    margin: 0 0 14px;
+    color: #6b7280;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+.home-intro__title {
+    margin: 0 auto;
+    max-width: 760px;
+    color: #0f172a;
+    font-size: clamp(1.85rem, 3vw, 2.65rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.22;
+}
+
+.home-intro__text {
+    margin: 22px auto 0;
+    max-width: 720px;
+}
+
+.home-intro__text p {
+    margin: 0;
+    color: #475569;
+    font-size: 0.98rem;
+    line-height: 1.72;
+}
+
+.home-intro__text p + p {
+    margin-top: 12px;
+}
+
+.home-intro__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.home-intro__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 10px 17px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none !important;
+    transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.home-intro__button--primary {
+    background: #111827;
+    color: #ffffff !important;
+}
+
+.home-intro__button--primary:hover,
+.home-intro__button--primary:focus {
+    background: #263244;
+}
+
+.home-intro__button--secondary {
+    background: #ffffff;
+    border-color: #d8dee8;
+    color: #111827 !important;
+}
+
+.home-intro__button--secondary:hover,
+.home-intro__button--secondary:focus {
+    border-color: #aab4c2;
+    color: #0f172a !important;
+}
+
+.home-intro__focus {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 38px;
+    text-align: left;
+}
+
+.home-intro__focus-card {
+    min-height: 150px;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+}
+
+.home-intro__focus-card h2 {
+    margin: 0 0 10px;
+    color: #111827;
+    font-size: 0.98rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.35;
+}
+
+.home-intro__focus-card p {
+    margin: 0;
+    color: #526070;
+    font-size: 0.88rem;
+    line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+    .home-intro__focus {
+        grid-template-columns: 1fr;
+    }
+
+    .home-intro__focus-card {
+        min-height: 0;
+    }
+}
+
+@media (max-width: 640px) {
+    .home-intro {
+        padding: 18px 0 28px;
+    }
+
+    .home-intro__content {
+        text-align: left;
+    }
+
+    .home-intro__label {
+        margin-bottom: 10px;
+        font-size: 0.7rem;
+    }
+
+    .home-intro__title {
+        font-size: clamp(1.55rem, 7vw, 2rem);
+        line-height: 1.25;
+    }
+
+    .home-intro__text {
+        margin-top: 18px;
+    }
+
+    .home-intro__text p {
+        font-size: 0.94rem;
+        line-height: 1.64;
+    }
+
+    .home-intro__actions {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 22px;
+    }
+
+    .home-intro__button {
+        width: 100%;
+    }
+
+    .home-intro__focus {
+        gap: 12px;
+        margin-top: 30px;
+    }
+
+    .home-intro__focus-card {
+        padding: 18px;
+    }
+}
+
+/* Projeler Grid Yapısı */
+.custom-projects-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 25px !important;
+    width: 100% !important;
+}
+
+/* Proje Kartı Tasarımı */
+.custom-project-card {
+    background: #fff !important;
+    border: 1px solid #eaeaea !important;
+    border-radius: 8px !important;
+    padding: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    position: relative !important;
+}
+
+/* Kart İçeriği Esnekliği */
+.card-content-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
+}
+
+/* Özet Metni Alanı */
+.archive__item-excerpt {
+    margin-bottom: 20px !important;
+    flex-grow: 1 !important; /* Boş alanı doldurarak butonu aşağı iter */
+}
+
+/* BUTON HİZALAMA: Mıknatıs gibi en alta çiviler */
+.custom-align-btn {
+    margin-top: auto !important; /* Otomatik olarak tabana hizalar */
+    align-self: flex-start !important;
+    padding: 6px 15px !important;
+    font-size: 0.65rem !important;
+    background-color: #002147 !important;
+    color: #fff !important;
+    border-radius: 4px !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+}
