@@ -1,184 +1,156 @@
-/* Ana sayfa kurumsal giriş */
-.home-intro {
-    color: #111827;
-    padding: 24px 0 36px;
-}
-
-.home-intro__content {
-    margin: 0 auto;
-    max-width: 880px;
-    text-align: center;
-}
-
-.home-intro__label {
-    margin: 0 0 14px;
-    color: #6b7280;
-    font-size: 0.74rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    line-height: 1.4;
-    text-transform: uppercase;
-}
-
-.home-intro__title {
-    margin: 0 auto;
-    max-width: 760px;
-    color: #0f172a;
-    font-size: clamp(1.85rem, 3vw, 2.65rem);
-    font-weight: 700;
-    letter-spacing: 0;
-    line-height: 1.22;
-}
-
-.home-intro__text {
-    margin: 22px auto 0;
-    max-width: 720px;
-}
-
-.home-intro__text p {
-    margin: 0;
-    color: #475569;
-    font-size: 0.98rem;
-    line-height: 1.72;
-}
-
-.home-intro__text p + p {
-    margin-top: 12px;
-}
-
-.home-intro__actions {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 28px;
-}
-
-.home-intro__button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 40px;
-    padding: 10px 17px;
-    border: 1px solid transparent;
-    border-radius: 6px;
-    font-size: 0.84rem;
-    font-weight: 700;
-    line-height: 1.2;
-    text-decoration: none !important;
-    transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
-}
-
-.home-intro__button--primary {
-    background: #111827;
-    color: #ffffff !important;
-}
-
-.home-intro__button--primary:hover,
-.home-intro__button--primary:focus {
-    background: #263244;
-}
-
-.home-intro__button--secondary {
-    background: #ffffff;
-    border-color: #d8dee8;
-    color: #111827 !important;
-}
-
-.home-intro__button--secondary:hover,
-.home-intro__button--secondary:focus {
-    border-color: #aab4c2;
-    color: #0f172a !important;
-}
-
-.home-intro__focus {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
-    margin-top: 38px;
-    text-align: left;
-}
-
-.home-intro__focus-card {
-    min-height: 150px;
-    padding: 20px;
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-}
-
-.home-intro__focus-card h2 {
-    margin: 0 0 10px;
-    color: #111827;
-    font-size: 0.98rem;
-    font-weight: 700;
-    letter-spacing: 0;
-    line-height: 1.35;
-}
-
-.home-intro__focus-card p {
-    margin: 0;
-    color: #526070;
-    font-size: 0.88rem;
-    line-height: 1.6;
-}
-
-@media (max-width: 900px) {
-    .home-intro__focus {
-        grid-template-columns: 1fr;
+/* Masaustu genel olcek ayari: daha sikisik ve sakin gorunum */
+@media (min-width: 768px) {
+    html {
+        font-size: 96%;
     }
 
-    .home-intro__focus-card {
-        min-height: 0;
-    }
-}
-
-@media (max-width: 640px) {
-    .home-intro {
-        padding: 18px 0 28px;
+    body {
+        line-height: 1.58;
     }
 
-    .home-intro__content {
-        text-align: left;
+    .masthead__inner-wrap {
+        align-items: center;
+        padding-top: 0.9em;
+        padding-bottom: 0.9em;
     }
 
-    .home-intro__label {
-        margin-bottom: 10px;
-        font-size: 0.7rem;
+    .masthead .site-title {
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
     }
 
-    .home-intro__title {
-        font-size: clamp(1.55rem, 7vw, 2rem);
-        line-height: 1.25;
+    .masthead .site-logo img {
+        width: 240px;
+        height: auto;
+        max-width: 240px;
+        max-height: 58px;
+        object-fit: contain;
     }
 
-    .home-intro__text {
-        margin-top: 18px;
+    .greedy-nav {
+        align-items: center;
     }
 
-    .home-intro__text p {
-        font-size: 0.94rem;
+    .masthead__menu-item,
+    .greedy-nav .visible-links a,
+    .greedy-nav .hidden-links a,
+    .greedy-nav__toggle {
+        font-size: 0.96em;
+    }
+
+    .greedy-nav .visible-links a,
+    .greedy-nav .hidden-links a {
+        font-weight: 600;
+    }
+
+    .sidebar {
+        font-size: 0.96em;
+    }
+
+    .sidebar .author__avatar img {
+        width: 140px;
+        height: 140px;
+        max-width: 140px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .author__name {
+        font-size: 1.05em;
+        line-height: 1.3;
+    }
+
+    .author__bio,
+    .author__urls,
+    .author__urls-wrapper .btn {
+        font-size: 0.96em;
+        line-height: 1.48;
+    }
+
+    .page__content {
+        font-size: 0.97em;
         line-height: 1.64;
     }
 
-    .home-intro__actions {
-        align-items: stretch;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 22px;
+    .page .page__inner-wrap {
+        margin-top: calc(1em + 56px);
     }
 
-    .home-intro__button {
-        width: 100%;
+    .page__content p,
+    .page__content li {
+        line-height: 1.64;
     }
 
-    .home-intro__focus {
-        gap: 12px;
-        margin-top: 30px;
+    .page__content h1,
+    .page__content h2,
+    .page__content h3,
+    .page__content h4 {
+        line-height: 1.28;
     }
 
-    .home-intro__focus-card {
-        padding: 18px;
+    .archive,
+    .archive__item,
+    .archive__item-excerpt {
+        font-size: 0.97em;
+    }
+
+    .page__share,
+    .page__share .btn,
+    .social-icons {
+        font-size: 0.96em;
+    }
+
+    .page__share {
+        margin-top: 1.6em;
+        padding-top: 0.8em;
+    }
+
+    .page__share-title {
+        margin-bottom: 8px;
+        font-size: 0.68rem;
+    }
+
+    .page__share .btn {
+        margin-inline-end: 0.25rem;
+        padding: 0.45rem 0.65rem;
+        font-size: 0.74rem;
+        line-height: 1.2;
+    }
+
+    .btn,
+    .custom-align-btn {
+        padding-top: 0.58em;
+        padding-bottom: 0.58em;
+    }
+}
+
+@media (min-width: 1024px) {
+    .sidebar {
+        padding-top: 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .masthead .site-logo img {
+        width: 160px;
+        height: auto;
+        max-width: 160px;
+        max-height: 44px;
+        object-fit: contain;
+    }
+
+    .sidebar .author__avatar img {
+        width: 88px;
+        height: 88px;
+        max-width: 88px;
+        object-fit: cover;
+        border-radius: 50%;
     }
 }
 
