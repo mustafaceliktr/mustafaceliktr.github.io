@@ -1,5 +1,5 @@
 # Tema Ayarları
-remote_theme: "mmistakes/minimal-mistakes" # Versiyon takısı olmadan en sağlıklısıdır
+remote_theme: "mmistakes/minimal-mistakes"
 minimal_mistakes_skin: "default"
 
 # Plugins (Eklentiler)
@@ -9,16 +9,42 @@ plugins:
   - jekyll-gist
   - jekyll-feed
   - jekyll-include-cache
-  - jekyll-remote-theme # Bu satırın olduğundan emin ol!
-  
+  - jekyll-remote-theme
+
 # Site Ayarları
 title: "Mustafa Çelik"
-logo: "assets/images/mustafacleiklogo.png" # Logonun bu yolda olduğunu teyit et
-teaser: "assets/images/mustafacleiklogo.png"
+description: "Mustafa Çelik - Kişisel Portfolyo ve Özgeçmiş"
+url: "https://mustafaceliktr.github.io"
 locale: "tr-TR"
+logo: "assets/images/mustafacleiklogo.png"
+teaser: "assets/images/mustafacleiklogo.png"
+og_image: "assets/images/mustafacleiklogo.png"
+excerpt_separator: ""
 
-# Masthead (Üst Bilgi) Ayarları
-minimal_mistakes_skin: "default" # Kendi özel CSS'imizi kullanacağız
+# Dosya yollarını temiz tutmak için
+include:
+  - _pages
+
+# Yazar Bilgileri
+author:
+  name: "Mustafa Çelik"
+  avatar: "assets/images/mustafacelik.png"
+  bio: "Satış Profesyoneli <br> AI & Vibe Coding Meraklısı"
+  location: "İstanbul, Türkiye"
+  links:
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/in/mustafaceliktr"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/mustafaceliktr"
+
+footer:
+  links:
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/in/mustafaceliktr"
+  copyright: "© 2026 Mustafa Çelik. Tüm hakları saklıdır."
 
 # Varsayılanlar
 defaults:
@@ -30,57 +56,3 @@ defaults:
       author_profile: true
       share: true
       related: true
-
-# Dosya yollarını temiz tutmak için
-include:
-  - _pages
-
-# SEO Ayarları
-description: "Mustafa Çelik - Kişisel Portfolyo ve Özgeçmiş"
-url: "https://mustafaceliktr.github.io"
-author:
-  name: "Mustafa Çelik"
-  links:
-    - label: "LinkedIn"
-      icon: "fab fa-fw fa-linkedin"
-      url: "https://linkedin.com/in/mustafaceliktr" # Burayı güncelle
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/mustafaceliktr"
-
-# Sosyal Paylaşım Görseli
-og_image: "assets/images/mustafacleiklogo.png" # Link paylaşıldığında görünecek resim
-
-footer:
-  links:
-    - label: "LinkedIn"
-      icon: "fab fa-fw fa-linkedin"
-      url: "https://linkedin.com/in/mustafaceliktr"
-  copyright: "© 2026 Mustafa Çelik. Tüm hakları saklıdır."
-
-  # Yazar Bilgileri (Sol Barı Dolduran Kısım)
-author:
-  name   : "Mustafa Çelik"
-  avatar : "assets/images/mustafacelik.png" # Buraya kendi fotoğrafını da koyabilirsin
-  bio    : "Satış Profesyoneli <br> AI & Vibe Coding Meraklısı"
-  location: "İstanbul, Türkiye"
-  links:
-    - label: "LinkedIn"
-      icon: "fab fa-fw fa-linkedin"
-      url: "https://linkedin.com/in/mustafaceliktr" # Kendi linkinle değiştir
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/mustafaceliktr"
-
-# Varsayılanlar (Sidebar'ı tüm sayfalarda aktif eder)
-defaults:
-  - scope:
-      path: ""
-      type: "pages"
-    values:
-      layout: "single"
-      author_profile: true # Bu satır sol barı açar
-      share: true
-      related: true
-locale: "tr-tr"
-excerpt_separator: ""
