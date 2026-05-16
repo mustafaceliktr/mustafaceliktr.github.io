@@ -5,6 +5,9 @@ permalink: /projects/
 author_profile: true
 ---
 
+<!-- markdownlint-disable MD033 -->
+<!-- Inline HTML is intentionally used here for the custom project card grid. -->
+
 Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışları ve enerji sektörü odağında geliştirdiğim uygulama ve araç çalışmalarını paylaşıyorum. Çalışmaların önemli bir kısmı, yapay zeka destekli üretim ve vibecoding yaklaşımıyla; pratik ihtiyaçlara hızlı, anlaşılır ve uygulanabilir çözümler üretme amacıyla hazırlanmıştır.
 
 <div class="custom-projects-grid">
@@ -37,7 +40,7 @@ Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışlar
 
   <div class="custom-project-card">
     <div class="archive__item-teaser">
-      <img src="/assets/images/freshly.png" alt="freshly">
+      <img src="/assets/images/skttakip.png" alt="Freshly">
     </div>
     <div class="card-content-wrapper">
       <h3 class="archive__item-title">Freshly</h3>
@@ -50,12 +53,12 @@ Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışlar
 
   <div class="custom-project-card">
     <div class="archive__item-teaser">
-      <img src="/assets/images/vibetrack.png" alt="VibeTrack">
+      <img src="/assets/images/vibe.png" alt="VibeTrack">
     </div>
     <div class="card-content-wrapper">
       <h3 class="archive__item-title">VibeTrack</h3>
       <div class="archive__item-excerpt">
-        Müşteri ziyaretlerini lokasyon bazlı kaydederek satış ekiplerinin takip, raporlama ve önceliklendirme süreçlerini destekleyen CRM aracı.
+        Ruh haline göre odak odaları, müzik ve zamanlayıcı akışıyla çalışma ritmini sade biçimde destekleyen verimlilik uygulaması.
       </div>
       <a href="/portfolyo/vibetrack.html" class="custom-align-btn">Projeyi İncele</a>
     </div>
@@ -63,14 +66,14 @@ Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışlar
 
   <div class="custom-project-card">
     <div class="archive__item-teaser">
-      <img src="/assets/images/evcp-dataker.png" alt="E.V.C.P. DaTAker">
+      <img src="/assets/images/dataker.png" alt="E.V.C.P. DaTAker">
     </div>
     <div class="card-content-wrapper">
       <h3 class="archive__item-title">E.V.C.P. DaTAker</h3>
       <div class="archive__item-excerpt">
         Şarj istasyonlarına ait konum ve teknik verileri toplayarak analiz çalışmaları için düzenli veri kaynağı hazırlayan araç.
       </div>
-      <a href="/portfolyo/evcp-dataker.html" class="custom-align-btn">Projeyi İncele</a>
+      <a href="/portfolyo/evcpdataker.html" class="custom-align-btn">Projeyi İncele</a>
     </div>
   </div>
 
