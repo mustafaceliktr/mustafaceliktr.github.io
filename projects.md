@@ -16,7 +16,7 @@ Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışlar
     <div class="card-content-wrapper">
       <h3 class="archive__item-title">HerŞeyim</h3>
       <div class="archive__item-excerpt">
-        Görev, not ve toplantı takibini tek ekranda birleştirerek kişisel planlama ve günlük iş akışını daha düzenli yönetmeyi hedefleyen yaşam asistanı.
+        Görev, not ve toplantı takibini tek ekranda birleştirerek günlük iş akışını daha düzenli yönetmeyi hedefleyen yaşam asistanı.
       </div>
       <a href="/portfolyo/herseyim.html" class="custom-align-btn">Projeyi İncele</a>
     </div>
@@ -29,7 +29,7 @@ Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışlar
     <div class="card-content-wrapper">
       <h3 class="archive__item-title">İnerken</h3>
       <div class="archive__item-excerpt">
-        Linkle veya manuel eklenen ürünlerde fiyat değişimlerini izleyerek satın alma kararlarını daha zamanında ve veriye dayalı vermeye yardımcı olan takip aracı.
+        Ürün fiyat değişimlerini izleyerek satın alma kararlarını daha zamanında ve veriye dayalı vermeye yardımcı olan takip aracı.
       </div>
       <a href="/portfolyo/inerken.html" class="custom-align-btn">Projeyi İncele</a>
     </div>
@@ -42,7 +42,7 @@ Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışlar
     <div class="card-content-wrapper">
       <h3 class="archive__item-title">Freshly</h3>
       <div class="archive__item-excerpt">
-        Son kullanma tarihi takibini kolaylaştırarak ev ve küçük işletme stoklarında gıda israfını azaltmaya yönelik pratik bir takip uygulaması.
+        Son kullanma tarihi takibini kolaylaştırarak ev ve küçük işletme stoklarında gıda israfını azaltmaya yönelik pratik uygulama.
       </div>
       <a href="/portfolyo/freshly.html" class="custom-align-btn">Projeyi İncele</a>
     </div>
@@ -55,7 +55,7 @@ Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışlar
     <div class="card-content-wrapper">
       <h3 class="archive__item-title">VibeTrack</h3>
       <div class="archive__item-excerpt">
-        Müşteri ziyaretleri ve saha aktivitelerini lokasyon bazlı kaydederek satış ekiplerinin takip, raporlama ve önceliklendirme süreçlerini destekleyen CRM aracı.
+        Müşteri ziyaretlerini lokasyon bazlı kaydederek satış ekiplerinin takip, raporlama ve önceliklendirme süreçlerini destekleyen CRM aracı.
       </div>
       <a href="/portfolyo/vibetrack.html" class="custom-align-btn">Projeyi İncele</a>
     </div>
@@ -68,7 +68,7 @@ Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışlar
     <div class="card-content-wrapper">
       <h3 class="archive__item-title">E.V.C.P. DaTAker</h3>
       <div class="archive__item-excerpt">
-        Elektrikli araç şarj istasyonlarına ait konum ve teknik verileri toplayarak analiz çalışmalarına daha düzenli veri kaynağı hazırlayan veri toplama aracı.
+        Şarj istasyonlarına ait konum ve teknik verileri toplayarak analiz çalışmaları için düzenli veri kaynağı hazırlayan araç.
       </div>
       <a href="/portfolyo/evcp-dataker.html" class="custom-align-btn">Projeyi İncele</a>
     </div>
@@ -81,7 +81,7 @@ Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışlar
     <div class="card-content-wrapper">
       <h3 class="archive__item-title">E.A. Şarj Ekosistemi Analizi</h3>
       <div class="archive__item-excerpt">
-        Şarj istasyonu verilerini dönemler arasında karşılaştırarak elektrikli araç ekosistemindeki büyüme, dağılım ve değişim eğilimlerini görünür kılan analiz çalışması.
+        Şarj istasyonu verilerini dönemler arasında karşılaştırarak büyüme, dağılım ve değişim eğilimlerini görünür kılan analiz çalışması.
       </div>
       <a href="/portfolyo/sarjekosistemianaliz.html" class="custom-align-btn">Projeyi İncele</a>
     </div>
@@ -94,7 +94,7 @@ Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışlar
     <div class="card-content-wrapper">
       <h3 class="archive__item-title">Gelişim Raporu V1</h3>
       <div class="archive__item-excerpt">
-        EPDK verileri üzerinden iki dönemli şarj noktası değişimini raporlayarak temel pazar gelişimini hızlı ve anlaşılır biçimde değerlendirmeyi sağlayan araç.
+        EPDK verileriyle iki dönemli şarj noktası değişimini raporlayarak temel pazar gelişimini hızlı değerlendirmeyi sağlayan araç.
       </div>
       <a href="/portfolyo/gelisimraporu.html" class="custom-align-btn">Projeyi İncele</a>
     </div>
@@ -107,7 +107,7 @@ Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışlar
     <div class="card-content-wrapper">
       <h3 class="archive__item-title">ProjectOS</h3>
       <div class="archive__item-excerpt">
-        Satış ve proje süreçlerini tek panelde izleyerek fırsat, görev ve ilerleme takibini daha ölçülebilir hale getirmeyi amaçlayan yönetim aracı.
+        Satış ve proje süreçlerini tek panelde izleyerek fırsat, görev ve ilerleme takibini daha ölçülebilir kılan yönetim aracı.
       </div>
       <a href="/portfolyo/projectos.html" class="custom-align-btn">Projeyi İncele</a>
     </div>
