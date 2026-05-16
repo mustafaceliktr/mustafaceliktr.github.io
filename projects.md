@@ -5,7 +5,7 @@ permalink: /projects/
 author_profile: true
 ---
 
-Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aşağıdadır. Projeleri incelemek isterseniz tanıtım sayfalarına gitmek için ilgili proje detaylar butonunu tıklayabilirsiniz.
+Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışları ve enerji sektörü odağında geliştirdiğim uygulama ve araç çalışmalarını paylaşıyorum. Çalışmaların önemli bir kısmı, yapay zeka destekli üretim ve vibecoding yaklaşımıyla; pratik ihtiyaçlara hızlı, anlaşılır ve uygulanabilir çözümler üretme amacıyla hazırlanmıştır.
 
 <div class="custom-projects-grid">
 
@@ -16,9 +16,9 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <div class="card-content-wrapper">
       <h3 class="archive__item-title">HerŞeyim</h3>
       <div class="archive__item-excerpt">
-        Görev, not ve toplantı yönetimini tek merkezde toplayan yaşam asistanı.
+        Görev, not ve toplantı takibini tek ekranda birleştirerek kişisel planlama ve günlük iş akışını daha düzenli yönetmeyi hedefleyen yaşam asistanı.
       </div>
-      <a href="/portfolyo/herseyim.html" target="_blank" class="custom-align-btn">Detaylar</a>
+      <a href="/portfolyo/herseyim.html" class="custom-align-btn">Projeyi İncele</a>
     </div>
   </div>
 
@@ -29,9 +29,9 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <div class="card-content-wrapper">
       <h3 class="archive__item-title">İnerken</h3>
       <div class="archive__item-excerpt">
-        Linkle veya manuel eklenen ürün için akıllı fiyat takibi ve bildirim uygulaması.
+        Linkle veya manuel eklenen ürünlerde fiyat değişimlerini izleyerek satın alma kararlarını daha zamanında ve veriye dayalı vermeye yardımcı olan takip aracı.
       </div>
-      <a href="/portfolyo/inerken.html" target="_blank" class="custom-align-btn">Detaylar</a>
+      <a href="/portfolyo/inerken.html" class="custom-align-btn">Projeyi İncele</a>
     </div>
   </div>
 
@@ -40,11 +40,11 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
       <img src="/assets/images/freshly.png" alt="freshly">
     </div>
     <div class="card-content-wrapper">
-      <h3 class="archive__item-title">freshly</h3>
+      <h3 class="archive__item-title">Freshly</h3>
       <div class="archive__item-excerpt">
-        Son kullanma tarihi (SKT) takibi ve gıda israfını önleyen akıllı takip uygulaması.
+        Son kullanma tarihi takibini kolaylaştırarak ev ve küçük işletme stoklarında gıda israfını azaltmaya yönelik pratik bir takip uygulaması.
       </div>
-      <a href="/portfolyo/freshly.html" target="_blank" class="custom-align-btn">Detaylar</a>
+      <a href="/portfolyo/freshly.html" class="custom-align-btn">Projeyi İncele</a>
     </div>
   </div>
 
@@ -55,9 +55,9 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <div class="card-content-wrapper">
       <h3 class="archive__item-title">VibeTrack</h3>
       <div class="archive__item-excerpt">
-        Satış ve müşteri ziyaretlerini lokasyon bazlı takip eden CRM destekli uygulama.
+        Müşteri ziyaretleri ve saha aktivitelerini lokasyon bazlı kaydederek satış ekiplerinin takip, raporlama ve önceliklendirme süreçlerini destekleyen CRM aracı.
       </div>
-      <a href="/portfolyo/vibetrack.html" target="_blank" class="custom-align-btn">Detaylar</a>
+      <a href="/portfolyo/vibetrack.html" class="custom-align-btn">Projeyi İncele</a>
     </div>
   </div>
 
@@ -68,9 +68,9 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <div class="card-content-wrapper">
       <h3 class="archive__item-title">E.V.C.P. DaTAker</h3>
       <div class="archive__item-excerpt">
-        Şarj istasyonu konum ve teknik verilerini otomatik toplayan veri madenciliği aracı.
+        Elektrikli araç şarj istasyonlarına ait konum ve teknik verileri toplayarak analiz çalışmalarına daha düzenli veri kaynağı hazırlayan veri toplama aracı.
       </div>
-      <a href="/portfolyo/evcp-dataker.html" target="_blank" class="custom-align-btn">Detaylar</a>
+      <a href="/portfolyo/evcp-dataker.html" class="custom-align-btn">Projeyi İncele</a>
     </div>
   </div>
 
@@ -81,9 +81,9 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <div class="card-content-wrapper">
       <h3 class="archive__item-title">E.A. Şarj Ekosistemi Analizi</h3>
       <div class="archive__item-excerpt">
-        Elektrikli araç şarj istasyonlarının çoklu dönem gelişimini gösteren analiz yazılımı.
+        Şarj istasyonu verilerini dönemler arasında karşılaştırarak elektrikli araç ekosistemindeki büyüme, dağılım ve değişim eğilimlerini görünür kılan analiz çalışması.
       </div>
-      <a href="/portfolyo/sarjekosistemianaliz.html" target="_blank" class="custom-align-btn">Detaylar</a>
+      <a href="/portfolyo/sarjekosistemianaliz.html" class="custom-align-btn">Projeyi İncele</a>
     </div>
   </div>
 
@@ -94,9 +94,9 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <div class="card-content-wrapper">
       <h3 class="archive__item-title">Gelişim Raporu V1</h3>
       <div class="archive__item-excerpt">
-        EPDK verileriyle şarj noktalarının iki dönemli temel gelişim analiz raporlama aracı.
+        EPDK verileri üzerinden iki dönemli şarj noktası değişimini raporlayarak temel pazar gelişimini hızlı ve anlaşılır biçimde değerlendirmeyi sağlayan araç.
       </div>
-      <a href="/portfolyo/gelisimraporu.html" target="_blank" class="custom-align-btn">Detaylar</a>
+      <a href="/portfolyo/gelisimraporu.html" class="custom-align-btn">Projeyi İncele</a>
     </div>
   </div>
 
@@ -107,9 +107,9 @@ Yazılım geliştirme sürecimde hayata geçirdiğim çalışmaların özeti aş
     <div class="card-content-wrapper">
       <h3 class="archive__item-title">ProjectOS</h3>
       <div class="archive__item-excerpt">
-        Satış ve proje yönetim süreçlerini optimize eden veri odaklı yönetim paneli.
+        Satış ve proje süreçlerini tek panelde izleyerek fırsat, görev ve ilerleme takibini daha ölçülebilir hale getirmeyi amaçlayan yönetim aracı.
       </div>
-      <a href="/portfolyo/projectos.html" target="_blank" class="custom-align-btn">Detaylar</a>
+      <a href="/portfolyo/projectos.html" class="custom-align-btn">Projeyi İncele</a>
     </div>
   </div>
 
