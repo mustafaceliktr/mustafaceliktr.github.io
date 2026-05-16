@@ -124,7 +124,7 @@
     }
 
     .btn,
-    .custom-align-btn {
+    .custom-project-card .custom-align-btn {
         padding-top: 0.58em;
         padding-bottom: 0.58em;
     }
@@ -157,9 +157,16 @@
 /* Projeler Grid Yapısı */
 .custom-projects-grid {
     display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
-    gap: 25px !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
     width: 100% !important;
+    align-items: start !important;
+}
+
+@media (min-width: 900px) {
+    .custom-projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
 }
 
 /* Proje Kartı Tasarımı */
@@ -167,31 +174,51 @@
     background: #fff !important;
     border: 1px solid #eaeaea !important;
     border-radius: 8px !important;
-    padding: 20px !important;
+    padding: 12px !important;
     display: flex !important;
     flex-direction: column !important;
-    height: 100% !important;
+    height: auto !important;
     position: relative !important;
 }
 
+.custom-project-card .archive__item-teaser {
+    margin-bottom: 0.55rem !important;
+}
+
+.custom-project-card .archive__item-teaser img {
+    display: block !important;
+    width: 100% !important;
+    height: 105px !important;
+    object-fit: contain !important;
+    object-position: center !important;
+}
+
 /* Kart İçeriği Esnekliği */
-.card-content-wrapper {
+.custom-project-card .card-content-wrapper {
     display: flex !important;
     flex-direction: column !important;
-    flex-grow: 1 !important;
+    flex-grow: 0 !important;
 }
 
 /* Özet Metni Alanı */
-.archive__item-excerpt {
-    margin-bottom: 20px !important;
-    flex-grow: 1 !important; /* Boş alanı doldurarak butonu aşağı iter */
+.custom-project-card .archive__item-title {
+    margin-top: 0 !important;
+    margin-bottom: 0.35rem !important;
 }
 
-/* BUTON HİZALAMA: Mıknatıs gibi en alta çiviler */
-.custom-align-btn {
-    margin-top: auto !important; /* Otomatik olarak tabana hizalar */
+.custom-project-card .archive__item-excerpt {
+    margin-top: 0 !important;
+    margin-bottom: 0.65rem !important;
+    flex-grow: 0 !important;
+    font-size: 0.88em !important;
+    line-height: 1.42 !important;
+}
+
+/* Proje karti butonu */
+.custom-project-card .custom-align-btn {
+    margin-top: 0 !important;
     align-self: flex-start !important;
-    padding: 6px 15px !important;
+    padding: 5px 12px !important;
     font-size: 0.65rem !important;
     background-color: #002147 !important;
     color: #fff !important;
