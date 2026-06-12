@@ -30,6 +30,7 @@ author:
   name: "Mustafa Çelik"
   avatar: "assets/images/mustafacelik.png"
   bio: "Satış Profesyoneli <br> AI & Vibe Coding Meraklısı"
+  home: "/cv/"
   location: "İstanbul, Türkiye"
   links:
     - label: "LinkedIn"
