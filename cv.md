@@ -15,6 +15,12 @@ Satış Profesyoneli olarak, satış ve müşteri yönetimi alanında 15 yıllı
 <h2 class="cv-section-title">İş Deneyimleri</h2>
 
 <div class="job-item">
+  <p class="job-title">Kurumsal Satış Müdürü</p>
+  <p class="company-date">Mekser Petrol Ekipmanları A.Ş. | Nisan 2026 - Halen</p>
+  <p class="job-description">ŞKurumsal Satış Müdürü olarak, Mekser’in ürettiği akaryakıt pompa ve ekipmaları akaryakıt dağıtım şirketleri ve endüstriyel ( key account seviyesinde) müşterilere satışını gerçekleştirmek. Bu doğrultuda EPDK lisanslı 32 akaryakıt dağıtım şirketinin tamamından sorumlu olarak bu firmaların, mühendislik, satın alma, finans vb tüm operasyonel ekipleri ile tüm seviyeleerde görüşmeler gerçekleştiriyorum. Mevcut görevime ek olarak iş ve satış hacminin gelişmesi amacıyla yeni iş kolları oluşturmak iin çalışmalarım da bulunmaktadır.</p>
+</div>
+
+<div class="job-item">
   <p class="job-title">Satış Yöneticisi</p>
   <p class="company-date">Zebra Electronics | Eylül 2024 - Ocak 2026</p>
   <p class="job-description">Şirketin ürettiği DC/AC elektrikli araç şarj ünitelerinin lisanslı CPO ve B2B müşterilerine satışını gerçekleştirdim. CPO yazılımı ve çağrı merkezi hizmetlerinin satışını yaparak müşteri ihtiyaçlarını analiz ettim, teknik ve ticari çözümler sundum. Toplamda 2 milyon USD değerinde sözleşmeler imzaladım.</p>
