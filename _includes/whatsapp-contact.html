@@ -1,0 +1,66 @@
+<style>
+  .whatsapp-contact {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 1000;
+  }
+
+  .whatsapp-contact__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    max-width: calc(100vw - 32px);
+    padding: 0.55rem 0.95rem;
+    border-radius: 999px;
+    background-color: #128c7e;
+    color: #fff !important;
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 0 6px 16px rgba(18, 140, 126, 0.22);
+    transition: background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+  }
+
+  .whatsapp-contact__link:hover,
+  .whatsapp-contact__link:focus {
+    background-color: #0f7a6d;
+    color: #fff !important;
+    text-decoration: none;
+    box-shadow: 0 8px 18px rgba(18, 140, 126, 0.28);
+    transform: translateY(-1px);
+  }
+
+  .whatsapp-contact__link:focus {
+    outline: 2px solid rgba(18, 140, 126, 0.32);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 480px) {
+    .whatsapp-contact {
+      right: 12px;
+      bottom: 12px;
+    }
+
+    .whatsapp-contact__link {
+      min-height: 36px;
+      padding: 0.5rem 0.7rem;
+      font-size: 0.72rem;
+    }
+  }
+</style>
+
+<div class="whatsapp-contact">
+  <a
+    class="whatsapp-contact__link"
+    href="https://wa.me/905557625559?text=Merhaba%20Mustafa%20Bey%2C%20web%20siteniz%20%C3%BCzerinden%20ula%C5%9F%C4%B1yorum.%20Sizinle%20ileti%C5%9Fime%20ge%C3%A7mek%20isterim."
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="WhatsApp üzerinden iletişime geç"
+  >
+    WhatsApp'tan iletişime geç
+  </a>
+</div>
