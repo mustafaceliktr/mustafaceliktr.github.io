@@ -158,6 +158,44 @@
 }
 
 @media (max-width: 768px) {
+    .masthead__menu,
+    .greedy-nav {
+        width: 100%;
+    }
+
+    .greedy-nav {
+        align-items: center;
+        display: flex;
+    }
+
+    .masthead .site-title {
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    .greedy-nav .visible-links {
+        height: 1px;
+        left: -9999px;
+        overflow: hidden;
+        position: absolute;
+        top: auto;
+        width: 1px;
+    }
+
+    .greedy-nav .visible-links .masthead__menu-item {
+        min-width: 100vw;
+    }
+
+    .greedy-nav__toggle {
+        margin-left: auto;
+    }
+
     .masthead .site-logo img {
         width: 160px;
         height: auto;
@@ -632,4 +670,78 @@
 .contact-links__list a:focus {
     background-color: #f4f6f8;
     text-decoration: none;
+}
+
+/* Back-to-top control */
+.back-to-top {
+    align-items: center;
+    appearance: none;
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 999px;
+    bottom: 74px;
+    box-shadow: 0 5px 14px rgba(0, 33, 71, 0.12);
+    color: #002147;
+    cursor: pointer;
+    display: flex;
+    font-size: 0.76rem;
+    font-weight: 700;
+    gap: 0.28rem;
+    min-height: 34px;
+    justify-content: center;
+    line-height: 1;
+    opacity: 0;
+    padding: 0.45rem 0.68rem;
+    pointer-events: none;
+    position: fixed;
+    right: 18px;
+    transform: translateY(6px);
+    transition: opacity 160ms ease, visibility 160ms ease, transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
+    visibility: hidden;
+    white-space: nowrap;
+    z-index: 999;
+}
+
+.back-to-top.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    visibility: visible;
+}
+
+.back-to-top__text {
+    display: inline;
+}
+
+.back-to-top:hover,
+.back-to-top:focus {
+    background-color: #eef7f8;
+    border-color: #9ccfd5;
+    color: #002147;
+}
+
+.back-to-top:focus {
+    outline: 2px solid rgba(0, 95, 103, 0.28);
+    outline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+    .back-to-top__text {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .back-to-top {
+        background-color: #002147;
+        border-color: #002147;
+        border-radius: 50%;
+        color: #fff;
+        font-size: 1rem;
+        height: 42px;
+        overflow: hidden;
+        padding: 0;
+        right: 12px;
+        width: 42px;
+    }
 }

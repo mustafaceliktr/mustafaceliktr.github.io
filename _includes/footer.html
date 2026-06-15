@@ -2,4 +2,42 @@
   &copy; {{ site.time | date: '%Y' }} Mustafa Çelik. Tüm hakları saklıdır.
 </div>
 
+<button id="back-to-top" class="back-to-top" type="button" aria-label="Yukarı dön">↑ <span class="back-to-top__text">Yukarı</span></button>
+
+<script>
+  (function() {
+    function initBackToTop() {
+      var backToTop = document.getElementById("back-to-top");
+
+      if (!backToTop) {
+        return;
+      }
+
+      function getScrollTop() {
+        return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      }
+
+      function updateBackToTop() {
+        backToTop.classList.toggle("is-visible", getScrollTop() > 250);
+      }
+
+      backToTop.addEventListener("click", function() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      });
+
+      updateBackToTop();
+      window.addEventListener("scroll", updateBackToTop, { passive: true });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initBackToTop);
+    } else {
+      initBackToTop();
+    }
+  })();
+</script>
+
 {% include whatsapp-contact.html %}
