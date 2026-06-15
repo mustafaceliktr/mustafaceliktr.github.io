@@ -6,7 +6,7 @@ date: 2026-04-02
 categories: ["Evcharge", "Enerji"]
 tags: ["linkedin", "b2b", "enerji", "evcharge"]
 header:
-  teaser: /assets/images/ev-ecosystem.jpg
+  teaser: /assets/images/ev-charging-quality-operations.jpg
 ---
 
 <a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>

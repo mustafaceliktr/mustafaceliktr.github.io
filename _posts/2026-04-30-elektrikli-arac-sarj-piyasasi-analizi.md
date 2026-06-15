@@ -6,7 +6,7 @@ author_profile: true
 categories: ["Enerji", "Mobilite"]
 tags: ["EPDK", "Elektrikli Arac", "DC Sarj"]
 header:
-  teaser: /assets/images/ev-charging-analysis.jpg
+  teaser: /assets/images/ev-charging-market-efficiency.jpg
 ---
 
 <a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>

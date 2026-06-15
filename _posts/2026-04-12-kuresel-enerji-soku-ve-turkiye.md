@@ -6,7 +6,7 @@ author_profile: true
 categories: ["Enerji", "Ekonomi"]
 tags: ["linkedin", "enerji", "ges", "veri", "depolama"]
 header:
-  teaser: /assets/images/global-energy.jpg
+  teaser: /assets/images/global-energy-shock-turkey-transition.jpg
 ---
 
 <a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>

@@ -6,7 +6,7 @@ author_profile: true
 categories: ["Evcharge", "Enerji"]
 tags: ["linkedin", "b2b", "enerji", "evcharge", "ges", "elektrik"]
 header:
-  teaser: /assets/images/energy-management.jpg
+  teaser: /assets/images/ev-charging-solar-storage-management.jpg
 ---
 
 <a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
