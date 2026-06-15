@@ -4,9 +4,9 @@ permalink: /cv/
 author_profile: true
 ---
 
-<div class="cv-actions-sidebar-top">
-  <a href="#form-alani" onclick="prepareDownload('tr')" class="cv-mini-btn">Türkçe CV İndir</a>
-  <a href="#form-alani" onclick="prepareDownload('en')" class="cv-mini-btn">English CV Download</a>
+<div class="cv-downloads">
+  <a href="#form-alani" onclick="prepareDownload('tr')" class="cv-downloads__button cv-downloads__button--primary">Türkçe CV İndir</a>
+  <a href="#form-alani" onclick="prepareDownload('en')" class="cv-downloads__button cv-downloads__button--secondary">English CV Download</a>
 </div>
 
 <h2 class="cv-section-title">Özgeçmiş Özeti</h2>
