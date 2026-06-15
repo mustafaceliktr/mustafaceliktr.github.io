@@ -6,7 +6,7 @@ author_profile: true
 categories: ["Enerji", "Ekonomi"]
 tags: ["Akaryakıt", "Makroekonomi", "Jeopolitik", "İşletme Sermayesi", "EV Şarj"]
 header:
-  teaser: /assets/images/energy-costs-analysis.jpg
+  teaser: /assets/images/fuel-station-mobility-business-transformation.jpg
 ---
 
 <a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>

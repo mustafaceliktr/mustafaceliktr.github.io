@@ -6,7 +6,7 @@ author_profile: true
 categories: ["Enerji", "Ekonomi"]
 tags: ["Enerji Maliyetleri", "B2B", "Sanayi", "Sürdürülebilirlik"]
 header:
-  teaser: /assets/images/energy-costs-analysis.jpg
+  teaser: /assets/images/energy-costs-economic-pressure-turkey.jpg
 ---
 
 <a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
