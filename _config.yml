@@ -14,7 +14,8 @@ plugins:
 # Site Ayarları
 title: "Mustafa Çelik"
 description: "Mustafa Çelik - Kişisel Portfolyo ve Özgeçmiş"
-url: "https://mustafaceliktr.github.io"
+url: "https://www.mustafaceliktr.com"
+baseurl: ""
 locale: "tr-TR"
 logo: "assets/images/mustafacleiklogo.png"
 teaser: "assets/images/mustafacleiklogo.png"
