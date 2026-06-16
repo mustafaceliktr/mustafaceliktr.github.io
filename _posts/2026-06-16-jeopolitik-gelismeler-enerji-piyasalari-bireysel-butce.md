@@ -6,7 +6,7 @@ author_profile: true
 categories: ["Enerji", "Ekonomi"]
 tags: ["Jeopolitik", "Enerji Piyasaları", "Akaryakıt", "Bireysel Bütçe", "Finansal Okuryazarlık"]
 header:
-  teaser: /assets/images/geopolitical-risk-energy-budget-awareness.jpg
+  teaser: /assets/images/geopolitical-risk-energy-budget-awareness-v2.jpg
 ---
 
 <a href="/blog/" class="blog-back-btn">← Blog Listesine Dön</a>
