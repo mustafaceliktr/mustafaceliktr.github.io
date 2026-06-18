@@ -575,6 +575,11 @@ footer{padding:40px 60px;border-top:1px solid rgba(123,94,167,.08);display:flex;
   .bb-core{width:140px;height:140px}
   footer{padding:30px 24px}
 }
+.project-bottom-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin-top:36px;margin-bottom:96px}
+.project-contact-cta,.back-to-projects{display:inline-block;padding:10px 14px;border:1px solid rgba(123,94,167,.22);border-radius:8px;background:rgba(255,255,255,.92);color:#4b2f76;font-weight:800;line-height:1.2;text-decoration:none}
+.project-contact-cta{background:var(--purple);color:#fff}
+.vibetrack-bottom-actions{align-items:flex-start;flex-direction:column;gap:14px;margin-bottom:120px;width:100%}
+@media(max-width:560px){.project-bottom-actions{align-items:stretch;flex-direction:column}}
 </style>
 </head>
 <body>
@@ -613,8 +618,6 @@ footer{padding:40px 60px;border-top:1px solid rgba(123,94,167,.08);display:flex;
       Klasik zaman yönetimi uygulamalarının soğuk ve stresli dünyasından çıkıp, kendi müziğin ve ruh halinle tasarlanmış bir odaklanma sığınağına gir.
     </p>
     <div class="hero-ctas">
-      <div class="cta-btn cta-primary">✦ Odana Gir</div>
-      <div class="cta-btn cta-secondary">Nasıl Çalışır? →</div>
     </div>
   </div>
 
@@ -945,7 +948,6 @@ footer{padding:40px 60px;border-top:1px solid rgba(123,94,167,.08);display:flex;
   <p class="vision-desc reveal">
     Bu proje sadece bir "sayaç" değil — dijital yorgunlukla mücadele eden modern insanın masaya her oturduğunda ilk açacağı asistan olmayı hedefliyor. Çalışmayı sıkıcı zorunluluktan, kişiselleştirilmiş bir deneyime dönüştürmek için.
   </p>
-  <div class="vision-cta reveal">✦ Odana Gir — Ücretsiz</div>
 </section>
 
 <!-- CREDIT -->
@@ -966,7 +968,10 @@ footer{padding:40px 60px;border-top:1px solid rgba(123,94,167,.08);display:flex;
     <div class="f-tag">Mood-Based</div>
   </div>
   <div class="f-meta">VibeTrack · Odaklanma ve Verimlilik · 2026</div>
-  <a href="/projects/" class="back-to-projects">← Projeler’e geri dön</a>
+  <div class="project-bottom-actions vibetrack-bottom-actions">
+    <a href="/iletisim/?konu=VibeTrack" class="project-contact-cta">Proje hakkında iletişime geç</a>
+    <a href="/projects/" class="back-to-projects">← Projeler’e geri dön</a>
+  </div>
 </footer>
 
 <script>

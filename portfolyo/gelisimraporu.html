@@ -387,6 +387,10 @@ footer{border-top:1px solid rgba(68,114,196,.1);padding:36px 0;
   .targets-grid{grid-template-columns:1fr}
   footer{flex-direction:column;padding:30px 24px}
 }
+.project-bottom-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin-top:36px;margin-bottom:96px}
+.project-contact-cta,.back-to-projects{display:inline-block;padding:10px 14px;border:1px solid rgba(32,56,100,.2);border-radius:8px;background:rgba(255,255,255,.92);color:#203864;font-weight:800;line-height:1.2;text-decoration:none}
+.project-contact-cta{background:var(--blue);color:#fff}
+@media(max-width:560px){.project-bottom-actions{align-items:stretch;flex-direction:column}}
 </style>
 </head>
 <body>
@@ -900,7 +904,10 @@ footer{border-top:1px solid rgba(68,114,196,.1);padding:36px 0;
   <div class="credit-name">Mustafa Çelik tarafından geliştirilmiştir.</div>
   <a href="https://www.linkedin.com/in/mustafacelik84/" class="credit-link" target="_blank">🔗 linkedin.com/in/mustafacelik84</a>
   <div class="credit-note">EV Şarj Altyapısı · Veri Analizi · Python · ttkbootstrap</div>
-  <a href="/projects/" class="back-to-projects">← Projeler’e geri dön</a>
+  <div class="project-bottom-actions">
+    <a href="/iletisim/?konu=Geli%C5%9Fim%20Raporu%20V1" class="project-contact-cta">Proje hakkında iletişime geç</a>
+    <a href="/projects/" class="back-to-projects">← Projeler’e geri dön</a>
+  </div>
 </div>
 </div>
 

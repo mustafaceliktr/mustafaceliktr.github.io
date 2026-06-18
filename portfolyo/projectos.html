@@ -409,6 +409,10 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:40px 0;text-align:cent
   .status-board{flex-direction:column}
   .roadmap .rm-row{flex-direction:column;align-items:flex-start}
 }
+.project-bottom-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin-top:36px;margin-bottom:96px}
+.project-contact-cta,.back-to-projects{display:inline-block;padding:10px 14px;border:1px solid rgba(255,255,255,.18);border-radius:8px;background:rgba(255,255,255,.92);color:#002147;font-weight:700;line-height:1.2;text-decoration:none}
+.project-contact-cta{background:var(--blue);color:#fff}
+@media(max-width:560px){.project-bottom-actions{align-items:stretch;flex-direction:column}}
 </style>
 </head>
 <body>
@@ -869,7 +873,10 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:40px 0;text-align:cent
   <div class="cred-name">Mustafa Çelik tarafından geliştirilmiştir.</div>
   <a href="https://www.linkedin.com/in/mustafacelik84/" class="cred-link" target="_blank">🔗 linkedin.com/in/mustafacelik84</a>
   <div class="cred-note">Tek kullanıcı, çoklu proje · Yerel üretkenlik aracı · HTML + CSS + JS</div>
-  <a href="/projects/" class="back-to-projects">← Projeler’e geri dön</a>
+  <div class="project-bottom-actions">
+    <a href="/iletisim/?konu=ProjectOS" class="project-contact-cta">Proje hakkında iletişime geç</a>
+    <a href="/projects/" class="back-to-projects">← Projeler’e geri dön</a>
+  </div>
 </div>
 
 <footer>
