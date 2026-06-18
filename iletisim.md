@@ -44,3 +44,17 @@ excerpt: "İş birliği, proje, sektör değerlendirmesi veya profesyonel ileti�
     </div>
   </section>
 </div>
+
+<script>
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const konu = params.get('konu');
+  if (!konu) return;
+
+  const subjectField = document.getElementById('contact-subject');
+  const formspreeSubject = document.querySelector('input[name="_subject"]');
+
+  if (subjectField) subjectField.value = konu;
+  if (formspreeSubject) formspreeSubject.value = konu;
+})();
+</script>

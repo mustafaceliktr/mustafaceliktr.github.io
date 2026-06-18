@@ -526,6 +526,10 @@ header {
   to   { opacity:1; transform: translateX(0); }
 }
 .content.active { animation: slideIn .25s ease; }
+.project-bottom-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin-top:36px;margin-bottom:96px}
+.project-contact-cta,.back-to-projects{display:inline-block;padding:10px 14px;border:1px solid rgba(255,255,255,.22);border-radius:8px;background:rgba(255,255,255,.92);color:#002147;font-weight:700;line-height:1.2;text-decoration:none}
+.project-contact-cta{background:#1F3864;color:#fff}
+@media(max-width:560px){.project-bottom-actions{align-items:stretch;flex-direction:column}}
 </style>
 </head>
 <body>
@@ -1440,7 +1444,8 @@ function showTab(id) {
   document.getElementById('tab-' + id).classList.add('active');
 }
 </script>
-<div style="position:relative;z-index:2;text-align:center;padding:28px 40px 40px;">
+<div class="project-bottom-actions" style="position:relative;z-index:2;padding:28px 40px 40px;">
+  <a href="/iletisim/?konu=Her%C5%9Eeyim" class="project-contact-cta">Proje hakkında iletişime geç</a>
   <a href="/projects/" class="back-to-projects">← Projeler’e geri dön</a>
 </div>
 {% include whatsapp-contact.html %}

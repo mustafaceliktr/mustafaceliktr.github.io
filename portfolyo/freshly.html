@@ -720,6 +720,10 @@ layout: null
     .features-grid, .audience-grid { grid-template-columns: 1fr; }
     .nav-cta .nav-link { display: none; }
   }
+  .project-bottom-actions { display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:center; margin-top:36px; margin-bottom:96px; }
+  .project-contact-cta, .back-to-projects { display:inline-block; padding:10px 14px; border:1px solid rgba(255,255,255,0.22); border-radius:8px; background:rgba(255,255,255,0.92); color:#002147; font-weight:700; line-height:1.2; text-decoration:none; }
+  .project-contact-cta { background: var(--green-600); color:#fff; }
+  @media (max-width: 560px) { .project-bottom-actions { align-items:stretch; flex-direction:column; } }
 </style>
 </head>
 <body>
@@ -1104,7 +1108,10 @@ layout: null
   <div class="footer-links">
     <a href="https://freshly--mustafaacelikk.replit.app/" class="footer-link" target="_blank">Uygulama</a>
     <a href="https://tally.so/r/vG4x4g" class="footer-link" target="_blank">Anket</a>
-    <a href="/projects/" class="footer-link back-to-projects">← Projeler’e geri dön</a>
+  </div>
+  <div class="project-bottom-actions">
+    <a href="/iletisim/?konu=Freshly" class="project-contact-cta">Proje hakkında iletişime geç</a>
+    <a href="/projects/" class="back-to-projects">← Projeler’e geri dön</a>
   </div>
   <div class="footer-copy">Beta © 2026 · Keep it fresh, always.</div>
 </footer>

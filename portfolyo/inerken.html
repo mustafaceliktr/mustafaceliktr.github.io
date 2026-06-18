@@ -263,6 +263,10 @@ footer{border-top:1px solid var(--border);padding:48px 0;text-align:center}
   .arch-flow{flex-direction:column}
   .arch-arrow{transform:rotate(90deg)}
 }
+.project-bottom-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin-top:36px;margin-bottom:96px}
+.project-contact-cta,.back-to-projects{display:inline-block;padding:10px 14px;border:1px solid rgba(255,255,255,.18);border-radius:8px;background:rgba(255,255,255,.92);color:#002147;font-weight:700;line-height:1.2;text-decoration:none}
+.project-contact-cta{background:#00E5A0;color:#0D0F14}
+@media(max-width:560px){.project-bottom-actions{align-items:stretch;flex-direction:column}}
 </style>
 </head>
 <body>
@@ -758,7 +762,10 @@ footer{border-top:1px solid var(--border);padding:48px 0;text-align:center}
     <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:var(--green)">Düşük</div><div style="font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:.5px">Kaynak Kullanımı</div></div>
   </div>
   <div class="footer-meta">Bu belge Nisan 2026'da hazırlanmıştır · Uygulama hazır · Sunucu çalışıyor · Sıradaki adım: Firebase ve mağaza yayını.</div>
-  <a href="/projects/" class="back-to-projects">← Projeler’e geri dön</a>
+  <div class="project-bottom-actions">
+    <a href="/iletisim/?konu=%C4%B0nerken" class="project-contact-cta">Proje hakkında iletişime geç</a>
+    <a href="/projects/" class="back-to-projects">← Projeler’e geri dön</a>
+  </div>
 </div>
 </footer>
 
