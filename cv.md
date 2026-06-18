@@ -1,7 +1,9 @@
 ---
 layout: single
+title: "Özgeçmiş"
 permalink: /cv/
 author_profile: true
+excerpt: "Mustafa Çelik’in kurumsal satış, müşteri yönetimi, iş geliştirme, enerji sektörü ve teknoloji odaklı profesyonel deneyimini inceleyin."
 ---
 
 <div class="cv-downloads">

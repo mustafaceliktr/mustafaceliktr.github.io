@@ -2,6 +2,7 @@
 layout: single
 author_profile: true
 seo_title: "Mustafa Çelik"
+excerpt: "Mustafa Çelik’in satış, iş geliştirme, yapay zeka destekli üretim, vibecoding projeleri ve enerji sektörü üzerine çalışmalarını içeren kişisel web sitesi."
 # Header ve title kısımlarını tamamen sildik, böylece banner kaybolacak.
 ---
 

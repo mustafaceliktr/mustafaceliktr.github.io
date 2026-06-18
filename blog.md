@@ -3,6 +3,7 @@ layout: single
 title: "Blog"
 permalink: /blog/
 author_profile: true
+excerpt: "Enerji sektörü, elektrikli araç şarj ekosistemi, ekonomi, iş geliştirme ve teknoloji üzerine Mustafa Çelik’in makale ve değerlendirmeleri."
 ---
 
 <div class="blog-index">
