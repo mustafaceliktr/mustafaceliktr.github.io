@@ -745,3 +745,10 @@
         width: 42px;
     }
 }
+.back-to-projects {
+    display: inline-block;
+    margin-top: 1rem;
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
