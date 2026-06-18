@@ -3,6 +3,7 @@ layout: single
 title: "İletişim"
 permalink: /iletisim/
 author_profile: true
+excerpt: "İş birliği, proje, sektör değerlendirmesi veya profesyonel iletişim için Mustafa Çelik ile bağlantı kurun."
 ---
 
 <div class="contact-page">

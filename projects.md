@@ -3,6 +3,7 @@ layout: single
 title: "Uygulama Çalışmalarım"
 permalink: /projects/
 author_profile: true
+excerpt: "Mustafa Çelik’in satış, veri analizi, günlük iş akışları, yapay zeka destekli araçlar ve enerji sektörü odağında geliştirdiği uygulama çalışmalarını inceleyin."
 ---
 
 <!-- markdownlint-disable MD033 -->

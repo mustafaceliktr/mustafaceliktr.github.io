@@ -13,13 +13,13 @@ plugins:
 
 # Site Ayarları
 title: "Mustafa Çelik"
-description: "Mustafa Çelik - Kişisel Portfolyo ve Özgeçmiş"
+description: "Mustafa Çelik’in satış, iş geliştirme, yapay zeka destekli üretim, vibecoding projeleri ve enerji sektörü üzerine çalışmalarını içeren kişisel web sitesi."
 url: "https://www.mustafaceliktr.com"
 baseurl: ""
 locale: "tr-TR"
 logo: "assets/images/mustafacleiklogo.png"
-teaser: "assets/images/mustafacleiklogo.png"
-og_image: "assets/images/mustafacleiklogo.png"
+teaser: "assets/images/og-default.png"
+og_image: "assets/images/og-default.png"
 excerpt_separator: ""
 
 # Dosya yollarını temiz tutmak için
