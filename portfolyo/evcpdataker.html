@@ -335,7 +335,8 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:40px 0;text-align:cent
 .rv.vis{opacity:1;transform:translateY(0)}
 
 @media(max-width:860px){
-  .feat-grid,.tech-grid,.flow-grid{grid-template-columns:1fr}
+  .feat-grid,.tech-grid,.flow-grid,.brief-grid{grid-template-columns:1fr}
+  .brief-wide{grid-column:auto}
   .stats{flex-direction:column}
   .st{border-right:none;border-bottom:1px solid var(--border)}
   .st:last-child{border-bottom:none}
@@ -344,6 +345,15 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:40px 0;text-align:cent
   .data-flow{flex-direction:column}
   .df-node{border-right:none;border-bottom:1px solid var(--border)}
 }
+.project-brief{padding:56px 0}
+.brief-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:24px}
+.brief-card{background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:24px}
+.brief-card h2{font-weight:800;font-size:26px;letter-spacing:-.7px;margin-bottom:10px}
+.brief-card p,.brief-card li{font-size:14px;color:var(--sub);line-height:1.7;font-weight:300}
+.brief-card ul{padding-left:18px}
+.brief-wide{grid-column:1/-1}
+.brief-status{border-color:rgba(44,201,133,.25);background:rgba(44,201,133,.06)}
+.brief-status strong{display:block;color:var(--success);font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:8px}
 .project-bottom-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin-top:36px;margin-bottom:96px}
 .project-contact-cta,.back-to-projects{display:inline-block;padding:10px 14px;border:1px solid rgba(255,255,255,.18);border-radius:8px;background:rgba(255,255,255,.92);color:#002147;font-weight:700;line-height:1.2;text-decoration:none}
 .project-contact-cta{background:var(--accent);color:#fff}
@@ -395,8 +405,54 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:40px 0;text-align:cent
   <div class="st"><div class="st-n">3×</div><div class="st-l">Yeniden Deneme</div></div>
   <div class="st"><div class="st-n">60s</div><div class="st-l">Süre Göstergesi</div></div>
   <div class="st"><div class="st-n">1</div><div class="st-l">Tık Excel</div></div>
-  <div class="st"><div class="st-n">0</div><div class="st-l">Manuel Adım</div></div>
+  <div class="st"><div class="st-n">Rehberli</div><div class="st-l">Kullanım</div></div>
 </div>
+</div>
+
+<div class="div"></div>
+
+<!-- STRUCTURED PROJECT BRIEF -->
+<div class="wrap project-brief">
+  <div class="tag">Kısa proje özeti</div>
+  <div class="brief-grid">
+    <article class="brief-card brief-wide">
+      <h2>E.V.C.P. DaTAker</h2>
+      <p>E.V.C.P. DaTAker, EPDK açık veri portalındaki elektrikli araç şarj noktası verilerini çekmeyi, soket bazında ayrıştırmayı ve analiz edilebilir Excel çıktısına dönüştürmeyi hedefleyen veri toplama çalışmasıdır.</p>
+    </article>
+    <article class="brief-card">
+      <h2>Problem</h2>
+      <p>Şarj istasyonu verisi teknik formatlarda geldiğinde, analize başlamadan önce indirme, ayrıştırma, temizleme ve Excel'e aktarma adımları zaman alır. Bu süreç teknik olmayan kullanıcılar için de zorlayıcı olabilir.</p>
+    </article>
+    <article class="brief-card">
+      <h2>Çözüm</h2>
+      <p>Uygulama, EPDK veri kaynağından alınan ham veriyi kullanıcıya rehberli bir masaüstü akışıyla işler. Soket listeleri satır bazına açılır, sayısal alanlar temizlenir ve zaman damgalı Excel raporu üretilir.</p>
+    </article>
+    <article class="brief-card">
+      <h2>Kimler için faydalı?</h2>
+      <ul>
+        <li>EV şarj altyapısı verisiyle çalışan enerji ve ulaşım ekipleri</li>
+        <li>Veri analizi için hızlı Excel çıktısı hazırlamak isteyen kullanıcılar</li>
+        <li>Saha, lokasyon veya pazar analizi yapan danışman ve analistler</li>
+      </ul>
+    </article>
+    <article class="brief-card">
+      <h2>Temel özellikler</h2>
+      <ul>
+        <li>EPDK veri kaynağından veri alma akışı</li>
+        <li>Soket bazlı ayrıştırma ve kolon temizliği</li>
+        <li>Excel dosyası üretimi ve zaman damgalı adlandırma</li>
+        <li>Yasal uyarı, ilerleme göstergesi ve hata dayanıklılığı yaklaşımı</li>
+      </ul>
+    </article>
+    <article class="brief-card brief-status">
+      <strong>Proje durumu</strong>
+      <p>Proje Durumu: Geliştirme / veri toplama çalışması</p>
+    </article>
+    <article class="brief-card">
+      <h2>Teknik notlar / sınırlamalar</h2>
+      <p>Veri erişimi EPDK servisinin kullanılabilirliğine ve kısıtlarına bağlıdır. Uygulama EPDK ile resmî bağlı değildir; teknik dosya veya demo paylaşımı proje hakkında iletişim üzerinden değerlendirilebilir.</p>
+    </article>
+  </div>
 </div>
 
 <div class="div"></div>

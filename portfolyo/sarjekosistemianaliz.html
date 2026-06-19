@@ -358,9 +358,20 @@ footer{border-top:1px solid rgba(42,74,106,.3);padding:48px 0;text-align:center}
 /* ─── SCROLL ANIMATIONS ─── */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
 .reveal.visible{opacity:1;transform:translateY(0)}
+.project-brief{padding:24px 0 72px}
+.brief-kicker{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue2);text-transform:uppercase;letter-spacing:2px;margin-bottom:14px}
+.brief-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.brief-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px 26px}
+.brief-card h2{font-family:'Barlow Condensed',sans-serif;font-size:30px;line-height:1;font-weight:700;letter-spacing:-.3px;margin-bottom:12px}
+.brief-card p,.brief-card li{font-size:15px;color:var(--sub);line-height:1.65;font-weight:300}
+.brief-card ul{padding-left:18px}
+.brief-status{border-color:rgba(30,204,113,.28);background:rgba(30,204,113,.06)}
+.brief-status strong{display:block;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:8px}
+.brief-wide{grid-column:1 / -1}
 
 @media(max-width:900px){
-  .features-grid,.outputs-grid,.tech-grid,.modes-grid,.platforms-grid{grid-template-columns:1fr}
+  .features-grid,.outputs-grid,.tech-grid,.modes-grid,.platforms-grid,.brief-grid{grid-template-columns:1fr}
+  .brief-wide{grid-column:auto}
   .stats-strip{flex-direction:column}
   .stat{border-right:none;border-bottom:1px solid var(--border)}
   .stat:last-child{border-bottom:none}
@@ -409,10 +420,55 @@ footer{border-top:1px solid rgba(42,74,106,.3);padding:48px 0;text-align:center}
   </p>
   <div class="hero-cta">
     <div class="hero-pip">Teknik dosya ve örnek çıktılar talep üzerine değerlendirilebilir.</div>
-    <div class="hero-pip">pip install pandas openpyxl matplotlib numpy reportlab python-pptx</div>
   </div>
 </div>
 </div>
+
+<!-- STRUCTURED PROJECT BRIEF -->
+<div class="wrap project-brief">
+  <div class="brief-kicker">Kısa proje özeti</div>
+  <div class="brief-grid">
+    <article class="brief-card brief-wide">
+      <h2>Elektrikli Araç Şarj Ekosistemi Analizi</h2>
+      <p>Bu çalışma, Türkiye'deki elektrikli araç şarj altyapısını EPDK kaynaklı veriler üzerinden inceleyen bir analiz ve raporlama uygulamasıdır. Operatör büyümesi, AC/DC soket dağılımı, kurulu güç, il bazlı yoğunluk ve dönemsel değişim gibi göstergeleri tek bir analiz akışında görünür hale getirir.</p>
+    </article>
+    <article class="brief-card">
+      <h2>Problem</h2>
+      <p>EV şarj pazarı hızlı büyüdüğü için işletmeciler, yatırımcılar ve sektör ekipleri pazar payını, bölgesel yoğunluğu ve teknolojik dağılımı düzenli takip etmek zorunda kalıyor. Ham veri dosyaları bu resmi tek başına hızlı ve karşılaştırılabilir biçimde sunmuyor.</p>
+    </article>
+    <article class="brief-card">
+      <h2>Çözüm</h2>
+      <p>Uygulama, farklı dönemlere ait veri dosyalarını işleyerek KPI kartları, grafikler, coğrafi dağılım görselleri ve Excel/PDF/PowerPoint çıktıları üretir. Böylece sektör gelişimi hem operasyonel hem de yönetim sunumu seviyesinde okunabilir hale gelir.</p>
+    </article>
+    <article class="brief-card">
+      <h2>Kimler için faydalı?</h2>
+      <ul>
+        <li>Şarj ağı işletmecileri ve enerji sektörü ekipleri</li>
+        <li>Yatırım, lokasyon ve büyüme analizi yapan karar vericiler</li>
+        <li>EV şarj altyapısını bölgesel ve dönemsel takip eden danışmanlar</li>
+      </ul>
+    </article>
+    <article class="brief-card">
+      <h2>Temel özellikler</h2>
+      <ul>
+        <li>Çok dönemli EPDK veri karşılaştırması</li>
+        <li>Operatör, soket tipi, kurulu güç ve il bazlı analiz</li>
+        <li>Dashboard görünümü ve pazar payı grafikleri</li>
+        <li>Excel, PDF ve PowerPoint rapor çıktıları</li>
+      </ul>
+    </article>
+    <article class="brief-card brief-status">
+      <strong>Proje durumu</strong>
+      <p>Proje Durumu: Geliştirme / analiz çalışması</p>
+    </article>
+    <article class="brief-card">
+      <h2>Teknik notlar / sınırlamalar</h2>
+      <p>Analiz kalitesi, kullanılan EPDK dosyalarının güncelliğine ve sütun yapısına bağlıdır. Bu sayfadaki ekranlar ve sayısal örnekler proje kapsamını göstermek içindir; canlı veri servisi, otomatik indirme veya herkese açık demo bağlantısı sunulmamaktadır.</p>
+    </article>
+  </div>
+</div>
+
+<div class="divider"></div>
 
 <!-- STATS -->
 <div class="wrap">

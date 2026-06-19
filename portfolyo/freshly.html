@@ -709,7 +709,8 @@ layout: null
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
-    .hero-grid { grid-template-columns: 1fr; }
+    .hero-grid, .brief-grid { grid-template-columns: 1fr; }
+    .brief-wide { grid-column:auto; }
     .hero-mockup { display: none; }
     .features-grid { grid-template-columns: 1fr 1fr; }
     .audience-grid { grid-template-columns: 1fr 1fr; }
@@ -720,6 +721,16 @@ layout: null
     .features-grid, .audience-grid { grid-template-columns: 1fr; }
     .nav-cta .nav-link { display: none; }
   }
+  .project-brief { padding: 70px 6vw; background: #fff; position: relative; z-index: 2; }
+  .brief-inner { max-width: 1120px; margin: 0 auto; }
+  .brief-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:24px; }
+  .brief-card { background: var(--green-50); border:1px solid rgba(22,163,74,0.14); border-radius:22px; padding:26px; }
+  .brief-card h2 { font-family:'Playfair Display',serif; font-size:28px; margin-bottom:10px; color:var(--ink); }
+  .brief-card p, .brief-card li { font-size:15px; line-height:1.7; color:var(--ink-muted); }
+  .brief-card ul { padding-left:18px; }
+  .brief-wide { grid-column:1/-1; }
+  .brief-status { background:#fff; border-color:rgba(22,163,74,0.24); }
+  .brief-status strong { display:block; color:var(--green-600); font-size:12px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:8px; }
   .project-bottom-actions { display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:center; margin-top:36px; margin-bottom:96px; }
   .project-contact-cta, .back-to-projects { display:inline-block; padding:10px 14px; border:1px solid rgba(255,255,255,0.22); border-radius:8px; background:rgba(255,255,255,0.92); color:#002147; font-weight:700; line-height:1.2; text-decoration:none; }
   .project-contact-cta { background: var(--green-600); color:#fff; }
@@ -762,12 +773,12 @@ layout: null
   <div class="hero-bg"></div>
   <div class="hero-grid">
     <div class="hero-content">
-      <div class="hero-eyebrow reveal">Beta — Şimdi Dene</div>
+      <div class="hero-eyebrow reveal">Konsept / prototip çalışma</div>
       <h1 class="hero-title reveal reveal-delay-1">
         Evinin <em>taze</em> kalması<br>senin elinde
       </h1>
       <p class="hero-desc reveal reveal-delay-2">
-        Son kullanma tarihleri geçmeden önce akıllı hatırlatmalar. Barkod tara, tarihi kaydet, zamanında tüket. İsrafı önle, tasarruf et.
+        Son kullanma tarihleri geçmeden önce hatırlatma al. Barkod tara, tarihi kaydet, stok ve tüketim planını daha düzenli yönet.
       </p>
       <div class="hero-actions reveal reveal-delay-3">
         <a href="https://freshly--mustafaacelikk.replit.app/" class="btn-primary" target="_blank">Hemen Başla</a>
@@ -783,8 +794,8 @@ layout: null
           <div class="stat-label">Tarif önerisi</div>
         </div>
         <div class="stat-item">
-          <div class="stat-num">%42</div>
-          <div class="stat-label">Ev israfı oranı</div>
+          <div class="stat-num">SKT</div>
+          <div class="stat-label">Hatırlatma akışı</div>
         </div>
       </div>
     </div>
@@ -860,6 +871,52 @@ layout: null
   </div>
 </section>
 
+<!-- STRUCTURED PROJECT BRIEF -->
+<section class="project-brief">
+  <div class="brief-inner">
+    <div class="section-eyebrow">Kısa proje özeti</div>
+    <div class="brief-grid">
+      <article class="brief-card brief-wide">
+        <h2>Freshly</h2>
+        <p>Freshly, evdeki gıda, ilaç ve benzeri ürünlerin stok ve son kullanma tarihi takibini kolaylaştıran bir uygulama konseptidir. Kullanıcının dolabındaki ürünleri görünür hale getirerek tüketim planlamasına ve israfı azaltma alışkanlığına destek olur.</p>
+      </article>
+      <article class="brief-card">
+        <h2>Problem</h2>
+        <p>Evlerde ürünler çoğu zaman dolapta unutulur, son kullanma tarihleri takip edilmez veya aynı ürün gereksiz yere tekrar alınır. Bu durum hem bütçe hem de sürdürülebilirlik açısından kayıp oluşturur.</p>
+      </article>
+      <article class="brief-card">
+        <h2>Çözüm</h2>
+        <p>Freshly, ürünleri barkod veya manuel kayıtla listelemeyi, son kullanma tarihlerini takip etmeyi ve yaklaşan tarihleri uyarı mantığıyla öne çıkarmayı hedefler. Böylece kullanıcı neyi önce tüketmesi gerektiğini daha kolay görür.</p>
+      </article>
+      <article class="brief-card">
+        <h2>Kimler için faydalı?</h2>
+        <ul>
+          <li>Ev alışverişi ve dolap takibini düzenlemek isteyen aileler</li>
+          <li>İlaç, bebek ürünü veya kozmetik SKT takibi yapan kullanıcılar</li>
+          <li>Gıda israfını azaltmak ve stok görünürlüğünü artırmak isteyenler</li>
+        </ul>
+      </article>
+      <article class="brief-card">
+        <h2>Temel özellikler</h2>
+        <ul>
+          <li>Ürün ve son kullanma tarihi kaydı</li>
+          <li>Renk kodlu tazelik / uyarı durumları</li>
+          <li>Barkod tarama ve ürün kategorileri fikri</li>
+          <li>Yaklaşan ürünlere göre tarif veya kullanım önerisi yaklaşımı</li>
+        </ul>
+      </article>
+      <article class="brief-card brief-status">
+        <strong>Proje durumu</strong>
+        <p>Proje Durumu: Konsept / prototip çalışma</p>
+      </article>
+      <article class="brief-card">
+        <h2>Teknik notlar / sınırlamalar</h2>
+        <p>Bu sayfa prototip ve ürün fikri sunumudur. Barkod verisi, ürün kaynaklarının kapsama alanına ve kullanıcı girişinin doğruluğuna bağlıdır; tıbbi ürünlerde profesyonel sağlık tavsiyesinin yerine geçmez.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- FEATURES -->
 <section id="features" class="features-section">
   <div class="section-inner">
@@ -915,7 +972,7 @@ layout: null
     <div class="reveal">
       <div class="section-eyebrow">Hedef Kitle</div>
       <h2 class="section-title">Kim için <em>tasarlandı?</em></h2>
-      <p class="section-desc">Türkiye'de yıllık 93 kg gıda israfının %42'si evlerde gerçekleşiyor. Freshly bu tabloyu değiştirmek için burada.</p>
+      <p class="section-desc">Freshly; evdeki gıda, ilaç ve bakım ürünlerini unutmayı azaltmak isteyen kullanıcılar için pratik bir takip yaklaşımı sunar.</p>
     </div>
     <div class="audience-grid">
       <div class="audience-card reveal reveal-delay-1">
@@ -990,36 +1047,36 @@ layout: null
   <div class="section-inner">
     <div class="reveal">
       <div class="section-eyebrow">Etki</div>
-      <h2 class="section-title">Rakamlar <em>konuşuyor</em></h2>
+      <h2 class="section-title">Takip alışkanlığı <em>fark yaratır</em></h2>
     </div>
     <div class="impact-grid">
       <div class="impact-stat-list">
         <div class="impact-stat reveal reveal-delay-1">
           <div class="impact-icon">🗑️</div>
           <div>
-            <div class="impact-num">93 kg</div>
-            <div class="impact-label">Türkiye'de kişi başı yıllık gıda israfı — dünya 3.'sü</div>
+            <div class="impact-num">Stok</div>
+            <div class="impact-label">Evde hangi ürünlerin bulunduğunu görünür kılma</div>
           </div>
         </div>
         <div class="impact-stat reveal reveal-delay-2">
           <div class="impact-icon">🏠</div>
           <div>
-            <div class="impact-num">%42</div>
-            <div class="impact-label">Bu israfın evlerde gerçekleşen kısmı</div>
+            <div class="impact-num">SKT</div>
+            <div class="impact-label">Yaklaşan son kullanma tarihlerini takip etme</div>
           </div>
         </div>
         <div class="impact-stat reveal reveal-delay-3">
           <div class="impact-icon">💰</div>
           <div>
-            <div class="impact-num">360 ₺</div>
-            <div class="impact-label">Ortalama kullanıcı başı aylık tahmini tasarruf</div>
+            <div class="impact-num">Plan</div>
+            <div class="impact-label">Önce tüketilmesi gereken ürünleri öne çıkarma</div>
           </div>
         </div>
         <div class="impact-stat reveal reveal-delay-4">
           <div class="impact-icon">🌍</div>
           <div>
-            <div class="impact-num">0.4 kg</div>
-            <div class="impact-label">Kurtarılan her ürün başına önlenen CO₂</div>
+            <div class="impact-num">Alışkanlık</div>
+            <div class="impact-label">Daha bilinçli alışveriş ve tüketim rutini oluşturma</div>
           </div>
         </div>
       </div>
