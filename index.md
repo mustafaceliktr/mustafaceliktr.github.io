@@ -10,7 +10,7 @@ excerpt: "Mustafa Çelik’in satış, iş geliştirme, yapay zeka destekli üre
   /* Ana Sayfa Tanıtım Metni Tasarımı */
   .intro-text {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 0,85rem;
+    font-size: 0.95rem;
     line-height: 1.1;
     color: #333333;
     margin-top: 10px;
@@ -19,21 +19,23 @@ excerpt: "Mustafa Çelik’in satış, iş geliştirme, yapay zeka destekli üre
 
 <div class="intro-text">
   <h2>Merhaba, ben Mustafa Çelik.</h2>
-  <p>Satış, müşteri yönetimi ve iş geliştirme alanlarında 15 yıllık kurumsal deneyime sahibim. Farklı ölçeklerdeki müşterilerle çalışarak ihtiyaç analizi, çözüm satışı, süreç takibi ve sürdürülebilir büyüme odağında pratik bir saha ve yönetim birikimi edindim.</p>
+  <p>18 yıllık profesyonel deneyimimin 15 yılını satış, müşteri yönetimi ve iş geliştirme alanlarında edindim. Enerji sektörü odağında kazandığım saha, müşteri ve süreç yönetimi tecrübesini; yapay zeka destekli araçlar, veri analizi ve pratik dijital çözümlerle birleştiriyorum.</p>
 </div>
 
 <div class="intro-text">
-<p>Bugün bu deneyimi; yapay zeka destekli iş geliştirme, vibecoding ile üretilen pratik dijital araçlar ve enerji sektöründeki dönüşüm üzerine yaptığım çalışmalarla birleştiriyorum. Amacım, teknolojiyi gündelik iş problemlerine uygulanabilir ve ölçülebilir çözümler üretmek için kullanmak.</p>
-
-<h2>Bu sitede neler bulabilirsiniz?</h2>
-<p>Bu web sitesinde profesyonel özgeçmişimi, üzerinde çalıştığım projeleri ve enerji sektörü başta olmak üzere ilgilendiğim konulara dair yazılarımı paylaşıyorum. Satış tecrübemi, dijital üretim merakımı ve sektörel gözlemlerimi sade bir çerçevede bir araya getirmeye çalışıyorum.</p>
+<p>Bu web sitesinde profesyonel geçmişimi, üzerinde çalıştığım uygulama projelerini ve enerji, teknoloji, elektrikli araç şarj ekosistemi ve iş geliştirme üzerine notlarımı paylaşıyorum.</p>
 
 <h2>Odaklandığım alanlar</h2>
+
 <ul>
   <li>Kurumsal satış, müşteri yönetimi ve iş geliştirme</li>
+  <li>Enerji sektörü ve elektrikli araç şarj ekosistemi</li>
   <li>Yapay zeka destekli iş araçları ve vibecoding projeleri</li>
-  <li>Enerji sektörü, elektrikli araç şarj ekosistemi ve dönüşüm süreçleri</li>
+  <li>Veri analizi, raporlama ve süreç takibi</li>
 </ul>
+
+<h2>Bu sitede neler bulabilirsiniz?</h2>
+<p>Projeler bölümünde geliştirdiğim uygulama çalışmalarını, blog bölümünde sektörel değerlendirmelerimi, özgeçmiş bölümünde ise profesyonel deneyimimi inceleyebilirsiniz.</p>
 
 <p><a href="/cv/">Özgeçmişimi inceleyin</a>, <a href="/projects/">projelerime göz atın</a> veya <a href="/blog/">yazılarımı okuyun</a>.</p>
 </div>
