@@ -7,8 +7,8 @@ excerpt: "Mustafa Çelik’in kurumsal satış, müşteri yönetimi, iş gelişt
 ---
 
 <div class="cv-downloads">
-  <a href="#form-alani" onclick="prepareDownload('tr')" class="cv-downloads__button cv-downloads__button--primary">Türkçe CV İndir</a>
-  <a href="#form-alani" onclick="prepareDownload('en')" class="cv-downloads__button cv-downloads__button--secondary">English CV Download</a>
+  <a href="#form-alani" onclick="prepareDownload('tr')" class="cv-downloads__button cv-downloads__button--primary">Türkçe CV Talep Et</a>
+  <a href="#form-alani" onclick="prepareDownload('en')" class="cv-downloads__button cv-downloads__button--secondary">English CV Request</a>
 </div>
 
 <h2 class="cv-section-title">Özgeçmiş Özeti</h2>
