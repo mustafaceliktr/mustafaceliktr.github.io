@@ -255,7 +255,8 @@ footer{border-top:1px solid var(--border);padding:48px 0;text-align:center}
 .arch-arrow{font-size:20px;color:var(--muted);padding:0 8px;flex-shrink:0}
 
 @media(max-width:768px){
-  .features-grid,.scan-grid,.notif-grid,.sites-grid,.tech-grid,.next-grid{grid-template-columns:1fr}
+  .features-grid,.scan-grid,.notif-grid,.sites-grid,.tech-grid,.next-grid,.brief-grid{grid-template-columns:1fr}
+  .brief-wide{grid-column:auto}
   h1{letter-spacing:-2px}
   .stats-row{flex-direction:column}
   .stat{border-right:none;border-bottom:1px solid var(--border)}
@@ -263,6 +264,15 @@ footer{border-top:1px solid var(--border);padding:48px 0;text-align:center}
   .arch-flow{flex-direction:column}
   .arch-arrow{transform:rotate(90deg)}
 }
+.project-brief{padding:56px 0}
+.brief-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.brief-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px}
+.brief-card h2{font-family:'Syne',sans-serif;font-size:26px;letter-spacing:-.8px;margin-bottom:10px}
+.brief-card p,.brief-card li{font-size:14px;color:var(--sub);line-height:1.7}
+.brief-card ul{padding-left:18px}
+.brief-wide{grid-column:1/-1}
+.brief-status{border-color:rgba(0,229,160,.25);background:var(--green-dim)}
+.brief-status strong{display:block;color:var(--green);font-family:'Space Mono',monospace;font-size:12px;margin-bottom:8px}
 .project-bottom-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin-top:36px;margin-bottom:96px}
 .project-contact-cta,.back-to-projects{display:inline-block;padding:10px 14px;border:1px solid rgba(255,255,255,.18);border-radius:8px;background:rgba(255,255,255,.92);color:#002147;font-weight:700;line-height:1.2;text-decoration:none}
 .project-contact-cta{background:#00E5A0;color:#0D0F14}
@@ -278,7 +288,7 @@ footer{border-top:1px solid var(--border);padding:48px 0;text-align:center}
 <div class="container">
 <nav>
   <div class="nav-logo">iner<span>ken</span></div>
-  <div class="nav-badge">v1.0 — Nisan 2026</div>
+  <div class="nav-badge">Konsept / prototip</div>
 </nav>
 </div>
 
@@ -287,10 +297,10 @@ footer{border-top:1px solid var(--border);padding:48px 0;text-align:center}
 <div class="hero">
   <div class="hero-eyebrow">
     <div class="hero-dot"></div>
-    <span class="hero-eyebrow-txt">Sunucu canlı · https://inerken.onrender.com</span>
+    <span class="hero-eyebrow-txt">Fiyat takip konsepti · ürün radar akışı</span>
   </div>
   <h1>Fiyatlar düşerken<br><span class="dim">sen</span> <span class="accent">dinlen.</span></h1>
-  <p class="hero-sub">Türkiye'nin büyük e-ticaret platformlarını tek ekrandan takip eden, fiyat düşüşlerini anında bildiren akıllı alışveriş asistanı.</p>
+  <p class="hero-sub">E-ticaret ürünlerindeki fiyat değişimlerini düzenli takip etmeye ve daha bilinçli satın alma kararları vermeye yardımcı olan alışveriş asistanı konsepti.</p>
 </div>
 
 <div class="stats-row">
@@ -315,6 +325,52 @@ footer{border-top:1px solid var(--border);padding:48px 0;text-align:center}
     <div class="stat-label">Bildirim Türü</div>
   </div>
 </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- STRUCTURED PROJECT BRIEF -->
+<div class="container project-brief">
+  <div class="section-eyebrow">Kısa proje özeti</div>
+  <div class="brief-grid">
+    <article class="brief-card brief-wide">
+      <h2>İnerken</h2>
+      <p>İnerken, kullanıcının takip ettiği ürünlerdeki fiyat değişimlerini tek ekranda izlemesini sağlayan bir fiyat takip uygulaması konseptidir. Amaç, farklı platformlarda manuel arama yapma yükünü azaltmak ve satın alma zamanlamasını daha veriye dayalı hale getirmektir.</p>
+    </article>
+    <article class="brief-card">
+      <h2>Problem</h2>
+      <p>Online alışverişte fiyatlar sık değişir ve aynı ürün farklı platformlarda farklı fiyatlarla listelenebilir. Kullanıcılar indirimleri kaçırmamak için ürünü tekrar tekrar kontrol etmek zorunda kalır.</p>
+    </article>
+    <article class="brief-card">
+      <h2>Çözüm</h2>
+      <p>Ürün linki ve hedef fiyat kaydedilir; uygulama ürün fiyatını düzenli aralıklarla kontrol edecek şekilde kurgulanır. Fiyat düşüşü, hedef fiyat ve kampanya takibi tek ürün kartında görünür.</p>
+    </article>
+    <article class="brief-card">
+      <h2>Kimler için faydalı?</h2>
+      <ul>
+        <li>Teknoloji, elektronik veya yüksek fiyatlı ürünleri takip eden kullanıcılar</li>
+        <li>Alışveriş kararını fiyat geçmişi ve hedef fiyatla desteklemek isteyenler</li>
+        <li>Farklı pazaryerlerini tek tek kontrol etmek istemeyen kullanıcılar</li>
+      </ul>
+    </article>
+    <article class="brief-card">
+      <h2>Temel özellikler</h2>
+      <ul>
+        <li>Ürün linki üzerinden takip listesi oluşturma</li>
+        <li>Hedef fiyat ve fiyat düşüşü uyarı mantığı</li>
+        <li>Platform karşılaştırma ve ürün kartı görünümü</li>
+        <li>Bildirim tercihleri ve düzenli tarama yaklaşımı</li>
+      </ul>
+    </article>
+    <article class="brief-card brief-status">
+      <strong>Proje durumu</strong>
+      <p>Proje Durumu: Konsept / prototip çalışma</p>
+    </article>
+    <article class="brief-card">
+      <h2>Teknik notlar / sınırlamalar</h2>
+      <p>Sayfadaki ekranlar prototip anlatımıdır. Fiyat takibi, platformların erişilebilir veri yapısına ve bağlantı formatlarına bağlıdır; gerçek kullanımda bildirim, veri doğruluğu ve platform değişiklikleri ayrıca test edilmelidir.</p>
+    </article>
+  </div>
 </div>
 
 <div class="divider"></div>
@@ -533,7 +589,7 @@ footer{border-top:1px solid var(--border);padding:48px 0;text-align:center}
     <div class="feat-card">
       <div class="feat-icon">⚡</div>
       <div class="feat-title">Flaş İndirim Modu</div>
-      <div class="feat-desc">Kampanya saatlerinde tarama sıklığı 5 dakikaya iner. Kısa süreli indirimleri asla kaçırmazsınız.</div>
+      <div class="feat-desc">Kampanya saatlerinde daha sık tarama yapılacak şekilde kurgulanır. Kısa süreli indirimleri fark etmeyi kolaylaştırır.</div>
       <div class="feat-tag">10:00 12:00 14:00 18:00 20:00 22:00</div>
     </div>
     <div class="feat-card">
@@ -545,7 +601,7 @@ footer{border-top:1px solid var(--border);padding:48px 0;text-align:center}
     <div class="feat-card">
       <div class="feat-icon">🛡</div>
       <div class="feat-title">Store Uyumlu</div>
-      <div class="feat-desc">Sunucu tabanlı mimari sayesinde App Store ve Google Play Store politikalarına tam uyumludur. Arka plan işlemi yoktur.</div>
+      <div class="feat-desc">Sunucu tabanlı mimari, mobil mağaza politikalarına daha uyumlu bir yapı hedefler. Ağır tarama işi telefona yüklenmez.</div>
       <div class="feat-tag">App Store · Play Store</div>
     </div>
   </div>
@@ -574,7 +630,7 @@ footer{border-top:1px solid var(--border);padding:48px 0;text-align:center}
     <div class="scan-card flash">
       <div class="scan-freq gold">5<span class="scan-unit"> dk</span></div>
       <div class="scan-name">Flaş Modu</div>
-      <div class="scan-desc">Kampanya saatlerinde devreye girer, tarama 5 dakikaya iner. Kısa süreli indirimleri anında yakalar.</div>
+      <div class="scan-desc">Kampanya saatlerinde devreye girer, tarama aralığı sıklaştırılır. Kısa süreli indirimleri daha hızlı fark etmeyi hedefler.</div>
       <div class="scan-flash-times">
         <span class="flash-time">10:00</span>
         <span class="flash-time">12:00</span>
@@ -594,7 +650,7 @@ footer{border-top:1px solid var(--border);padding:48px 0;text-align:center}
 <div class="notif-section">
 <div class="container">
   <div class="section-eyebrow">Bildirim Sistemi</div>
-  <h2 class="section-title">3 farklı alarm, 0 kaçırılan fırsat.</h2>
+  <h2 class="section-title">3 farklı alarm, daha kontrollü takip.</h2>
   <div class="notif-grid">
     <div class="notif-big-card target">
       <div class="notif-emoji">🎯</div>
@@ -754,14 +810,14 @@ footer{border-top:1px solid var(--border);padding:48px 0;text-align:center}
 <footer>
 <div class="container">
   <div class="footer-logo">iner<span>ken</span></div>
-  <div class="footer-url">https://inerken.onrender.com</div>
+  <div class="footer-url">Fiyat takip uygulaması konsepti</div>
   <div style="display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-bottom:32px">
     <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:var(--green)">9</div><div style="font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:.5px">Platform</div></div>
     <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:var(--green)">Düzenli</div><div style="font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:.5px">Takip</div></div>
     <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:var(--green)">3 tip</div><div style="font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:.5px">Bildirim</div></div>
     <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:var(--green)">Düşük</div><div style="font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:.5px">Kaynak Kullanımı</div></div>
   </div>
-  <div class="footer-meta">Bu belge Nisan 2026'da hazırlanmıştır · Uygulama hazır · Sunucu çalışıyor · Sıradaki adım: Firebase ve mağaza yayını.</div>
+  <div class="footer-meta">Bu belge Nisan 2026'da hazırlanmıştır · Konsept / prototip çalışma · Sıradaki adım: bildirim ve canlı veri akışını doğrulama.</div>
   <div class="project-bottom-actions">
     <a href="/iletisim/?konu=%C4%B0nerken" class="project-contact-cta">Proje hakkında iletişime geç</a>
     <a href="/projects/" class="back-to-projects">← Projeler’e geri dön</a>

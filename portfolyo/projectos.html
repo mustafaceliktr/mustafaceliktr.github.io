@@ -400,7 +400,8 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:40px 0;text-align:cent
 .rv.vis{opacity:1;transform:translateY(0)}
 
 @media(max-width:900px){
-  .modules-grid,.tech-grid,.risks,.done-grid{grid-template-columns:1fr}
+  .modules-grid,.tech-grid,.risks,.done-grid,.brief-grid{grid-template-columns:1fr}
+  .brief-wide{grid-column:auto}
   .stats{flex-direction:column}
   .stt{border-right:none;border-bottom:1px solid var(--border)}
   .stt:last-child{border-bottom:none}
@@ -409,6 +410,15 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:40px 0;text-align:cent
   .status-board{flex-direction:column}
   .roadmap .rm-row{flex-direction:column;align-items:flex-start}
 }
+.project-brief{padding:56px 0}
+.brief-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:24px}
+.brief-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px}
+.brief-card h2{font-weight:800;font-size:26px;letter-spacing:-.7px;margin-bottom:10px}
+.brief-card p,.brief-card li{font-size:14px;color:var(--sub);line-height:1.7}
+.brief-card ul{padding-left:18px}
+.brief-wide{grid-column:1/-1}
+.brief-status{border-color:rgba(79,142,247,.28);background:rgba(79,142,247,.08)}
+.brief-status strong{display:block;color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:8px}
 .project-bottom-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin-top:36px;margin-bottom:96px}
 .project-contact-cta,.back-to-projects{display:inline-block;padding:10px 14px;border:1px solid rgba(255,255,255,.18);border-radius:8px;background:rgba(255,255,255,.92);color:#002147;font-weight:700;line-height:1.2;text-decoration:none}
 .project-contact-cta{background:var(--blue);color:#fff}
@@ -429,7 +439,7 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:40px 0;text-align:cent
     <div class="logo-name">Project<span>OS</span></div>
   </div>
   <div class="nav-right">
-    <div class="badge b-green">v1.0 Çalışıyor</div>
+    <div class="badge b-green">Konsept / geliştirme</div>
     <div class="badge b-blue">localStorage</div>
     <div class="badge b-muted">Tarayıcı Tabanlı</div>
   </div>
@@ -461,8 +471,54 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:40px 0;text-align:cent
   <div class="stt"><div class="stt-n">5</div><div class="stt-l">Proje Durumu</div></div>
   <div class="stt"><div class="stt-n">0</div><div class="stt-l">Sunucu</div></div>
   <div class="stt"><div class="stt-n">0</div><div class="stt-l">Framework</div></div>
-  <div class="stt"><div class="stt-n">∞</div><div class="stt-l">Yerel Depolama</div></div>
+  <div class="stt"><div class="stt-n">Yerel</div><div class="stt-l">Depolama</div></div>
 </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- STRUCTURED PROJECT BRIEF -->
+<div class="wrap project-brief">
+  <div class="sec-tag">Kısa proje özeti</div>
+  <div class="brief-grid">
+    <article class="brief-card brief-wide">
+      <h2>ProjectOS</h2>
+      <p>ProjectOS, aynı anda yürütülen birden fazla projeyi görevler, durumlar, çalışma oturumları ve AI context notlarıyla takip etmek için tasarlanan yerel proje yönetimi konseptidir.</p>
+    </article>
+    <article class="brief-card">
+      <h2>Problem</h2>
+      <p>Çoklu proje yürütürken görevler, notlar, oturum çıktıları ve yapay zeka ile çalışma bağlamı farklı yerlere dağılır. Bu da sonraki adımı görmeyi ve projeye kaldığın yerden devam etmeyi zorlaştırır.</p>
+    </article>
+    <article class="brief-card">
+      <h2>Çözüm</h2>
+      <p>ProjectOS; projeleri durumlarına göre izleyen, görev ve session log tutan, seçili proje için AI context pack üreten tek panel fikri sunar. Veriler tarayıcıda yerel olarak saklanacak şekilde kurgulanmıştır.</p>
+    </article>
+    <article class="brief-card">
+      <h2>Kimler için faydalı?</h2>
+      <ul>
+        <li>Birden fazla kişisel veya teknik projeyi aynı anda yöneten kullanıcılar</li>
+        <li>AI destekli geliştirme süreçlerinde bağlam kaybını azaltmak isteyenler</li>
+        <li>Basit, yerel ve sunucusuz proje takip aracı arayan üreticiler</li>
+      </ul>
+    </article>
+    <article class="brief-card">
+      <h2>Temel özellikler</h2>
+      <ul>
+        <li>Proje listesi, durum filtresi ve görev takibi</li>
+        <li>Session log ve proje geçmişi kayıtları</li>
+        <li>AI context pack üretimi ve kopyalama akışı</li>
+        <li>JSON yedekleme ve export önizleme yaklaşımı</li>
+      </ul>
+    </article>
+    <article class="brief-card brief-status">
+      <strong>Proje durumu</strong>
+      <p>Proje Durumu: Konsept / geliştirme çalışması</p>
+    </article>
+    <article class="brief-card">
+      <h2>Teknik notlar / sınırlamalar</h2>
+      <p>Yerel tarayıcı depolamasına dayalı yapı, düzenli yedekleme ihtiyacı doğurur. Bu sayfa ticari olarak tamamlanmış bir ürün iddiası taşımaz; export ve paketleme akışları geliştirme alanı olarak durmaktadır.</p>
+    </article>
+  </div>
 </div>
 
 <div class="divider"></div>
@@ -886,7 +942,7 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:40px 0;text-align:cent
     <div><div class="fsn">7</div><div class="fsl">Modül</div></div>
     <div><div class="fsn">5</div><div class="fsl">Durum</div></div>
     <div><div class="fsn">0</div><div class="fsl">Sunucu</div></div>
-    <div><div class="fsn">v1</div><div class="fsl">Çalışıyor</div></div>
+    <div><div class="fsn">v1</div><div class="fsl">Geliştirme</div></div>
   </div>
   <div class="f-meta">ProjectOS · Proje Takip Paneli · Yerel Web Sürümü · Nisan 2026</div>
 </div>

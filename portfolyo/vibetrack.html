@@ -575,11 +575,20 @@ footer{padding:40px 60px;border-top:1px solid rgba(123,94,167,.08);display:flex;
   .bb-core{width:140px;height:140px}
   footer{padding:30px 24px}
 }
+.project-brief{padding:70px 60px;background:rgba(255,255,255,.55)}
+.brief-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:1160px;margin:24px auto 0}
+.brief-card{background:var(--white);border:1.5px solid rgba(123,94,167,.12);border-radius:22px;padding:24px;box-shadow:0 14px 36px rgba(123,94,167,.06)}
+.brief-card h2{font-family:'Nunito',sans-serif;font-weight:900;font-size:26px;margin-bottom:10px}
+.brief-card p,.brief-card li{font-size:14px;color:var(--sub);line-height:1.7}
+.brief-card ul{padding-left:18px}
+.brief-wide{grid-column:1/-1}
+.brief-status strong{display:block;color:var(--purple);font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
 .project-bottom-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin-top:36px;margin-bottom:96px}
 .project-contact-cta,.back-to-projects{display:inline-block;padding:10px 14px;border:1px solid rgba(123,94,167,.22);border-radius:8px;background:rgba(255,255,255,.92);color:#4b2f76;font-weight:800;line-height:1.2;text-decoration:none}
 .project-contact-cta{background:var(--purple);color:#fff}
 .vibetrack-bottom-actions{align-items:flex-start;flex-direction:column;gap:14px;margin-bottom:120px;width:100%}
-@media(max-width:560px){.project-bottom-actions{align-items:stretch;flex-direction:column}}
+@media(max-width:1100px){.brief-grid{grid-template-columns:1fr}.brief-wide{grid-column:auto}}
+@media(max-width:560px){.project-bottom-actions{align-items:stretch;flex-direction:column}.project-brief{padding:56px 24px}}
 </style>
 </head>
 <body>
@@ -615,7 +624,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(123,94,167,.08);display:flex;
     <h1>Odaklan.<br><span class="gr">Hisset.</span><br>Üret.</h1>
     <p class="hero-tagline">Ruh haline göre kişiselleşen çalışma deneyimi.</p>
     <p class="hero-desc">
-      Klasik zaman yönetimi uygulamalarının soğuk ve stresli dünyasından çıkıp, kendi müziğin ve ruh halinle tasarlanmış bir odaklanma sığınağına gir.
+      Mood temelli çalışma odaları, zamanlayıcı ve sakin ses deneyimiyle odaklanmayı daha kişisel ve sürdürülebilir hale getirmeyi hedefleyen bir uygulama konsepti.
     </p>
     <div class="hero-ctas">
     </div>
@@ -654,6 +663,52 @@ footer{padding:40px 60px;border-top:1px solid rgba(123,94,167,.08);display:flex;
       <path d="M0,60 C240,100 480,20 720,60 C960,100 1200,20 1440,60 L1440,120 L0,120 Z" fill="rgba(123,94,167,.04)"/>
       <path d="M0,80 C360,40 720,100 1080,60 C1260,40 1380,70 1440,80 L1440,120 L0,120 Z" fill="rgba(59,184,160,.04)"/>
     </svg>
+  </div>
+</section>
+
+<!-- STRUCTURED PROJECT BRIEF -->
+<section class="project-brief">
+  <div style="max-width:1160px;margin:0 auto">
+    <div class="sec-tag">Kısa proje özeti</div>
+    <div class="brief-grid">
+      <article class="brief-card brief-wide">
+        <h2>VibeTrack</h2>
+        <p>VibeTrack, odaklanma seanslarını ruh hali, müzik ve zamanlayıcıyla birleştiren kişisel üretkenlik konseptidir. Kullanıcıya tek tip bir sayaç yerine, çalışmaya başlama eşiğini düşüren daha yumuşak ve kişiselleştirilmiş bir ritim sunmayı amaçlar.</p>
+      </article>
+      <article class="brief-card">
+        <h2>Problem</h2>
+        <p>Klasik zamanlayıcılar çoğu kullanıcı için mekanik, baskılayıcı veya motivasyon açısından yetersiz kalabilir. Özellikle evden çalışanlar ve öğrenciler için odaklanma ortamını başlatmak işin kendisi kadar zor olabilir.</p>
+      </article>
+      <article class="brief-card">
+        <h2>Çözüm</h2>
+        <p>VibeTrack; tematik odalar, gömülü sesler, görsel nefes ritmi ve odak süresiyle çalışma başlangıcını daha davetkar hale getirir. Kullanıcı moduna uygun odayı seçerek kısa bir odak seansına girer.</p>
+      </article>
+      <article class="brief-card">
+        <h2>Kimler için faydalı?</h2>
+        <ul>
+          <li>Uzaktan çalışan ve çalışma ritmini korumak isteyen profesyoneller</li>
+          <li>Ders, okuma veya yazma seanslarını bölmek isteyen öğrenciler</li>
+          <li>Mood-based ses ve görsel destekle odaklanmayı seven kullanıcılar</li>
+        </ul>
+      </article>
+      <article class="brief-card">
+        <h2>Temel özellikler</h2>
+        <ul>
+          <li>Ruh haline göre tematik odak odaları</li>
+          <li>Pomodoro benzeri odak ve mola akışı</li>
+          <li>Gömülü ses oynatıcı ve nefes ritmi görselleştirmesi</li>
+          <li>Sade, dikkat dağıtmayan çalışma ekranı</li>
+        </ul>
+      </article>
+      <article class="brief-card brief-status">
+        <strong>Proje durumu</strong>
+        <p>Proje Durumu: Konsept / prototip çalışma</p>
+      </article>
+      <article class="brief-card">
+        <h2>Teknik notlar / sınırlamalar</h2>
+        <p>Bu sayfadaki ekranlar deneyim prototipidir. Stres azaltma veya sağlık etkisi iddiası taşımaz; nefes ve ses öğeleri odak alışkanlığını desteklemek için tasarlanmış yardımcı arayüz öğeleridir.</p>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -770,7 +825,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(123,94,167,.08);display:flex;
       <div style="margin-bottom:28px">
         <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:22px;margin-bottom:10px;color:var(--text)">Neden nefes döngüsü?</div>
         <p style="font-size:15px;color:var(--sub);line-height:1.75">
-          Araştırmalar, belirli frekanslarda ritimli nefes almanın kortizol seviyesini düşürdüğünü ve prefrontal korteksi aktive ettiğini gösteriyor. VibeTrack'in dairesi, seni bilinçsizce bu ritme yönlendirir.
+          Ritimli nefes ve sakin görsel akış, çalışma başlangıcında bedeni ve dikkati yavaşlatmaya yardımcı olabilir. VibeTrack'in dairesi, kullanıcıyı bu ritme nazikçe eşlik etmeye davet eder.
         </p>
       </div>
 
@@ -794,7 +849,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(123,94,167,.08);display:flex;
       <div style="margin-top:28px;background:var(--white);border-radius:16px;padding:20px 22px;border:1.5px solid rgba(123,94,167,.1)">
         <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;margin-bottom:8px">🎵 Entegre Ses Motoru</div>
         <p style="font-size:14px;color:var(--sub);line-height:1.6">
-          Spotify, Apple Music ya da YouTube'a gerek yok. VibeTrack'in kendi müzik motoru, odak türüne özel olarak hazırlanmış sesler çalar. Dikkat dağılması sıfır.
+          Spotify, Apple Music ya da YouTube'a geçmeden, VibeTrack'in kendi müzik motoru odak türüne özel hazırlanmış sesleri çalar. Böylece çalışma ekranından kopma ihtimali azalır.
         </p>
       </div>
     </div>
@@ -842,7 +897,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(123,94,167,.08);display:flex;
     <div class="feat reveal" style="transition-delay:.25s">
       <div class="feat-icon">🧠</div>
       <div class="feat-title">Flow Durumu Desteği</div>
-      <div class="feat-desc">Ses, görsel ve zamanlama üçlüsü, beynin Flow durumuna geçmesini kolaylaştırır. Daha az çaba, daha fazla üretim.</div>
+      <div class="feat-desc">Ses, görsel ve zamanlama üçlüsü, çalışmaya başlama ve ritmi sürdürme sürecini destekler.</div>
       <div class="feat-chip">Psikoloji Tabanlı</div>
     </div>
   </div>
@@ -923,8 +978,8 @@ footer{padding:40px 60px;border-top:1px solid rgba(123,94,167,.08);display:flex;
     <div class="target reveal" style="transition-delay:.2s">
       <div class="target-icon-wrap ti3">⚡</div>
       <div>
-        <div class="target-title">DEHB Eğilimi Olanlar</div>
-        <div class="target-desc">Beyin doğru frekanstaki arka plan sesleriyle (beyaz gürültü, lo-fi) meşgul edilerek ana göreve odaklanmaya ihtiyaç duyan bireyler.</div>
+        <div class="target-title">Dikkat Desteği Arayanlar</div>
+        <div class="target-desc">Beyaz gürültü, lo-fi ve sade görsel ritimlerle çalışmaya başlama eşiğini düşürmek isteyen kullanıcılar.</div>
       </div>
     </div>
     <div class="target reveal" style="transition-delay:.3s">

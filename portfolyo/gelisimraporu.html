@@ -372,7 +372,8 @@ footer{border-top:1px solid rgba(68,114,196,.1);padding:36px 0;
 .df-arrow{color:var(--muted);font-size:20px;flex-shrink:0;padding:0 4px}
 
 @media(max-width:1050px){
-  .analysis-grid,.tech-grid,.disc-cards,.shortcuts-grid{grid-template-columns:1fr}
+  .analysis-grid,.tech-grid,.disc-cards,.shortcuts-grid,.brief-grid{grid-template-columns:1fr}
+  .brief-wide{grid-column:auto}
   .flow-wrap{grid-template-columns:1fr}
   .hero-right{display:none}
   .stats{flex-direction:column}
@@ -387,6 +388,15 @@ footer{border-top:1px solid rgba(68,114,196,.1);padding:36px 0;
   .targets-grid{grid-template-columns:1fr}
   footer{flex-direction:column;padding:30px 24px}
 }
+.project-brief{padding:56px 0}
+.brief-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:24px}
+.brief-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);padding:24px}
+.brief-card h2{font-family:'Outfit',sans-serif;font-weight:900;font-size:28px;letter-spacing:-.8px;margin-bottom:10px}
+.brief-card p,.brief-card li{font-size:14px;color:var(--sub);line-height:1.7}
+.brief-card ul{padding-left:18px}
+.brief-wide{grid-column:1/-1}
+.brief-status{background:var(--blue3);border-color:rgba(68,114,196,.24)}
+.brief-status strong{display:block;color:var(--blue);font-family:'Outfit',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
 .project-bottom-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin-top:36px;margin-bottom:96px}
 .project-contact-cta,.back-to-projects{display:inline-block;padding:10px 14px;border:1px solid rgba(32,56,100,.2);border-radius:8px;background:rgba(255,255,255,.92);color:#203864;font-weight:800;line-height:1.2;text-decoration:none}
 .project-contact-cta{background:var(--blue);color:#fff}
@@ -502,6 +512,52 @@ footer{border-top:1px solid rgba(68,114,196,.1);padding:36px 0;
   <div class="stt"><div class="stt-n">AC+DC</div><div class="stt-l">Soket Analizi</div></div>
   <div class="stt"><div class="stt-n">v4.1</div><div class="stt-l">Versiyon</div></div>
 </div>
+</div>
+
+<div class="div"></div>
+
+<!-- STRUCTURED PROJECT BRIEF -->
+<div class="wrap project-brief">
+  <div class="sec-tag rv">Kısa proje özeti</div>
+  <div class="brief-grid">
+    <article class="brief-card brief-wide rv">
+      <h2>Gelişim Raporu V1</h2>
+      <p>Gelişim Raporu V1, elektrikli araç şarj pazarı verilerini iki dönem arasında karşılaştırarak operatör, soket tipi, kurulu güç ve pazar payı değişimlerini raporlayan analiz çalışmasıdır.</p>
+    </article>
+    <article class="brief-card rv">
+      <h2>Problem</h2>
+      <p>EV şarj altyapısı büyürken farklı dönemlere ait veri setlerini karşılaştırmak; operatör isimleri, soket sınıfları ve veri formatı farkları nedeniyle manuel olarak zaman alır.</p>
+    </article>
+    <article class="brief-card rv">
+      <h2>Çözüm</h2>
+      <p>Uygulama, iki dönem verisini alır, operatör mapping ile isimleri normalleştirir ve değişim metriklerini renk kodlu Excel raporuna dönüştürür. Böylece gelişim tablo üzerinden hızlıca okunabilir.</p>
+    </article>
+    <article class="brief-card rv">
+      <h2>Kimler için faydalı?</h2>
+      <ul>
+        <li>EV şarj ağı operatörleri ve enerji sektörü ekipleri</li>
+        <li>Pazar gelişimini dönemsel takip eden veri analistleri</li>
+        <li>Yatırım, planlama ve rekabet analizi yapan karar vericiler</li>
+      </ul>
+    </article>
+    <article class="brief-card rv">
+      <h2>Temel özellikler</h2>
+      <ul>
+        <li>İki dönemli Excel veri karşılaştırması</li>
+        <li>Operatör adı normalizasyonu ve mapping dosyası</li>
+        <li>AC/DC soket, güç, büyüme ve pazar payı analizi</li>
+        <li>Renk kodlu, okunabilir Excel raporu</li>
+      </ul>
+    </article>
+    <article class="brief-card brief-status rv">
+      <strong>Proje durumu</strong>
+      <p>Proje Durumu: Analiz / raporlama çalışması</p>
+    </article>
+    <article class="brief-card rv">
+      <h2>Teknik notlar / sınırlamalar</h2>
+      <p>Rapor sonuçları yüklenen veri setlerinin doğruluğuna ve mapping kalitesine bağlıdır. Üretilen çıktı resmi belge değil, karar destek ve analiz amaçlı bir rapordur.</p>
+    </article>
+  </div>
 </div>
 
 <div class="div"></div>

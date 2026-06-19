@@ -6,7 +6,7 @@ layout: null
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Her Şeyim — İnteraktif Wireframe</title>
+<title>Her Şeyim — Akıllı Yaşam Asistanı</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -526,9 +526,24 @@ header {
   to   { opacity:1; transform: translateX(0); }
 }
 .content.active { animation: slideIn .25s ease; }
+.project-brief{padding:56px 40px 28px;max-width:1180px;margin:0 auto;color:#fff}
+.brief-kicker{font-family:'JetBrains Mono',monospace;font-size:11px;color:#93C5FD;text-transform:uppercase;letter-spacing:.12em;margin-bottom:14px}
+.brief-hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(280px,.7fr);gap:28px;align-items:start;margin-bottom:34px}
+.brief-title{font-family:'DM Serif Display',serif;font-size:clamp(36px,6vw,68px);line-height:.95;letter-spacing:-.6px;margin-bottom:16px}
+.brief-lead{font-size:17px;line-height:1.75;color:rgba(255,255,255,.68);max-width:720px}
+.brief-status{background:rgba(24,95,165,.12);border:1px solid rgba(24,95,165,.34);border-radius:12px;padding:18px 20px}
+.brief-status strong{display:block;color:#fff;margin-bottom:6px}
+.brief-status span{display:block;color:#93C5FD;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.6}
+.brief-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.brief-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:20px}
+.brief-card h2{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;color:#fff;margin-bottom:10px}
+.brief-card p,.brief-card li{font-size:14px;line-height:1.75;color:rgba(255,255,255,.62)}
+.brief-card ul{padding-left:18px}
+.visual-note{padding:14px 40px 0;max-width:1180px;margin:0 auto;color:rgba(255,255,255,.48);font-size:13px;line-height:1.7}
 .project-bottom-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin-top:36px;margin-bottom:96px}
 .project-contact-cta,.back-to-projects{display:inline-block;padding:10px 14px;border:1px solid rgba(255,255,255,.22);border-radius:8px;background:rgba(255,255,255,.92);color:#002147;font-weight:700;line-height:1.2;text-decoration:none}
 .project-contact-cta{background:#1F3864;color:#fff}
+@media(max-width:800px){.brief-hero,.brief-grid{grid-template-columns:1fr}.project-brief{padding:40px 24px 24px}.visual-note{padding-left:24px;padding-right:24px}}
 @media(max-width:560px){.project-bottom-actions{align-items:stretch;flex-direction:column}}
 </style>
 </head>
@@ -543,14 +558,66 @@ header {
     <div class="logo-mark">HS</div>
     <div>
       <div class="logo-text">Her Şeyim</div>
-      <div class="logo-sub">İnteraktif Wireframe Sistemi</div>
+      <div class="logo-sub">Akıllı Yaşam Asistanı</div>
     </div>
   </div>
   <div class="header-meta">
-    <div class="status-dot"><div class="dot"></div> v1.0 — Sprint 1</div>
-    <div class="version-tag">Flutter 3.41.6</div>
+    <div class="status-dot"><div class="dot"></div> Konsept / prototip çalışma</div>
+    <div class="version-tag">Mobil uygulama fikri</div>
   </div>
 </header>
+
+<section class="project-brief">
+  <div class="brief-kicker">Kısa proje özeti</div>
+  <div class="brief-hero">
+    <div>
+      <h1 class="brief-title">Her Şeyim</h1>
+      <p class="brief-lead">Her Şeyim; görevleri, takvimi, notları ve önemli arama hatırlatıcılarını tek yerde toplayan kişisel yaşam asistanı konseptidir. Amaç, kullanıcının günlük akışını sabah kısa bir özetle görmesi ve iş/kişisel sorumluluklarını daha sade biçimde yönetmesidir.</p>
+    </div>
+    <div class="brief-status">
+      <strong>Proje durumu</strong>
+      <span>Proje Durumu: Konsept / prototip çalışma</span>
+    </div>
+  </div>
+
+  <div class="brief-grid">
+    <article class="brief-card">
+      <h2>Problem</h2>
+      <p>Günlük işler; takvim, yapılacaklar listesi, not uygulamaları ve telefon görüşmeleri arasında dağılabiliyor. Bu da özellikle yoğun çalışan kullanıcılar için öncelik takibini, geciken işleri ve arama hatırlatmalarını yönetmeyi zorlaştırıyor.</p>
+    </article>
+    <article class="brief-card">
+      <h2>Çözüm</h2>
+      <p>Uygulama; günün görevlerini, toplantılarını, notlarını ve arama hatırlatmalarını tek bir mobil akışta birleştirir. Profil yapısı sayesinde kişisel ve iş içerikleri ayrılabilir; günlük briefing ekranı kullanıcının güne nereden başlayacağını netleştirir.</p>
+    </article>
+    <article class="brief-card">
+      <h2>Kimler için faydalı?</h2>
+      <ul>
+        <li>Yoğun takvim ve görev akışı olan profesyoneller</li>
+        <li>Kişisel ve iş sorumluluklarını ayrı takip etmek isteyen kullanıcılar</li>
+        <li>Telefon görüşmesi, not ve hatırlatıcıları kaçırmak istemeyen kişiler</li>
+      </ul>
+    </article>
+    <article class="brief-card">
+      <h2>Temel özellikler</h2>
+      <ul>
+        <li>Günlük briefing ve öncelikli görev özeti</li>
+        <li>Profil bazlı görev, takvim ve not ayrımı</li>
+        <li>Arama hatırlatıcısı ve erteleme akışı</li>
+        <li>Sesli not, hızlı not ve temel raporlama fikri</li>
+      </ul>
+    </article>
+    <article class="brief-card">
+      <h2>Teknik notlar / sınırlamalar</h2>
+      <p>Bu sayfa, ürün fikrini ve ekran akışlarını anlatan bir konsept/prototip sunumudur. Ekranlar görsel temsil amaçlıdır; canlı bir uygulama mağazası bağlantısı veya indirilebilir demo bağlantısı sunulmamaktadır.</p>
+    </article>
+    <article class="brief-card">
+      <h2>Proje durumu</h2>
+      <p>Konsept seviyesi netleştirilmiş, ana ekranlar ve kullanıcı akışı prototip olarak hazırlanmıştır. Sonraki aşama; kapsamı daraltılmış bir MVP, gerçek bildirim davranışı ve veri saklama modelinin doğrulanmasıdır.</p>
+    </article>
+  </div>
+</section>
+
+<div class="visual-note">Aşağıdaki bölüm, fikrin ekran akışını göstermek için korunan interaktif prototip alanıdır.</div>
 
 <!-- NAV SEKMELERI -->
 <div class="nav-tabs">
@@ -568,10 +635,10 @@ header {
 <!-- GENEL BAKIŞ -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <div class="content active" id="tab-overview">
-  <div class="section-label">Proje Özeti</div>
-  <div class="section-title">Her Şeyim</div>
-  <div class="section-desc">Flutter ile geliştirilen akıllı mobil yaşam asistanı. Görev, toplantı, hatırlatıcı ve notları tek uygulamada yönet.</div>
-  <div class="code-tag"><div class="dot"></div> Proje Durumu: İnteraktif wireframe / prototip çalışma</div>
+  <div class="section-label">Prototip Önizlemesi</div>
+  <div class="section-title">Ekran Akışı</div>
+  <div class="section-desc">Aşağıdaki kartlar, Her Şeyim fikrinin ana modüllerini ve mobil kullanım akışını örnek ekranlarla gösterir.</div>
+  <div class="code-tag"><div class="dot"></div> Proje Durumu: Konsept / prototip çalışma</div>
 
   <div class="summary-grid">
     <div class="summary-card">
@@ -647,7 +714,7 @@ header {
     </div>
     <div class="dt-row">
       <div class="dt-key">Geliştirme Modeli</div>
-      <div class="dt-val">Vibecoding — Mustafa Prompt yazar, AI Agent kod yazar, Mustafa test eder</div>
+      <div class="dt-val">Kapsam doğrulama, ekran akışı ve MVP önceliklendirmesi devam ediyor</div>
       <div class="dt-status st-active">Aktif</div>
     </div>
   </div>
