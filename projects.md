@@ -15,6 +15,19 @@ Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışlar
 
   <div class="custom-project-card">
     <div class="custom-project-card-image archive__item-teaser">
+      <img src="/assets/images/legat-card.svg" alt="LEGAT">
+    </div>
+    <div class="card-content-wrapper">
+      <h3 class="custom-project-card-title archive__item-title">LEGAT</h3>
+      <div class="custom-project-card-desc archive__item-excerpt">
+        Görev, not, hatırlatıcı, takvim ve profil akışlarını tek uygulamada birleştirmeyi hedefleyen kişisel üretkenlik uygulaması.
+      </div>
+      <a href="/portfolyo/legat.html" class="custom-align-btn">Projeyi İncele</a>
+    </div>
+  </div>
+
+  <div class="custom-project-card">
+    <div class="custom-project-card-image archive__item-teaser">
       <img src="/assets/images/herseyim.png" alt="HerŞeyim">
     </div>
     <div class="card-content-wrapper">
