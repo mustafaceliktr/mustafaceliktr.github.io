@@ -48,32 +48,6 @@ Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışlar
 
   <div class="custom-project-card">
     <div class="custom-project-card-image archive__item-teaser">
-      <img src="/assets/images/inerken.png" alt="İnerken">
-    </div>
-    <div class="card-content-wrapper">
-      <h3 class="custom-project-card-title archive__item-title">İnerken</h3>
-      <div class="custom-project-card-desc archive__item-excerpt">
-        Ürün fiyat değişimlerini izleyerek satın alma kararlarını daha zamanında ve veriye dayalı vermeye yardımcı olan takip aracı.
-      </div>
-      <a href="/portfolyo/inerken.html" class="custom-align-btn">Projeyi İncele</a>
-    </div>
-  </div>
-
-  <div class="custom-project-card">
-    <div class="custom-project-card-image archive__item-teaser">
-      <img src="/assets/images/skttakip.png" alt="Freshly">
-    </div>
-    <div class="card-content-wrapper">
-      <h3 class="custom-project-card-title archive__item-title">Freshly</h3>
-      <div class="custom-project-card-desc archive__item-excerpt">
-        Son kullanma tarihi takibini kolaylaştırarak ev ve küçük işletme stoklarında gıda israfını azaltmaya yönelik pratik uygulama.
-      </div>
-      <a href="/portfolyo/freshly.html" class="custom-align-btn">Projeyi İncele</a>
-    </div>
-  </div>
-
-  <div class="custom-project-card">
-    <div class="custom-project-card-image archive__item-teaser">
       <img src="/assets/images/vibe.png" alt="VibeTrack">
     </div>
     <div class="card-content-wrapper">
