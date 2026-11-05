@@ -28,14 +28,21 @@ Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışlar
 
   <div class="custom-project-card">
     <div class="custom-project-card-image archive__item-teaser">
-      <img src="/assets/images/herseyim.png" alt="HerŞeyim">
+      <svg viewBox="0 0 360 82" width="100%" height="74" role="img" aria-label="Excel 2019 satış raporu temsili görseli" xmlns="http://www.w3.org/2000/svg">
+        <rect width="360" height="82" rx="4" fill="#f1f6f3"/>
+        <rect width="360" height="18" fill="#217346"/>
+        <text x="12" y="13" fill="white" font-family="Arial, sans-serif" font-size="11">EXCEL 2019 · SATIŞ TAKİBİ</text>
+        <path d="M16 66H158" stroke="#c4d3ca"/><path d="M30 65V42M60 65V32M90 65V48M120 65V26" stroke="#217346" stroke-width="16"/>
+        <path d="M187 60L223 48L260 52L300 30L340 24" fill="none" stroke="#4472c4" stroke-width="3"/>
+        <text x="187" y="75" fill="#42564a" font-family="Arial, sans-serif" font-size="10">Temsili veriler</text>
+      </svg>
     </div>
     <div class="card-content-wrapper">
-      <h3 class="custom-project-card-title archive__item-title">HerŞeyim</h3>
+      <h3 class="custom-project-card-title archive__item-title">Kurumsal Satış Takip ve Raporlama Sistemi</h3>
       <div class="custom-project-card-desc archive__item-excerpt">
-        Görev, not ve toplantı takibini tek ekranda birleştirerek günlük iş akışını daha düzenli yönetmeyi hedefleyen yaşam asistanı.
+        Kurumsal satış temaslarını, fırsatları, teklif ve sipariş süreçlerini izlemek için yapay zekâ desteğiyle geliştirilen Excel 2019 / VBA çözümü.
       </div>
-      <a href="/portfolyo/herseyim.html" class="custom-align-btn">Projeyi İncele</a>
+      <a href="/portfolyo/kurumsal-satis-takip.html" class="custom-align-btn">Projeyi İncele</a>
     </div>
   </div>
 
