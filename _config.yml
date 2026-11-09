@@ -17,7 +17,7 @@ description: "Mustafa Çelik’in satış, iş geliştirme, yapay zeka destekli 
 url: "https://www.mustafaceliktr.com"
 baseurl: ""
 locale: "tr-TR"
-logo: "assets/images/mustafacleiklogo.png"
+logo: "assets/images/mustafa-celik-logo-header.png"
 teaser: "assets/images/og-default.png"
 og_image: "assets/images/og-default.png"
 excerpt_separator: ""
@@ -25,6 +25,10 @@ excerpt_separator: ""
 # Dosya yollarını temiz tutmak için
 include:
   - _pages
+
+exclude:
+  - assets/docs/mustafa_celik_cv_tr.pdf
+  - assets/docs/mustafa_celik_cv_en.pdf
 
 # Yazar Bilgileri
 author:

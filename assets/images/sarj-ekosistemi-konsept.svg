@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Şarj altyapısı ve veri analizi — temsili konsept görseli</title>
+  <desc id="desc">Lacivert zeminde elektrikli araç şarj ünitesi ve sayısal değer içermeyen soyut analitik paneller. Gerçek uygulama ekranı değildir.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#102c40"/><stop offset="1" stop-color="#081722"/></linearGradient>
+    <linearGradient id="unit" x2="1" y2="1"><stop stop-color="#214b5d"/><stop offset="1" stop-color="#123142"/></linearGradient>
+  </defs>
+  <rect width="960" height="540" rx="18" fill="url(#bg)"/>
+  <g stroke="#294859" stroke-width="1" opacity=".45"><path d="M32 110H928M32 440H928M310 110V440M630 110V440"/></g>
+  <text x="42" y="58" fill="#65ddd5" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="600">ŞARJ ALTYAPISI × VERİ</text>
+  <text x="42" y="90" fill="#c3d4df" font-family="Segoe UI,Arial,sans-serif" font-size="17">Analiz yaklaşımı · Bölgesel dağılım · Dönemsel gelişim</text>
+  <ellipse cx="191" cy="427" rx="117" ry="16" fill="#06121c"/>
+  <rect x="107" y="147" width="139" height="274" rx="19" fill="url(#unit)" stroke="#67c9ca" stroke-width="3"/>
+  <rect x="128" y="174" width="97" height="92" rx="9" fill="#0a202e"/>
+  <path d="M184 189l-24 37h21l-9 27 29-39h-21z" fill="#65ddd5"/>
+  <path d="M246 204h23q24 0 24 24v112q0 21-17 21t-17-21v-48" fill="none" stroke="#6bb7bd" stroke-width="9"/>
+  <rect x="247" y="272" width="25" height="40" rx="6" fill="#65ddd5"/>
+  <path d="M146 300h61M146 323h42M146 346h52" stroke="#4c8293" stroke-width="5" stroke-linecap="round"/>
+  <rect x="346" y="145" width="264" height="126" rx="12" fill="#122e40" stroke="#305267"/>
+  <rect x="634" y="145" width="284" height="126" rx="12" fill="#122e40" stroke="#305267"/>
+  <g fill="#7badae"><rect x="365" y="165" width="107" height="7" rx="3"/><rect x="654" y="165" width="107" height="7" rx="3"/></g>
+  <g fill="#54c8c0"><rect x="370" y="226" width="30" height="24" rx="3"/><rect x="419" y="205" width="30" height="45" rx="3"/><rect x="468" y="217" width="30" height="33" rx="3"/><rect x="517" y="189" width="30" height="61" rx="3"/></g>
+  <path d="M657 242l43-26 45 12 48-33 46 13 56-23" fill="none" stroke="#65ddd5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="346" y="294" width="572" height="129" rx="12" fill="#102838" stroke="#305267"/>
+  <g fill="none" stroke="#3b6a7d" stroke-width="2"><path d="M378 386l48-52 59 37 68-36 64 51 67-50 75 41 79-30 49 36"/></g>
+  <g fill="#65ddd5"><circle cx="426" cy="334" r="6"/><circle cx="485" cy="371" r="6"/><circle cx="553" cy="335" r="6"/><circle cx="617" cy="386" r="6"/><circle cx="684" cy="336" r="6"/><circle cx="759" cy="377" r="6"/><circle cx="838" cy="347" r="6"/></g>
+  <rect x="42" y="470" width="876" height="42" rx="8" fill="#153646"/>
+  <text x="480" y="498" text-anchor="middle" fill="#d9f3f1" font-family="Segoe UI,Arial,sans-serif" font-size="21" font-weight="600">Temsili konsept görseli</text>
+</svg>

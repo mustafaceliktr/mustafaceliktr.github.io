@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">VibeTrack — temsili prototip görünümü</title>
+  <desc id="desc">Sakin, Akış ve Derin Odak ortamları ile 25:00 gösteren statik zamanlayıcı. Çalışan uygulama ekranı değildir.</desc>
+  <rect width="960" height="540" rx="18" fill="#101323"/>
+  <g font-family="Segoe UI,Arial,sans-serif">
+    <text x="40" y="64" fill="#eeeaf9" font-size="34" font-weight="700">VibeTrack</text>
+    <text x="920" y="60" fill="#B6A8F6" text-anchor="end" font-size="21">Konsept / Prototip</text>
+    <rect x="40" y="98" width="880" height="342" rx="13" fill="#1D2137" stroke="#3d405c"/>
+    <g fill="#292D4A" stroke="#4c4769"><rect x="65" y="124" width="260" height="158" rx="11"/><rect x="350" y="124" width="260" height="158" rx="11"/><rect x="635" y="124" width="260" height="158" rx="11"/></g>
+    <g fill="none" stroke="#B6A8F6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><circle cx="195" cy="179" r="20"/><path d="M195 145v-7m0 75v7m-34-41h-7m75 0h7m-65-24-5-5m53 53 5 5m-53-5-5 5m53-53 5-5M443 167q18-20 37 0t37 0m-74 20q18-20 37 0t37 0m-74 20q18-20 37 0t37 0M773 148a31 31 0 1 0 20 55 32 32 0 0 1-20-55z"/></g>
+    <g fill="#eeeaf9" text-anchor="middle" font-size="27" font-weight="600"><text x="195" y="254">Sakin</text><text x="480" y="254">Akış</text><text x="765" y="254">Derin Odak</text></g>
+    <text x="480" y="364" text-anchor="middle" fill="#eeeaf9" font-size="68" font-weight="600">25:00</text>
+    <text x="480" y="405" text-anchor="middle" fill="#B6A8F6" font-size="20">Statik zamanlayıcı</text>
+    <text x="480" y="492" text-anchor="middle" fill="#B6A8F6" font-size="23" font-weight="600">Temsili prototip görünümü</text>
+  </g>
+</svg>

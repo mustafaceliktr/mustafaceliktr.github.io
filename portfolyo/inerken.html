@@ -5,6 +5,7 @@ layout: null
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
+<meta name="description" content="Ürün fiyat değişimlerini takip ederek satın alma kararlarını daha zamanında ve veriye dayalı vermeye yardımcı olan uygulama konsepti.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>inerken — Fiyat Takip Uygulaması</title>
 <link rel="canonical" href="https://www.mustafaceliktr.com/portfolyo/inerken.html">
@@ -282,7 +283,22 @@ footer{border-top:1px solid var(--border);padding:48px 0;text-align:center}
 .project-contact-cta,.back-to-projects{display:inline-block;padding:10px 14px;border:1px solid rgba(255,255,255,.18);border-radius:8px;background:rgba(255,255,255,.92);color:#002147;font-weight:700;line-height:1.2;text-decoration:none}
 .project-contact-cta{background:#00E5A0;color:#0D0F14}
 @media(max-width:560px){.project-bottom-actions{align-items:stretch;flex-direction:column}}
+.release-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:start}
+@media(max-width:768px){.release-grid{grid-template-columns:minmax(0,1fr);gap:32px}.next-card>div{min-width:0;overflow-wrap:anywhere}}
+@media(max-width:768px){
+  .brief-grid{grid-template-columns:minmax(0,1fr)}
+  .brief-wide{grid-column:auto}
+  .brief-card{min-width:0;overflow-wrap:break-word}
+}
+@media(max-width:480px){.hero h1{margin-inline:-16px;overflow-wrap:anywhere}}
 </style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R8X1FLQWNQ"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-R8X1FLQWNQ');
+</script>
 </head>
 <body>
 
@@ -765,7 +781,7 @@ footer{border-top:1px solid var(--border);padding:48px 0;text-align:center}
 <!-- STATUS -->
 <div class="status-section">
 <div class="container">
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start">
+  <div class="release-grid">
     <div>
       <div class="section-eyebrow">Mevcut Durum</div>
       <h2 class="section-title" style="font-size:clamp(24px,3vw,36px)">Ne hazır,<br>ne bekliyor?</h2>

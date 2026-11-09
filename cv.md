@@ -2,114 +2,88 @@
 layout: single
 title: "Özgeçmiş"
 permalink: /cv/
-author_profile: true
-excerpt: "Mustafa Çelik’in kurumsal satış, müşteri yönetimi, iş geliştirme, enerji sektörü ve teknoloji odaklı profesyonel deneyimini inceleyin."
+author_profile: false
+share: false
+classes: cv-modern
+excerpt: "Mustafa Çelik’in profesyonel deneyimi, eğitimi ve yetkinlik alanları."
 ---
 
-<div class="cv-downloads">
-  <a href="#form-alani" onclick="prepareDownload('tr')" class="cv-downloads__button cv-downloads__button--primary">Türkçe CV Talep Et</a>
-  <a href="#form-alani" onclick="prepareDownload('en')" class="cv-downloads__button cv-downloads__button--secondary">English CV Request</a>
+<div class="cv-content">
+  <p class="cv-intro">Profesyonel deneyimim, eğitimim ve yetkinlik alanlarım.</p>
+  <div class="cv-accent" aria-hidden="true"></div>
+  <section class="cv-profile cv-card" aria-labelledby="cv-name">
+    <img class="cv-photo" src="{{ site.author.avatar | relative_url }}" alt="Mustafa Çelik" width="180" height="190">
+    <div class="cv-profile-copy">
+      <h2 id="cv-name">Mustafa Çelik</h2>
+      <p class="cv-role">Kurumsal Satış ve İş Geliştirme</p>
+      <ul class="cv-meta"><li>Mekser Petrol Ekipmanları A.Ş.</li><li>İstanbul, Türkiye</li><li><a href="https://linkedin.com/in/mustafaceliktr">LinkedIn</a></li></ul>
+      <p>Enerji, akaryakıt ekipmanları, elektrikli araç şarj sistemleri ve LED aydınlatma alanlarında kurumsal satış, müşteri yönetimi ve iş geliştirme deneyimine sahibim. Müşteri ihtiyaçlarına uygun teknik ve ticari çözümler geliştiriyor, iş süreçlerinin verimliliğine odaklanıyorum.</p>
+    </div>
+    <div class="cv-expertise">
+<div><svg class="cv-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v13H3z M8 7V3h8v4 M3 12h18 M10 12v3h4v-3"/></svg><div><h3>Kurumsal Satış</h3><p>Çözüm odaklı satış ve müşteri yönetimi</p></div></div>
+<div><svg class="cv-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 14h4v7H3z M10 9h4v12h-4z M17 3h4v18h-4z"/></svg><div><h3>İş Geliştirme</h3><p>Yeni pazar, müşteri ve iş fırsatları</p></div></div>
+<div><svg class="cv-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2 4 14h7l-1 8 10-13h-7z"/></svg><div><h3>Enerji & Mobilite</h3><p>Akaryakıt, şarj ve aydınlatma çözümleri</p></div></div>
 </div>
-
-<h2 class="cv-section-title">Özgeçmiş Özeti</h2>
-Satış Profesyoneli olarak, satış ve müşteri yönetimi alanında 15 yıllık geniş bir deneyime sahibim. 2008 yılından bu yana, küçük, orta ve büyük ölçekli müşterilerle etkili satış stratejileri geliştirerek, müşteri ihtiyaçlarını anlama ve çözüm odaklı yaklaşımlar sunma konularında başarılı sonuçlar elde ettim. İş süreçlerini optimize etme becerim sayesinde, müşteri memnuniyetini artırarak şirket hedeflerine ulaşılmasına katkı sağladım.
-
-<h2 class="cv-section-title">İş Deneyimleri</h2>
-
-<div class="job-item">
-  <p class="job-title">Kurumsal Satış Müdürü</p>
-  <p class="company-date">Mekser Petrol Ekipmanları A.Ş. | Nisan 2026 - Halen</p>
-  <p class="job-description">ŞKurumsal Satış Müdürü olarak, Mekser’in ürettiği akaryakıt pompa ve ekipmaları akaryakıt dağıtım şirketleri ve endüstriyel ( key account seviyesinde) müşterilere satışını gerçekleştirmek. Bu doğrultuda EPDK lisanslı 32 akaryakıt dağıtım şirketinin tamamından sorumlu olarak bu firmaların, mühendislik, satın alma, finans vb tüm operasyonel ekipleri ile tüm seviyeleerde görüşmeler gerçekleştiriyorum. Mevcut görevime ek olarak iş ve satış hacminin gelişmesi amacıyla yeni iş kolları oluşturmak iin çalışmalarım da bulunmaktadır.</p>
+  </section>
+  <div class="cv-columns">
+    <section class="cv-card cv-experience" aria-labelledby="cv-experience-title">
+<h2 id="cv-experience-title"><svg class="cv-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v13H3z M8 7V3h8v4 M3 12h18 M10 12v3h4v-3"/></svg>Profesyonel Deneyim</h2><ol class="cv-timeline"><li><div class="cv-job-heading"><h3>Kurumsal Satış Müdürü</h3><span class="cv-date">Nis 2026 –</span></div><p class="cv-company">Mekser Petrol Ekipmanları A.Ş.</p><p>Akaryakıt ekipmanlarında kurumsal satış, müşteri yönetimi ve iş geliştirme. Dağıtım şirketleri ve endüstriyel müşterilerle teknik ve ticari süreçlerin yürütülmesi.</p></li>
+<li><div class="cv-job-heading"><h3>Satış Yöneticisi</h3><span class="cv-date">Eyl 2024 – Oca 2026</span></div><p class="cv-company">Zebra Electronics</p><p>DC/AC elektrikli araç şarj üniteleri, CPO yazılımı ve çağrı merkezi hizmetlerinin satışı. Müşteri ihtiyaçlarına yönelik teknik ve ticari çözümler.</p></li>
+<li><div class="cv-job-heading"><h3>Kurumsal Satış Yöneticisi / Yönetmeni</h3><span class="cv-date">Nis 2022 – May 2024</span></div><p class="cv-company">Bizim Toptan Satış Mağazaları</p><p>Kurumsal müşteri kazanımı ve farklı satış kanallarının yönetimi. Gıda ve gıda dışı ürün tedarik süreçlerinin planlanması.</p></li>
+<li><div class="cv-job-heading"><h3>Kurumsal Satış Yöneticisi / Yönetmeni</h3><span class="cv-date">Ağu 2016 – Nis 2022</span></div><p class="cv-company">Mepsan Petrol Cihazları A.Ş.</p><p>Akaryakıt ekipmanları ve LED aydınlatma çözümlerinde satış ve proje süreçleri. Dağıtım şirketleri ve kamu kurumlarıyla iş birliklerinin yönetimi.</p></li>
+<li><div class="cv-job-heading"><h3>Kurumsal Satış Yöneticisi / Yönetmeni</h3><span class="cv-date">Eki 2014 – Tem 2016</span></div><p class="cv-company">Nixonled – Yağmur Group Elektrik Enerjisi Toptan Satış A.Ş.</p><p>LED aydınlatma armatürlerinde kurumsal satış ve pazarlama. Müşteri portföyünün geliştirilmesi ve belediye projelerinin yönetimi.</p></li>
+<li><div class="cv-job-heading"><h3>Satış Yöneticisi</h3><span class="cv-date">Ara 2011 – Tem 2013</span></div><p class="cv-company">Techled Aydınlatma Sistemleri</p><p>Endüstriyel LED aydınlatma armatürlerinin satış ve pazarlaması; kurumsal müşteri portföyünün geliştirilmesi.</p></li>
+<li><div class="cv-job-heading"><h3>Satış Destek Süpervizörü</h3><span class="cv-date">Nis 2011 – Kas 2011</span></div><p class="cv-company">Coren Elektrik Enerjisi İthalat İhracat ve Toptan Satış A.Ş.</p><p>Sözleşme ve müşteri dosyası prosedürlerinin oluşturulması. Abonelik başvuruları, başvuru takibi ve tahsilat süreçlerinin yürütülmesi.</p></li>
+<li><div class="cv-job-heading"><h3>Müşteri Hesap Yöneticisi</h3><span class="cv-date">Ara 2007 – Ara 2010</span></div><p class="cv-company">Petrol Ofisi A.Ş.</p><p>Müşteri hesapları, teminat ve tahsilat takibi. Müşteri primlerinin hesaplanması ve fatura kayıt süreçleri.</p></li>
+</ol></section><div class="cv-right">
+<section class="cv-card cv-education" aria-labelledby="cv-education-title"><h2 id="cv-education-title"><svg class="cv-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m2 8 10-5 10 5-10 5z M6 10v7q6 5 12 0v-7 M22 8v9"/></svg>Eğitim</h2><div class="cv-study"><div><h3>Elektrik Öğretmenliği – Lisans</h3><p>Marmara Üniversitesi</p><p class="cv-study-detail">Teknoloji Fakültesi · Türkçe · İkinci Öğretim</p></div><span class="cv-date">Eyl 2023 – Devam ediyor</span></div><div class="cv-study"><div><h3>İşletme Yönetimi – Lisans</h3><p>Conley Üniversitesi</p></div><span class="cv-date">Eyl 2020 – Haz 2022</span></div><div class="cv-study"><div><h3>Anadolu Meslek Lisesi</h3><p>Lise</p></div><span class="cv-date">Oca 2002</span></div></section><section class="cv-card" aria-labelledby="cv-skills-title"><h2 id="cv-skills-title"><svg class="cv-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 14h4v7H3z M10 9h4v12h-4z M17 3h4v18h-4z"/></svg>Yetkinlikler</h2><ul class="cv-tags"><li>Kurumsal Satış</li><li>Müşteri Yönetimi</li><li>İş Geliştirme</li><li>Proje ve Süreç Yönetimi</li><li>Veri Analizi ve Raporlama</li><li>SAP HANA</li><li>Oracle</li><li>ERP</li><li>AutoCAD</li><li>Dialux</li><li>Microsoft Office</li><li>Yapay Zekâ Araçları</li></ul></section><div class="cv-small-grid"><section class="cv-card" aria-labelledby="cv-cert-title"><h2 id="cv-cert-title"><svg class="cv-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 13 5 22l7-3 7 3-3-9 M18 8a6 6 0 1 1-12 0 6 6 0 0 1 12 0"/></svg>Sertifikalar ve Eğitimler</h2><ul class="cv-certificates"><li>VBA (MS Office 2007) · Koç Sistem (2009)</li><li>İleri Excel · Koç Sistem (2009)</li><li>Gelişim Eğitimleri · İstanbul İşletme Enstitüsü (2016)</li></ul></section>
+<section class="cv-card" aria-labelledby="cv-language-title"><h2 id="cv-language-title"><svg class="cv-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0 M3 12h18 M12 3q-8 9 0 18 M12 3q8 9 0 18"/></svg>Dil</h2><p class="cv-language"><strong>İngilizce</strong><span class="cv-language-rule" aria-hidden="true"></span>B2</p></section></div>
+<section class="cv-card" aria-labelledby="cv-interests-title"><h2 id="cv-interests-title"><svg class="cv-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 5-6 7 6 7 M17 5l6 7-6 7 M14 3l-4 18"/></svg>İlgi Alanları</h2><p>Yapay zekâ, veri analizi, otomasyon ve vibe coding ile masaüstü ve mobil uygulama geliştirme çalışmaları.</p></section>
+</div></div>
+<div class="cv-actions">
+<a class="cv-button cv-button--primary" href="#form-alani"><svg class="cv-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h20v14H2z m0 0 10 8L22 5"/></svg>Türkçe / İngilizce CV Talep Et</a><a class="cv-button" href="https://linkedin.com/in/mustafaceliktr"><span class="cv-linkedin" aria-hidden="true">in</span>LinkedIn Üzerinden İletişime Geç</a>
 </div>
-
-<div class="job-item">
-  <p class="job-title">Satış Yöneticisi</p>
-  <p class="company-date">Zebra Electronics | Eylül 2024 - Ocak 2026</p>
-  <p class="job-description">Şirketin ürettiği DC/AC elektrikli araç şarj ünitelerinin lisanslı CPO ve B2B müşterilerine satışını gerçekleştirdim. CPO yazılımı ve çağrı merkezi hizmetlerinin satışını yaparak müşteri ihtiyaçlarını analiz ettim, teknik ve ticari çözümler sundum. Toplamda 2 milyon USD değerinde sözleşmeler imzaladım.</p>
+<section id="form-alani" class="cv-card cv-request" aria-labelledby="form-baslik">
+<h2 id="form-baslik">Özgeçmiş Talebi</h2>
+<p>Tercih ettiğiniz dilde özgeçmiş talebinizi iletebilirsiniz.</p>
+<form id="cv-form" action="https://formspree.io/f/mwvyzrgl" method="POST">
+<div class="cv-form-fields">
+<div><label for="cv-fullname">Adınız Soyadınız</label><input id="cv-fullname" type="text" name="Ad Soyad" autocomplete="name" required></div>
+<div><label for="cv-email">E-posta Adresiniz</label><input id="cv-email" type="email" name="E-posta" autocomplete="email" required></div>
+<div><label for="secilen-dil">Talep Edilen Dil</label><select id="secilen-dil" name="Talep Edilen Dil"><option value="Türkçe">Türkçe</option><option value="İngilizce">English</option></select></div>
+<button type="submit" id="submit-btn" class="cv-button cv-button--primary">Talep Gönder</button>
 </div>
-
-<div class="job-item">
-  <p class="job-title">Kurumsal Satış Yöneticisi</p>
-  <p class="company-date">Bizim Toptan Satış Mağazaları | Nisan 2022 - Mayıs 2024</p>
-  <p class="job-description">Aylık ortalama %30 düzenli ciro artışı sağladım. 300+ çalışana sahip kurumsal firmaların, akaryakıt istasyonlarının ve restoran zincirlerinin gıda/gıda dışı ürün tedarik operasyonlarını planlayarak verimlilik sağladım.</p>
+<p id="form-mesaj" role="status" aria-live="polite" hidden></p>
+</form>
+</section>
 </div>
-
-<div class="job-item">
-  <p class="job-title">Kurumsal Satış Yöneticisi</p>
-  <p class="company-date">Mepsan Petrol Cihazları A.Ş. | Ağustos 2016 - Nisan 2022</p>
-  <p class="job-description">Üretilen akaryakıt ekipmanları ve akaryakıt dağıtım şirketleri ile iş birliği içinde projeler geliştirdim. Petrol Ofisi, Alpet, Lukoil gibi büyük akaryakıt dağıtım şirketleri ile projeler başarıyla uygulamaya geçirildi.</p>
-</div>
-
-<div class="job-item">
-  <p class="job-title">Kurumsal Satış Yöneticisi</p>
-  <p class="company-date">Nixonled - Yağmur Group & Techled Aydınlatma | Aralık 2011 - Temmuz 2016</p>
-  <p class="job-description">Endüstriyel LED aydınlatma armatürlerinin pazarlama ve satış süreçlerini yönettim. Hayat Kimya, Aksa Akrilik, Arçelik, TÜPRAŞ gibi firmaları portföye kazandırdım.</p>
-</div>
-
-<h2 class="cv-section-title">Eğitim Bilgileri</h2>
-<ul>
-  <li><strong>Marmara Üniversitesi</strong> - Teknoloji Fakültesi, Elektrik Öğretmenliği (Eylül 2023 - Devam ediyor)</li>
-  <li><strong>Conley Üniversitesi</strong> - İşletme Yönetimi, Lisans (Eylül 2020 - Haziran 2022)</li>
-</ul>
-
-<h2 class="cv-section-title">Teknik ve Profesyonel Yetenekler</h2>
-<ul>
-  <li><strong>Satış & İş Geliştirme:</strong> Kurumsal Pazarlama, Çözüm Satışı, Müşteri İlişkileri, Süreç Yönetimi.</li>
-  <li><strong>Teknoloji & Yazılım:</strong> Yapay Zeka (Vibe Coding), Python (Raporlama), SAP HANA, Oracle, ERP, Autocad.</li>
-</ul>
-
-<h2 class="cv-section-title">Hobi ve İlgi Alanları</h2>
-<p>Yapay zeka asistanları üzerinden Vibe Coding ile çeşitli masaüstü ve mobil uygulamalar geliştirmek. Detaylar için Projeler sayfasına bakabilirsiniz.</p>
-
-<br><br>
-
-<div id="form-alani" class="form-alani">
-  <hr>
-  <h3 id="form-baslik">Özgeçmiş Talebi</h3>
-  <form id="cv-form" action="https://formspree.io/f/mwvyzrgl" method="POST" style="max-width: 400px;">
-    <input type="hidden" id="secilen-dil" name="Talep Edilen Dil" value="Türkçe">
-    <label>Adınız Soyadınız:</label>
-    <input type="text" name="Ad Soyad" required style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
-    <label>E-posta Adresiniz:</label>
-    <input type="email" name="E-posta" required style="width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
-    <input type="submit" id="submit-btn" value="Özgeçmişi mailime gönder" style="width: 100%; cursor: pointer; padding: 10px; background-color: #002147; color: white; border: none; border-radius: 4px; font-weight: bold; font-size: 0.65rem;">
-  </form>
-  <p id="form-mesaj" style="display:none; margin-top: 15px; font-weight: bold; font-size: 0.75rem;"></p>
-</div>
-
 <script>
-  function prepareDownload(lang) {
-    document.getElementById('secilen-dil').value = (lang === 'tr') ? "Türkçe" : "İngilizce";
-    document.getElementById('form-baslik').textContent = (lang === 'tr') ? "Türkçe Özgeçmiş Talebi" : "English CV Request";
-    document.getElementById('form-alani').scrollIntoView({ behavior: 'smooth' });
-  }
-
-  var form = document.getElementById("cv-form");
-  var mesajAlani = document.getElementById("form-mesaj");
-  var submitBtn = document.getElementById("submit-btn");
-
-  form.addEventListener("submit", function(event) {
+(function () {
+  var form = document.getElementById('cv-form');
+  var message = document.getElementById('form-mesaj');
+  var button = document.getElementById('submit-btn');
+  form.addEventListener('submit', async function (event) {
     event.preventDefault();
-    submitBtn.disabled = true;
-    submitBtn.value = "Gönderiliyor...";
-    fetch(form.action, {
-      method: form.method,
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
-    }).then(response => {
-      if (response.ok) {
-        mesajAlani.style.display = "block";
-        mesajAlani.style.color = "green";
-        mesajAlani.textContent = "Talebiniz alındı. Özgeçmiş e-postanıza gönderilecektir.";
-        form.reset();
-        submitBtn.value = "Talep Gönderildi";
-        // 5 SANİYE SONRA SIFIRLAMA
-        setTimeout(function() {
-          submitBtn.disabled = false;
-          submitBtn.value = "Özgeçmişi mailime gönder";
-          mesajAlani.style.display = "none";
-        }, 5000);
-      }
-    });
+    if (button.disabled) return;
+    button.disabled = true;
+    button.textContent = 'Gönderiliyor…';
+    message.hidden = true;
+    try {
+      var response = await fetch(form.action, {
+        method: form.method,
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (!response.ok) throw new Error('request-failed');
+      message.textContent = 'Talebiniz alındı.';
+      form.reset();
+    } catch (error) {
+      message.textContent = 'Talebiniz gönderilemedi. Lütfen tekrar deneyin.';
+    } finally {
+      message.hidden = false;
+      button.disabled = false;
+      button.textContent = 'Talep Gönder';
+    }
   });
+})();
 </script>

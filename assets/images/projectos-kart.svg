@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">ProjectOS — temsili proje çalışma alanı</title>
+  <desc id="desc">Solda Proje A, B ve C örnek listesi; sağda görevler, oturum notları, AI bağlamı ve yedekleme başlıkları. Sayısal gösterge veya gerçek proje verisi içermez; çalışan uygulama ekranı değildir.</desc>
+  <rect width="960" height="540" rx="18" fill="#0D1829"/>
+  <g font-family="Segoe UI,Arial,sans-serif">
+    <text x="40" y="62" fill="#e5edf3" font-size="34" font-weight="700">ProjectOS</text>
+    <text x="920" y="59" text-anchor="end" fill="#65ddd5" font-size="20">Konsept / Geliştirme</text>
+    <rect x="40" y="96" width="310" height="344" rx="12" fill="#14243B" stroke="#2b435f"/>
+    <rect x="370" y="96" width="550" height="344" rx="12" fill="#14243B" stroke="#2b435f"/>
+    <text x="64" y="135" fill="#65ddd5" font-size="22" font-weight="600">Projeler</text>
+    <text x="394" y="135" fill="#65ddd5" font-size="22" font-weight="600">Proje çalışma alanı</text>
+    <g fill="#1c344c"><rect x="57" y="157" width="276" height="76" rx="7"/><rect x="57" y="250" width="276" height="76" rx="7"/><rect x="57" y="343" width="276" height="76" rx="7"/></g>
+    <g fill="#e5edf3" font-size="25" font-weight="600"><text x="75" y="188">Proje A</text><text x="75" y="281">Proje B</text><text x="75" y="374">Proje C</text></g>
+    <g fill="#b1c6d9" font-size="18"><text x="75" y="215">Devam ediyor</text><text x="75" y="308">Planlama</text><text x="75" y="401">Beklemede</text></g>
+    <g fill="#e5edf3" font-size="23"><text x="452" y="198">Görevler ve ilerleme</text><text x="452" y="266">Oturum notları</text><text x="452" y="334">AI bağlam özeti</text><text x="452" y="402">Yedekleme yaklaşımı</text></g>
+    <g fill="none" stroke="#65ddd5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="399" y="175" width="28" height="28" rx="4"/><path d="M405 189l6 6 11-13"/>
+      <path d="M400 245h29v21h-16l-10 8v-8h-3z"/>
+      <rect x="404" y="313" width="20" height="20" rx="3"/><path d="M409 308v5m10-5v5m-10 20v5m10-5v5m-20-20h5m-5 10h5m20-10h5m-5 10h5"/>
+      <path d="M401 382h28v25h-28zM405 382v9h18v-9m-16 25v-10h16v10"/>
+    </g>
+    <text x="480" y="490" text-anchor="middle" fill="#65ddd5" font-size="23" font-weight="600">Temsili konsept arayüzü</text>
+  </g>
+</svg>

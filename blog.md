@@ -1,14 +1,16 @@
 ---
 layout: single
-title: "Blog"
+title: "Deneyimler, Analizler ve Perspektifler"
 permalink: /blog/
-author_profile: true
+author_profile: false
+share: false
+classes: blog-modern
 excerpt: "Enerji sektörü, elektrikli araç şarj ekosistemi, ekonomi, iş geliştirme ve teknoloji üzerine Mustafa Çelik’in makale ve değerlendirmeleri."
 ---
 
 <div class="blog-index">
   <section class="blog-intro">
-    <p>Burada LinkedIn makalelerimi, sektördeki gelişmeleri ve kişisel görüşlerimi paylaşıyorum.</p>
+    <p>Enerji, elektrikli araç şarj ekosistemi, ekonomi ve iş geliştirme üzerine yazılarımı ve değerlendirmelerimi paylaşıyorum.</p>
     <span class="blog-intro__accent" aria-hidden="true"></span>
   </section>
 
@@ -16,7 +18,7 @@ excerpt: "Enerji sektörü, elektrikli araç şarj ekosistemi, ekonomi, iş geli
   {% assign remaining_posts = site.posts | slice: 1, site.posts.size %}
 
   {% if featured_post %}
-    <section class="blog-featured" aria-label="Öne çıkan yazı">
+    <section class="blog-featured{% unless featured_post.header.teaser %} blog-featured--text{% endunless %}" aria-label="Öne çıkan yazı">
       {% if featured_post.header.teaser %}
         <a class="blog-featured__media" href="{{ featured_post.url | relative_url }}" aria-label="{{ featured_post.title | escape }}">
           <img src="{{ featured_post.header.teaser | relative_url }}" alt="">
@@ -24,6 +26,7 @@ excerpt: "Enerji sektörü, elektrikli araç şarj ekosistemi, ekonomi, iş geli
       {% endif %}
 
       <div class="blog-featured__content">
+        <p class="blog-featured__label">Öne Çıkan Yazı</p>
         {% if featured_post.categories %}
           <div class="blog-pills" aria-label="Kategoriler">
             {% for category in featured_post.categories %}
@@ -37,7 +40,7 @@ excerpt: "Enerji sektörü, elektrikli araç şarj ekosistemi, ekonomi, iş geli
         </h2>
 
         <p class="blog-featured__excerpt">
-          {{ featured_post.excerpt | markdownify | strip_html | truncatewords: 34 }}
+          {{ featured_post.excerpt | default: featured_post.content | markdownify | strip_html | remove: "← Blog Listesine Dön" | truncatewords: 34 }}
         </p>
 
         <div class="blog-meta">
@@ -56,7 +59,7 @@ excerpt: "Enerji sektörü, elektrikli araç şarj ekosistemi, ekonomi, iş geli
 
       <div class="blog-list">
         {% for post in remaining_posts %}
-          <article class="blog-card">
+          <article class="blog-card{% unless post.header.teaser %} blog-card--text{% endunless %}">
             {% if post.header.teaser %}
               <a class="blog-card__media" href="{{ post.url | relative_url }}" aria-label="{{ post.title | escape }}">
                 <img src="{{ post.header.teaser | relative_url }}" alt="">
@@ -77,7 +80,7 @@ excerpt: "Enerji sektörü, elektrikli araç şarj ekosistemi, ekonomi, iş geli
               </h3>
 
               <p class="blog-card__excerpt">
-                {{ post.excerpt | markdownify | strip_html | truncatewords: 24 }}
+                {{ post.excerpt | default: post.content | markdownify | strip_html | remove: "← Blog Listesine Dön" | truncatewords: 24 }}
               </p>
 
               <div class="blog-meta">

@@ -2,13 +2,17 @@
 layout: single
 title: "İletişim"
 permalink: /iletisim/
-author_profile: true
+author_profile: false
+share: false
+classes: contact-modern
 excerpt: "İş birliği, proje, sektör değerlendirmesi veya profesyonel iletişim için Mustafa Çelik ile bağlantı kurun."
 ---
 
 <div class="contact-page">
-  <p class="contact-page__intro">Benimle iş birliği, proje, sektör değerlendirmesi veya profesyonel iletişim için aşağıdaki formu kullanabilirsiniz.</p>
+  <p class="contact-page__intro">İş birliği, projeler ve profesyonel konular için benimle iletişime geçebilirsiniz.</p>
+  <div class="contact-page__accent" aria-hidden="true"></div>
 
+  <div class="contact-page__columns">
   <form class="contact-form" action="https://formspree.io/f/xlgkzjva" method="POST">
     <input type="hidden" name="_subject" value="Web sitesi iletişim formu">
 
@@ -36,13 +40,12 @@ excerpt: "İş birliği, proje, sektör değerlendirmesi veya profesyonel ileti�
   </form>
 
   <section class="contact-links" aria-labelledby="contact-links-title">
-    <h2 id="contact-links-title">Alternatif Kanallar</h2>
+    <h2 id="contact-links-title">Diğer İletişim Kanalları</h2>
     <div class="contact-links__list">
       <a href="https://linkedin.com/in/mustafaceliktr" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="https://github.com/mustafaceliktr" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href="https://wa.me/905557625559?text=Merhaba%20Mustafa%20Bey%2C%20web%20siteniz%20%C3%BCzerinden%20ula%C5%9F%C4%B1yorum.%20Sizinle%20ileti%C5%9Fime%20ge%C3%A7mek%20isterim." target="_blank" rel="noopener noreferrer">WhatsApp</a>
     </div>
   </section>
+  </div>
 </div>
 
 <script>

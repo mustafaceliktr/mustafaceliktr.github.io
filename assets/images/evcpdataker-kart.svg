@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">E.V.C.P. DaTAker — veri hazırlama konsepti</title>
+  <desc id="desc">EPDK veri kaynağından Python ile işleme ve Excel hazırlama hedefine uzanan şematik akış. Temsili konsept arayüzüdür; çalışan uygulama ekranı değildir.</desc>
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#123043"/><stop offset="1" stop-color="#081722"/></linearGradient></defs>
+  <rect width="960" height="540" rx="18" fill="url(#bg)"/>
+  <g font-family="Segoe UI,Arial,sans-serif">
+    <text x="44" y="65" fill="#e5edf3" font-size="34" font-weight="700">E.V.C.P. DaTAker</text>
+    <text x="44" y="104" fill="#65ddd5" font-size="21">Veri toplama ve hazırlama</text>
+    <path d="M44 129h872" stroke="#2b4c5e"/>
+    <g fill="#133243" stroke="#35596a" stroke-width="2"><rect x="44" y="168" width="250" height="200" rx="13"/><rect x="354" y="168" width="250" height="200" rx="13"/><rect x="664" y="168" width="250" height="200" rx="13"/></g>
+    <g fill="none" stroke="#65ddd5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+      <ellipse cx="169" cy="210" rx="31" ry="11"/><path d="M138 210v48c0 15 62 15 62 0v-48M138 234c0 15 62 15 62 0"/>
+      <path d="M462 205l-22 25 22 25m34-50 22 25-22 25m-12-55-10 62"/>
+      <rect x="763" y="194" width="52" height="66" rx="4"/><path d="M763 217h52m-52 21h52m-26-21v43"/>
+      <path d="M310 266h26m-10-10 10 10-10 10M620 266h26m-10-10 10 10-10 10"/>
+    </g>
+    <g text-anchor="middle" fill="#e5edf3" font-size="27" font-weight="650"><text x="169" y="311">EPDK</text><text x="479" y="311">Python</text><text x="789" y="311">Excel</text></g>
+    <g text-anchor="middle" fill="#b4cbd6" font-size="18"><text x="169" y="341">Veri kaynağı</text><text x="479" y="341">İşleme yaklaşımı</text><text x="789" y="341">Hazırlama hedefi</text></g>
+    <text x="480" y="415" text-anchor="middle" fill="#b4cbd6" font-size="19">Veri alma → İşleme → Kontrol → Excel hazırlama</text>
+    <rect x="44" y="451" width="872" height="55" rx="8" fill="#173b49"/>
+    <text x="480" y="486" text-anchor="middle" fill="#d9f3f1" font-size="23" font-weight="600">Temsili konsept arayüzü</text>
+  </g>
+</svg>

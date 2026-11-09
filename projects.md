@@ -1,15 +1,19 @@
 ---
 layout: single
-title: "Uygulama Çalışmalarım"
+title: "Projeler"
 permalink: /projects/
-author_profile: true
+author_profile: false
+classes: projects-modern
 excerpt: "Mustafa Çelik’in satış, veri analizi, günlük iş akışları, yapay zeka destekli araçlar ve enerji sektörü odağında geliştirdiği uygulama çalışmalarını inceleyin."
 ---
 
 <!-- markdownlint-disable MD033 -->
 <!-- Inline HTML is intentionally used here for the custom project card grid. -->
 
-Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışları ve enerji sektörü odağında geliştirdiğim uygulama ve araç çalışmalarını paylaşıyorum. Çalışmaların önemli bir kısmı, yapay zeka destekli üretim ve vibecoding yaklaşımıyla; pratik ihtiyaçlara hızlı, anlaşılır ve uygulanabilir çözümler üretme amacıyla hazırlanmıştır.
+<section class="projects-intro" aria-labelledby="projects-intro-title">
+  <h2 id="projects-intro-title">Gerçek ihtiyaçlardan doğan çözümler</h2>
+  <p>Satış, veri analizi ve günlük iş akışlarını desteklemek için geliştirdiğim uygulama ve araç çalışmaları.</p>
+</section>
 
 <div class="custom-projects-grid">
 
@@ -28,14 +32,7 @@ Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışlar
 
   <div class="custom-project-card">
     <div class="custom-project-card-image archive__item-teaser">
-      <svg viewBox="0 0 360 82" width="100%" height="74" role="img" aria-label="Excel 2019 satış raporu temsili görseli" xmlns="http://www.w3.org/2000/svg">
-        <rect width="360" height="82" rx="4" fill="#f1f6f3"/>
-        <rect width="360" height="18" fill="#217346"/>
-        <text x="12" y="13" fill="white" font-family="Arial, sans-serif" font-size="11">EXCEL 2019 · SATIŞ TAKİBİ</text>
-        <path d="M16 66H158" stroke="#c4d3ca"/><path d="M30 65V42M60 65V32M90 65V48M120 65V26" stroke="#217346" stroke-width="16"/>
-        <path d="M187 60L223 48L260 52L300 30L340 24" fill="none" stroke="#4472c4" stroke-width="3"/>
-        <text x="187" y="75" fill="#42564a" font-family="Arial, sans-serif" font-size="10">Temsili veriler</text>
-      </svg>
+      <img src="/assets/images/kurumsal-satis-kart.webp" alt="Excel 2019 ve VBA satış raporu: temsili KPI kutuları, kanal bazında temas ve temas seyri grafikleri" loading="lazy" width="2128" height="1216" style="object-fit: contain !important;">
     </div>
     <div class="card-content-wrapper">
       <h3 class="custom-project-card-title archive__item-title">Kurumsal Satış Takip ve Raporlama Sistemi</h3>
@@ -48,7 +45,7 @@ Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışlar
 
   <div class="custom-project-card">
     <div class="custom-project-card-image archive__item-teaser">
-      <img src="/assets/images/vibe.png" alt="VibeTrack">
+      <img src="/assets/images/vibetrack-kart.svg" alt="VibeTrack — üç odak ortamı ve statik zamanlayıcı içeren temsili prototip görünümü" width="960" height="540" loading="lazy">
     </div>
     <div class="card-content-wrapper">
       <h3 class="custom-project-card-title archive__item-title">VibeTrack</h3>
@@ -61,7 +58,7 @@ Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışlar
 
   <div class="custom-project-card">
     <div class="custom-project-card-image archive__item-teaser">
-      <img src="/assets/images/dataker.png" alt="E.V.C.P. DaTAker">
+      <img src="/assets/images/evcpdataker-kart.svg" alt="E.V.C.P. DaTAker — EPDK, Python ve Excel hazırlama hedefini gösteren temsili konsept" width="960" height="540" loading="lazy">
     </div>
     <div class="card-content-wrapper">
       <h3 class="custom-project-card-title archive__item-title">E.V.C.P. DaTAker</h3>
@@ -74,7 +71,7 @@ Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışlar
 
   <div class="custom-project-card">
     <div class="custom-project-card-image archive__item-teaser">
-      <img src="/assets/images/ekosistem.png" alt="E.A. Şarj Ekosistemi Analizi">
+      <img src="/assets/images/sarj-ekosistemi-konsept.svg" alt="E.A. Şarj Ekosistemi Analizi — temsili konsept görseli" width="960" height="540" loading="lazy">
     </div>
     <div class="card-content-wrapper">
       <h3 class="custom-project-card-title archive__item-title">E.A. Şarj Ekosistemi Analizi</h3>
@@ -87,7 +84,7 @@ Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışlar
 
   <div class="custom-project-card">
     <div class="custom-project-card-image archive__item-teaser">
-      <img src="/assets/images/gelisim.png" alt="Gelişim Raporu V1">
+      <img src="/assets/images/gelisimraporu-kart.svg" alt="Gelişim Raporu V1 — sayısal veri içermeyen temsili dönem karşılaştırma tablosu" width="960" height="540" loading="lazy">
     </div>
     <div class="card-content-wrapper">
       <h3 class="custom-project-card-title archive__item-title">Gelişim Raporu V1</h3>
@@ -100,7 +97,7 @@ Bu bölümde; satış, müşteri yönetimi, veri analizi, günlük iş akışlar
 
   <div class="custom-project-card">
     <div class="custom-project-card-image archive__item-teaser">
-      <img src="/assets/images/projectos.png" alt="ProjectOS">
+      <img src="/assets/images/projectos-kart.svg" alt="ProjectOS — proje listesi, görevler, oturum ve AI bağlamı için temsili konsept arayüzü" width="960" height="540" loading="lazy">
     </div>
     <div class="card-content-wrapper">
       <h3 class="custom-project-card-title archive__item-title">ProjectOS</h3>

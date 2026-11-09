@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Gelişim Raporu V1 — temsili karşılaştırma tablosu</title>
+  <desc id="desc">Önceki dönem, güncel dönem ve değişim sütunları. Soket sayısı, kurulu güç ve operatör sayısı satırlarındaki bütün değerler çizgiyle belirtilmiştir. Gerçek veri veya uygulama ekranı değildir.</desc>
+  <rect width="960" height="540" rx="18" fill="#071725"/>
+  <g font-family="Segoe UI,Arial,sans-serif">
+    <text x="40" y="65" fill="#e5edf3" font-size="34" font-weight="700">Gelişim Raporu V1</text>
+    <text x="40" y="105" fill="#65ddd5" font-size="21">İki dönemli karşılaştırma yaklaşımı</text>
+    <rect x="40" y="145" width="880" height="290" rx="10" fill="#102838" stroke="#2d4b60" stroke-width="2"/>
+    <path d="M41 201H919M41 279H919M41 357H919M295 146V434M510 146V434M725 146V434" stroke="#2d4b60" stroke-width="2"/>
+    <path d="M296 147h213v53H296zM511 147h213v53H511z" fill="#173953"/>
+    <path d="M726 147h184q9 0 9 10v43H726z" fill="#153b39"/>
+    <g fill="#d5e4ee" font-size="22" font-weight="600"><text x="60" y="182">Gösterge</text><text x="402" y="182" text-anchor="middle">Önceki Dönem</text><text x="617" y="182" text-anchor="middle">Güncel Dönem</text><text x="822" y="182" text-anchor="middle" fill="#8bd3b2">Değişim</text></g>
+    <g fill="#d5e4ee" font-size="23"><text x="60" y="248">Soket sayısı</text><text x="60" y="326">Kurulu güç</text><text x="60" y="404">Operatör sayısı</text></g>
+    <g font-size="29" text-anchor="middle" fill="#8eb5d9"><text x="402" y="249">—</text><text x="617" y="249">—</text><text x="402" y="327">—</text><text x="617" y="327">—</text><text x="402" y="405">—</text><text x="617" y="405">—</text></g>
+    <g font-size="29" text-anchor="middle" fill="#8bd3b2"><text x="822" y="249">—</text><text x="822" y="327">—</text><text x="822" y="405">—</text></g>
+    <text x="480" y="490" text-anchor="middle" fill="#65ddd5" font-size="23" font-weight="600">Temsili konsept görünümü</text>
+  </g>
+</svg>
