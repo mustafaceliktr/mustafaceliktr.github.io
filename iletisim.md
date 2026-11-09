@@ -43,6 +43,7 @@ excerpt: "İş birliği, proje, sektör değerlendirmesi veya profesyonel ileti�
     <h2 id="contact-links-title">Diğer İletişim Kanalları</h2>
     <div class="contact-links__list">
       <a href="https://linkedin.com/in/mustafaceliktr" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://wa.me/mcelik84" target="_blank" rel="noopener noreferrer">WhatsApp</a>
     </div>
   </section>
   </div>

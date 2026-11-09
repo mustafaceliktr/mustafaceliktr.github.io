@@ -1,1 +1,24 @@
-{% comment %}WhatsApp contact temporarily disabled until the username link is verified.{% endcomment %}
+<style>
+  .whatsapp-contact { position: fixed; right: 18px; bottom: 18px; z-index: 1000; }
+  .whatsapp-contact .whatsapp-contact__link {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 38px; max-width: calc(100vw - 32px); padding: 0.55rem 0.95rem;
+    border-radius: 999px; background: #128c7e; color: #fff;
+    font-size: 0.78rem; font-weight: 700; line-height: 1;
+    text-decoration: none; white-space: nowrap;
+    box-shadow: 0 6px 16px rgba(18, 140, 126, 0.22);
+    transition: background-color 160ms ease, box-shadow 160ms ease;
+  }
+  .whatsapp-contact .whatsapp-contact__link:hover, .whatsapp-contact .whatsapp-contact__link:focus {
+    background: #0f7a6d; color: #fff; text-decoration: none;
+    box-shadow: 0 8px 18px rgba(18, 140, 126, 0.28);
+  }
+  .whatsapp-contact .whatsapp-contact__link:focus-visible { outline: 2px solid #128c7e; outline-offset: 3px; }
+  @media (max-width: 480px) {
+    .whatsapp-contact { right: 12px; bottom: 12px; }
+    .whatsapp-contact .whatsapp-contact__link { min-height: 36px; padding: 0.5rem 0.7rem; font-size: 0.72rem; }
+  }
+</style>
+<div class="whatsapp-contact">
+  <a class="whatsapp-contact__link" href="https://wa.me/mcelik84" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp üzerinden iletişime geç">WhatsApp'tan iletişime geç</a>
+</div>
