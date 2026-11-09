@@ -40,10 +40,7 @@ excerpt: "Mustafa Çelik’in profesyonel deneyimi, eğitimi ve yetkinlik alanla
 <section class="cv-card" aria-labelledby="cv-language-title"><h2 id="cv-language-title"><svg class="cv-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0 M3 12h18 M12 3q-8 9 0 18 M12 3q8 9 0 18"/></svg>Dil</h2><p class="cv-language"><strong>İngilizce</strong><span class="cv-language-rule" aria-hidden="true"></span>B2</p></section></div>
 <section class="cv-card" aria-labelledby="cv-interests-title"><h2 id="cv-interests-title"><svg class="cv-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 5-6 7 6 7 M17 5l6 7-6 7 M14 3l-4 18"/></svg>İlgi Alanları</h2><p>Yapay zekâ, veri analizi, otomasyon ve vibe coding ile masaüstü ve mobil uygulama geliştirme çalışmaları.</p></section>
 </div></div>
-<div class="cv-actions">
-<a class="cv-button cv-button--primary" href="#form-alani"><svg class="cv-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h20v14H2z m0 0 10 8L22 5"/></svg>Türkçe / İngilizce CV Talep Et</a><a class="cv-button" href="https://linkedin.com/in/mustafaceliktr"><span class="cv-linkedin" aria-hidden="true">in</span>LinkedIn Üzerinden İletişime Geç</a>
-</div>
-<section id="form-alani" class="cv-card cv-request" aria-labelledby="form-baslik">
+<section id="form-alani" class="cv-card cv-request" aria-labelledby="form-baslik" style="margin-top: 24px;">
 <h2 id="form-baslik">Özgeçmiş Talebi</h2>
 <p>Tercih ettiğiniz dilde özgeçmiş talebinizi iletebilirsiniz.</p>
 <form id="cv-form" action="https://formspree.io/f/mwvyzrgl" method="POST">
